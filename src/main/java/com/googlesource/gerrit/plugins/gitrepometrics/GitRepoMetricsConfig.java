@@ -26,7 +26,7 @@ import org.eclipse.jgit.lib.Config;
 
 @Singleton
 public class GitRepoMetricsConfig {
-
+  public static String PLUGIN_NAME = "git-repo-metrics";
   private final Config config;
 
   @Inject
@@ -35,7 +35,6 @@ public class GitRepoMetricsConfig {
   }
 
   public List<String> getRepositoryNames() {
-    return Arrays.stream(config.getStringList("git-repo-metrics", null, "project"))
-        .collect(toList());
+    return Arrays.stream(config.getStringList(PLUGIN_NAME, null, "project")).collect(toList());
   }
 }

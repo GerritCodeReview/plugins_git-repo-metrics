@@ -28,23 +28,24 @@ import java.util.Collections;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
-public class GitRepoMetricsCacheModuleTest {
+public class GitRepoMetricsCacheTest {
 
   PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
 
-  GitRepoMetricsCacheModule gitRepoMetricsCacheModule;
+  GitRepoMetricsCache gitRepoMetricsCacheModule;
   GitRepoMetricsConfig gitRepoMetricsConfig;
   FakeMetricMaker fakeMetricMaker;
 
   @Test
   public void shouldRegisterMetrics() {
     Config c = new Config();
-    c.setStringList("git-repo-metrics", null, "project", Collections.singletonList("repo1"));
+    c.setStringList(
+        GitRepoMetricsConfig.PLUGIN_NAME, null, "project", Collections.singletonList("repo1"));
     doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
-    gitRepoMetricsConfig = new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics");
+    gitRepoMetricsConfig =
+        new GitRepoMetricsConfig(pluginConfigFactory, GitRepoMetricsConfig.PLUGIN_NAME);
     fakeMetricMaker = new FakeMetricMaker();
-    gitRepoMetricsCacheModule =
-        new GitRepoMetricsCacheModule(fakeMetricMaker, gitRepoMetricsConfig);
+    gitRepoMetricsCacheModule = new GitRepoMetricsCache(fakeMetricMaker, gitRepoMetricsConfig);
     gitRepoMetricsCacheModule.initCache();
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
   }

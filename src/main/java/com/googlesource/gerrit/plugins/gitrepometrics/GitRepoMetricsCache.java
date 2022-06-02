@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.base.Supplier;
+import com.google.common.collect.Maps;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
@@ -22,27 +23,31 @@ import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 @Singleton
-public class GitRepoMetricsCacheModule {
+public class GitRepoMetricsCache {
+  private Map<String, Long> metrics;
+  private final MetricMaker metricMaker;
+  private final List<String> projects;
+
   public static List<GitRepoMetric> metricsNames = new ArrayList<>(GitStats.availableMetrics());
-  public List<String> projects;
-
-  public static Map<String, Long> metrics = new HashMap<>(Collections.emptyMap());;
-
-  public final MetricMaker metricMaker;
-  public final GitRepoMetricsConfig config;
 
   @Inject
-  GitRepoMetricsCacheModule(MetricMaker metricMaker, GitRepoMetricsConfig config) {
+  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config) {
     this.metricMaker = metricMaker;
-    this.config = config;
     this.projects = config.getRepositoryNames();
+    this.metrics = Maps.newHashMap();
+  }
+
+  public Map<String, Long> getMetrics() {
+    return metrics;
+  }
+
+  public void setMetrics(Map<String, Long> metrics) {
+    this.metrics = metrics;
   }
 
   public void initCache() {
@@ -51,7 +56,7 @@ public class GitRepoMetricsCacheModule {
           projects.forEach(
               projectName -> {
                 String name =
-                    GitRepoMetricsCacheModule.getMetricName(gitRepoMetric.getName(), projectName);
+                    GitRepoMetricsCache.getMetricName(gitRepoMetric.getName(), projectName);
                 Supplier<Long> supplier =
                     new Supplier<Long>() {
                       public Long get() {
@@ -59,7 +64,7 @@ public class GitRepoMetricsCacheModule {
                         // registering
                         //     dynamically the metrics
                         // TODO add grace period!!
-                        return GitRepoMetricsCacheModule.metrics.getOrDefault(name, 0L);
+                        return getMetrics().getOrDefault(name, 0L);
                       }
                     };
 
