@@ -16,7 +16,7 @@ package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
-import com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCacheModule;
+import com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCache;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
@@ -84,7 +84,6 @@ public class GitStats {
       String metricName,
       Function<GC.RepoStatistics, Long> fn,
       GC.RepoStatistics statistics) {
-    metrics.put(
-        GitRepoMetricsCacheModule.getMetricName(metricName, p.getName()), fn.apply(statistics));
+    metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), fn.apply(statistics));
   }
 }

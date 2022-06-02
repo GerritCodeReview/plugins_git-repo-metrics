@@ -28,11 +28,11 @@ import java.util.Collections;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
-public class GitRepoMetricsCacheModuleTest {
+public class GitRepoMetricsCacheTest {
 
   PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
 
-  GitRepoMetricsCacheModule gitRepoMetricsCacheModule;
+  GitRepoMetricsCache gitRepoMetricsCacheModule;
   GitRepoMetricsConfig gitRepoMetricsConfig;
   FakeMetricMaker fakeMetricMaker;
 
@@ -43,9 +43,8 @@ public class GitRepoMetricsCacheModuleTest {
     doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
     gitRepoMetricsConfig = new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics");
     fakeMetricMaker = new FakeMetricMaker();
-    gitRepoMetricsCacheModule =
-        new GitRepoMetricsCacheModule(fakeMetricMaker, gitRepoMetricsConfig);
-    gitRepoMetricsCacheModule.initCache();
+    gitRepoMetricsCacheModule = new GitRepoMetricsCache(fakeMetricMaker, gitRepoMetricsConfig);
+    GitRepoMetricsCache.initCache(gitRepoMetricsCacheModule);
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
   }
 

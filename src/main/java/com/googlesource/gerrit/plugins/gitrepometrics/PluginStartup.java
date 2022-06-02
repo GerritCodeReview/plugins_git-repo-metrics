@@ -21,16 +21,21 @@ import com.google.inject.Inject;
 public class PluginStartup implements LifecycleListener {
   public final MetricMaker metricMaker;
   public final GitRepoMetricsConfig config;
+  public final GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject
-  public PluginStartup(MetricMaker metricMaker, GitRepoMetricsConfig config) {
+  public PluginStartup(
+      MetricMaker metricMaker,
+      GitRepoMetricsConfig config,
+      GitRepoMetricsCache gitRepoMetricsCache) {
     this.metricMaker = metricMaker;
     this.config = config;
+    this.gitRepoMetricsCache = gitRepoMetricsCache;
   }
 
   @Override
   public void start() {
-    new GitRepoMetricsCacheModule(metricMaker, config).initCache();
+    GitRepoMetricsCache.initCache(gitRepoMetricsCache);
   }
 
   @Override

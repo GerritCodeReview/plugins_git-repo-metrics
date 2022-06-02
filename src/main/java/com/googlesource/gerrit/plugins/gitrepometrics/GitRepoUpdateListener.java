@@ -28,12 +28,16 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private final GitRepositoryManager repoManager;
   private final ExecutorService executor;
+  private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Inject
   GitRepoUpdateListener(
-      GitRepositoryManager repoManager, @UpdateGitMetricsExecutor ExecutorService executor) {
+      GitRepositoryManager repoManager,
+      @UpdateGitMetricsExecutor ExecutorService executor,
+      UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory) {
     this.repoManager = repoManager;
     this.executor = executor;
+    this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
   }
 
   @Override
@@ -43,7 +47,7 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
     logger.atFine().log("Got an update for project %s", projectName);
     try (Repository repository = repoManager.openRepository(projectNameKey)) {
       UpdateGitMetricsTask updateGitMetricsTask =
-          new UpdateGitMetricsTask(repository, Project.builder(projectNameKey).build());
+          updateGitMetricsTaskFactory.create(repository, Project.builder(projectNameKey).build());
       executor.execute(updateGitMetricsTask);
     } catch (RepositoryNotFoundException e) {
       logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);

@@ -29,29 +29,35 @@ import java.util.Locale;
 import java.util.Map;
 
 @Singleton
-public class GitRepoMetricsCacheModule {
+public class GitRepoMetricsCache {
+  private Map<String, Long> metrics;
+  private final MetricMaker metricMaker;
+  private final List<String> projects;
+
   public static List<GitRepoMetric> metricsNames = new ArrayList<>(GitStats.availableMetrics());
-  public List<String> projects;
-
-  public static Map<String, Long> metrics = new HashMap<>(Collections.emptyMap());;
-
-  public final MetricMaker metricMaker;
-  public final GitRepoMetricsConfig config;
 
   @Inject
-  GitRepoMetricsCacheModule(MetricMaker metricMaker, GitRepoMetricsConfig config) {
+  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config) {
     this.metricMaker = metricMaker;
-    this.config = config;
     this.projects = config.getRepositoryNames();
+    this.metrics = new HashMap<>(Collections.emptyMap());
   }
 
-  public void initCache() {
+  public Map<String, Long> getMetrics() {
+    return metrics;
+  }
+
+  public void setMetrics(Map<String, Long> metrics) {
+    this.metrics = metrics;
+  }
+
+  public static void initCache(GitRepoMetricsCache gitRepoMetricsCache) {
     metricsNames.forEach(
         gitRepoMetric -> {
-          projects.forEach(
+          gitRepoMetricsCache.projects.forEach(
               projectName -> {
                 String name =
-                    GitRepoMetricsCacheModule.getMetricName(gitRepoMetric.getName(), projectName);
+                    GitRepoMetricsCache.getMetricName(gitRepoMetric.getName(), projectName);
                 Supplier<Long> supplier =
                     new Supplier<Long>() {
                       public Long get() {
@@ -59,11 +65,11 @@ public class GitRepoMetricsCacheModule {
                         // registering
                         //     dynamically the metrics
                         // TODO add grace period!!
-                        return GitRepoMetricsCacheModule.metrics.getOrDefault(name, 0L);
+                        return gitRepoMetricsCache.getMetrics().getOrDefault(name, 0L);
                       }
                     };
 
-                metricMaker.newCallbackMetric(
+                gitRepoMetricsCache.metricMaker.newCallbackMetric(
                     name,
                     Long.class,
                     new Description(gitRepoMetric.getDescription())

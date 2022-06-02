@@ -14,10 +14,10 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import static com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCacheModule.metrics;
-
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -27,12 +27,22 @@ import org.eclipse.jgit.lib.Repository;
 public class UpdateGitMetricsTask implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
+  public interface Factory {
+    UpdateGitMetricsTask create(Repository repository, Project project);
+  }
+
   private final Repository repository;
   private final Project project;
+  private GitRepoMetricsCache gitRepoMetricsCache;
 
-  UpdateGitMetricsTask(Repository repository, Project project) {
+  @Inject
+  UpdateGitMetricsTask(
+      GitRepoMetricsCache gitRepoMetricsCache,
+      @Assisted Repository repository,
+      @Assisted Project project) {
     this.repository = repository;
     this.project = project;
+    this.gitRepoMetricsCache = gitRepoMetricsCache;
   }
 
   @Override
@@ -46,7 +56,7 @@ public class UpdateGitMetricsTask implements Runnable {
     Map<String, Long> newMetrics = gitStats.get();
     logger.atInfo().log(
         "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
-    metrics.putAll(newMetrics);
+    gitRepoMetricsCache.setMetrics(newMetrics);
   }
 
   String getStringFromMap(Map<String, Long> m) {

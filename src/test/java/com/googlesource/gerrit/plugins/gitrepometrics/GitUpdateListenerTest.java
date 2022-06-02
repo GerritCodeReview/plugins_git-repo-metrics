@@ -21,11 +21,18 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.server.git.GitRepositoryManager;
+import com.google.gerrit.testing.InMemoryModule;
 import com.google.gerrit.testing.InMemoryRepositoryManager;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import com.google.inject.TypeLiteral;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import org.eclipse.jgit.lib.Repository;
@@ -44,10 +51,28 @@ public class GitUpdateListenerTest {
   ArgumentCaptor<UpdateGitMetricsTask> valueCapture =
       ArgumentCaptor.forClass(UpdateGitMetricsTask.class);
 
+  @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
+
   @Before
   public void setupRepo() throws IOException {
+
+    AbstractModule m =
+        new AbstractModule() {
+          @Override
+          protected void configure() {
+            install(new InMemoryModule());
+            install(new UpdateGitMetricsTaskModule());
+            bind(new TypeLiteral<String>() {})
+                .annotatedWith(PluginName.class)
+                .toInstance("git-repo-metrics");
+          }
+        };
+    Injector injector = Guice.createInjector(m);
+    injector.injectMembers(this);
+
     reset(mockedExecutorService);
-    gitRepoUpdateListener = new GitRepoUpdateListener(repoManager, mockedExecutorService);
+    gitRepoUpdateListener =
+        new GitRepoUpdateListener(repoManager, mockedExecutorService, updateGitMetricsTaskFactory);
     repository = repoManager.createRepository(testProjectNameKey);
   }
 
@@ -56,7 +81,7 @@ public class GitUpdateListenerTest {
     doNothing().when(mockedExecutorService).execute(valueCapture.capture());
     gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent(testProject));
     UpdateGitMetricsTask expectedUpdateGitMetricsTask =
-        new UpdateGitMetricsTask(repository, Project.builder(testProjectNameKey).build());
+        updateGitMetricsTaskFactory.create(repository, Project.builder(testProjectNameKey).build());
     assertThat(valueCapture.getValue().toString())
         .isEqualTo(expectedUpdateGitMetricsTask.toString());
   }
