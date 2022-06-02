@@ -15,22 +15,16 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 
+import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.DisabledMetricMaker;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.util.Collections;
-import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
 public class GitRepoMetricsCacheTest {
-
-  PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
 
   GitRepoMetricsCache gitRepoMetricsCacheModule;
   GitRepoMetricsConfig gitRepoMetricsConfig;
@@ -38,14 +32,67 @@ public class GitRepoMetricsCacheTest {
 
   @Test
   public void shouldRegisterMetrics() {
-    Config c = new Config();
-    c.setStringList("git-repo-metrics", null, "project", Collections.singletonList("repo1"));
-    doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
-    gitRepoMetricsConfig = new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics");
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList("repo1"));
     fakeMetricMaker = new FakeMetricMaker();
     gitRepoMetricsCacheModule = new GitRepoMetricsCache(fakeMetricMaker, gitRepoMetricsConfig);
     GitRepoMetricsCache.initCache(gitRepoMetricsCacheModule);
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
+  }
+
+  @Test
+  public void shouldCollectStatsWhenGracePeriodNotSet() {
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList("repo1"), "0m");
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    String testMetric = "testMetric";
+    gitRepoMetricsCacheModule.setMetrics(ImmutableMap.of("anyMetric", 0L), testMetric);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(testMetric)).isTrue();
+  }
+
+  @Test
+  public void shouldNotCollectStatsWhenGracePeriodIsNotExpired() {
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList("repo1"), "5m");
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    String testMetric = "testMetric";
+    gitRepoMetricsCacheModule.setMetrics(ImmutableMap.of("anyMetric", 0L), testMetric);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(testMetric)).isFalse();
+  }
+
+  @Test
+  public void shouldCollectStatsWhenGracePeriodIsExpired() throws InterruptedException {
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList("repo1"), "1s");
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    String testMetric = "testMetric";
+    gitRepoMetricsCacheModule.setMetrics(ImmutableMap.of("anyMetric", 0L), testMetric);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(testMetric)).isFalse();
+
+    // Make sure grace period is expired
+    Thread.sleep(1000);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(testMetric)).isTrue();
+  }
+
+  @Test
+  public void shouldSetCollectionTime() {
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList("repo1"));
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    long currentTimeStamp = System.currentTimeMillis();
+
+    String testMetric = "testMetric";
+    gitRepoMetricsCacheModule.setMetrics(ImmutableMap.of("anyMetric", 0L), testMetric);
+
+    assertThat(gitRepoMetricsCacheModule.getCollectedAt().get(testMetric))
+        .isAtLeast(currentTimeStamp);
   }
 
   private class FakeMetricMaker extends DisabledMetricMaker {

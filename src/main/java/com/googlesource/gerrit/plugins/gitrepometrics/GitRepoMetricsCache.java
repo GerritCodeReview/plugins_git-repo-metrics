@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.base.Supplier;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
@@ -30,9 +31,12 @@ import java.util.Map;
 
 @Singleton
 public class GitRepoMetricsCache {
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private Map<String, Long> metrics;
+  private Map<String, Long> collectedAt;
   private final MetricMaker metricMaker;
   private final List<String> projects;
+  private final long gracePeriodMs;
 
   public static List<GitRepoMetric> metricsNames = new ArrayList<>(GitStats.availableMetrics());
 
@@ -40,15 +44,42 @@ public class GitRepoMetricsCache {
   GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config) {
     this.metricMaker = metricMaker;
     this.projects = config.getRepositoryNames();
+    this.gracePeriodMs = config.getGracePeriodMs();
     this.metrics = new HashMap<>(Collections.emptyMap());
+    this.collectedAt = new HashMap<>(Collections.emptyMap());
   }
 
   public Map<String, Long> getMetrics() {
     return metrics;
   }
 
-  public void setMetrics(Map<String, Long> metrics) {
+  public void setMetrics(Map<String, Long> metrics, String metricName) {
+    this.collectedAt.put(metricName, System.currentTimeMillis());
     this.metrics = metrics;
+  }
+
+  public Map<String, Long> getCollectedAt() {
+    return collectedAt;
+  }
+
+  public void setCollectedAt(Map<String, Long> collectedAt) {
+    this.collectedAt = collectedAt;
+  }
+
+  public boolean doCollectStats(String name) {
+    if (gracePeriodMs <= 0L) {
+      return true;
+    }
+
+    long lastCollectionTime = collectedAt.getOrDefault(name, 0L);
+    long currentTimeMs = System.currentTimeMillis();
+    boolean doCollectStats = lastCollectionTime + gracePeriodMs < currentTimeMs;
+    if (!doCollectStats) {
+      logger.atFine().log(
+          "Skip stats collection for %s (grace period: %d, last collection time: %d, current time: %d",
+          name, gracePeriodMs, lastCollectionTime, currentTimeMs);
+    }
+    return doCollectStats;
   }
 
   public static void initCache(GitRepoMetricsCache gitRepoMetricsCache) {

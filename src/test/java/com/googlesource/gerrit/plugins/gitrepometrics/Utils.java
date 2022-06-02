@@ -14,33 +14,30 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import static java.util.stream.Collectors.toList;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
-import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.config.PluginConfigFactory;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import org.eclipse.jgit.lib.Config;
 
-@Singleton
-public class GitRepoMetricsConfig {
+public class Utils {
 
-  private final Config config;
-
-  @Inject
-  public GitRepoMetricsConfig(PluginConfigFactory configFactory, @PluginName String pluginName) {
-    config = configFactory.getGlobalPluginConfig(pluginName);
+  public static GitRepoMetricsConfig getRpoConfig(List<String> projects) {
+    return getRpoConfig(projects, "0m");
   }
 
-  public List<String> getRepositoryNames() {
-    return Arrays.stream(config.getStringList("git-repo-metrics", null, "project"))
-        .collect(toList());
-  }
+  public static GitRepoMetricsConfig getRpoConfig(List<String> projects, String gracePeriod) {
+    PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
 
-  public Long getGracePeriodMs() {
-    return config.getTimeUnit("git-repo-metrics", null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
+    Config c = new Config();
+
+    c.setStringList("git-repo-metrics", null, "project", projects);
+    c.setString("git-repo-metrics", null, "gracePeriod", gracePeriod);
+
+    doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
+
+    return new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics");
   }
 }

@@ -53,10 +53,12 @@ public class UpdateGitMetricsTask implements Runnable {
         repository.getIdentifier(), project.getName());
     // TODO Loop through all the collectors
     GitStats gitStats = new GitStats((FileRepository) repository, project);
-    Map<String, Long> newMetrics = gitStats.get();
-    logger.atInfo().log(
-        "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
-    gitRepoMetricsCache.setMetrics(newMetrics);
+    if (gitRepoMetricsCache.doCollectStats(gitStats.getStatName())) {
+      Map<String, Long> newMetrics = gitStats.get();
+      logger.atInfo().log(
+          "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
+      gitRepoMetricsCache.setMetrics(newMetrics, gitStats.getStatName());
+    }
   }
 
   String getStringFromMap(Map<String, Long> m) {

@@ -86,4 +86,8 @@ public class GitStats {
       GC.RepoStatistics statistics) {
     metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), fn.apply(statistics));
   }
+
+  public String getStatName() {
+    return "git-statistics";
+  }
 }
