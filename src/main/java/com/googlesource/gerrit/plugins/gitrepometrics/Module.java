@@ -17,17 +17,20 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
+import com.google.inject.Scopes;
 import java.util.concurrent.ExecutorService;
 
 public class Module extends LifecycleModule {
 
   @Override
   protected void configure() {
+    bind(GitRepoMetricsCache.class).in(Scopes.SINGLETON);
     bind(ExecutorService.class)
         .annotatedWith(UpdateGitMetricsExecutor.class)
         .toProvider(UpdateGitMetricsExecutorProvider.class);
     bind(GitRepoUpdateListener.class);
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitRepoUpdateListener.class);
     listener().to(PluginStartup.class);
+    install(new UpdateGitMetricsTaskModule());
   }
 }

@@ -26,16 +26,16 @@ import org.eclipse.jgit.lib.Config;
 
 @Singleton
 public class GitRepoMetricsConfig {
-
+  private final String pluginName;
   private final Config config;
 
   @Inject
   public GitRepoMetricsConfig(PluginConfigFactory configFactory, @PluginName String pluginName) {
     config = configFactory.getGlobalPluginConfig(pluginName);
+    this.pluginName = pluginName;
   }
 
   public List<String> getRepositoryNames() {
-    return Arrays.stream(config.getStringList("git-repo-metrics", null, "project"))
-        .collect(toList());
+    return Arrays.stream(config.getStringList(pluginName, null, "project")).collect(toList());
   }
 }
