@@ -22,21 +22,48 @@ import com.google.gerrit.metrics.DisabledMetricMaker;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.io.IOException;
 import java.util.Collections;
+import org.junit.Before;
 import org.junit.Test;
 
 public class GitRepoMetricsCacheTest {
   GitRepoMetricsCache gitRepoMetricsCacheModule;
   GitRepoMetricsConfig gitRepoMetricsConfig;
   FakeMetricMaker fakeMetricMaker;
+  private ConfigSetupUtils configSetupUtils;
+  private final String enabledRepo = "enabledRepo";
+
+  @Before
+  public void setupRepo() throws IOException {
+    configSetupUtils = new ConfigSetupUtils(Collections.singletonList(enabledRepo));
+  }
 
   @Test
   public void shouldRegisterMetrics() throws IOException {
-    ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Collections.singletonList("repo1"));
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     fakeMetricMaker = new FakeMetricMaker();
     gitRepoMetricsCacheModule = new GitRepoMetricsCache(fakeMetricMaker, gitRepoMetricsConfig);
     gitRepoMetricsCacheModule.initCache();
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
+  }
+
+  @Test
+  public void shouldCollectStatsForEnabledRepo() throws IOException {
+    String enabledRepo = "enabledRepo";
+    gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(enabledRepo)).isTrue();
+  }
+
+  @Test
+  public void shouldNotCollectStatsForDisabledRepo() throws IOException {
+    String disabledRepo = "disabledRepo";
+    gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(disabledRepo)).isFalse();
   }
 
   private class FakeMetricMaker extends DisabledMetricMaker {
