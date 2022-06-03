@@ -16,11 +16,14 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import java.io.IOException;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
 
@@ -28,35 +31,43 @@ public class UpdateGitMetricsTask implements Runnable {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   public interface Factory {
-    UpdateGitMetricsTask create(Repository repository, Project project);
+    UpdateGitMetricsTask create(String projectName);
   }
 
-  private final Repository repository;
-  private final Project project;
+  private final String projectName;
   private GitRepoMetricsCache gitRepoMetricsCache;
+  private GitRepositoryManager repoManager;
 
   @Inject
   UpdateGitMetricsTask(
       GitRepoMetricsCache gitRepoMetricsCache,
-      @Assisted Repository repository,
-      @Assisted Project project) {
-    this.repository = repository;
-    this.project = project;
+      GitRepositoryManager repoManager,
+      @Assisted String projectName) {
+    this.projectName = projectName;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
+    this.repoManager = repoManager;
   }
 
   @Override
   public void run() {
-    // TODO Might be a noop
-    logger.atInfo().log(
-        "Running task to collect stats: repo %s, project %s",
-        repository.getIdentifier(), project.getName());
-    // TODO Loop through all the collectors
-    GitStats gitStats = new GitStats((FileRepository) repository, project);
-    Map<String, Long> newMetrics = gitStats.get();
-    logger.atInfo().log(
-        "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
-    gitRepoMetricsCache.setMetrics(newMetrics);
+    Project.NameKey projectNameKey = Project.nameKey(projectName);
+    try (Repository repository = repoManager.openRepository(projectNameKey)) {
+      logger.atInfo().log(
+          "Running task to collect stats: repo %s, project %s",
+          repository.getIdentifier(), projectName);
+      // TODO Loop through all the collectors
+      Project project = Project.builder(projectNameKey).build();
+      GitStats gitStats = new GitStats((FileRepository) repository, project);
+      Map<String, Long> newMetrics = gitStats.get();
+      logger.atInfo().log(
+          "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
+      gitRepoMetricsCache.setMetrics(newMetrics);
+    } catch (RepositoryNotFoundException e) {
+      logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log(
+          "Something went wrong when reading from the repository for %s", projectName);
+    }
   }
 
   String getStringFromMap(Map<String, Long> m) {
@@ -67,6 +78,6 @@ public class UpdateGitMetricsTask implements Runnable {
 
   @Override
   public String toString() {
-    return String.join(" - ", repository.toString(), project.getName());
+    return "UpdateGitMetricsTask " + projectName;
   }
 }

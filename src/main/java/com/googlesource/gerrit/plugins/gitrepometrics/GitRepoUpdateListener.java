@@ -15,27 +15,19 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
-import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
-import java.io.IOException;
 import java.util.concurrent.ExecutorService;
-import org.eclipse.jgit.errors.RepositoryNotFoundException;
-import org.eclipse.jgit.lib.Repository;
 
 public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private final GitRepositoryManager repoManager;
   private final ExecutorService executor;
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Inject
   GitRepoUpdateListener(
-      GitRepositoryManager repoManager,
       @UpdateGitMetricsExecutor ExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory) {
-    this.repoManager = repoManager;
     this.executor = executor;
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
   }
@@ -43,17 +35,8 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
   @Override
   public void onGitReferenceUpdated(Event event) {
     String projectName = event.getProjectName();
-    Project.NameKey projectNameKey = Project.nameKey(projectName);
     logger.atFine().log("Got an update for project %s", projectName);
-    try (Repository repository = repoManager.openRepository(projectNameKey)) {
-      UpdateGitMetricsTask updateGitMetricsTask =
-          updateGitMetricsTaskFactory.create(repository, Project.builder(projectNameKey).build());
-      executor.execute(updateGitMetricsTask);
-    } catch (RepositoryNotFoundException e) {
-      logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);
-    } catch (IOException e) {
-      logger.atSevere().withCause(e).log(
-          "Something went wrong when reading from the repository for %s", projectName);
-    }
+    UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
+    executor.execute(updateGitMetricsTask);
   }
 }
