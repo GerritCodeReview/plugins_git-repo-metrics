@@ -16,14 +16,10 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
 import static java.nio.file.Files.delete;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.DisabledMetricMaker;
 import com.google.gerrit.server.config.GerritServerConfig;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.gerrit.server.config.SitePath;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -31,7 +27,6 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -44,28 +39,18 @@ public class UpdateGitMetricsTaskTest {
 
   private final String projectName = "testProject";
   private final Project.NameKey projectNameKey = Project.nameKey(projectName);
-  private static PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
-  private GitRepoMetricsCache gitRepoMetricsCache;
   private Repository testRepository;
-  Project testProject;
+  private Project testProject;
+  private GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Before
   public void setupRepository() throws Exception {
-    Path basePath = Files.createTempDirectory("git_repo_metrics_");
-    Path gitBasePath = new File(basePath.toFile(), "git").toPath();
-
-    Config c = new Config();
-    c.setStringList(
-        GitRepoMetricsConfig.PLUGIN_NAME, null, "project", Collections.singletonList("repo1"));
-    c.setString("gerrit", null, "basePath", gitBasePath.toString());
-    doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
-
+    ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Collections.singletonList("repo1"));
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
-            new DisabledMetricMaker(),
-            new GitRepoMetricsConfig(pluginConfigFactory, GitRepoMetricsConfig.PLUGIN_NAME));
+            new DisabledMetricMaker(), configSetupUtils.getGitRepoMetricsConfig());
 
     AbstractModule m =
         new AbstractModule() {
@@ -73,23 +58,26 @@ public class UpdateGitMetricsTaskTest {
           protected void configure() {
             install(new UpdateGitMetricsTaskModule());
             bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
-            bind(Config.class).annotatedWith(GerritServerConfig.class).toInstance(c);
+            bind(Config.class)
+                .annotatedWith(GerritServerConfig.class)
+                .toInstance(configSetupUtils.getConfig());
           }
 
           @Provides
           @SitePath
           Path getSitePath() {
-            return gitBasePath;
+            return configSetupUtils.getBasePath();
           }
         };
     Injector injector = Guice.createInjector(m);
     injector.injectMembers(this);
 
     try {
-      testRepository = new FileRepository(new File(gitBasePath.toFile(), projectName));
+      testRepository =
+          new FileRepository(new File(configSetupUtils.getGitBasePath().toFile(), projectName));
       testRepository.create(true);
     } catch (Exception e) {
-      delete(gitBasePath);
+      delete(configSetupUtils.getGitBasePath());
       throw e;
     }
     testProject = Project.builder(projectNameKey).build();

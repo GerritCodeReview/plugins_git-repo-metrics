@@ -15,35 +15,24 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 
 import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.DisabledMetricMaker;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import java.io.IOException;
 import java.util.Collections;
-import org.eclipse.jgit.lib.Config;
 import org.junit.Test;
 
 public class GitRepoMetricsCacheTest {
-
-  PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
-
   GitRepoMetricsCache gitRepoMetricsCacheModule;
   GitRepoMetricsConfig gitRepoMetricsConfig;
   FakeMetricMaker fakeMetricMaker;
 
   @Test
-  public void shouldRegisterMetrics() {
-    Config c = new Config();
-    c.setStringList(
-        GitRepoMetricsConfig.PLUGIN_NAME, null, "project", Collections.singletonList("repo1"));
-    doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
-    gitRepoMetricsConfig =
-        new GitRepoMetricsConfig(pluginConfigFactory, GitRepoMetricsConfig.PLUGIN_NAME);
+  public void shouldRegisterMetrics() throws IOException {
+    ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Collections.singletonList("repo1"));
+    gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     fakeMetricMaker = new FakeMetricMaker();
     gitRepoMetricsCacheModule = new GitRepoMetricsCache(fakeMetricMaker, gitRepoMetricsConfig);
     gitRepoMetricsCacheModule.initCache();
