@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d5e7d31_0472b103",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6cec29a_a2aea695",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8206ed1_4534ae06",
@@ -35,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9f2688b_e0e3578f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f8206ed1_4534ae06",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e46eb019_b62cf93c",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-06-03T13:45:50Z",
       "side": 1,
       "message": "I am not sure this metric name will always be a valid one.\nThink for example about a project named `foo/bar`, which contains an invalid character for a metric name.\n\nPerhaps we should call dropwizard `sanitizeMetricName` in getMetricName()?",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8313b95_483419cf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Doesn\u0027t look to be a problem. Seems like DW does it behind the scene.",
+      "parentUuid": "e46eb019_b62cf93c",
       "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -75,6 +129,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55bd351d_07aa6e0e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Yep, good point. I am going to address this in a follow up comment since out of scope with the current change",
+      "parentUuid": "b0e6fbf4_25ab4b4b",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 98
+      },
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f9031f9_ad3defab",
@@ -92,6 +170,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1abfcf72_58fb2b50",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "See [1].\n\n```\n\"The only difference is, @Inject is used when the factory has only one method to create the type, while @AssistedInject is used when the factory has multiple such methods corresponding to multiple constructors for the type\"\n```\n\n[1]: https://stackoverflow.com/questions/15351366/difference-between-inject-and-assistedinjected#:~:text\u003dThe%20only%20difference%20is%2C%20%40Inject,multiple%20constructors%20for%20the%20type",
+      "parentUuid": "8f9031f9_ad3defab",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb0dd97c_0c9dad55",
@@ -105,6 +201,24 @@
       "writtenOn": "2022-06-03T13:45:50Z",
       "side": 1,
       "message": "Why do we apply a function here?\nCouldn\u0027t we just pass the relevant long to the method?\n\nsomething like:\n\n```\n putMetric(metrics, numberOfPackedObjects, s -\u003e s.numberOfPackedObjects, statistics);\n      putMetric(metrics, numberOfPackFiles, s.numberOfPackFiles);\n```",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1218074f_4ed180c3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Yep, you are right. I am going to address this in a follow up comment since out of scope with the current change",
+      "parentUuid": "eb0dd97c_0c9dad55",
       "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -132,6 +246,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d0ce351_cb3b04fb",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "yep, exactly",
+      "parentUuid": "f9e3f322_17cf4675",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 48
+      },
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cc37f3a_838d285f",
@@ -149,6 +287,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61ec1d1_ef1afe89",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cc37f3a_838d285f",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca261492_cedb6a05",
@@ -162,6 +318,30 @@
       "writtenOn": "2022-06-03T13:45:50Z",
       "side": 1,
       "message": "Consider DRY the occurrences of this string in a final static `PROJECT_NAME \u003d \"git-repo-metrics\"`",
+      "range": {
+        "startLine": 53,
+        "startChar": 20,
+        "endLine": 53,
+        "endChar": 38
+      },
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d117aa48_57392a82",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTaskTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:19:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca261492_cedb6a05",
       "range": {
         "startLine": 53,
         "startChar": 20,
