@@ -78,10 +78,7 @@ public class GitStats {
         new GitRepoMetric(numberOfBitmaps, "Number of bitmaps", "Count"));
   }
 
-  private void putMetric(
-      Map<String, Long> metrics,
-      String metricName,
-      long value) {
+  private void putMetric(Map<String, Long> metrics, String metricName, long value) {
     metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), value);
   }
 }
