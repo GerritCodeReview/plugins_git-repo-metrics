@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
+import org.eclipse.jgit.lib.Repository;
 
 // TODO Add an interface
 // TODO implement multiple collectors
@@ -42,8 +43,8 @@ public class GitStats {
   public static String sizeOfPackedObjects = "sizeOfPackedObjects";
   public static String numberOfBitmaps = "numberOfBitmaps";
 
-  public GitStats(FileRepository repository, Project project) {
-    this.repository = repository;
+  public GitStats(Repository repository, Project project) {
+    this.repository = (FileRepository) repository;
     this.p = project;
   }
 
@@ -78,10 +79,7 @@ public class GitStats {
         new GitRepoMetric(numberOfBitmaps, "Number of bitmaps", "Count"));
   }
 
-  private void putMetric(
-      Map<String, Long> metrics,
-      String metricName,
-      long value) {
+  private void putMetric(Map<String, Long> metrics, String metricName, long value) {
     metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), value);
   }
 }

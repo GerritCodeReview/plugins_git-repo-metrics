@@ -18,7 +18,6 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
-import static org.mockito.Mockito.verifyNoInteractions;
 
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginName;
@@ -72,7 +71,7 @@ public class GitUpdateListenerTest {
 
     reset(mockedExecutorService);
     gitRepoUpdateListener =
-        new GitRepoUpdateListener(repoManager, mockedExecutorService, updateGitMetricsTaskFactory);
+        new GitRepoUpdateListener(mockedExecutorService, updateGitMetricsTaskFactory);
     repository = repoManager.createRepository(testProjectNameKey);
   }
 
@@ -81,15 +80,9 @@ public class GitUpdateListenerTest {
     doNothing().when(mockedExecutorService).execute(valueCapture.capture());
     gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent(testProject));
     UpdateGitMetricsTask expectedUpdateGitMetricsTask =
-        updateGitMetricsTaskFactory.create(repository, Project.builder(testProjectNameKey).build());
+        updateGitMetricsTaskFactory.create(testProject);
     assertThat(valueCapture.getValue().toString())
         .isEqualTo(expectedUpdateGitMetricsTask.toString());
-  }
-
-  @Test
-  public void shouldNotUpdateMetricsWhenRepoDoesntExists() {
-    gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent("InvalidProject"));
-    verifyNoInteractions(mockedExecutorService);
   }
 
   public static class TestEvent implements GitReferenceUpdatedListener.Event {
