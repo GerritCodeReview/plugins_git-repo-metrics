@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6735109b_aebde693",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "nit: this could be ```Maps.newHashMap();```",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8415a5f8_79fc188f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "nit: this should be flagged as @VisibleForTesting",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab6afeef_b6f80c83",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "This is unused",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e0d8ff_8e3666ef",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "Should we name this `shouldCollectStats` to emphasise that we are not actually collecting anything here, as the name would suggest?",
+      "range": {
+        "startLine": 69,
+        "startChar": 17,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d95ba2d_875c2f28",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "I don\u0027t think it is possible for gracePeriodMs to be negative.\n\n`config.getTimeUnit` will throw an IllegalArgumentException if such value is supplied",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d16d20_44d56698",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "nit: unrelated",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccccd76c_1e3bfca2",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "Not sure 0 is a good default.\nDo you think we should default to something like 5 minutes?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 34
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb2d7555_aaae16cc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:05:54Z",
+      "side": 1,
+      "message": "I am thinking perhaps another way to do this would be to pass a `Clock` object to the GitRepoMetricsCache.\n\nIn this way, when testing, we could instantiate it with a clock fixed in the past, such as `Clock.fixed(...past...)` and remove the need of sleeps in the code.",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
