@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.base.Supplier;
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
@@ -82,5 +83,9 @@ public class GitRepoMetricsCache {
 
   public static String getMetricName(String metricName, String projectName) {
     return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
+  }
+
+  public boolean doCollectStats(String projectName) {
+      return projects.stream().anyMatch(p -> p.equals(projectName));
   }
 }
