@@ -40,7 +40,6 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 public class GitUpdateListenerTest {
-  private final String pluginName = "git-repo-metrics";
   private final GitRepositoryManager repoManager = new InMemoryRepositoryManager();
   private final ExecutorService mockedExecutorService = mock(ExecutorService.class);
   private GitRepoUpdateListener gitRepoUpdateListener;
@@ -63,7 +62,7 @@ public class GitUpdateListenerTest {
             install(new UpdateGitMetricsTaskModule());
             bind(new TypeLiteral<String>() {})
                 .annotatedWith(PluginName.class)
-                .toInstance(pluginName);
+                .toInstance(ConfigSetupUtils.pluginName);
           }
         };
     Injector injector = Guice.createInjector(m);
