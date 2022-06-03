@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
 
@@ -52,14 +51,14 @@ public class GitStats {
     Map<String, Long> metrics = new java.util.HashMap<>(Collections.emptyMap());
     try {
       GC.RepoStatistics statistics = new GC(repository).getStatistics();
-      putMetric(metrics, numberOfPackedObjects, s -> s.numberOfPackedObjects, statistics);
-      putMetric(metrics, numberOfPackFiles, s -> s.numberOfPackFiles, statistics);
-      putMetric(metrics, numberOfLooseObjects, s -> s.numberOfLooseObjects, statistics);
-      putMetric(metrics, numberOfLooseRefs, s -> s.numberOfLooseRefs, statistics);
-      putMetric(metrics, numberOfPackedRefs, s -> s.numberOfPackedRefs, statistics);
-      putMetric(metrics, sizeOfLooseObjects, s -> s.sizeOfLooseObjects, statistics);
-      putMetric(metrics, sizeOfPackedObjects, s -> s.sizeOfPackedObjects, statistics);
-      putMetric(metrics, numberOfBitmaps, s -> s.numberOfBitmaps, statistics);
+      putMetric(metrics, numberOfPackedObjects, statistics.numberOfPackedObjects);
+      putMetric(metrics, numberOfPackFiles, statistics.numberOfPackFiles);
+      putMetric(metrics, numberOfLooseObjects, statistics.numberOfLooseObjects);
+      putMetric(metrics, numberOfLooseRefs, statistics.numberOfLooseRefs);
+      putMetric(metrics, numberOfPackedRefs, statistics.numberOfPackedRefs);
+      putMetric(metrics, sizeOfLooseObjects, statistics.sizeOfLooseObjects);
+      putMetric(metrics, sizeOfPackedObjects, statistics.sizeOfPackedObjects);
+      putMetric(metrics, numberOfBitmaps, statistics.numberOfBitmaps);
       logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
     } catch (IOException e) {
       logger.atSevere().log("Something went wrong: %s", e.getMessage());
@@ -82,8 +81,7 @@ public class GitStats {
   private void putMetric(
       Map<String, Long> metrics,
       String metricName,
-      Function<GC.RepoStatistics, Long> fn,
-      GC.RepoStatistics statistics) {
-    metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), fn.apply(statistics));
+      long value) {
+    metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), value);
   }
 }
