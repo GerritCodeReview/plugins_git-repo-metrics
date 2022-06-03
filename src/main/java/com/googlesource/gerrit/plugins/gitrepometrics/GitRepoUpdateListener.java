@@ -29,15 +29,18 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
   private final GitRepositoryManager repoManager;
   private final ExecutorService executor;
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
+  private GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject
   GitRepoUpdateListener(
       GitRepositoryManager repoManager,
       @UpdateGitMetricsExecutor ExecutorService executor,
-      UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory) {
+      UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
+      GitRepoMetricsCache gitRepoMetricsCache) {
     this.repoManager = repoManager;
     this.executor = executor;
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
+    this.gitRepoMetricsCache = gitRepoMetricsCache;
   }
 
   @Override
@@ -45,6 +48,11 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
     String projectName = event.getProjectName();
     Project.NameKey projectNameKey = Project.nameKey(projectName);
     logger.atFine().log("Got an update for project %s", projectName);
+
+    if (!gitRepoMetricsCache.doCollectStats(projectName)) {
+      return;
+    }
+
     try (Repository repository = repoManager.openRepository(projectNameKey)) {
       UpdateGitMetricsTask updateGitMetricsTask =
           updateGitMetricsTaskFactory.create(repository, Project.builder(projectNameKey).build());

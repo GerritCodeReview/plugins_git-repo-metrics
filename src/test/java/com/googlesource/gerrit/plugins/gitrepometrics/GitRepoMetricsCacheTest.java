@@ -37,6 +37,27 @@ public class GitRepoMetricsCacheTest {
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
   }
 
+  @Test
+  public void shouldCollectStatsForEnabledRepo() {
+    String enabledRepo = "enabledRepo";
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList(enabledRepo));
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(enabledRepo)).isTrue();
+  }
+
+  @Test
+  public void shouldNotCollectStatsForDisabledRepo() {
+    String enabledRepo = "enabledRepo";
+    String disabledRepo = "disabledRepo";
+    gitRepoMetricsConfig = Utils.getRpoConfig(Collections.singletonList(enabledRepo));
+    gitRepoMetricsCacheModule =
+        new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+
+    assertThat(gitRepoMetricsCacheModule.doCollectStats(disabledRepo)).isFalse();
+  }
+
   private class FakeMetricMaker extends DisabledMetricMaker {
     Integer callsCounter;
 
