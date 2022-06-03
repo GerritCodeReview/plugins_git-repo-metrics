@@ -1,0 +1,33 @@
+@PLUGIN@ configuration
+======================
+
+The @PLUGIN@ allows a systematic collection of repository metrics.
+Metrics are updated upon a `ref-update` receive.
+
+Currently, the metrics exposed are the following:
+
+```bash
+plugins_git_repo_metrics_numberofbitmaps_<repo_name>
+plugins_git_repo_metrics_numberoflooseobjects_<repo_name>
+plugins_git_repo_metrics_numberoflooserefs_<repo_name>
+plugins_git_repo_metrics_numberofpackedobjects_<repo_name>
+plugins_git_repo_metrics_numberofpackedrefs_<repo_name>
+plugins_git_repo_metrics_numberofpackfiles_<repo_name>
+plugins_git_repo_metrics_sizeoflooseobjects_<repo_name>
+plugins_git_repo_metrics_sizeofpackedobjects_<repo_name>
+```
+
+Settings
+--------
+
+The plugin allows to customize its behaviour through a specific
+`git-repo-metrics.config` file in the `$GERRIT_SITE/etc` directory.
+
+The metrics are not collected for all the projects, otherwise there might be an explosion of metrics
+exported, but only the one listed in the configuration file, i.e.:
+
+```
+[git-repo-metrics]
+  project = test-project
+  project = another-repo
+```
