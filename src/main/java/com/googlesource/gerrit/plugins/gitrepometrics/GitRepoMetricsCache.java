@@ -82,4 +82,8 @@ public class GitRepoMetricsCache {
   public static String getMetricName(String metricName, String projectName) {
     return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
   }
+
+  public boolean shouldCollectStats(String projectName) {
+    return projects.stream().anyMatch(p -> p.equals(projectName));
+  }
 }
