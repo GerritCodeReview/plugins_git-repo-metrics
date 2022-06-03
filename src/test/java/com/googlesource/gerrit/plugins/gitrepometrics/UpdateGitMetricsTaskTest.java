@@ -16,13 +16,9 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
 import static java.nio.file.Files.delete;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.DisabledMetricMaker;
-import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -31,7 +27,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.Config;
 import org.eclipse.jgit.lib.Repository;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,21 +37,16 @@ public class UpdateGitMetricsTaskTest {
   private final Project.NameKey projectNameKey = Project.nameKey(projectName);
   private Repository testRepository;
   private Project testProject;
-  private PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
   private GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Before
   public void setupRepository() throws Exception {
-    Config c = new Config();
-    c.setStringList("git-repo-metrics", null, "project", Collections.singletonList("repo1"));
-    doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
-
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
             new DisabledMetricMaker(),
-            new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics"));
+                Utils.getRpoConfig(Collections.singletonList("repo1")));
 
     AbstractModule m =
         new AbstractModule() {
