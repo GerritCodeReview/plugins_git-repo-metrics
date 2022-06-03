@@ -22,11 +22,15 @@ import static org.mockito.Mockito.mock;
 
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.DisabledMetricMaker;
+import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.PluginConfigFactory;
+import com.google.gerrit.server.config.SitePath;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Provides;
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
@@ -40,17 +44,21 @@ public class UpdateGitMetricsTaskTest {
   private final String pluginName = "git-repo-metrics";
   private final String projectName = "testProject";
   private final Project.NameKey projectNameKey = Project.nameKey(projectName);
-  private Repository testRepository;
-  private Project testProject;
   private static PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
   private GitRepoMetricsCache gitRepoMetricsCache;
+  private Repository testRepository;
+  Project testProject;
 
   @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Before
   public void setupRepository() throws Exception {
+    Path basePath = Files.createTempDirectory("git_repo_metrics_");
+    Path gitBasePath = new File(basePath.toFile(), "git").toPath();
+
     Config c = new Config();
     c.setStringList(pluginName, null, "project", Collections.singletonList("repo1"));
+    c.setString("gerrit", null, "basePath", gitBasePath.toString());
     doReturn(c).when(pluginConfigFactory).getGlobalPluginConfig(any());
 
     gitRepoMetricsCache =
@@ -63,17 +71,23 @@ public class UpdateGitMetricsTaskTest {
           protected void configure() {
             install(new UpdateGitMetricsTaskModule());
             bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
+            bind(Config.class).annotatedWith(GerritServerConfig.class).toInstance(c);
+          }
+
+          @Provides
+          @SitePath
+          Path getSitePath() {
+            return gitBasePath;
           }
         };
     Injector injector = Guice.createInjector(m);
     injector.injectMembers(this);
 
-    Path p = Files.createTempDirectory("git_repo_metrics_");
     try {
-      testRepository = new FileRepository(p.toFile());
+      testRepository = new FileRepository(new File(gitBasePath.toFile(), projectName));
       testRepository.create(true);
     } catch (Exception e) {
-      delete(p);
+      delete(gitBasePath);
       throw e;
     }
     testProject = Project.builder(projectNameKey).build();
@@ -81,9 +95,16 @@ public class UpdateGitMetricsTaskTest {
 
   @Test
   public void shouldUpdateMetrics() {
-    UpdateGitMetricsTask updateGitMetricsTask =
-        updateGitMetricsTaskFactory.create(testRepository, testProject);
+    UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
     updateGitMetricsTask.run();
     assertThat(gitRepoMetricsCache.getMetrics().keySet()).isNotEmpty();
+  }
+
+  @Test
+  public void shouldNotUpdateMetricsIfRepoDoesNotExist() {
+    UpdateGitMetricsTask updateGitMetricsTask =
+        updateGitMetricsTaskFactory.create("nonExistentProject");
+    updateGitMetricsTask.run();
+    assertThat(gitRepoMetricsCache.getMetrics().keySet()).isEmpty();
   }
 }
