@@ -223,6 +223,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac5598e_08225ed8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-03T15:38:31Z",
+      "side": 1,
+      "message": "https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/338695",
+      "parentUuid": "1218074f_4ed180c3",
+      "revId": "6579381860f90b50e4c86f73b6426a2fcb84b7a7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9e3f322_17cf4675",
