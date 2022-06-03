@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3cb39a6_8b1b160d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-03T14:07:23Z",
+      "side": 1,
+      "message": "Utils class has been added as part of this CR [1] as well.\nWere you planning to extract it into this one only?\n\n\n[1]https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/338657",
+      "revId": "d533a2e9307b3a47bb36f8e8879e9e1c418fe9f2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
