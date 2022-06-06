@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e22ff59a_740bdc25",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-06T19:38:28Z",
+      "side": 1,
+      "message": "I don\u0027t remember the outcome of our conversation, but should this be named `shouldCollectStats`?",
+      "range": {
+        "startLine": 86,
+        "startChar": 17,
+        "endLine": 86,
+        "endChar": 31
+      },
+      "revId": "f754d366a24ab9404d9591037f0236c7d9f330ce",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0ff42e2_8a62c492",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-06T19:38:28Z",
+      "side": 1,
+      "message": "Should this be using `enabledRepo` at L33?",
+      "revId": "f754d366a24ab9404d9591037f0236c7d9f330ce",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
