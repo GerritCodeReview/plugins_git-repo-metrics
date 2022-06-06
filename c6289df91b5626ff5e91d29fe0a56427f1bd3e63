@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c93341d6_4f77f01d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-06T19:32:13Z",
+      "side": 1,
+      "message": "needs",
+      "range": {
+        "startLine": 9,
+        "startChar": 26,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "c6289df91b5626ff5e91d29fe0a56427f1bd3e63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20a66945_0f6e2337",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-06T19:32:13Z",
+      "side": 1,
+      "message": "opening?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 8
+      },
+      "revId": "c6289df91b5626ff5e91d29fe0a56427f1bd3e63",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b082463_6366ad83",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
         "patchSetId": 2
