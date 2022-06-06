@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c43732a3_2479f24e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2022-06-06T19:27:56Z",
+      "side": 1,
+      "message": "Why this variable?\nCan we not store the @PluginName argument in a field and use that?\n\nLooks like this variable is only used by the tests I think should be defined there rather than here",
+      "revId": "48c032c36fce0f803b968e1196614b5845a5e61d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
