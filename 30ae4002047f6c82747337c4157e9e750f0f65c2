@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18cc4a4f_23a200e8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6735109b_aebde693",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8415a5f8_79fc188f",
@@ -35,6 +53,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de7fe93_13670daa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8415a5f8_79fc188f",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab6afeef_b6f80c83",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-06-03T14:05:54Z",
       "side": 1,
       "message": "This is unused",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 3
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38002033_27a70158",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab6afeef_b6f80c83",
       "range": {
         "startLine": 65,
         "startChar": 0,
@@ -81,6 +141,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0649bacd_1c901bc9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9e0d8ff_8e3666ef",
+      "range": {
+        "startLine": 69,
+        "startChar": 17,
+        "endLine": 69,
+        "endChar": 31
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d95ba2d_875c2f28",
@@ -94,6 +178,30 @@
       "writtenOn": "2022-06-03T14:05:54Z",
       "side": 1,
       "message": "I don\u0027t think it is possible for gracePeriodMs to be negative.\n\n`config.getTimeUnit` will throw an IllegalArgumentException if such value is supplied",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1974a7b1_5a603c19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d95ba2d_875c2f28",
       "range": {
         "startLine": 70,
         "startChar": 1,
@@ -121,6 +229,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa03cff_4879a08e",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d16d20_44d56698",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ccccd76c_1e3bfca2",
@@ -134,6 +260,30 @@
       "writtenOn": "2022-06-03T14:05:54Z",
       "side": 1,
       "message": "Not sure 0 is a good default.\nDo you think we should default to something like 5 minutes?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 34
+      },
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5edded19_06bf9a24",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:25:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ccccd76c_1e3bfca2",
       "range": {
         "startLine": 38,
         "startChar": 0,
