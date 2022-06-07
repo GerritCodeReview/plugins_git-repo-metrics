@@ -23,7 +23,7 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private final ExecutorService executor;
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
-  private GitRepoMetricsCache gitRepoMetricsCache;
+  private final GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject
   GitRepoUpdateListener(
@@ -40,11 +40,9 @@ public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
     String projectName = event.getProjectName();
     logger.atFine().log("Got an update for project %s", projectName);
 
-    if (!gitRepoMetricsCache.shouldCollectStats(projectName)) {
-      return;
+    if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
+      UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
+      executor.execute(updateGitMetricsTask);
     }
-
-    UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
-    executor.execute(updateGitMetricsTask);
   }
 }

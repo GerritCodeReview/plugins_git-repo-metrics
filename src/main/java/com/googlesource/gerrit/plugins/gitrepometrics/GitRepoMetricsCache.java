@@ -14,40 +14,60 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Maps;
+import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-@Singleton
 public class GitRepoMetricsCache {
+  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private Map<String, Long> metrics;
   private final MetricMaker metricMaker;
   private final List<String> projects;
+  private Map<String, Long> collectedAt;
+  private final long gracePeriodMs;
+
+  private final Clock clock;
 
   public static List<GitRepoMetric> metricsNames = new ArrayList<>(GitStats.availableMetrics());
 
-  @Inject
-  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config) {
+  @VisibleForTesting
+  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config, Clock clock) {
     this.metricMaker = metricMaker;
     this.projects = config.getRepositoryNames();
     this.metrics = Maps.newHashMap();
+    this.collectedAt = Maps.newHashMap();
+    this.clock = clock;
+    this.gracePeriodMs = config.getGracePeriodMs();
+  }
+
+  @Inject
+  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config) {
+    this(metricMaker, config, Clock.systemDefaultZone());
   }
 
   public Map<String, Long> getMetrics() {
     return metrics;
   }
 
-  public void setMetrics(Map<String, Long> metrics) {
+  public void setMetrics(Map<String, Long> metrics, String projectName) {
+    this.collectedAt.put(projectName, clock.millis());
     this.metrics = metrics;
+  }
+
+  @VisibleForTesting
+  public Map<String, Long> getCollectedAt() {
+    return collectedAt;
   }
 
   public void initCache() {
@@ -84,6 +104,16 @@ public class GitRepoMetricsCache {
   }
 
   public boolean shouldCollectStats(String projectName) {
+    long lastCollectionTime = collectedAt.getOrDefault(projectName, 0L);
+    long currentTimeMs = System.currentTimeMillis();
+    boolean doCollectStats = lastCollectionTime + gracePeriodMs <= currentTimeMs;
+    if (!doCollectStats) {
+      logger.atFine().log(
+          "Skip stats collection for %s (grace period: %d, last collection time: %d, current time: %d",
+          projectName, gracePeriodMs, lastCollectionTime, currentTimeMs);
+      return false;
+    }
+
     return projects.stream().anyMatch(p -> p.equals(projectName));
   }
 }
