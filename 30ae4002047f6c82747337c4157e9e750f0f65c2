@@ -309,6 +309,24 @@
       "message": "I am thinking perhaps another way to do this would be to pass a `Clock` object to the GitRepoMetricsCache.\n\nIn this way, when testing, we could instantiate it with a clock fixed in the past, such as `Clock.fixed(...past...)` and remove the need of sleeps in the code.",
       "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b900f9a_233fd269",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-07T14:26:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb2d7555_aaae16cc",
+      "revId": "30ae4002047f6c82747337c4157e9e750f0f65c2",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
