@@ -81,4 +81,8 @@ public class GitStats {
   private void putMetric(Map<String, Long> metrics, String metricName, long value) {
     metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), value);
   }
+
+  public String getStatName() {
+    return "git-statistics";
+  }
 }

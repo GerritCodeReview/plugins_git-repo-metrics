@@ -24,7 +24,8 @@ public class Module extends LifecycleModule {
 
   @Override
   protected void configure() {
-    bind(GitRepoMetricsCache.class).in(Scopes.SINGLETON);
+    bind(GitRepoMetricsCache.class)
+        .in(Scopes.SINGLETON);
     bind(ExecutorService.class)
         .annotatedWith(UpdateGitMetricsExecutor.class)
         .toProvider(UpdateGitMetricsExecutorProvider.class);

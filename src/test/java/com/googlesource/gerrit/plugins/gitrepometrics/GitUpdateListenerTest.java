@@ -32,6 +32,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.Scopes;
 import com.google.inject.TypeLiteral;
 import java.io.IOException;
 import java.util.Collections;
@@ -75,7 +76,8 @@ public class GitUpdateListenerTest {
             bind(new TypeLiteral<String>() {})
                 .annotatedWith(PluginName.class)
                 .toInstance(ConfigSetupUtils.pluginName);
-            bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
+            bind(GitRepoMetricsCache.class)
+                .toInstance(gitRepoMetricsCache);
           }
         };
     Injector injector = Guice.createInjector(m);

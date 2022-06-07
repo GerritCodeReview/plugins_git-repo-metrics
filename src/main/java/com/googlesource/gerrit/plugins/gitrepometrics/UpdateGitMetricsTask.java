@@ -18,6 +18,7 @@ import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class UpdateGitMetricsTask implements Runnable {
       Map<String, Long> newMetrics = gitStats.get();
       logger.atInfo().log(
           "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
-      gitRepoMetricsCache.setMetrics(newMetrics);
+      gitRepoMetricsCache.setMetrics(newMetrics, projectName);
     } catch (RepositoryNotFoundException e) {
       logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);
     } catch (IOException e) {

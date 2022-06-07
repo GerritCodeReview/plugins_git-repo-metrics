@@ -22,6 +22,8 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
@@ -37,5 +39,9 @@ public class GitRepoMetricsConfig {
 
   public List<String> getRepositoryNames() {
     return Arrays.stream(config.getStringList(pluginName, null, "project")).collect(toList());
+  }
+
+  public Long getGracePeriodMs() {
+    return config.getTimeUnit("git-repo-metrics", null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
   }
 }
