@@ -30,4 +30,8 @@ exported, but only the one listed in the configuration file, i.e.:
 [git-repo-metrics]
   project = test-project
   project = another-repo
+  gracePeriod = 5m
 ```
+
+_git-repo-metrics.gracePeriod_: Grace period between samples collection. Used to avoid aggressive
+metrics collection. By default, 0.

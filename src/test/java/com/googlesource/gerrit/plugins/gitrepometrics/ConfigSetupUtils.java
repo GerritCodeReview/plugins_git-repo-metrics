@@ -27,15 +27,21 @@ import java.util.List;
 import org.eclipse.jgit.lib.Config;
 
 public class ConfigSetupUtils {
-  final static String pluginName = "git-repo-metrics";
+  static final String pluginName = "git-repo-metrics";
   private final Path basePath;
   private final Path gitBasePath;
   private final List<String> projects;
+  private final String gracePeriod;
 
   public ConfigSetupUtils(List<String> projects) throws IOException {
+    this(projects, "0");
+  }
+
+  public ConfigSetupUtils(List<String> projects, String gracePeriod) throws IOException {
     this.basePath = Files.createTempDirectory("git_repo_metrics_");
     this.gitBasePath = new File(basePath.toFile(), "git").toPath();
     this.projects = projects;
+    this.gracePeriod = gracePeriod;
   }
 
   public GitRepoMetricsConfig getGitRepoMetricsConfig() {
@@ -50,6 +56,7 @@ public class ConfigSetupUtils {
     Config c = new Config();
 
     c.setStringList(pluginName, null, "project", projects);
+    c.setString(pluginName, null, "gracePeriod", gracePeriod);
     c.setString("gerrit", null, "basePath", gitBasePath.toString());
     return c;
   }

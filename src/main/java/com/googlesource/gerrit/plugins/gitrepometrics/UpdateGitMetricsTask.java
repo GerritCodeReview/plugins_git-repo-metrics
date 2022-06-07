@@ -61,7 +61,7 @@ public class UpdateGitMetricsTask implements Runnable {
       Map<String, Long> newMetrics = gitStats.get();
       logger.atInfo().log(
           "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
-      gitRepoMetricsCache.setMetrics(newMetrics);
+      gitRepoMetricsCache.setMetrics(newMetrics, projectName);
     } catch (RepositoryNotFoundException e) {
       logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);
     } catch (IOException e) {
