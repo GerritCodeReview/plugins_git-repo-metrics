@@ -16,6 +16,24 @@
       "message": "Nit: constructor{,s}",
       "revId": "71603fe1b04da205e53403d21acb4627fa5f8b79",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519fa62a_d53b8e42",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-08T19:15:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0d77895_6e232aaa",
+      "revId": "71603fe1b04da205e53403d21acb4627fa5f8b79",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
