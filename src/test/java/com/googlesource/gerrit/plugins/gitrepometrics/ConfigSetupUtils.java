@@ -25,7 +25,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import org.eclipse.jgit.lib.Config;
+import org.junit.Ignore;
 
+@Ignore
 public class ConfigSetupUtils {
   static final String pluginName = "git-repo-metrics";
   private final Path basePath;
