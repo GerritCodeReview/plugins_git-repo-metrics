@@ -11,6 +11,7 @@ gerrit_plugin(
     name = "git-repo-metrics",
     srcs = glob(
         ["src/main/java/**/*.java"],
+        exclude = ["src/main/java/com/google/gerrit/server/git/DelegateRepositoryUnwrapper.java"],
     ),
     manifest_entries = [
         "Gerrit-PluginName: git-repo-metrics",
@@ -21,7 +22,25 @@ gerrit_plugin(
     ],
     resources = glob(
         ["src/main/resources/**/*"],
-    )
+    ),
+    deps = [
+        ":git-repo-metrics-delegaterepositoryunwrapper-lib-neverlink",
+    ],
+)
+
+java_library(
+    name = "git-repo-metrics-delegaterepositoryunwrapper-lib",
+    srcs = ["src/main/java/com/google/gerrit/server/git/DelegateRepositoryUnwrapper.java"],
+    visibility = ["//visibility:public"],
+    deps = PLUGIN_DEPS,
+)
+
+java_library(
+    name = "git-repo-metrics-delegaterepositoryunwrapper-lib-neverlink",
+    srcs = ["src/main/java/com/google/gerrit/server/git/DelegateRepositoryUnwrapper.java"],
+    neverlink = True,
+    visibility = ["//visibility:public"],
+    deps = PLUGIN_DEPS,
 )
 
 junit_tests(
@@ -48,5 +67,5 @@ java_library(
 java_library(
     name = "git-repo-metrics__plugin_deps",
     visibility = ["//visibility:public"],
-    exports = PLUGIN_DEPS
+    exports = PLUGIN_DEPS,
 )
