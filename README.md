@@ -14,19 +14,20 @@ Example:
 git clone --recursive https://gerrit.googlesource.com/gerrit
 git clone https://gerrit.googlesource.com/plugins/git-repo-metrics
 pushd gerrit/plugins && ln -s ../../git-repo-metrics . && popd
-cd gerrit && bazel build plugins/git-repo-metrics
+cd gerrit && bazel build //plugins/git-repo-metrics:all
 ```
 
-The output plugin jar is created in:
+Two jar will be created:
 
 ```
-bazel-genfiles/plugins/git-repo-metrics/git-repo-metrics.jar
+bazel-bin/plugins/git-repo-metrics/git-repo-metrics.jar
+bazel-bin/plugins/git-repo-metrics/libgit-repo-metrics-delegaterepositoryunwrapper-lib.jar
 ```
 
 ## How to install
 
-Copy the git-repo-metrics.jar into the Gerrit's /plugins directory and wait for the plugin to be automatically
-loaded.
+Copy the `git-repo-metrics.jar` into the Gerrit's `/plugins` directory and the `libgit-repo-metrics-delegaterepositoryunwrapper-lib.jar`
+into the `/lib` directory. Restart your Gerrit instance and the plugin will be loaded.
 
 ## Configuration
 
