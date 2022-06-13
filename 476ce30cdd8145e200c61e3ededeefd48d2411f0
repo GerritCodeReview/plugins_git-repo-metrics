@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b5cfc44_4c4e9f73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-06-13T20:58:54Z",
+      "side": 1,
+      "message": "The `repository` we get at L#55 could be a `SharedRefDbRepository`, hence a `DelegateRepository`, i.e.: in the multi-site.\n\nLater in the code, L#66, I need a `FileRepository` to extract stats.\n\nTo unwrap the `SharedRefDbRepository` and cast it to a `FileRepository`, I need to call the `delegate()` method `protected`.\n\nI was thinking, of either adding a method in the `SharedRefDbRepository` to expose the original `Repository` or making public the current `delegate()` method.\n\nI am tempted to go for the latter.\n\nWDYT is the best approach?",
+      "revId": "476ce30cdd8145e200c61e3ededeefd48d2411f0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
