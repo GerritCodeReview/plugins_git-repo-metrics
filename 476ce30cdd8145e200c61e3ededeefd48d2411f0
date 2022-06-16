@@ -34,6 +34,24 @@
       "parentUuid": "2b5cfc44_4c4e9f73",
       "revId": "476ce30cdd8145e200c61e3ededeefd48d2411f0",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ada9dda_fc917896",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-16T15:00:08Z",
+      "side": 1,
+      "message": "To overwrite the `delegate()` method from `DelegateRepository` class, it should at least become protected instead of package protected:\n  public class DelegateRepository extends Repository {\n  [...]\n  protected Repository delegate() {\n    return delegate;\n  }\n\nThen you could of course say this:\n  public class SharedRefDbRepository extends DelegateRepository {\n  [...]\n  @Override\n  public Repository delegate() {\n    return super.delegate();\n  }\n\nor, you could also just return delegate member as it\u0027s already protected, but then I wouldn\u0027t call this method `delegate()` to avoid confusion but rather differently:\n  public class SharedRefDbRepository extends DelegateRepository {\n  [...]\n  public Repository getDelegate() {\n    return delegate;\n  }\n\n\u003e IIUIC adding method to  SharedRefDbRepository  will not help you here as you would need that class being a part of this plugin class loader, [...]\n\nI think the suggestion was to change this class in global-refdb upstream. Given that global-refdb is deployed in \u003cgerrit_site\u003e/lib directory this approach would work.\n\nThis plugin should then depend on `global-refdb`, similarly how it\u0027s done in multi-site plugin:\n\n  deps \u003d [\n        \":replication-neverlink\",\n        \"@events-broker//jar\",\n        \"@global-refdb//jar\",\n    ],\n\nSo, I\u0027m asking, why it\u0027s not sufficient to only have compile-only dependency, as it should be provided to runtime anyway, similarly, to servlet API, as it\u0027s used only to compile time, as running with embedded Jetty would provide the servlet API.\n\nUnrelated, but I have just sent this change 339434 for review to to optimize the build for the multi-site plugin and exclude global-refdb and events-broker from the shaded jar.\n\nThe only difference in this plugin compared to multi-site plugin is: Strictly speaking, depends git-repo-metrics nicht on global-refdb, so that it could be, that global-refdb is not available in \u003cgerrit_site\u003e\n/lib directory, in that case we would get CNFE if you would cast to SharedRefDbRepository.\n\nAnother  idea is to not change anything, but just abuse the fact, that the delegate() method is package protected.\n\nSo that adding new class in this plugin in the same package should do the trick (not tested):\n\n      Repository newRepo \u003d repository;\n      if (repository instanceof DelegateRepository) {\n    \t  newRepo \u003d DelegateRepositoryUnwrapper.unwrap((DelegateRepository) repository);\n      }\n\nwhere the DelegateRepositoryUnwrapper would be create in the same package in this plugin, where DelegateRepository is located in gerrit core:\n\n```\npackage com.google.gerrit.server.git;\n\nimport org.eclipse.jgit.lib.Repository;\n\npublic class DelegateRepositoryUnwrapper {\n\tpublic static Repository unwrap(DelegateRepository delegateRepository) {\n\t\treturn delegateRepository.delegate();\n\t}\n\t\n\tprivate DelegateRepositoryUnwrapper() {}\n}\n```",
+      "parentUuid": "52ab874a_7e419975",
+      "revId": "476ce30cdd8145e200c61e3ededeefd48d2411f0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
