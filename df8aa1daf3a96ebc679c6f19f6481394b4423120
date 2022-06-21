@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f72ee3b_2b285ffd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "This is a non intrusive approach isolated in this plugin. While the additional library fixed the problem, it could be a good idea to still make the method public in gerrit core in DelegateRepository.",
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04006e7f_15316789",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "Nit: may be define a constant for this and use it here and below? Something like:\n\n  DELEGATE_REPOSITORY_UNWRAPPER_SRCS \u003d [\"src/main/java/com/google/gerrit/server/git/DelegateRepositoryUnwrapper.java\"]",
+      "range": {
+        "startLine": 14,
+        "startChar": 18,
+        "endLine": 14,
+        "endChar": 97
+      },
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47d5ff2a_9eec30bb",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "Optional: There is nothing special to this plugin in this unwrapper. You could rename it to just be: delegaterepositoryunwrapper-lib. This would have implication to final artifact and installation instructions:\n\n  bazel-bin/plugins/git-repo-metrics/libdelegaterepositoryunwrapper-lib.jar\n\nAnd there will be a shorter library creted for \u003cgerrit_site\u003e/lib directory.",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 32,
+        "endChar": 60
+      },
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ece7d441_de81c11a",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "Not needed?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 41
+      },
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8234ed87_361e72b6",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "Not needed?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 41
+      },
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee498dc1_87b2f732",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "better: `\u003cgerrit_site\u003e/plugins`",
+      "range": {
+        "startLine": 29,
+        "startChar": 51,
+        "endLine": 29,
+        "endChar": 60
+      },
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acdf5cb6_0a88eed6",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T13:52:29Z",
+      "side": 1,
+      "message": "`\u003cgerrit_site\u003e/lib`",
+      "range": {
+        "startLine": 30,
+        "startChar": 9,
+        "endLine": 30,
+        "endChar": 15
+      },
+      "revId": "df8aa1daf3a96ebc679c6f19f6481394b4423120",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
