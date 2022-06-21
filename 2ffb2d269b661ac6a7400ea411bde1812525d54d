@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e657f597_901dc229",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T15:37:11Z",
+      "side": 1,
+      "message": "Also rename the neverlink library \":delegaterepositoryunwrapper-neverlink\"?",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "2ffb2d269b661ac6a7400ea411bde1812525d54d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18bb30f6_94640fb8",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T15:37:11Z",
+      "side": 1,
+      "message": "Just: \"delegaterepositoryunwrapper-neverlink\"",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 70
+      },
+      "revId": "2ffb2d269b661ac6a7400ea411bde1812525d54d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4624f130_0779b5ac",
+        "filename": "BUILD",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-06-21T15:37:11Z",
+      "side": 1,
+      "message": "Use constant here as well: srcs \u003d DELEGATE_REPOSITORY_UNWRAPPER_SRCS,",
+      "range": {
+        "startLine": 41,
+        "startChar": 11,
+        "endLine": 41,
+        "endChar": 90
+      },
+      "revId": "2ffb2d269b661ac6a7400ea411bde1812525d54d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
