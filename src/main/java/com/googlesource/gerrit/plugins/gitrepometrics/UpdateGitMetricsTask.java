@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.DelegateRepository;
-import com.google.gerrit.server.git.DelegateRepositoryUnwrapper;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -62,7 +61,7 @@ public class UpdateGitMetricsTask implements Runnable {
 
       Repository unwrappedRepo =
           repository instanceof DelegateRepository
-              ? DelegateRepositoryUnwrapper.unwrap((DelegateRepository) repository)
+              ? ((DelegateRepository) repository).delegate()
               : repository;
 
       GitStats gitStats = new GitStats((FileRepository) unwrappedRepo, project);

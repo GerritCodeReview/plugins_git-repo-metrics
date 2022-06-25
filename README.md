@@ -17,17 +17,16 @@ pushd gerrit/plugins && ln -s ../../git-repo-metrics . && popd
 cd gerrit && bazel build //plugins/git-repo-metrics:all
 ```
 
-Two jar will be created:
+A jar will be created:
 
 ```
 bazel-bin/plugins/git-repo-metrics/git-repo-metrics.jar
-bazel-bin/plugins/git-repo-metrics/libdelegaterepositoryunwrapper.jar
 ```
 
 ## How to install
 
-Copy the `git-repo-metrics.jar` into the Gerrit's `<gerrit_site>/plugins` directory and the `libdelegaterepositoryunwrapper.jar`
-into the `<gerrit_site>/lib` directory. Restart your Gerrit instance and the plugin will be loaded.
+Copy the `git-repo-metrics.jar` into the Gerrit's `<gerrit_site>/plugins` directory.
+Gerrit will automatically load the plugin.
 
 ## Configuration
 
