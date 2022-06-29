@@ -16,8 +16,6 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
-import com.google.gerrit.server.git.DelegateRepository;
-import com.google.gerrit.server.git.DelegateRepositoryUnwrapper;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -59,13 +57,7 @@ public class UpdateGitMetricsTask implements Runnable {
           repository.getIdentifier(), projectName);
       // TODO Loop through all the collectors
       Project project = Project.builder(projectNameKey).build();
-
-      Repository unwrappedRepo =
-          repository instanceof DelegateRepository
-              ? DelegateRepositoryUnwrapper.unwrap((DelegateRepository) repository)
-              : repository;
-
-      GitStats gitStats = new GitStats((FileRepository) unwrappedRepo, project);
+      GitStats gitStats = new GitStats((FileRepository) repository, project);
       Map<String, Long> newMetrics = gitStats.get();
       logger.atInfo().log(
           "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
