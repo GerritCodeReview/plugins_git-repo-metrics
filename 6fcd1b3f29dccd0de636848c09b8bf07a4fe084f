@@ -16,6 +16,24 @@
       "message": "Add: \"Reason for revert:\" line, and say that the visibility of the delegate() method was changed from package protected to public.\n\nSee for example change 339834. Also note, when doing revert from the UI, this line would be added for you automatically.",
       "revId": "6fcd1b3f29dccd0de636848c09b8bf07a4fe084f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6607dafd_95bf7770",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-07-01T10:08:37Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "822dda64_ffd4f28d",
+      "revId": "6fcd1b3f29dccd0de636848c09b8bf07a4fe084f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
