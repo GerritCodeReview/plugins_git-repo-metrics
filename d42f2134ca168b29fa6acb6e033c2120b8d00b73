@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2c6165_98a0745f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-07-01T08:52:02Z",
+      "side": 1,
+      "message": "I didn\u0027t add a test yet for this change. I am happy to do it in a follow up change if it is ok for you. I wanted to get it out of the way to give it a go on gerrithub.io.\n\nWDYT?",
+      "revId": "d42f2134ca168b29fa6acb6e033c2120b8d00b73",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
