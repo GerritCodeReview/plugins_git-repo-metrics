@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Maps;
@@ -33,6 +34,7 @@ public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private Map<String, Long> metrics;
   private final MetricMaker metricMaker;
+  private final MetricRegistry metricRegistry;
   private final List<String> projects;
   private Map<String, Long> collectedAt;
   private final long gracePeriodMs;
@@ -42,8 +44,13 @@ public class GitRepoMetricsCache {
   public static List<GitRepoMetric> metricsNames = new ArrayList<>(GitStats.availableMetrics());
 
   @VisibleForTesting
-  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config, Clock clock) {
+  GitRepoMetricsCache(
+      MetricMaker metricMaker,
+      MetricRegistry metricRegistry,
+      GitRepoMetricsConfig config,
+      Clock clock) {
     this.metricMaker = metricMaker;
+    this.metricRegistry = metricRegistry;
     this.projects = config.getRepositoryNames();
     this.metrics = Maps.newHashMap();
     this.collectedAt = Maps.newHashMap();
@@ -52,8 +59,9 @@ public class GitRepoMetricsCache {
   }
 
   @Inject
-  GitRepoMetricsCache(MetricMaker metricMaker, GitRepoMetricsConfig config) {
-    this(metricMaker, config, Clock.systemDefaultZone());
+  GitRepoMetricsCache(
+      MetricMaker metricMaker, MetricRegistry metricRegistry, GitRepoMetricsConfig config) {
+    this(metricMaker, metricRegistry, config, Clock.systemDefaultZone());
   }
 
   public Map<String, Long> getMetrics() {
@@ -88,19 +96,30 @@ public class GitRepoMetricsCache {
                       }
                     };
 
-                metricMaker.newCallbackMetric(
-                    name,
-                    Long.class,
-                    new Description(gitRepoMetric.getDescription())
-                        .setRate()
-                        .setUnit(gitRepoMetric.getUnit()),
-                    supplier);
+                if (!metricRegistry
+                    .getMetrics()
+                    .containsKey(
+                        GitRepoMetricsCache.getFullyQualifiedMetricName(
+                            gitRepoMetric.getName(), projectName))) {
+                  metricMaker.newCallbackMetric(
+                      name,
+                      Long.class,
+                      new Description(gitRepoMetric.getDescription())
+                          .setRate()
+                          .setUnit(gitRepoMetric.getUnit()),
+                      supplier);
+                }
               });
         });
   }
 
   public static String getMetricName(String metricName, String projectName) {
     return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
+  }
+
+  public static String getFullyQualifiedMetricName(String metricName, String projectName) {
+    return String.format(
+        "%s/%s/%s", "plugins", "git-repo-metrics", getMetricName(metricName, projectName));
   }
 
   public boolean shouldCollectStats(String projectName) {
