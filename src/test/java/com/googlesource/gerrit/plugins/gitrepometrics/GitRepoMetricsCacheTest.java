@@ -16,6 +16,8 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.codahale.metrics.Metric;
+import com.codahale.metrics.MetricRegistry;
 import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
@@ -45,7 +47,30 @@ public class GitRepoMetricsCacheTest {
   public void shouldRegisterMetrics() throws IOException {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     fakeMetricMaker = new FakeMetricMaker();
-    gitRepoMetricsCache = new GitRepoMetricsCache(fakeMetricMaker, gitRepoMetricsConfig);
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+    gitRepoMetricsCache.initCache();
+    assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
+  }
+
+  @Test
+  public void shouldRegisterMetricsOnlyOnce() throws IOException {
+    gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
+    MetricRegistry metricRegistry = new MetricRegistry();
+    fakeMetricMaker = new FakeMetricMaker();
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(fakeMetricMaker, metricRegistry, gitRepoMetricsConfig);
+
+    gitRepoMetricsCache.initCache();
+    assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
+
+    GitRepoMetricsCache.metricsNames.forEach(
+        gitRepoMetric ->
+            metricRegistry.register(
+                GitRepoMetricsCache.getFullyQualifiedMetricName(
+                    gitRepoMetric.getName(), enabledRepo),
+                new FakeMetric()));
+
     gitRepoMetricsCache.initCache();
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
   }
@@ -53,7 +78,8 @@ public class GitRepoMetricsCacheTest {
   @Test
   public void shouldCollectStatsForEnabledRepo() throws IOException {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache = new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
   }
@@ -62,7 +88,8 @@ public class GitRepoMetricsCacheTest {
   public void shouldNotCollectStatsForDisabledRepo() throws IOException {
     String disabledRepo = "disabledRepo";
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache = new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(disabledRepo)).isFalse();
   }
@@ -72,7 +99,8 @@ public class GitRepoMetricsCacheTest {
     ConfigSetupUtils configSetupUtils =
         new ConfigSetupUtils(Collections.singletonList(enabledRepo));
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache = new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
 
@@ -84,7 +112,8 @@ public class GitRepoMetricsCacheTest {
     ConfigSetupUtils configSetupUtils =
         new ConfigSetupUtils(Collections.singletonList(enabledRepo), "5 m");
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache = new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
 
@@ -99,6 +128,7 @@ public class GitRepoMetricsCacheTest {
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
             new FakeMetricMaker(),
+            new MetricRegistry(),
             gitRepoMetricsConfig,
             Clock.fixed(
                 Instant.now().minus(2, ChronoUnit.SECONDS), Clock.systemDefaultZone().getZone()));
@@ -113,7 +143,8 @@ public class GitRepoMetricsCacheTest {
     ConfigSetupUtils configSetupUtils =
         new ConfigSetupUtils(Collections.singletonList(enabledRepo));
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache = new GitRepoMetricsCache(new FakeMetricMaker(), gitRepoMetricsConfig);
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
     long currentTimeStamp = System.currentTimeMillis();
 
@@ -143,5 +174,9 @@ public class GitRepoMetricsCacheTest {
         public void remove() {}
       };
     }
+  }
+
+  private class FakeMetric implements Metric {
+    FakeMetric() {}
   }
 }
