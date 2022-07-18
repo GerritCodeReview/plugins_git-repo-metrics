@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920ef28b_ff05b2d0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1011323
+      },
+      "writtenOn": "2022-07-18T19:28:11Z",
+      "side": 1,
+      "message": "Nit: Annotate with `@VisibleForTesting` to indicate, that this method is only made public because it is used from tests? Also, given that the class is in the same package, you could make the method package protected, just omit public and it would still work.",
+      "revId": "d9ea1a0bc9d7047808cf26719f03904d9a19456e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
