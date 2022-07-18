@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import static com.google.common.truth.Truth.assertThat;
 import static java.nio.file.Files.delete;
 
+import com.codahale.metrics.MetricRegistry;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.metrics.DisabledMetricMaker;
 import com.google.gerrit.server.config.GerritServerConfig;
@@ -49,7 +50,9 @@ public class UpdateGitMetricsTaskTest {
     ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Collections.singletonList("repo1"));
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
-            new DisabledMetricMaker(), configSetupUtils.getGitRepoMetricsConfig());
+            new DisabledMetricMaker(),
+            new MetricRegistry(),
+            configSetupUtils.getGitRepoMetricsConfig());
 
     AbstractModule m =
         new AbstractModule() {
