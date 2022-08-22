@@ -64,12 +64,14 @@ public class GitRepoMetricsCacheTest {
     gitRepoMetricsCache.initCache();
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
 
-    GitRepoMetricsCache.metricsNames.forEach(
-        gitRepoMetric ->
-            metricRegistry.register(
-                GitRepoMetricsCache.getFullyQualifiedMetricName(
-                    gitRepoMetric.getName(), enabledRepo),
-                new FakeMetric()));
+    gitRepoMetricsCache
+        .getMetricsNames()
+        .forEach(
+            gitRepoMetric ->
+                metricRegistry.register(
+                    GitRepoMetricsCache.getFullyQualifiedMetricName(
+                        gitRepoMetric.getName(), enabledRepo),
+                    new FakeMetric()));
 
     gitRepoMetricsCache.initCache();
     assertThat(fakeMetricMaker.callsCounter).isEqualTo(GitStats.availableMetrics().size());
