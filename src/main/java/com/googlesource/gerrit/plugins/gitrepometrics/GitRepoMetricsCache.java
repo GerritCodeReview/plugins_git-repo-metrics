@@ -38,10 +38,9 @@ public class GitRepoMetricsCache {
   private final List<String> projects;
   private Map<String, Long> collectedAt;
   private final long gracePeriodMs;
+  private List<GitRepoMetric> metricsNames;
 
   private final Clock clock;
-
-  public static List<GitRepoMetric> metricsNames = new ArrayList<>(GitStats.availableMetrics());
 
   @VisibleForTesting
   GitRepoMetricsCache(
@@ -51,6 +50,7 @@ public class GitRepoMetricsCache {
       Clock clock) {
     this.metricMaker = metricMaker;
     this.metricRegistry = metricRegistry;
+    this.metricsNames = new ArrayList<>(GitStats.availableMetrics());
     this.projects = config.getRepositoryNames();
     this.metrics = Maps.newHashMap();
     this.collectedAt = Maps.newHashMap();
@@ -71,6 +71,10 @@ public class GitRepoMetricsCache {
   public void setMetrics(Map<String, Long> metrics, String projectName) {
     this.collectedAt.put(projectName, clock.millis());
     this.metrics = metrics;
+  }
+
+  public List<GitRepoMetric> getMetricsNames() {
+    return metricsNames;
   }
 
   @VisibleForTesting
