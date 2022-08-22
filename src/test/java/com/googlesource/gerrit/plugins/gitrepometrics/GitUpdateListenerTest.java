@@ -25,6 +25,7 @@ import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.DisabledMetricMaker;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.testing.InMemoryModule;
@@ -63,8 +64,10 @@ public class GitUpdateListenerTest {
   public void setupRepo() throws IOException {
     ConfigSetupUtils configSetupUtils =
         new ConfigSetupUtils(Collections.singletonList(testProject));
+
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
+            new DynamicSet<>(),
             new DisabledMetricMaker(),
             new MetricRegistry(),
             configSetupUtils.getGitRepoMetricsConfig());

@@ -19,6 +19,7 @@ import static java.nio.file.Files.delete;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.DisabledMetricMaker;
 import com.google.gerrit.server.config.GerritServerConfig;
 import com.google.gerrit.server.config.SitePath;
@@ -27,6 +28,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.StatsCollector;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.Collections;
@@ -42,14 +44,22 @@ public class UpdateGitMetricsTaskTest {
   private Repository testRepository;
   private Project testProject;
   private GitRepoMetricsCache gitRepoMetricsCache;
+  private FakeStatsCollector fakeStatsCollector;
+  private DynamicSet<StatsCollector> ds;
 
   @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Before
   public void setupRepository() throws Exception {
     ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Collections.singletonList("repo1"));
+
+    fakeStatsCollector = new FakeStatsCollector();
+    ds = new DynamicSet<>();
+    ds.add("git-repo-metrics", fakeStatsCollector);
+
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
+            ds,
             new DisabledMetricMaker(),
             new MetricRegistry(),
             configSetupUtils.getGitRepoMetricsConfig());
@@ -59,7 +69,9 @@ public class UpdateGitMetricsTaskTest {
           @Override
           protected void configure() {
             install(new UpdateGitMetricsTaskModule());
+
             bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
+
             bind(Config.class)
                 .annotatedWith(GerritServerConfig.class)
                 .toInstance(configSetupUtils.getConfig());
