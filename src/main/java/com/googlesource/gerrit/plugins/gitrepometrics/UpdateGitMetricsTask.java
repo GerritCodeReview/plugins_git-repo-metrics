@@ -16,14 +16,17 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.server.git.DelegateRepository;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.StatsCollector;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
@@ -56,7 +59,6 @@ public class UpdateGitMetricsTask implements Runnable {
       logger.atInfo().log(
           "Running task to collect stats: repo %s, project %s",
           repository.getIdentifier(), projectName);
-      // TODO Loop through all the collectors
       Project project = Project.builder(projectNameKey).build();
 
       Repository unwrappedRepo =
@@ -64,8 +66,14 @@ public class UpdateGitMetricsTask implements Runnable {
               ? ((DelegateRepository) repository).delegate()
               : repository;
 
-      GitStats gitStats = new GitStats((FileRepository) unwrappedRepo, project);
-      Map<String, Long> newMetrics = gitStats.get();
+      Iterable<StatsCollector> iterable = () -> gitRepoMetricsCache.getCollectors().iterator();
+      HashMap <String, Long> newMetrics = new HashMap<>();;
+      iterable.forEach(collector -> {
+        System.out.println("Collecting something new: ");
+        StatsCollector sc = collector.create((FileRepository) unwrappedRepo, project);
+        sc.collect().forEach((key, value) -> newMetrics.merge(key, value, (oldValue, newValue) -> newValue));
+      });
+
       logger.atInfo().log(
           "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
       gitRepoMetricsCache.setMetrics(newMetrics, projectName);

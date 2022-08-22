@@ -19,13 +19,15 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Supplier;
 import com.google.common.collect.Maps;
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.StatsCollector;
+
 import java.time.Clock;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -39,18 +41,24 @@ public class GitRepoMetricsCache {
   private Map<String, Long> collectedAt;
   private final long gracePeriodMs;
   private List<GitRepoMetric> metricsNames;
+  private DynamicSet <StatsCollector> collectors;
 
   private final Clock clock;
 
   @VisibleForTesting
   GitRepoMetricsCache(
+      DynamicSet <StatsCollector> collectors,
       MetricMaker metricMaker,
       MetricRegistry metricRegistry,
       GitRepoMetricsConfig config,
       Clock clock) {
+    this.collectors = collectors;
     this.metricMaker = metricMaker;
     this.metricRegistry = metricRegistry;
-    this.metricsNames = new ArrayList<>(GitStats.availableMetrics());
+
+    this.metricsNames = new java.util.ArrayList <>(Collections.emptyList());
+    collectors.stream().forEach(c -> this.metricsNames.addAll(c.availableMetrics()));
+
     this.projects = config.getRepositoryNames();
     this.metrics = Maps.newHashMap();
     this.collectedAt = Maps.newHashMap();
@@ -59,9 +67,9 @@ public class GitRepoMetricsCache {
   }
 
   @Inject
-  GitRepoMetricsCache(
+  GitRepoMetricsCache(DynamicSet <StatsCollector> collectors,
       MetricMaker metricMaker, MetricRegistry metricRegistry, GitRepoMetricsConfig config) {
-    this(metricMaker, metricRegistry, config, Clock.systemDefaultZone());
+    this(collectors, metricMaker, metricRegistry, config, Clock.systemDefaultZone());
   }
 
   public Map<String, Long> getMetrics() {
@@ -75,6 +83,10 @@ public class GitRepoMetricsCache {
 
   public List<GitRepoMetric> getMetricsNames() {
     return metricsNames;
+  }
+
+  public DynamicSet <StatsCollector> getCollectors() {
+    return collectors;
   }
 
   @VisibleForTesting
