@@ -20,10 +20,12 @@ import com.google.gerrit.server.git.DelegateRepository;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
@@ -56,18 +58,29 @@ public class UpdateGitMetricsTask implements Runnable {
       logger.atInfo().log(
           "Running task to collect stats: repo %s, project %s",
           repository.getIdentifier(), projectName);
-      // TODO Loop through all the collectors
-      Project project = Project.builder(projectNameKey).build();
 
       Repository unwrappedRepo =
           repository instanceof DelegateRepository
               ? ((DelegateRepository) repository).delegate()
               : repository;
 
-      GitStats gitStats = new GitStats((FileRepository) unwrappedRepo, project);
-      Map<String, Long> newMetrics = gitStats.get();
+      Iterable<MetricsCollector> iterable = () -> gitRepoMetricsCache.getCollectors().iterator();
+      HashMap<String, Long> newMetrics =
+          StreamSupport.stream(iterable.spliterator(), false)
+              .map(
+                  metricsCollector ->
+                      metricsCollector.collect((FileRepository) unwrappedRepo, projectName))
+              .reduce(
+                  new HashMap<>(),
+                  (accumulator, latestMetrics) -> {
+                    HashMap<String, Long> newVal = new HashMap<>();
+                    newVal.putAll(accumulator);
+                    newVal.putAll(latestMetrics);
+                    return newVal;
+                  });
+
       logger.atInfo().log(
-          "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
+          "Here all the metrics for %s - %s", projectNameKey.get(), getStringFromMap(newMetrics));
       gitRepoMetricsCache.setMetrics(newMetrics, projectName);
     } catch (RepositoryNotFoundException e) {
       logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);
