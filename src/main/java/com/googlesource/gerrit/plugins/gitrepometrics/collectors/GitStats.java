@@ -19,19 +19,13 @@ import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCache;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
 
-// TODO Add an interface
-// TODO implement multiple collectors
-public class GitStats {
+public class GitStats implements MetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-
-  private final FileRepository repository;
-  private final Project p;
 
   public static String numberOfPackedObjects = "numberOfPackedObjects";
   public static String numberOfPackFiles = "numberOfPackFiles";
@@ -42,23 +36,21 @@ public class GitStats {
   public static String sizeOfPackedObjects = "sizeOfPackedObjects";
   public static String numberOfBitmaps = "numberOfBitmaps";
 
-  public GitStats(FileRepository repository, Project project) {
-    this.repository = repository;
-    this.p = project;
-  }
+  public GitStats() {}
 
-  public Map<String, Long> get() {
-    Map<String, Long> metrics = new java.util.HashMap<>(Collections.emptyMap());
+  @Override
+  public HashMap<String, Long> collect(FileRepository repository, Project project) {
+    HashMap<String, Long> metrics = new HashMap<>(availableMetrics().size());
     try {
       GC.RepoStatistics statistics = new GC(repository).getStatistics();
-      putMetric(metrics, numberOfPackedObjects, statistics.numberOfPackedObjects);
-      putMetric(metrics, numberOfPackFiles, statistics.numberOfPackFiles);
-      putMetric(metrics, numberOfLooseObjects, statistics.numberOfLooseObjects);
-      putMetric(metrics, numberOfLooseRefs, statistics.numberOfLooseRefs);
-      putMetric(metrics, numberOfPackedRefs, statistics.numberOfPackedRefs);
-      putMetric(metrics, sizeOfLooseObjects, statistics.sizeOfLooseObjects);
-      putMetric(metrics, sizeOfPackedObjects, statistics.sizeOfPackedObjects);
-      putMetric(metrics, numberOfBitmaps, statistics.numberOfBitmaps);
+      putMetric(project, metrics, numberOfPackedObjects, statistics.numberOfPackedObjects);
+      putMetric(project, metrics, numberOfPackFiles, statistics.numberOfPackFiles);
+      putMetric(project, metrics, numberOfLooseObjects, statistics.numberOfLooseObjects);
+      putMetric(project, metrics, numberOfLooseRefs, statistics.numberOfLooseRefs);
+      putMetric(project, metrics, numberOfPackedRefs, statistics.numberOfPackedRefs);
+      putMetric(project, metrics, sizeOfLooseObjects, statistics.sizeOfLooseObjects);
+      putMetric(project, metrics, sizeOfPackedObjects, statistics.sizeOfPackedObjects);
+      putMetric(project, metrics, numberOfBitmaps, statistics.numberOfBitmaps);
       logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
     } catch (IOException e) {
       logger.atSevere().log("Something went wrong: %s", e.getMessage());
@@ -66,7 +58,8 @@ public class GitStats {
     return metrics;
   }
 
-  public static List<GitRepoMetric> availableMetrics() {
+  @Override
+  public List<GitRepoMetric> availableMetrics() {
     return Arrays.asList(
         new GitRepoMetric(numberOfPackedObjects, "Number of packed objects", "Count"),
         new GitRepoMetric(numberOfPackFiles, "Number of pack files", "Count"),
@@ -78,11 +71,13 @@ public class GitStats {
         new GitRepoMetric(numberOfBitmaps, "Number of bitmaps", "Count"));
   }
 
-  private void putMetric(Map<String, Long> metrics, String metricName, long value) {
-    metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), value);
+  private void putMetric(
+      Project project, HashMap<String, Long> metrics, String metricName, long value) {
+    metrics.put(GitRepoMetricsCache.getMetricName(metricName, project.getName()), value);
   }
 
-  public String getStatName() {
+  @Override
+  public String getMetricsCollectorName() {
     return "git-statistics";
   }
 }
