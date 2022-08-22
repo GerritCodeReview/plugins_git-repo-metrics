@@ -18,6 +18,8 @@ import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.inject.Scopes;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.StatsCollector;
 import java.util.concurrent.ExecutorService;
 
 public class Module extends LifecycleModule {
@@ -30,6 +32,7 @@ public class Module extends LifecycleModule {
         .toProvider(UpdateGitMetricsExecutorProvider.class);
     bind(GitRepoUpdateListener.class);
     DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitRepoUpdateListener.class);
+    DynamicSet.bind(binder(), StatsCollector.class).to(GitStats.class);
     listener().to(PluginStartup.class);
     install(new UpdateGitMetricsTaskModule());
   }
