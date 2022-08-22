@@ -20,6 +20,7 @@ import com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCache;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -27,7 +28,7 @@ import org.eclipse.jgit.internal.storage.file.GC;
 
 // TODO Add an interface
 // TODO implement multiple collectors
-public class GitStats {
+public class GitStats implements StatsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   private final FileRepository repository;
@@ -42,13 +43,19 @@ public class GitStats {
   public static String sizeOfPackedObjects = "sizeOfPackedObjects";
   public static String numberOfBitmaps = "numberOfBitmaps";
 
-  public GitStats(FileRepository repository, Project project) {
+  @Override
+  public GitStats create(FileRepository repository, Project project) {
+    return new GitStats(repository, project);
+  }
+
+  private GitStats(FileRepository repository, Project project) {
     this.repository = repository;
     this.p = project;
   }
 
-  public Map<String, Long> get() {
-    Map<String, Long> metrics = new java.util.HashMap<>(Collections.emptyMap());
+  @Override
+  public HashMap <String, Long> collect() {
+    HashMap<String, Long> metrics = new java.util.HashMap<>(Collections.emptyMap());
     try {
       GC.RepoStatistics statistics = new GC(repository).getStatistics();
       putMetric(metrics, numberOfPackedObjects, statistics.numberOfPackedObjects);
@@ -78,10 +85,11 @@ public class GitStats {
         new GitRepoMetric(numberOfBitmaps, "Number of bitmaps", "Count"));
   }
 
-  private void putMetric(Map<String, Long> metrics, String metricName, long value) {
+  private void putMetric(HashMap<String, Long> metrics, String metricName, long value) {
     metrics.put(GitRepoMetricsCache.getMetricName(metricName, p.getName()), value);
   }
 
+  @Override
   public String getStatName() {
     return "git-statistics";
   }
