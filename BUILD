@@ -24,15 +24,31 @@ gerrit_plugin(
     )
 )
 
+java_library(
+    name = "git-repo-metrics_tests_lib",
+    testonly = True,
+    srcs = glob(
+        ["src/test/java/**/*.java"],
+        exclude = ["src/test/java/**/*Test.java"],
+    ),
+    tags = [
+        "git-repo-metrics",
+    ],
+    deps = [
+        "git-repo-metrics__plugin_test_deps",
+    ],
+)
+
 junit_tests(
     name = "git-repo-metrics_tests",
-    srcs = glob(["src/test/java/**/*.java"]),
+    srcs = glob(["src/test/java/**/*Test.java"]),
     resources = glob(["src/test/resources/**/*"]),
     tags = [
         "git-repo-metrics",
     ],
     deps = [
         ":git-repo-metrics__plugin_test_deps",
+        ":git-repo-metrics_tests_lib",
     ],
 )
 
