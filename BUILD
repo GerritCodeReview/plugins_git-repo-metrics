@@ -29,7 +29,10 @@ java_library(
     testonly = True,
     srcs = glob(
         ["src/test/java/**/*.java"],
-        exclude = ["src/test/java/**/*Test.java"],
+        exclude = [
+            "src/test/java/**/*Test.java",
+            "src/test/java/**/*IT.java",
+        ],
     ),
     tags = [
         "git-repo-metrics",
@@ -41,7 +44,12 @@ java_library(
 
 junit_tests(
     name = "git-repo-metrics_tests",
-    srcs = glob(["src/test/java/**/*Test.java"]),
+    srcs = glob(
+        [
+            "src/test/java/**/*Test.java",
+            "src/test/java/**/*IT.java",
+        ],
+    ),
     resources = glob(["src/test/resources/**/*"]),
     tags = [
         "git-repo-metrics",
