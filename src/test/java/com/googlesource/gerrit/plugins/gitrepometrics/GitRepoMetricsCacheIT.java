@@ -22,6 +22,7 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSStats;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +47,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
             .filter(metricName -> metricName.contains("git-repo-metrics"))
             .collect(Collectors.toList());
 
-    int expectedMetricsCount = new GitStats().availableMetrics().size();
+    int expectedMetricsCount =
+        new GitStats().availableMetrics().size() + new FSStats().availableMetrics().size();
     // Since we have 2 projects (test1 and test2), the number of expected metrics is 2 *
     // expectedMetricsCount
     assertThat(repoMetricsCount.size()).isEqualTo(2 * expectedMetricsCount);
