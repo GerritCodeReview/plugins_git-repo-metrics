@@ -22,6 +22,30 @@
       },
       "revId": "4005f6b3d993b566dd993d4da4e252be2a07c5c9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25add21c_32af7f49",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-08-24T09:18:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edb4f9c4_feacd0c3",
+      "range": {
+        "startLine": 71,
+        "startChar": 34,
+        "endLine": 71,
+        "endChar": 43
+      },
+      "revId": "4005f6b3d993b566dd993d4da4e252be2a07c5c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
