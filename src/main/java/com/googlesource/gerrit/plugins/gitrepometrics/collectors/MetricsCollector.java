@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
+import static com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCache.getMetricName;
+
 import com.google.gerrit.entities.Project;
 import java.util.HashMap;
 import java.util.List;
@@ -26,4 +28,9 @@ public interface MetricsCollector {
   String getMetricsCollectorName();
 
   List<GitRepoMetric> availableMetrics();
+
+  default void putMetric(
+      Project project, HashMap<String, Long> metrics, String metricName, long value) {
+    metrics.put(getMetricName(metricName, project.getName()), value);
+  }
 }
