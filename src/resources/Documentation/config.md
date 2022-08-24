@@ -15,6 +15,10 @@ plugins_git_repo_metrics_numberofpackedrefs_<repo_name>
 plugins_git_repo_metrics_numberofpackfiles_<repo_name>
 plugins_git_repo_metrics_sizeoflooseobjects_<repo_name>
 plugins_git_repo_metrics_sizeofpackedobjects_<repo_name>
+plugins_git_repo_metrics_numberofkeepfiles_<repo_name>
+plugins_git_repo_metrics_numberoffiles_<repo_name>
+plugins_git_repo_metrics_numberofdirectories_<repo_name>
+plugins_git_repo_metrics_numberofemptydirectories_<repo_name>
 ```
 
 Settings
