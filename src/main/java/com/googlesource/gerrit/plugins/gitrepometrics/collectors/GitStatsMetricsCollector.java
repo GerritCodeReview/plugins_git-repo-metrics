@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
-import com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCache;
 import java.io.IOException;
 import java.util.HashMap;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -67,11 +66,6 @@ public class GitStatsMetricsCollector implements MetricsCollector {
         new GitRepoMetric(sizeOfLooseObjects, "Size of loose objects", "Count"),
         new GitRepoMetric(sizeOfPackedObjects, "Size of packed objects", "Count"),
         new GitRepoMetric(numberOfBitmaps, "Number of bitmaps", "Count"));
-  }
-
-  private void putMetric(
-      String projectName, HashMap<String, Long> metrics, String metricName, long value) {
-    metrics.put(GitRepoMetricsCache.getMetricName(metricName, projectName), value);
   }
 
   @Override
