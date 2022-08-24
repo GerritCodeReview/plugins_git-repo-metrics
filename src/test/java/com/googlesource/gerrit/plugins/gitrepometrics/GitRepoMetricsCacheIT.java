@@ -22,7 +22,8 @@ import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,7 +49,9 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
             .filter(metricName -> metricName.contains("git-repo-metrics"))
             .collect(Collectors.toList());
 
-    int expectedMetricsCount = new GitStats().availableMetrics().size();
+    int expectedMetricsCount =
+        new GitStatsMetricsCollector().availableMetrics().size()
+            + new FSMetricsCollector().availableMetrics().size();
     assertThat(repoMetricsCount.size()).isEqualTo(availableProjects.size() * expectedMetricsCount);
   }
 }
