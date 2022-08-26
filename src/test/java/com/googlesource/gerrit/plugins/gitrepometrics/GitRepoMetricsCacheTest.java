@@ -18,7 +18,6 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
-import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
@@ -28,7 +27,9 @@ import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -118,9 +119,50 @@ public class GitRepoMetricsCacheTest {
         new GitRepoMetricsCache(
             ds, new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetrics(
+        new HashMap<String, Long>() {
+          {
+            put("anyMetric", 0L);
+          }
+        },
+        enabledRepo);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
+  }
+
+  @Test
+  public void shouldMergeMetricsFromDifferentRepositories() throws IOException {
+    final String enabledRepoA = "enabledRepoA";
+    final String enabledRepoB = "enabledRepoB";
+    ConfigSetupUtils configSetupUtils =
+        new ConfigSetupUtils(Arrays.asList(enabledRepoA, enabledRepoB));
+    gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(
+            ds, new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
+
+    gitRepoMetricsCache.setMetrics(
+        new HashMap<String, Long>() {
+          {
+            put("anyMetricA", 0L);
+          }
+        },
+        enabledRepoA);
+    gitRepoMetricsCache.setMetrics(
+        new HashMap<String, Long>() {
+          {
+            put("anyMetricB", 0L);
+          }
+        },
+        enabledRepoB);
+
+    assertThat(gitRepoMetricsCache.getMetrics().size()).isEqualTo(2);
+    assertThat(
+            gitRepoMetricsCache
+                .getMetrics()
+                .keySet()
+                .containsAll(Arrays.asList("anyMetricA", "anyMetricB")))
+        .isTrue();
   }
 
   @Test
@@ -132,7 +174,13 @@ public class GitRepoMetricsCacheTest {
         new GitRepoMetricsCache(
             ds, new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetrics(
+        new HashMap<String, Long>() {
+          {
+            put("anyMetric", 0L);
+          }
+        },
+        enabledRepo);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isFalse();
   }
@@ -151,7 +199,13 @@ public class GitRepoMetricsCacheTest {
             Clock.fixed(
                 Instant.now().minus(2, ChronoUnit.SECONDS), Clock.systemDefaultZone().getZone()));
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetrics(
+        new HashMap<String, Long>() {
+          {
+            put("anyMetric", 0L);
+          }
+        },
+        enabledRepo);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
   }
@@ -167,7 +221,13 @@ public class GitRepoMetricsCacheTest {
 
     long currentTimeStamp = System.currentTimeMillis();
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetrics(
+        new HashMap<String, Long>() {
+          {
+            put("anyMetric", 0L);
+          }
+        },
+        enabledRepo);
 
     assertThat(gitRepoMetricsCache.getCollectedAt().get(enabledRepo)).isAtLeast(currentTimeStamp);
   }
