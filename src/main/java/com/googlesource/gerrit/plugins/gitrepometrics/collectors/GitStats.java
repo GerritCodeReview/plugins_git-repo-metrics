@@ -35,8 +35,6 @@ public class GitStats implements MetricsCollector {
   public static String sizeOfPackedObjects = "sizeOfPackedObjects";
   public static String numberOfBitmaps = "numberOfBitmaps";
 
-  public GitStats() {}
-
   @Override
   public HashMap<String, Long> collect(FileRepository repository, Project project) {
     HashMap<String, Long> metrics = new HashMap<>(availableMetrics().size());
