@@ -35,6 +35,8 @@ import org.junit.Test;
 public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
   @Inject MetricRegistry metricRegistry;
+  @Inject FSMetricsCollector fsMetricsCollector;
+  @Inject GitStats gitStats;
 
   @Test
   @UseLocalDisk
@@ -50,8 +52,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
             .collect(Collectors.toList());
 
     int expectedMetricsCount =
-        new GitStats().availableMetrics().size()
-            + new FSMetricsCollector().availableMetrics().size();
+        gitStats.availableMetrics().size() + fsMetricsCollector.availableMetrics().size();
     assertThat(repoMetricsCount.size()).isEqualTo(availableProjects.size() * expectedMetricsCount);
   }
 }
