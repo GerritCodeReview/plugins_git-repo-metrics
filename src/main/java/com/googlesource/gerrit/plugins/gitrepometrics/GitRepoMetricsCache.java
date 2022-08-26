@@ -26,6 +26,7 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.time.Clock;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -33,7 +34,7 @@ import java.util.stream.Collectors;
 
 public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private Map<String, Long> metrics;
+  private HashMap<String, Long> metrics;
   private final MetricMaker metricMaker;
   private final MetricRegistry metricRegistry;
   private final List<String> projects;
@@ -80,9 +81,10 @@ public class GitRepoMetricsCache {
     return metrics;
   }
 
-  public void setMetrics(Map<String, Long> metrics, String projectName) {
+  public void setMetrics(HashMap<String, Long> newMetrics, String projectName) {
     this.collectedAt.put(projectName, clock.millis());
-    this.metrics = metrics;
+    newMetrics.forEach(
+        (key, value) -> metrics.merge(key, value, (oldMetric, newMetric) -> newMetric));
   }
 
   public List<GitRepoMetric> getMetricsNames() {
