@@ -42,13 +42,16 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
       name = "git-repo-metrics.project",
       values = {"test1", "test2"})
   public void shouldRegisterAllMetrics() {
+
     List<String> repoMetricsCount =
         metricRegistry.getMetrics().keySet().stream()
             .filter(metricName -> metricName.contains("git-repo-metrics"))
             .collect(Collectors.toList());
 
+    GitStats gitStats = server.getTestInjector().getInstance(GitStats.class);
+    FSStats FSStats = server.getTestInjector().getInstance(FSStats.class);
     int expectedMetricsCount =
-        new GitStats().availableMetrics().size() + new FSStats().availableMetrics().size();
+        gitStats.availableMetrics().size() + FSStats.availableMetrics().size();
     // Since we have 2 projects (test1 and test2), the number of expected metrics is 2 *
     // expectedMetricsCount
     assertThat(repoMetricsCount.size()).isEqualTo(2 * expectedMetricsCount);
