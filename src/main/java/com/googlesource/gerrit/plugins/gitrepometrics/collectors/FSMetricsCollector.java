@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
@@ -32,9 +31,6 @@ public class FSMetricsCollector implements MetricsCollector {
   public static String numberOfEmptyDirectories = "numberOfEmptyDirectories";
   public static String numberOfDirectories = "numberOfDirectories";
   public static String numberOfFiles = "numberOfFiles";
-
-  @VisibleForTesting
-  public FSMetricsCollector() {}
 
   @Override
   public HashMap<String, Long> collect(FileRepository repository, Project project) {
