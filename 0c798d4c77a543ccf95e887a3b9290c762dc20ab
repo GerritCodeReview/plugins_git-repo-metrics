@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38ac660c_3c583866",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-08-29T08:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a759c26_9b7edf3d",
+      "revId": "0c798d4c77a543ccf95e887a3b9290c762dc20ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbcb28db_a50a7062",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-08-26T22:16:16Z",
       "side": 1,
       "message": "Why not simply:\n\n```\nthis.metricsNames \u003d collectors.stream()\n                              .flatMap(c -\u003e c.availableMetrics().stream())\n                              .collect(Collectors.toList());\n```",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 85
+      },
+      "revId": "0c798d4c77a543ccf95e887a3b9290c762dc20ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ef565a1_9b19fd70",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-08-29T08:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbcb28db_a50a7062",
       "range": {
         "startLine": 57,
         "startChar": 0,
@@ -58,6 +100,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11e5b32d_ab74e6ea",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-08-29T08:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12c881bd_f0527ec5",
+      "revId": "0c798d4c77a543ccf95e887a3b9290c762dc20ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14b42206_46a00bdb",
@@ -71,6 +131,30 @@
       "writtenOn": "2022-08-26T22:16:16Z",
       "side": 1,
       "message": "Can you add Javadocs as well?",
+      "range": {
+        "startLine": 24,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "0c798d4c77a543ccf95e887a3b9290c762dc20ab",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb751a1_8d0d4d9b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-08-29T08:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14b42206_46a00bdb",
       "range": {
         "startLine": 24,
         "startChar": 1,
