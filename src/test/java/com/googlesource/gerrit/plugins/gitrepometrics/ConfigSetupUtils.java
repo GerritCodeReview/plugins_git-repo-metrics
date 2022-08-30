@@ -18,22 +18,39 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
+import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.server.config.PluginConfigFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
+import com.google.gerrit.server.config.SitePaths;
+import com.google.gerrit.server.git.LocalDiskRepositoryManager;
+import org.eclipse.jgit.api.Git;
+import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Config;
 import org.junit.Ignore;
+import org.junit.Rule;
+import org.junit.rules.TemporaryFolder;
 
 @Ignore
+@UseLocalDisk
 public class ConfigSetupUtils {
+
+  @Rule
+  public TemporaryFolder dir = new TemporaryFolder();
+
   static final String pluginName = "git-repo-metrics";
   private final Path basePath;
   private final Path gitBasePath;
   private final List<String> projects;
   private final String gracePeriod;
+  private Config cfg;
+  private SitePaths site;
+  private LocalDiskRepositoryManager repoManager;
 
   public ConfigSetupUtils(List<String> projects) throws IOException {
     this(projects, "0");
@@ -44,7 +61,14 @@ public class ConfigSetupUtils {
     this.gitBasePath = new File(basePath.toFile(), "git").toPath();
     this.projects = projects;
     this.gracePeriod = gracePeriod;
+    this.site = new SitePaths(basePath);
+    cfg = new Config();
+    cfg.setString("gerrit", null, "basePath", "git");
+    repoManager = new LocalDiskRepositoryManager(site, cfg);
   }
+
+
+
 
   public GitRepoMetricsConfig getGitRepoMetricsConfig() {
     PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
@@ -69,5 +93,12 @@ public class ConfigSetupUtils {
 
   public Path getGitBasePath() {
     return gitBasePath;
+  }
+
+  public FileRepository createRepository(String repoName) throws IOException, GitAPIException {
+    File repo = dir.newFolder(repoName);
+    try (Git git = Git.init().setDirectory(repo).call()) {
+      return (FileRepository) git.getRepository();
+    }
   }
 }

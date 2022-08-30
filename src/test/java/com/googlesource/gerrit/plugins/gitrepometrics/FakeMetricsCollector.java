@@ -14,8 +14,6 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.google.gerrit.entities.Project;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
@@ -28,8 +26,8 @@ import org.junit.Ignore;
 @Ignore
 public class FakeMetricsCollector implements MetricsCollector {
   @Override
-  public HashMap<String, Long> collect(FileRepository repository, Project project) {
-    return Maps.newHashMap(ImmutableMap.of("fake-metrics-1", 1L, "fake-metrics-2", 2L));
+  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
+    return null;
   }
 
   @Override
