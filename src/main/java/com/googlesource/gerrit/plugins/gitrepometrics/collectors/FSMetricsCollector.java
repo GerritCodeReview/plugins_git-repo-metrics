@@ -31,27 +31,30 @@ import org.eclipse.jgit.internal.storage.file.FileRepository;
 public class FSMetricsCollector implements MetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  public static String numberOfKeepFiles = "numberOfKeepFiles";
-  public static String numberOfEmptyDirectories = "numberOfEmptyDirectories";
-  public static String numberOfDirectories = "numberOfDirectories";
-  public static String numberOfFiles = "numberOfFiles";
+  protected static final GitRepoMetric numberOfKeepFiles =
+      new GitRepoMetric("numberOfKeepFiles", "Number of keep files on filesystem", "Count");
+  protected static final GitRepoMetric numberOfEmptyDirectories =
+      new GitRepoMetric(
+          "numberOfEmptyDirectories", "Number of empty directories on filesystem", "Count");
+  protected static final GitRepoMetric numberOfDirectories =
+      new GitRepoMetric("numberOfDirectories", "Number of directories on filesystem", "Count");
+  protected static final GitRepoMetric numberOfFiles =
+      new GitRepoMetric("numberOfFiles", "Number of directories on filesystem", "Count");
 
   @Override
-  public HashMap<String, Long> collect(FileRepository repository, Project project) {
-    HashMap<String, Long> metrics = new HashMap<>();
+  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
+    HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
+    metrics.put(numberOfKeepFiles, keepFilesCount(repository));
 
-    putMetric(project, metrics, numberOfKeepFiles, keepFilesCount(repository));
-
+    HashMap<String, Long> metricsV = new HashMap<>();
     HashMap<String, AtomicInteger> partialMetrics =
-        filesAndDirectoriesCount(repository, project, metrics);
-    putMetric(
-        project,
-        metrics,
+        filesAndDirectoriesCount(repository, project, metricsV);
+
+    metrics.put(
         numberOfEmptyDirectories,
-        partialMetrics.get(numberOfEmptyDirectories).longValue());
-    putMetric(
-        project, metrics, numberOfDirectories, partialMetrics.get(numberOfDirectories).longValue());
-    putMetric(project, metrics, numberOfFiles, partialMetrics.get(numberOfFiles).longValue());
+        partialMetrics.get(numberOfEmptyDirectories.getName()).longValue());
+    metrics.put(numberOfDirectories, partialMetrics.get(numberOfDirectories.getName()).longValue());
+    metrics.put(numberOfFiles, partialMetrics.get(numberOfFiles.getName()).longValue());
 
     return metrics;
   }
@@ -61,9 +64,9 @@ public class FSMetricsCollector implements MetricsCollector {
     HashMap<String, AtomicInteger> counter =
         new HashMap<String, AtomicInteger>() {
           {
-            put(numberOfFiles, new AtomicInteger(0));
-            put(numberOfDirectories, new AtomicInteger(0));
-            put(numberOfEmptyDirectories, new AtomicInteger(0));
+            put(numberOfFiles.getName(), new AtomicInteger(0));
+            put(numberOfDirectories.getName(), new AtomicInteger(0));
+            put(numberOfEmptyDirectories.getName(), new AtomicInteger(0));
           }
         };
     try {
@@ -72,13 +75,17 @@ public class FSMetricsCollector implements MetricsCollector {
           .forEach(
               path -> {
                 if (path.toFile().isFile()) {
-                  counter.get(numberOfFiles).updateAndGet(metricCounter -> metricCounter + 1);
+                  counter
+                      .get(numberOfFiles.getName())
+                      .updateAndGet(metricCounter -> metricCounter + 1);
                 }
                 if (path.toFile().isDirectory()) {
-                  counter.get(numberOfDirectories).updateAndGet(metricCounter -> metricCounter + 1);
+                  counter
+                      .get(numberOfDirectories.getName())
+                      .updateAndGet(metricCounter -> metricCounter + 1);
                   if (Objects.requireNonNull(path.toFile().listFiles()).length == 0) {
                     counter
-                        .get(numberOfEmptyDirectories)
+                        .get(numberOfEmptyDirectories.getName())
                         .updateAndGet(metricCounter -> metricCounter + 1);
                   }
                 }
@@ -91,7 +98,7 @@ public class FSMetricsCollector implements MetricsCollector {
     return counter;
   }
 
-  private int keepFilesCount(FileRepository repository) {
+  private long keepFilesCount(FileRepository repository) {
     File packDirectory = new File(repository.getObjectsDirectory(), "pack");
     File[] keepFiles =
         packDirectory.listFiles(
@@ -111,10 +118,6 @@ public class FSMetricsCollector implements MetricsCollector {
   @Override
   public List<GitRepoMetric> availableMetrics() {
     return Arrays.asList(
-        new GitRepoMetric(numberOfKeepFiles, "Number of keep files on filesystem", "Count"),
-        new GitRepoMetric(
-            numberOfEmptyDirectories, "Number of empty directories on filesystem", "Count"),
-        new GitRepoMetric(numberOfDirectories, "Number of directories on filesystem", "Count"),
-        new GitRepoMetric(numberOfFiles, "Number of directories on filesystem", "Count"));
+        numberOfKeepFiles, numberOfEmptyDirectories, numberOfFiles, numberOfDirectories);
   }
 }
