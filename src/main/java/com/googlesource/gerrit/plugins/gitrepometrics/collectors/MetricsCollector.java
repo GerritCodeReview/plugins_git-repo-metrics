@@ -14,8 +14,6 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
-import static com.googlesource.gerrit.plugins.gitrepometrics.GitRepoMetricsCache.getMetricName;
-
 import com.google.common.collect.ImmutableList;
 import java.util.HashMap;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -28,10 +26,10 @@ public interface MetricsCollector {
    *
    * @param projectName to collect metrics for
    * @param repository {@link FileRepository} to collect metrics from
-   * @return {@code HashMap<String, Long>} where the key is the metric name and the value is the
-   *     corresponding metric value collected.
+   * @return {@code HashMap<GitRepoMetric, Long>} where the key is the {@link GitRepoMetric} and the
+   *     value is the corresponding metric value collected.
    */
-  HashMap<String, Long> collect(FileRepository repository, String projectName);
+  HashMap<GitRepoMetric, Long> collect(FileRepository repository, String projectName);
 
   /**
    * Returns the name of the metric collector.
@@ -47,9 +45,4 @@ public interface MetricsCollector {
    *     metric collector implementation.
    */
   ImmutableList<GitRepoMetric> availableMetrics();
-
-  default void putMetric(
-      String projectName, HashMap<String, Long> metrics, String metricName, long value) {
-    metrics.put(getMetricName(metricName, projectName), value);
-  }
 }

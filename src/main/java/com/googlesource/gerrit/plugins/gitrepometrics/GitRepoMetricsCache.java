@@ -83,9 +83,15 @@ public class GitRepoMetricsCache {
     return metrics;
   }
 
-  public void setMetrics(Map<String, Long> metrics, String projectName) {
-    this.collectedAt.put(projectName, clock.millis());
-    this.metrics = metrics;
+  public void setMetrics(Map<GitRepoMetric, Long> newMetrics, String projectName) {
+    newMetrics.forEach(
+        (repoMetric, value) -> {
+          logger.atFine().log(
+              String.format(
+                  "Collected %s for project %s: %d", repoMetric.getName(), projectName, value));
+          metrics.put(getMetricName(repoMetric.getName(), projectName), value);
+        });
+    collectedAt.put(projectName, clock.millis());
   }
 
   public List<GitRepoMetric> getMetricsNames() {
