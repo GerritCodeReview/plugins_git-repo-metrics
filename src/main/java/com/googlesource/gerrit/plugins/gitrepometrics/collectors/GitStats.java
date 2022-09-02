@@ -25,28 +25,36 @@ import org.eclipse.jgit.internal.storage.file.GC;
 public class GitStats implements MetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
-  public static String numberOfPackedObjects = "numberOfPackedObjects";
-  public static String numberOfPackFiles = "numberOfPackFiles";
-  public static String numberOfLooseObjects = "numberOfLooseObjects";
-  public static String numberOfLooseRefs = "numberOfLooseRefs";
-  public static String numberOfPackedRefs = "numberOfPackedRefs";
-  public static String sizeOfLooseObjects = "sizeOfLooseObjects";
-  public static String sizeOfPackedObjects = "sizeOfPackedObjects";
-  public static String numberOfBitmaps = "numberOfBitmaps";
+  public static final GitRepoMetric numberOfPackedObjects =
+      new GitRepoMetric("numberOfPackedObjects", "Number of packed objects", "Count");
+  public static final GitRepoMetric numberOfPackFiles =
+      new GitRepoMetric("numberOfPackFiles", "Number of pack files", "Count");
+  public static final GitRepoMetric numberOfLooseObjects =
+      new GitRepoMetric("numberOfLooseObjects", "Number of loose objects", "Count");
+  public static final GitRepoMetric numberOfLooseRefs =
+      new GitRepoMetric("numberOfLooseRefs", "Number of loose refs", "Count");
+  public static final GitRepoMetric numberOfPackedRefs =
+      new GitRepoMetric("numberOfPackedRefs", "Number of packed refs", "Count");
+  public static final GitRepoMetric sizeOfLooseObjects =
+      new GitRepoMetric("sizeOfLooseObjects", "Size of loose objects", "Count");
+  public static final GitRepoMetric sizeOfPackedObjects =
+      new GitRepoMetric("sizeOfPackedObjects", "Size of packed objects", "Count");
+  public static final GitRepoMetric numberOfBitmaps =
+      new GitRepoMetric("numberOfBitmaps", "Number of bitmaps", "Count");
 
   @Override
-  public HashMap<String, Long> collect(FileRepository repository, Project project) {
-    HashMap<String, Long> metrics = new HashMap<>(availableMetrics().size());
+  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
+    HashMap<GitRepoMetric, Long> metrics = new HashMap<>(availableMetrics().size());
     try {
       GC.RepoStatistics statistics = new GC(repository).getStatistics();
-      putMetric(project, metrics, numberOfPackedObjects, statistics.numberOfPackedObjects);
-      putMetric(project, metrics, numberOfPackFiles, statistics.numberOfPackFiles);
-      putMetric(project, metrics, numberOfLooseObjects, statistics.numberOfLooseObjects);
-      putMetric(project, metrics, numberOfLooseRefs, statistics.numberOfLooseRefs);
-      putMetric(project, metrics, numberOfPackedRefs, statistics.numberOfPackedRefs);
-      putMetric(project, metrics, sizeOfLooseObjects, statistics.sizeOfLooseObjects);
-      putMetric(project, metrics, sizeOfPackedObjects, statistics.sizeOfPackedObjects);
-      putMetric(project, metrics, numberOfBitmaps, statistics.numberOfBitmaps);
+      metrics.put(numberOfPackedObjects, statistics.numberOfPackedObjects);
+      metrics.put(numberOfPackFiles, statistics.numberOfPackFiles);
+      metrics.put(numberOfLooseObjects, statistics.numberOfLooseObjects);
+      metrics.put(numberOfLooseRefs, statistics.numberOfLooseRefs);
+      metrics.put(numberOfPackedRefs, statistics.numberOfPackedRefs);
+      metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
+      metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
+      metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
       logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
     } catch (IOException e) {
       logger.atSevere().log("Something went wrong: %s", e.getMessage());
@@ -57,14 +65,14 @@ public class GitStats implements MetricsCollector {
   @Override
   public ImmutableList<GitRepoMetric> availableMetrics() {
     return ImmutableList.of(
-        new GitRepoMetric(numberOfPackedObjects, "Number of packed objects", "Count"),
-        new GitRepoMetric(numberOfPackFiles, "Number of pack files", "Count"),
-        new GitRepoMetric(numberOfLooseObjects, "Number of loose objects", "Count"),
-        new GitRepoMetric(numberOfLooseRefs, "Number of loose refs", "Count"),
-        new GitRepoMetric(numberOfPackedRefs, "Number of packed refs", "Count"),
-        new GitRepoMetric(sizeOfLooseObjects, "Size of loose objects", "Count"),
-        new GitRepoMetric(sizeOfPackedObjects, "Size of packed objects", "Count"),
-        new GitRepoMetric(numberOfBitmaps, "Number of bitmaps", "Count"));
+        numberOfPackedObjects,
+        numberOfPackFiles,
+        numberOfLooseObjects,
+        numberOfLooseRefs,
+        numberOfPackedRefs,
+        sizeOfLooseObjects,
+        sizeOfPackedObjects,
+        numberOfBitmaps);
   }
 
   @Override
