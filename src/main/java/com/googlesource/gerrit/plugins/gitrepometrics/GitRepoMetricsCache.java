@@ -83,6 +83,31 @@ public class GitRepoMetricsCache {
   public void setMetric(GitRepoMetric newMetric, Long value, String projectName) {
     this.collectedAt.put(projectName, clock.millis());
     metrics.put(getMetricName(newMetric.getName(), projectName), value);
+
+    if (!metricExists(getMetricName(newMetric.getName(), projectName))) {
+      createNewCallbackMetric(newMetric, projectName);
+    }
+  }
+
+  private boolean metricExists(String metricName) {
+    return metricRegistry
+        .getMetrics()
+        .containsKey(String.format("%s/%s/%s", "plugins", "git-repo-metrics", metricName));
+  }
+
+  private void createNewCallbackMetric(GitRepoMetric metric, String projectName) {
+    Supplier<Long> supplier =
+        new Supplier<Long>() {
+          public Long get() {
+            return getMetrics().getOrDefault(getMetricName(metric.getName(), projectName), 0L);
+          }
+        };
+
+    metricMaker.newCallbackMetric(
+        getMetricName(metric.getName(), projectName),
+        Long.class,
+        new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()),
+        supplier);
   }
 
   public List<GitRepoMetric> getMetricsNames() {
@@ -98,49 +123,8 @@ public class GitRepoMetricsCache {
     return collectedAt;
   }
 
-  public void initCache() {
-    metricsNames.forEach(
-        gitRepoMetric -> {
-          projects.forEach(
-              projectName -> {
-                String name =
-                    GitRepoMetricsCache.getMetricName(gitRepoMetric.getName(), projectName);
-                Supplier<Long> supplier =
-                    new Supplier<Long>() {
-                      public Long get() {
-                        // TODO Blaah! Initializing all the values to zero!? Would be better
-                        // registering
-                        //     dynamically the metrics
-                        // TODO add grace period!!
-                        return getMetrics().getOrDefault(name, 0L);
-                      }
-                    };
-
-                if (!metricRegistry
-                    .getMetrics()
-                    .containsKey(
-                        GitRepoMetricsCache.getFullyQualifiedMetricName(
-                            gitRepoMetric.getName(), projectName))) {
-                  metricMaker.newCallbackMetric(
-                      name,
-                      Long.class,
-                      new Description(gitRepoMetric.getDescription())
-                          .setRate()
-                          .setUnit(gitRepoMetric.getUnit()),
-                      supplier);
-                }
-              });
-        });
-  }
-
   public static String getMetricName(String metricName, String projectName) {
     return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
-  }
-
-  @VisibleForTesting
-  static String getFullyQualifiedMetricName(String metricName, String projectName) {
-    return String.format(
-        "%s/%s/%s", "plugins", "git-repo-metrics", getMetricName(metricName, projectName));
   }
 
   public boolean shouldCollectStats(String projectName) {
