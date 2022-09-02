@@ -27,9 +27,14 @@ import org.junit.Ignore;
 
 @Ignore
 public class FakeMetricsCollector implements MetricsCollector {
+  public static final GitRepoMetric fakeMetric1 =
+      new GitRepoMetric("fake-metric-1", "Fake metric 1", "Count");
+  public static final GitRepoMetric fakeMetric2 =
+      new GitRepoMetric("fake-metric-2", "Fake metric 2", "Count");
+
   @Override
-  public HashMap<String, Long> collect(FileRepository repository, Project project) {
-    return Maps.newHashMap(ImmutableMap.of("fake-metrics-1", 1L, "fake-metrics-2", 2L));
+  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
+    return Maps.newHashMap(ImmutableMap.of(fakeMetric1, 1L, fakeMetric2, 2L));
   }
 
   @Override
@@ -39,9 +44,7 @@ public class FakeMetricsCollector implements MetricsCollector {
 
   @Override
   public List<GitRepoMetric> availableMetrics() {
-    return Arrays.asList(
-        new GitRepoMetric("fake-metric-1", "Fake metric 1", "Count"),
-        new GitRepoMetric("fake-metric-2", "Fake metric 2", "Count"));
+    return Arrays.asList(fakeMetric1, fakeMetric2);
   }
 
   protected FakeMetricsCollector() {}

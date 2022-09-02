@@ -20,6 +20,7 @@ import com.google.gerrit.server.git.DelegateRepository;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.io.IOException;
 import java.util.HashMap;
@@ -66,23 +67,20 @@ public class UpdateGitMetricsTask implements Runnable {
               : repository;
 
       Iterable<MetricsCollector> iterable = () -> gitRepoMetricsCache.getCollectors().iterator();
-      HashMap<String, Long> newMetrics =
-          StreamSupport.stream(iterable.spliterator(), false)
-              .map(
-                  metricsCollector ->
-                      metricsCollector.collect((FileRepository) unwrappedRepo, project))
-              .reduce(
-                  new HashMap<>(),
-                  (accumulator, latestMetrics) -> {
-                    HashMap<String, Long> newVal = new HashMap<>();
-                    newVal.putAll(accumulator);
-                    newVal.putAll(latestMetrics);
-                    return newVal;
-                  });
-
-      logger.atInfo().log(
-          "Here all the metrics for %s - %s", project.getName(), getStringFromMap(newMetrics));
-      gitRepoMetricsCache.setMetrics(newMetrics, projectName);
+      StreamSupport.stream(iterable.spliterator(), false)
+          .forEach(
+              metricsCollector -> {
+                HashMap<GitRepoMetric, Long> metrics =
+                    metricsCollector.collect((FileRepository) unwrappedRepo, project);
+                metrics.forEach(
+                    (repoMetric, value) -> {
+                      logger.atFine().log(
+                          String.format(
+                              "Collected %s for project %s: %d",
+                              repoMetric.getName(), projectName, value));
+                      gitRepoMetricsCache.setMetric(repoMetric, value, projectName);
+                    });
+              });
     } catch (RepositoryNotFoundException e) {
       logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);
     } catch (IOException e) {
