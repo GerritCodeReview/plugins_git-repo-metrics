@@ -18,11 +18,11 @@ import static com.google.common.truth.Truth.assertThat;
 
 import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
-import com.google.common.collect.ImmutableMap;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.DisabledMetricMaker;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.io.IOException;
 import java.time.Clock;
@@ -47,7 +47,7 @@ public class GitRepoMetricsCacheTest {
     configSetupUtils = new ConfigSetupUtils(Collections.singletonList(enabledRepo));
 
     fakeStatsCollector = new FakeMetricsCollector();
-    ds = new DynamicSet<>();
+    ds = new DynamicSet<MetricsCollector>();
     ds.add("git-repo-metrics", fakeStatsCollector);
   }
 
@@ -118,7 +118,8 @@ public class GitRepoMetricsCacheTest {
         new GitRepoMetricsCache(
             ds, new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetric(
+        new GitRepoMetric("anyMetric", "anyMetricDescription", "Count"), 0L, enabledRepo);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
   }
@@ -132,7 +133,8 @@ public class GitRepoMetricsCacheTest {
         new GitRepoMetricsCache(
             ds, new FakeMetricMaker(), new MetricRegistry(), gitRepoMetricsConfig);
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetric(
+        new GitRepoMetric("anyMetric", "anyMetricDescription", "Count"), 0L, enabledRepo);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isFalse();
   }
@@ -151,7 +153,8 @@ public class GitRepoMetricsCacheTest {
             Clock.fixed(
                 Instant.now().minus(2, ChronoUnit.SECONDS), Clock.systemDefaultZone().getZone()));
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetric(
+        new GitRepoMetric("anyMetric", "anyMetricDescription", "Count"), 0L, enabledRepo);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
   }
@@ -167,7 +170,8 @@ public class GitRepoMetricsCacheTest {
 
     long currentTimeStamp = System.currentTimeMillis();
 
-    gitRepoMetricsCache.setMetrics(ImmutableMap.of("anyMetric", 0L), enabledRepo);
+    gitRepoMetricsCache.setMetric(
+        new GitRepoMetric("anyMetric", "anyMetricDescription", "Count"), 0L, enabledRepo);
 
     assertThat(gitRepoMetricsCache.getCollectedAt().get(enabledRepo)).isAtLeast(currentTimeStamp);
   }
