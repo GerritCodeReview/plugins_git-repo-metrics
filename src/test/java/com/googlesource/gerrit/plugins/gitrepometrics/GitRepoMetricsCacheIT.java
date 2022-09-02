@@ -21,11 +21,14 @@ import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.config.GlobalPluginConfig;
+import com.google.gerrit.entities.Project;
+import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.server.config.PluginConfigFactory;
 import com.google.inject.Inject;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSStats;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStats;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.junit.Before;
 import org.junit.Test;
 
 @TestPlugin(
@@ -34,26 +37,50 @@ import org.junit.Test;
 public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
   @Inject MetricRegistry metricRegistry;
+  @Inject PluginConfigFactory config;
+  GitRepoMetricsCache gitRepoMetricsCache;
+
+  private final Project.NameKey testProject1 = Project.nameKey("testProject1");
+  private final Project.NameKey testProject2 = Project.nameKey("testProject2");
+
+  @Override
+  @Before
+  public void setUpTestPlugin() throws Exception {
+    super.setUpTestPlugin();
+
+    repoManager.createRepository(testProject1);
+    repoManager.createRepository(testProject2);
+
+    DynamicSet<MetricsCollector> ds = new DynamicSet<MetricsCollector>();
+    ds.add("git-repo-metrics", new FakeMetricsCollector("collector1"));
+    ds.add("git-repo-metrics", new FakeMetricsCollector("collector2"));
+
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(
+            ds,
+            new FakeMetricMaker(metricRegistry),
+            metricRegistry,
+            new GitRepoMetricsConfig(config, ConfigSetupUtils.pluginName));
+  }
 
   @Test
   @UseLocalDisk
   @GlobalPluginConfig(
       pluginName = "git-repo-metrics",
       name = "git-repo-metrics.project",
-      values = {"test1", "test2"})
+      values = {"testProject1", "testProject2"})
   public void shouldRegisterAllMetrics() {
+    new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, "testProject1").run();
+    new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, "testProject2").run();
 
     List<String> repoMetricsCount =
         metricRegistry.getMetrics().keySet().stream()
             .filter(metricName -> metricName.contains("git-repo-metrics"))
             .collect(Collectors.toList());
-
-    GitStats gitStats = server.getTestInjector().getInstance(GitStats.class);
-    FSStats FSStats = server.getTestInjector().getInstance(FSStats.class);
-    int expectedMetricsCount =
-        gitStats.availableMetrics().size() + FSStats.availableMetrics().size();
-    // Since we have 2 projects (test1 and test2), the number of expected metrics is 2 *
-    // expectedMetricsCount
-    assertThat(repoMetricsCount.size()).isEqualTo(2 * expectedMetricsCount);
+    // We expect 8 metrics since we have 2 projects (testProject1 and testProject1) and we have 2
+    // collectors
+    // collecting 2 metrics (see FakeStatsCollector)
+    assertThat(repoMetricsCount.size())
+        .isEqualTo(2 /* metrics */ * 2 /* repositories */ * 2 /* collectors */);
   }
 }
