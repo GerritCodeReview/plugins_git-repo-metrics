@@ -49,7 +49,7 @@ public class FSMetricsCollectorTest {
     File objectDirectory = ((FileRepository) repository).getObjectsDirectory();
     Files.createFile(new File(objectDirectory, "pack/keep1.keep").toPath());
 
-    HashMap<String, Long> metrics =
+    HashMap<GitRepoMetric, Long> metrics =
         new FSMetricsCollector().collect((FileRepository) repository, project);
 
     // This is the FS structure, from the "objects" directory, metrics are collected from:
@@ -57,10 +57,11 @@ public class FSMetricsCollectorTest {
     //  ├── info
     //  └── pack
     //      └── keep1.keep
-    assertThat(metrics.get("numberofkeepfiles_testrepo")).isEqualTo(1); // keep1.keep
-    assertThat(metrics.get("numberoffiles_testrepo")).isEqualTo(1); // keep1.keep
-    assertThat(metrics.get("numberofdirectories_testrepo")).isEqualTo(3); // info, pack and .
-    assertThat(metrics.get("numberofemptydirectories_testrepo")).isEqualTo(1); // info
+    assertThat(metrics.get(FSMetricsCollector.numberOfKeepFiles)).isEqualTo(1); // keep1.keep
+    assertThat(metrics.get(FSMetricsCollector.numberOfFiles)).isEqualTo(1); // keep1.keep
+    assertThat(metrics.get(FSMetricsCollector.numberOfDirectories))
+        .isEqualTo(3); // info, pack and .
+    assertThat(metrics.get(FSMetricsCollector.numberOfEmptyDirectories)).isEqualTo(1); // info
   }
 
   private FileRepository createRepository(String repoName) throws Exception {
