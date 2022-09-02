@@ -36,7 +36,6 @@ public class Module extends LifecycleModule {
     DynamicSet.setOf(binder(), MetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStats.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSStats.class);
-    listener().to(PluginStartup.class);
     install(new UpdateGitMetricsTaskModule());
   }
 }
