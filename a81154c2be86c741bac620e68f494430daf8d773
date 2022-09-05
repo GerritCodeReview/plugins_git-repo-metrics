@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d74d887e_75904db8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:24:54Z",
+      "side": 1,
+      "message": "FSMetricsCollector?",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a760c922_5644bf4c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
         "patchSetId": 9
@@ -72,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad724657_71e09537",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:24:54Z",
+      "side": 1,
+      "message": "Agreed, please use a different thread-pool for that.",
+      "parentUuid": "8c41567f_5c9801cd",
+      "range": {
+        "startLine": 75,
+        "startChar": 10,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18e15af6_09db18df",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
         "patchSetId": 9
@@ -88,6 +135,53 @@
         "startChar": 45,
         "endLine": 79,
         "endChar": 86
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22f5256_69e00601",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:24:54Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "18e15af6_09db18df",
+      "range": {
+        "startLine": 79,
+        "startChar": 45,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930526f4_b4f04a26",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:24:54Z",
+      "side": 1,
+      "message": "You can avoid the condition by using `MoreObjects`.\n\nExample:\n```\nMoreObjects.firstNotNull(keepFiles, new File[0]).length\n```",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 51
       },
       "revId": "a81154c2be86c741bac620e68f494430daf8d773",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
