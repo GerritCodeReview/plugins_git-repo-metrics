@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "751ae3b6_222e3cdb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:17:52Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "202fe1f1_e0782822",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 27
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7140ce2_3e1adc7d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
         "patchSetId": 13
