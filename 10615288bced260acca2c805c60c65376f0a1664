@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "059dfa9c_fadb479a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:48:50Z",
+      "side": 1,
+      "message": "nit: typo `defaulting`",
+      "range": {
+        "startLine": 11,
+        "startChar": 38,
+        "endLine": 11,
+        "endChar": 47
+      },
+      "revId": "10615288bced260acca2c805c60c65376f0a1664",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d2d37c_09c23a0d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:48:50Z",
+      "side": 1,
+      "message": "I get why it works: static objects are used as keys hence `Object.[hashCode|equals]` can be relied upon it might be a subject of issues later. Consider implementing those methods in `GitRepoMetric` class...",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 56,
+        "endChar": 88
+      },
+      "revId": "10615288bced260acca2c805c60c65376f0a1664",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
