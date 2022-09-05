@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a760c922_5644bf4c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:35:59Z",
+      "side": 1,
+      "message": "nit: one could set the initial map capacity to `availableMetrics` size",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0afee6e_21ef4223",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:35:59Z",
+      "side": 1,
+      "message": "nit: empty line would ease the reading of the code if it was before the `try {` statement, not after",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c41567f_5c9801cd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:35:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure if going into parallel on repo level (that is typically backed by `ForkJoinPool.commonPool()`) is the best approach here as we have no control over it and they will be blocked by the IO... What if threads get exhausted?",
+      "range": {
+        "startLine": 75,
+        "startChar": 10,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e15af6_09db18df",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:35:59Z",
+      "side": 1,
+      "message": "it is not guaranteed to be an atomic operation as `get` happens before `set`, there are methods introduced for that like:\n* `getAndIncrement`\n* `incrementAndGet`",
+      "range": {
+        "startLine": 79,
+        "startChar": 45,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a74013c0_a06d0ae4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:35:59Z",
+      "side": 1,
+      "message": "list of metrics could be created statically and only returned from `availableMetrics` methods ;)",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 3
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acbc47a6_4a7f3f15",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-05T16:35:59Z",
+      "side": 1,
+      "message": "it looks more like a `static` method (as it is used internally by `collect`) than `default`.\nAnother viable alternative would be `AbstractMetricsCollector` that would contain the `putMetric` method...",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 3
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
