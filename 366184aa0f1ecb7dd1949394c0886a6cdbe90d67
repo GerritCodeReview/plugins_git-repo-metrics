@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8198d8da_b5d79fb3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:26:22Z",
+      "side": 1,
+      "message": "Unrelated change?",
+      "revId": "366184aa0f1ecb7dd1949394c0886a6cdbe90d67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261c16d0_37e1ea71",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2022-09-05T23:26:22Z",
+      "side": 1,
+      "message": "Why not simply declaring them as @Inject as fields of the test instance? They are automatically injected with the test injector AFAIK.",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "366184aa0f1ecb7dd1949394c0886a6cdbe90d67",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
