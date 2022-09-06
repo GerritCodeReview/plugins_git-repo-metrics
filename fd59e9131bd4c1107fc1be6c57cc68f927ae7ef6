@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b5ae4d8_f537f043",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T08:33:44Z",
+      "side": 1,
+      "message": "Ah cool! Sure I will address it in a followup",
+      "parentUuid": "751ae3b6_222e3cdb",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 27
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7140ce2_3e1adc7d",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
         "patchSetId": 13
@@ -94,6 +118,54 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8383cf37_c4c04b19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T08:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c544eb8_9adc9705",
+      "range": {
+        "startLine": 44,
+        "startChar": 40,
+        "endLine": 44,
+        "endChar": 57
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d533db_8d8e0372",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T08:33:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7140ce2_3e1adc7d",
+      "range": {
+        "startLine": 44,
+        "startChar": 60,
+        "endLine": 44,
+        "endChar": 82
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "992129fc_2bc0357c",
@@ -107,6 +179,30 @@
       "writtenOn": "2022-09-05T16:08:12Z",
       "side": 1,
       "message": "I understand that `availableMetrics` is an implementation now but IMHO it would sill make sense to get all metrics statically cuz AFAIU they are not changing in time for a given collector...",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ab54d71_e08c7210",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T08:33:44Z",
+      "side": 1,
+      "message": "Correct. I moved them to be `static` in a followup change [1]. Is that what you meant?\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/344635/2",
+      "parentUuid": "992129fc_2bc0357c",
       "range": {
         "startLine": 63,
         "startChar": 2,
