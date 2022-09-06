@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e4e94d9_da0f03bf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d74d887e_75904db8",
+      "range": {
+        "startLine": 31,
+        "startChar": 13,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a760c922_5644bf4c",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81b3256_61421a5b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a760c922_5644bf4c",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 52
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0afee6e_21ef4223",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-05T16:35:59Z",
       "side": 1,
       "message": "nit: empty line would ease the reading of the code if it was before the `try {` statement, not after",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 74,
+        "endChar": 59
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17df03c9_088f2526",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0afee6e_21ef4223",
       "range": {
         "startLine": 72,
         "startChar": 4,
@@ -119,6 +191,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b4b80eb_dfa440cd",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Mmm...good point. The same should be applied to the other metric as well :/\n\nI think it might be worth addressing it in a follow up change, based on this one,  for both the metric collectors. WDYT?",
+      "parentUuid": "ad724657_71e09537",
+      "range": {
+        "startLine": 75,
+        "startChar": 10,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18e15af6_09db18df",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
         "patchSetId": 9
@@ -164,6 +260,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "220dc9cf_fe105e60",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Aaahh cool, I didn\u0027t know. Thanks.",
+      "parentUuid": "c22f5256_69e00601",
+      "range": {
+        "startLine": 79,
+        "startChar": 45,
+        "endLine": 79,
+        "endChar": 86
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "930526f4_b4f04a26",
@@ -177,6 +297,30 @@
       "writtenOn": "2022-09-05T23:24:54Z",
       "side": 1,
       "message": "You can avoid the condition by using `MoreObjects`.\n\nExample:\n```\nMoreObjects.firstNotNull(keepFiles, new File[0]).length\n```",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 107,
+        "endChar": 51
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "391045a7_225f4a33",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Neat!",
+      "parentUuid": "930526f4_b4f04a26",
       "range": {
         "startLine": 107,
         "startChar": 11,
@@ -212,6 +356,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "11c78df9_c900ca7e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "you are right. I did it in a followup change for all the metrics [1].\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/344635/2",
+      "parentUuid": "a74013c0_a06d0ae4",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 3
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acbc47a6_4a7f3f15",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
         "patchSetId": 9
@@ -223,6 +391,30 @@
       "writtenOn": "2022-09-05T16:35:59Z",
       "side": 1,
       "message": "it looks more like a `static` method (as it is used internally by `collect`) than `default`.\nAnother viable alternative would be `AbstractMetricsCollector` that would contain the `putMetric` method...",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 3
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "780ac6e5_7e95f6cc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T11:47:25Z",
+      "side": 1,
+      "message": "Yep, I thought about that.\nHowever, I am getting rid of this method at some point in this chain of changes [1] and this class will be back to be a \"pure\" interface.\n\nUnless you are strong about that, I would leave it as it is and get rid of it in the change I mentioned earlier.\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/344635/2",
+      "parentUuid": "acbc47a6_4a7f3f15",
       "range": {
         "startLine": 52,
         "startChar": 2,
