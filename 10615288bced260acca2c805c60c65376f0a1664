@@ -69,6 +69,30 @@
       },
       "revId": "10615288bced260acca2c805c60c65376f0a1664",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f3c385_0630df27",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-06T13:11:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3d2d37c_09c23a0d",
+      "range": {
+        "startLine": 46,
+        "startChar": 3,
+        "endLine": 56,
+        "endChar": 88
+      },
+      "revId": "10615288bced260acca2c805c60c65376f0a1664",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
