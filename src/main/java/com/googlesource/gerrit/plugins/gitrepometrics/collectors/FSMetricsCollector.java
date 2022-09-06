@@ -14,11 +14,8 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
-import com.google.common.base.MoreObjects;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -44,7 +41,6 @@ public class FSMetricsCollector implements MetricsCollector {
   @Override
   public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
     HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
-    metrics.put(numberOfKeepFiles, keepFilesCount(repository));
 
     HashMap<String, Long> metricsV = new HashMap<>();
     HashMap<String, AtomicInteger> partialMetrics =
@@ -55,6 +51,7 @@ public class FSMetricsCollector implements MetricsCollector {
         partialMetrics.get(numberOfEmptyDirectories.getName()).longValue());
     metrics.put(numberOfDirectories, partialMetrics.get(numberOfDirectories.getName()).longValue());
     metrics.put(numberOfFiles, partialMetrics.get(numberOfFiles.getName()).longValue());
+    metrics.put(numberOfKeepFiles, partialMetrics.get(numberOfKeepFiles.getName()).longValue());
 
     return metrics;
   }
@@ -67,6 +64,7 @@ public class FSMetricsCollector implements MetricsCollector {
             put(numberOfFiles.getName(), new AtomicInteger(0));
             put(numberOfDirectories.getName(), new AtomicInteger(0));
             put(numberOfEmptyDirectories.getName(), new AtomicInteger(0));
+            put(numberOfKeepFiles.getName(), new AtomicInteger(0));
           }
         };
     try {
@@ -78,6 +76,12 @@ public class FSMetricsCollector implements MetricsCollector {
                   counter
                       .get(numberOfFiles.getName())
                       .updateAndGet(metricCounter -> metricCounter + 1);
+
+                  if (path.toFile().getName().endsWith(".keep")) {
+                    counter
+                        .get(numberOfKeepFiles.getName())
+                        .updateAndGet(metricCounter -> metricCounter + 1);
+                  }
                 }
                 if (path.toFile().isDirectory()) {
                   counter
@@ -96,18 +100,6 @@ public class FSMetricsCollector implements MetricsCollector {
     }
 
     return counter;
-  }
-
-  private long keepFilesCount(FileRepository repository) {
-    File packDirectory = new File(repository.getObjectsDirectory(), "pack");
-    File[] keepFiles =
-        packDirectory.listFiles(
-            new FilenameFilter() {
-              public boolean accept(File dir, String name) {
-                return name.endsWith("keep");
-              }
-            });
-    return MoreObjects.firstNonNull(keepFiles, new File[0]).length;
   }
 
   @Override
