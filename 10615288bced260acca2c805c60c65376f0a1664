@@ -93,6 +93,29 @@
       },
       "revId": "10615288bced260acca2c805c60c65376f0a1664",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f74a9e_797d299f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T07:03:24Z",
+      "side": 1,
+      "message": "Is there a need to create the list from scratch for every call? AFAIU it is pretty static number of metrics to collect... Would it make sense to initiate it statically then?",
+      "range": {
+        "startLine": 120,
+        "startChar": 5,
+        "endLine": 121,
+        "endChar": 88
+      },
+      "revId": "10615288bced260acca2c805c60c65376f0a1664",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }

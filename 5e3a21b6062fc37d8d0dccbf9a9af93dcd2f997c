@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e97fe52_437c753c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRepoMetric.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T07:03:24Z",
+      "side": 1,
+      "message": "nit: it will fall apart when either `name`, `description` or `unit` is `null` which is not the case now ;)\n\nIMHO safer solution would be to call:\n`Objects.equals` as it takes care of `null` on either site\n\nWDYT?",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 100
+      },
+      "revId": "5e3a21b6062fc37d8d0dccbf9a9af93dcd2f997c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
