@@ -213,6 +213,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49af2d6a_97119a47",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T06:58:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1b4b80eb_dfa440cd",
+      "range": {
+        "startLine": 75,
+        "startChar": 10,
+        "endLine": 75,
+        "endChar": 21
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18e15af6_09db18df",
@@ -378,6 +402,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c916bbfc_2b85fa6f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSStats.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T06:58:38Z",
+      "side": 1,
+      "message": "Almost. List is created over and over again. I have asked for it in the change in question.",
+      "parentUuid": "11c78df9_c900ca7e",
+      "range": {
+        "startLine": 116,
+        "startChar": 2,
+        "endLine": 123,
+        "endChar": 3
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acbc47a6_4a7f3f15",
@@ -415,6 +463,30 @@
       "side": 1,
       "message": "Yep, I thought about that.\nHowever, I am getting rid of this method at some point in this chain of changes [1] and this class will be back to be a \"pure\" interface.\n\nUnless you are strong about that, I would leave it as it is and get rid of it in the change I mentioned earlier.\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/344635/2",
       "parentUuid": "acbc47a6_4a7f3f15",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 3
+      },
+      "revId": "a81154c2be86c741bac620e68f494430daf8d773",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70f36153_fb2847b4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T06:58:38Z",
+      "side": 1,
+      "message": "Yeah, I have noticed that when I was reviewing the change in question ;)\n\nIf in doubt I\u0027m always asking myself the following question (which David Pursehouse asked me some years ago so all credits go to him 😄):\n\n\u003e What if this commit becomes the tip of the branch at some point, would that be OK then?\n\nAs long as you are happy with the answer I\u0027m fine too 😄",
+      "parentUuid": "780ac6e5_7e95f6cc",
       "range": {
         "startLine": 52,
         "startChar": 2,
