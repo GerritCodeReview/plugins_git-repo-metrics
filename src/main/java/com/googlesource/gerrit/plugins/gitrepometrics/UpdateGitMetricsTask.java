@@ -25,6 +25,7 @@ import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollecto
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
@@ -41,15 +42,18 @@ public class UpdateGitMetricsTask implements Runnable {
   private final String projectName;
   private GitRepoMetricsCache gitRepoMetricsCache;
   private GitRepositoryManager repoManager;
+  private final ExecutorService executorService;
 
   @Inject
   UpdateGitMetricsTask(
       GitRepoMetricsCache gitRepoMetricsCache,
       GitRepositoryManager repoManager,
+      ExecutorService executorService,
       @Assisted String projectName) {
     this.projectName = projectName;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
     this.repoManager = repoManager;
+    this.executorService = executorService;
   }
 
   @Override
@@ -70,15 +74,15 @@ public class UpdateGitMetricsTask implements Runnable {
       StreamSupport.stream(iterable.spliterator(), false)
           .forEach(
               metricsCollector -> {
-                HashMap<GitRepoMetric, Long> metrics =
-                    metricsCollector.collect((FileRepository) unwrappedRepo, project);
-                metrics.forEach(
-                    (repoMetric, value) -> {
-                      logger.atFine().log(
-                          String.format(
-                              "Collected %s for project %s: %d",
-                              repoMetric.getName(), projectName, value));
-                      gitRepoMetricsCache.setMetric(repoMetric, value, projectName);
+                    metricsCollector.collect((FileRepository) unwrappedRepo, project, executorService, metrics -> {
+                      metrics.forEach(
+                              (repoMetric, value) -> {
+                                logger.atFine().log(
+                                        String.format(
+                                                "Collected %s for project %s: %d",
+                                                repoMetric.getName(), projectName, value));
+                                gitRepoMetricsCache.setMetric(repoMetric, value, projectName);
+                              });
                     });
               });
     } catch (RepositoryNotFoundException e) {

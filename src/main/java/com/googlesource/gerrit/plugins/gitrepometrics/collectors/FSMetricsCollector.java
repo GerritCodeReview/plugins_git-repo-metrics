@@ -22,7 +22,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
+
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
 public class FSMetricsCollector implements MetricsCollector {
@@ -39,67 +44,63 @@ public class FSMetricsCollector implements MetricsCollector {
       new GitRepoMetric("numberOfFiles", "Number of directories on filesystem", "Count");
 
   @Override
-  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
-    HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
+  public void collect(FileRepository repository, Project project, ExecutorService executorService, Consumer <HashMap <GitRepoMetric, Long>> populateMetrics) {
 
-    HashMap<String, Long> metricsV = new HashMap<>();
-    HashMap<String, AtomicInteger> partialMetrics =
-        filesAndDirectoriesCount(repository, project, metricsV);
-
-    metrics.put(
-        numberOfEmptyDirectories,
-        partialMetrics.get(numberOfEmptyDirectories.getName()).longValue());
-    metrics.put(numberOfDirectories, partialMetrics.get(numberOfDirectories.getName()).longValue());
-    metrics.put(numberOfFiles, partialMetrics.get(numberOfFiles.getName()).longValue());
-    metrics.put(numberOfKeepFiles, partialMetrics.get(numberOfKeepFiles.getName()).longValue());
-
-    return metrics;
+    filesAndDirectoriesCount(repository, project, executorService, populateMetrics);
   }
 
-  private HashMap<String, AtomicInteger> filesAndDirectoriesCount(
-      FileRepository repository, Project project, HashMap<String, Long> metrics) {
-    HashMap<String, AtomicInteger> counter =
-        new HashMap<String, AtomicInteger>() {
-          {
-            put(numberOfFiles.getName(), new AtomicInteger(0));
-            put(numberOfDirectories.getName(), new AtomicInteger(0));
-            put(numberOfEmptyDirectories.getName(), new AtomicInteger(0));
-            put(numberOfKeepFiles.getName(), new AtomicInteger(0));
+  private void filesAndDirectoriesCount(
+      FileRepository repository, Project project, ExecutorService executorService, Consumer <HashMap<GitRepoMetric, Long>> populateMetrics) {
+
+      executorService.submit(new Callable <HashMap < GitRepoMetric, Long >>() {
+        @Override
+        public HashMap <GitRepoMetric, Long> call() throws Exception {
+          HashMap < GitRepoMetric, Long > r = new HashMap <GitRepoMetric, Long>();
+          try {
+            r = Files.walk(repository.getObjectsDirectory().toPath())
+                    .collect(Collectors.toList())
+                    .parallelStream()
+                    .map(path -> {
+                      HashMap <GitRepoMetric, Long> c = new HashMap <GitRepoMetric, Long>() {
+                        {
+                          put(numberOfFiles, 0L);
+                          put(numberOfDirectories, 0L);
+                          put(numberOfEmptyDirectories, 0L);
+                          put(numberOfKeepFiles, 0L);
+                        }
+                      };
+                      if (path.toFile().isFile()) {
+                        c.put(numberOfFiles, 1L);
+                        if (path.toFile().getName().endsWith(".keep")) {
+                          c.put(numberOfKeepFiles, 1L);
+                        }
+                      }
+                      if (path.toFile().isDirectory()) {
+                        c.put(numberOfDirectories, 1L);
+                        if (Objects.requireNonNull(path.toFile().listFiles()).length == 0) {
+                          c.put(numberOfEmptyDirectories, 1L);
+                        }
+                      }
+                      return c;
+                    }).reduce(new HashMap <GitRepoMetric, Long>(), (a, b) -> new HashMap <GitRepoMetric, Long>() {{
+                      put(numberOfFiles, a.get(numberOfFiles) + b.get(numberOfFiles));
+                      put(numberOfDirectories., a.get(numberOfDirectories) + b.get(numberOfDirectories));
+                      put(numberOfEmptyDirectories, a.get(numberOfEmptyDirectories) + b.get(numberOfEmptyDirectories));
+                      put(numberOfKeepFiles, a.get(numberOfKeepFiles) + b.get(numberOfKeepFiles));
+                    }});
+          } catch (IOException e) {
+            logger.atSevere().withCause(e).log(
+                    "Can't open object directory for project " + project.getName());
           }
-        };
-    try {
-      Files.walk(repository.getObjectsDirectory().toPath())
-          .parallel()
-          .forEach(
-              path -> {
-                if (path.toFile().isFile()) {
-                  counter
-                      .get(numberOfFiles.getName())
-                      .updateAndGet(metricCounter -> metricCounter + 1);
-                  if (path.toFile().getName().endsWith(".keep")) {
-                    counter
-                        .get(numberOfKeepFiles.getName())
-                        .updateAndGet(metricCounter -> metricCounter + 1);
-                  }
-                }
-                if (path.toFile().isDirectory()) {
-                  counter
-                      .get(numberOfDirectories.getName())
-                      .updateAndGet(metricCounter -> metricCounter + 1);
-                  if (Objects.requireNonNull(path.toFile().listFiles()).length == 0) {
-                    counter
-                        .get(numberOfEmptyDirectories.getName())
-                        .updateAndGet(metricCounter -> metricCounter + 1);
-                  }
-                }
-              });
-    } catch (IOException e) {
-      logger.atSevere().withCause(e).log(
-          "Can't open object directory for project " + project.getName());
-    }
 
-    return counter;
+          populateMetrics.accept(r);
+          return r;
+        }
+      });
+
   }
+
+
 
   @Override
   public String getMetricsCollectorName() {

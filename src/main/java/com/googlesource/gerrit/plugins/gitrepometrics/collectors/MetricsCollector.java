@@ -17,6 +17,9 @@ package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 import com.google.gerrit.entities.Project;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
+
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
 /** This interface is meant to be implemented by Git repository metrics collectors. * */
@@ -30,7 +33,7 @@ public interface MetricsCollector {
    * @return {@code HashMap<GitRepoMetric, Long>} where the key is the {@link GitRepoMetric} and the
    *     value is the corresponding metric value collected.
    */
-  HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project);
+  void collect(FileRepository repository, Project project, ExecutorService executorService, Consumer <HashMap<GitRepoMetric, Long>> populateMetrics);
 
   /**
    * Returns the name of the metric collector.
