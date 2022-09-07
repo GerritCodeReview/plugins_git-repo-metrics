@@ -20,10 +20,8 @@ import com.google.gerrit.server.git.DelegateRepository;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -69,15 +67,18 @@ public class UpdateGitMetricsTask implements Runnable {
       StreamSupport.stream(iterable.spliterator(), false)
           .forEach(
               metricsCollector -> {
-                HashMap<GitRepoMetric, Long> metrics =
-                    metricsCollector.collect((FileRepository) unwrappedRepo, projectName);
-                metrics.forEach(
-                    (repoMetric, value) -> {
-                      logger.atFine().log(
-                          String.format(
-                              "Collected %s for project %s: %d",
-                              repoMetric.getName(), projectName, value));
-                      gitRepoMetricsCache.setMetric(repoMetric, value, projectName);
+                metricsCollector.collect(
+                    (FileRepository) unwrappedRepo,
+                    projectName,
+                    metrics -> {
+                      metrics.forEach(
+                          (repoMetric, value) -> {
+                            logger.atFine().log(
+                                String.format(
+                                    "Collected %s for project %s: %d",
+                                    repoMetric.getName(), projectName, value));
+                            gitRepoMetricsCache.setMetric(repoMetric, value, projectName);
+                          });
                     });
               });
     } catch (RepositoryNotFoundException e) {
