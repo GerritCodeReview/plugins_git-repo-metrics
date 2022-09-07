@@ -30,6 +30,47 @@ import org.eclipse.jgit.internal.storage.file.FileRepository;
 public class FSMetricsCollector implements MetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
+  static class MetricsRecord {
+    private long numberOfKeepFilesCount = 0L;
+    private long numberOfEmptyDirectoriesCount = 0L;
+    private long numberOfDirectoriesCount = 0L;
+    private long numberOfFilesCount = 0L;
+
+    void foundKeepFile() {
+      numberOfKeepFilesCount++;
+    }
+
+    void foundEmptyDirectory() {
+      numberOfEmptyDirectoriesCount++;
+    }
+
+    void foundDirectory() {
+      numberOfDirectoriesCount++;
+    }
+
+    void foundFile() {
+      numberOfFilesCount++;
+    }
+
+    void incrementMetrics(MetricsRecord metricsRecordInc) {
+      numberOfKeepFilesCount += metricsRecordInc.numberOfKeepFilesCount;
+      numberOfEmptyDirectoriesCount += metricsRecordInc.numberOfEmptyDirectoriesCount;
+      numberOfDirectoriesCount += metricsRecordInc.numberOfDirectoriesCount;
+      numberOfFilesCount += metricsRecordInc.numberOfFilesCount;
+    }
+
+    HashMap<GitRepoMetric, Long> toMap() {
+      return new HashMap() {
+        {
+          put(numberOfFiles, numberOfFilesCount);
+          put(numberOfDirectories, numberOfDirectoriesCount);
+          put(numberOfEmptyDirectories, numberOfEmptyDirectoriesCount);
+          put(numberOfKeepFiles, numberOfKeepFilesCount);
+        }
+      };
+    }
+  }
+
   protected static final GitRepoMetric numberOfKeepFiles =
       new GitRepoMetric("numberOfKeepFiles", "Number of keep files on filesystem", "Count");
   protected static final GitRepoMetric numberOfEmptyDirectories =
@@ -66,59 +107,40 @@ public class FSMetricsCollector implements MetricsCollector {
   private HashMap<GitRepoMetric, Long> filesAndDirectoriesCount(
       FileRepository repository, String projectName) {
 
-    HashMap<GitRepoMetric, Long> metrics = new HashMap<GitRepoMetric, Long>();
     try {
-      metrics =
+      MetricsRecord metricsRecord =
           Files.walk(repository.getObjectsDirectory().toPath())
               .map(
                   path -> {
                     File f = path.toFile();
-                    HashMap<GitRepoMetric, Long> m = getInitializedMetrics();
+                    MetricsRecord mr = new MetricsRecord();
+                    ;
                     if (f.isFile()) {
-                      m.put(numberOfFiles, 1L);
+                      mr.foundFile();
                       if (f.getName().endsWith(".keep")) {
-                        m.put(numberOfKeepFiles, 1L);
+                        mr.foundKeepFile();
                       }
                     } else {
-                      m.put(numberOfDirectories, 1L);
+                      mr.foundDirectory();
                       if (Objects.requireNonNull(f.listFiles()).length == 0) {
-                        m.put(numberOfEmptyDirectories, 1L);
+                        mr.foundEmptyDirectory();
                       }
                     }
-                    return m;
+                    return mr;
                   })
               .reduce(
-                  getInitializedMetrics(),
-                  (acc, lastMetric) ->
-                      new HashMap<GitRepoMetric, Long>() {
-                        {
-                          putMetric(numberOfFiles);
-                          putMetric(numberOfDirectories);
-                          putMetric(numberOfEmptyDirectories);
-                          putMetric(numberOfKeepFiles);
-                        }
-
-                        private void putMetric(GitRepoMetric metric) {
-                          put(metric, acc.get(metric) + lastMetric.get(metric));
-                        }
-                      });
+                  new MetricsRecord(),
+                  (acc, lastMetric) -> {
+                    acc.incrementMetrics(lastMetric);
+                    return acc;
+                  });
+      return metricsRecord.toMap();
     } catch (IOException e) {
       logger.atSevere().withCause(e).log(
           "Error reading from file system for project " + projectName);
     }
 
-    return metrics;
-  }
-
-  private HashMap<GitRepoMetric, Long> getInitializedMetrics() {
-    return new HashMap<GitRepoMetric, Long>() {
-      {
-        put(numberOfFiles, 0L);
-        put(numberOfDirectories, 0L);
-        put(numberOfEmptyDirectories, 0L);
-        put(numberOfKeepFiles, 0L);
-      }
-    };
+    return new MetricsRecord().toMap();
   }
 
   @Override
