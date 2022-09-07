@@ -15,11 +15,10 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.util.HashMap;
+import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.junit.Ignore;
 
@@ -30,8 +29,17 @@ public class FakeMetricsCollector implements MetricsCollector {
   private final GitRepoMetric fakeMetric2;
 
   @Override
-  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, String projectName) {
-    return Maps.newHashMap(ImmutableMap.of(fakeMetric1, 1L, fakeMetric2, 2L));
+  public void collect(
+      FileRepository repository,
+      String projectName,
+      Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
+    populateMetrics.accept(
+        new HashMap<GitRepoMetric, Long>() {
+          {
+            put(fakeMetric1, 1L);
+            put(fakeMetric2, 2L);
+          }
+        });
   }
 
   @Override
