@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
@@ -45,12 +47,22 @@ public class FSMetricsCollectorTest {
   }
 
   @Test
-  public void testCorrectMetricsCollection() throws IOException {
+  public void testCorrectMetricsCollection() throws IOException, InterruptedException {
     File objectDirectory = ((FileRepository) repository).getObjectsDirectory();
     Files.createFile(new File(objectDirectory, "pack/keep1.keep").toPath());
 
-    HashMap<GitRepoMetric, Long> metrics =
-        new FSMetricsCollector().collect((FileRepository) repository, project);
+    HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
+
+    CountDownLatch latch = new CountDownLatch(1);
+    new FSMetricsCollector(Executors.newFixedThreadPool(2))
+        .collect(
+            (FileRepository) repository,
+            project,
+            m -> {
+              metrics.putAll(m);
+              latch.countDown();
+            });
+    latch.await();
 
     // This is the FS structure, from the "objects" directory, metrics are collected from:
     //  .

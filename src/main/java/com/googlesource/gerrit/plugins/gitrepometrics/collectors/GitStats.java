@@ -17,8 +17,12 @@ package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.entities.Project;
+import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.gitrepometrics.UpdateGitMetricsExecutor;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
 
@@ -42,24 +46,44 @@ public class GitStats implements MetricsCollector {
   public static final GitRepoMetric numberOfBitmaps =
       new GitRepoMetric("numberOfBitmaps", "Number of bitmaps", "Count");
 
+  private final ExecutorService executorService;
+
+  @Inject
+  GitStats(@UpdateGitMetricsExecutor ExecutorService executorService) {
+    this.executorService = executorService;
+  }
+
   @Override
-  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, Project project) {
-    HashMap<GitRepoMetric, Long> metrics = new HashMap<>(availableMetrics().size());
-    try {
-      GC.RepoStatistics statistics = new GC(repository).getStatistics();
-      metrics.put(numberOfPackedObjects, statistics.numberOfPackedObjects);
-      metrics.put(numberOfPackFiles, statistics.numberOfPackFiles);
-      metrics.put(numberOfLooseObjects, statistics.numberOfLooseObjects);
-      metrics.put(numberOfLooseRefs, statistics.numberOfLooseRefs);
-      metrics.put(numberOfPackedRefs, statistics.numberOfPackedRefs);
-      metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
-      metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
-      metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
-      logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
-    } catch (IOException e) {
-      logger.atSevere().log("Something went wrong: %s", e.getMessage());
-    }
-    return metrics;
+  public void collect(
+      FileRepository repository,
+      Project project,
+      Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
+
+    executorService.submit(
+        () -> {
+          try {
+            Thread.sleep(5000);
+          } catch (Exception e) {
+            /// nothing
+          }
+          HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
+          try {
+            GC.RepoStatistics statistics = new GC(repository).getStatistics();
+            metrics.put(numberOfPackedObjects, statistics.numberOfPackedObjects);
+            metrics.put(numberOfPackFiles, statistics.numberOfPackFiles);
+            metrics.put(numberOfLooseObjects, statistics.numberOfLooseObjects);
+            metrics.put(numberOfLooseRefs, statistics.numberOfLooseRefs);
+            metrics.put(numberOfPackedRefs, statistics.numberOfPackedRefs);
+            metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
+            metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
+            metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
+            logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
+          } catch (IOException e) {
+            logger.atSevere().log("Something went wrong: %s", e.getMessage());
+          }
+
+          populateMetrics.accept(metrics);
+        });
   }
 
   @Override
