@@ -66,9 +66,21 @@ public class UpdateGitMetricsTask implements Runnable {
       gitRepoMetricsCache.getCollectors().stream()
           .forEach(
               metricsCollector -> {
-                HashMap<GitRepoMetric, Long> metrics =
-                    metricsCollector.collect((FileRepository) unwrappedRepo, projectName);
-                gitRepoMetricsCache.setMetrics(metrics, projectName);
+                metricsCollector.collect(
+                    (FileRepository) unwrappedRepo,
+                    projectName,
+                    metrics -> {
+                      Map<GitRepoMetric, Long> newMetrics = new HashMap<>();
+                      metrics.forEach(
+                          (repoMetric, value) -> {
+                            logger.atFine().log(
+                                String.format(
+                                    "Collected %s for project %s: %d",
+                                    repoMetric.getName(), projectName, value));
+                            newMetrics.put(repoMetric, value);
+                          });
+                      gitRepoMetricsCache.setMetrics(newMetrics, projectName);
+                    });
               });
     } catch (RepositoryNotFoundException e) {
       logger.atSevere().withCause(e).log("Cannot find repository for %s", projectName);

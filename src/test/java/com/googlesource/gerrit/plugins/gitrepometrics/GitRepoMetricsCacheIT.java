@@ -14,20 +14,21 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import static com.google.common.truth.Truth.assertThat;
+import static org.junit.Assert.fail;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
+import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.gerrit.entities.Project;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,9 +37,11 @@ import org.junit.Test;
     sysModule = "com.googlesource.gerrit.plugins.gitrepometrics.Module")
 public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
+  private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 5;
+
   @Inject MetricRegistry metricRegistry;
-  @Inject FSMetricsCollector fsMetricsCollector;
-  @Inject GitStatsMetricsCollector gitStatsMetricsCollector;
+  FSMetricsCollector fsMetricsCollector;
+  GitStatsMetricsCollector gitStatsMetricsCollector;
   GitRepoMetricsCache gitRepoMetricsCache;
 
   private final Project.NameKey testProject1 = Project.nameKey("testProject1");
@@ -52,6 +55,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     repoManager.createRepository(testProject1);
     repoManager.createRepository(testProject2);
     gitRepoMetricsCache = plugin.getSysInjector().getInstance(GitRepoMetricsCache.class);
+    fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
+    gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
   }
 
   @Test
@@ -65,14 +70,25 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, testProject1.get()).run();
     new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, testProject2.get()).run();
 
-    List<String> repoMetricsCount =
-        metricRegistry.getMetrics().keySet().stream()
-            .filter(metricName -> metricName.contains("git-repo-metrics"))
-            .collect(Collectors.toList());
-
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()
             + gitStatsMetricsCollector.availableMetrics().size();
-    assertThat(repoMetricsCount.size()).isEqualTo(availableProjects.size() * expectedMetricsCount);
+
+    try {
+      WaitUtil.waitUntil(
+          () -> getPluginMetricsCount() == (long) availableProjects.size() * expectedMetricsCount,
+          Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
+    } catch (InterruptedException e) {
+      fail(
+          String.format(
+              "Only %d metrics have been registered, expected %d",
+              getPluginMetricsCount(), availableProjects.size() * expectedMetricsCount));
+    }
+  }
+
+  private long getPluginMetricsCount() {
+    return metricRegistry.getMetrics().keySet().stream()
+        .filter(metricName -> metricName.contains("git-repo-metrics"))
+        .count();
   }
 }
