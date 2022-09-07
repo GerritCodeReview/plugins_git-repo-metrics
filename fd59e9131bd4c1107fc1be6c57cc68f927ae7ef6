@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a45110b_b5fd4b07",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T06:41:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7b5ae4d8_f537f043",
+      "range": {
+        "startLine": 63,
+        "startChar": 6,
+        "endLine": 66,
+        "endChar": 27
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7140ce2_3e1adc7d",
@@ -203,6 +227,30 @@
       "side": 1,
       "message": "Correct. I moved them to be `static` in a followup change [1]. Is that what you meant?\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/344635/2",
       "parentUuid": "992129fc_2bc0357c",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebea54f2_786b5f8b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-07T06:41:49Z",
+      "side": 1,
+      "message": "Almost. In the change in question objects are created once but `list` is created every time `availableMetrics` method is called.\nI\u0027m wondering if that is really necessary as AFAIU it is walked over to collect values.\nIOW it is never modified and quite static regardless of the repo metrics are collected from. One could assure that by returning `ImmutableList` already in the interface definition.",
+      "parentUuid": "5ab54d71_e08c7210",
       "range": {
         "startLine": 63,
         "startChar": 2,
