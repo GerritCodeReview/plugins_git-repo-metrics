@@ -259,6 +259,30 @@
       },
       "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b65d896_fe534257",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 13
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-07T07:43:47Z",
+      "side": 1,
+      "message": "I see, makes sense.",
+      "parentUuid": "ebea54f2_786b5f8b",
+      "range": {
+        "startLine": 63,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "fd59e9131bd4c1107fc1be6c57cc68f927ae7ef6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
