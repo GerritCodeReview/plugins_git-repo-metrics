@@ -16,11 +16,15 @@ package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
+import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.gitrepometrics.UpdateGitMetricsExecutor;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.ExecutorService;
+import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
 public class FSMetricsCollector implements MetricsCollector {
@@ -40,64 +44,81 @@ public class FSMetricsCollector implements MetricsCollector {
       ImmutableList.of(
           numberOfKeepFiles, numberOfEmptyDirectories, numberOfFiles, numberOfDirectories);
 
-  @Override
-  public HashMap<GitRepoMetric, Long> collect(FileRepository repository, String projectName) {
-    HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
-    HashMap<String, AtomicInteger> partialMetrics =
-        filesAndDirectoriesCount(repository, projectName);
+  private final ExecutorService executorService;
 
-    metrics.put(
-        numberOfEmptyDirectories,
-        partialMetrics.get(numberOfEmptyDirectories.getName()).longValue());
-    metrics.put(numberOfDirectories, partialMetrics.get(numberOfDirectories.getName()).longValue());
-    metrics.put(numberOfFiles, partialMetrics.get(numberOfFiles.getName()).longValue());
-    metrics.put(numberOfKeepFiles, partialMetrics.get(numberOfKeepFiles.getName()).longValue());
+  @Inject
+  FSMetricsCollector(@UpdateGitMetricsExecutor ExecutorService executorService) {
+    this.executorService = executorService;
+  }
+
+  @Override
+  public void collect(
+      FileRepository repository,
+      String projectName,
+      Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
+
+    executorService.submit(
+        () -> {
+          populateMetrics.accept(filesAndDirectoriesCount(repository, projectName));
+        });
+  }
+
+  private HashMap<GitRepoMetric, Long> filesAndDirectoriesCount(
+      FileRepository repository, String projectName) {
+
+    HashMap<GitRepoMetric, Long> metrics = new HashMap<GitRepoMetric, Long>();
+    try {
+      metrics =
+          Files.walk(repository.getObjectsDirectory().toPath())
+              .map(
+                  path -> {
+                    File f = path.toFile();
+                    HashMap<GitRepoMetric, Long> m = getInitializedMetrics();
+                    if (f.isFile()) {
+                      m.put(numberOfFiles, 1L);
+                      if (f.getName().endsWith(".keep")) {
+                        m.put(numberOfKeepFiles, 1L);
+                      }
+                    } else {
+                      m.put(numberOfDirectories, 1L);
+                      if (Objects.requireNonNull(f.listFiles()).length == 0) {
+                        m.put(numberOfEmptyDirectories, 1L);
+                      }
+                    }
+                    return m;
+                  })
+              .reduce(
+                  getInitializedMetrics(),
+                  (acc, lastMetric) ->
+                      new HashMap<GitRepoMetric, Long>() {
+                        {
+                          putMetric(numberOfFiles);
+                          putMetric(numberOfDirectories);
+                          putMetric(numberOfEmptyDirectories);
+                          putMetric(numberOfKeepFiles);
+                        }
+
+                        private void putMetric(GitRepoMetric metric) {
+                          put(metric, acc.get(metric) + lastMetric.get(metric));
+                        }
+                      });
+    } catch (IOException e) {
+      logger.atSevere().withCause(e).log(
+          "Error reading from file system for project " + projectName);
+    }
 
     return metrics;
   }
 
-  private HashMap<String, AtomicInteger> filesAndDirectoriesCount(
-      FileRepository repository, String projectName) {
-    HashMap<String, AtomicInteger> counter =
-        new HashMap<String, AtomicInteger>() {
-          {
-            put(numberOfFiles.getName(), new AtomicInteger(0));
-            put(numberOfDirectories.getName(), new AtomicInteger(0));
-            put(numberOfEmptyDirectories.getName(), new AtomicInteger(0));
-            put(numberOfKeepFiles.getName(), new AtomicInteger(0));
-          }
-        };
-    try {
-      Files.walk(repository.getObjectsDirectory().toPath())
-          .parallel()
-          .forEach(
-              path -> {
-                if (path.toFile().isFile()) {
-                  counter
-                      .get(numberOfFiles.getName())
-                      .updateAndGet(metricCounter -> metricCounter + 1);
-                  if (path.toFile().getName().endsWith(".keep")) {
-                    counter
-                        .get(numberOfKeepFiles.getName())
-                        .updateAndGet(metricCounter -> metricCounter + 1);
-                  }
-                }
-                if (path.toFile().isDirectory()) {
-                  counter
-                      .get(numberOfDirectories.getName())
-                      .updateAndGet(metricCounter -> metricCounter + 1);
-                  if (Objects.requireNonNull(path.toFile().listFiles()).length == 0) {
-                    counter
-                        .get(numberOfEmptyDirectories.getName())
-                        .updateAndGet(metricCounter -> metricCounter + 1);
-                  }
-                }
-              });
-    } catch (IOException e) {
-      logger.atSevere().withCause(e).log("Can't open object directory for project " + projectName);
-    }
-
-    return counter;
+  private HashMap<GitRepoMetric, Long> getInitializedMetrics() {
+    return new HashMap<GitRepoMetric, Long>() {
+      {
+        put(numberOfFiles, 0L);
+        put(numberOfDirectories, 0L);
+        put(numberOfEmptyDirectories, 0L);
+        put(numberOfKeepFiles, 0L);
+      }
+    };
   }
 
   @Override
