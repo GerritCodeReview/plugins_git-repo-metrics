@@ -21,4 +21,4 @@ import java.lang.annotation.Retention;
 
 @Retention(RUNTIME)
 @BindingAnnotation
-@interface UpdateGitMetricsExecutor {}
+public @interface UpdateGitMetricsExecutor {}

@@ -79,6 +79,7 @@ public class GitRepoMetricsCache {
     this(collectors, metricMaker, metricRegistry, config, Clock.systemDefaultZone());
   }
 
+
   public Map<String, Long> getMetrics() {
     return metrics;
   }
