@@ -22,6 +22,30 @@
       },
       "revId": "cbb39511ed43fc9af7ad9b5197633f3ae0ce6635",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cd2b8d5_38665f96",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-08T13:16:02Z",
+      "side": 1,
+      "message": "Really good point. Let me amend it.",
+      "parentUuid": "e64be2fb_36975487",
+      "range": {
+        "startLine": 41,
+        "startChar": 64,
+        "endLine": 41,
+        "endChar": 81
+      },
+      "revId": "cbb39511ed43fc9af7ad9b5197633f3ae0ce6635",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
