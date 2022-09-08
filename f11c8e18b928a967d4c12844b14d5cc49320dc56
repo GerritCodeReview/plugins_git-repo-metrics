@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c79a81f_a9ddf36a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollector.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-08T12:26:52Z",
+      "side": 1,
+      "message": "how about static list creation so that it gets returned here only?",
+      "range": {
+        "startLine": 109,
+        "startChar": 2,
+        "endLine": 112,
+        "endChar": 3
+      },
+      "revId": "f11c8e18b928a967d4c12844b14d5cc49320dc56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a3d06c_b339c1b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRepoMetric.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-08T12:26:52Z",
+      "side": 1,
+      "message": "it should be\n```\nreturn Objects.equals(name, that.name)\n  \u0026\u0026 Objects.equals(unit, that.unit)\n  \u0026\u0026 Objects.equals(description, that.description)\n```\notherwise only `GitRepoMetrics` references are compared and that happens already in lines #44 and #45",
+      "range": {
+        "startLine": 47,
+        "startChar": 4,
+        "endLine": 47,
+        "endChar": 38
+      },
+      "revId": "f11c8e18b928a967d4c12844b14d5cc49320dc56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e2b1962_8a75c3ac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStats.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-08T12:26:52Z",
+      "side": 1,
+      "message": "how creating the list statically to return it here?",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 76,
+        "endChar": 3
+      },
+      "revId": "f11c8e18b928a967d4c12844b14d5cc49320dc56",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
