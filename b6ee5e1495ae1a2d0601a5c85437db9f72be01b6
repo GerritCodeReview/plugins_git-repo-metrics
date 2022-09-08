@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cae5441_75ac4bd2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-08T13:15:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5624f779_caba3448",
+      "range": {
+        "startLine": 53,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 21
+      },
+      "revId": "b6ee5e1495ae1a2d0601a5c85437db9f72be01b6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5cf4ea5_7a78380c",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-08T12:21:06Z",
       "side": 1,
       "message": "nit: `createRepository` returns already `FileRepository` so why not to refer to it instead of `Repository` so that it doesn\u0027t have to casted to `FileRepository` in #49?",
+      "range": {
+        "startLine": 36,
+        "startChar": 10,
+        "endLine": 36,
+        "endChar": 31
+      },
+      "revId": "b6ee5e1495ae1a2d0601a5c85437db9f72be01b6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da96bcbe_efbe7f81",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollectorTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-08T13:15:53Z",
+      "side": 1,
+      "message": "you are right. Probably a leftover from a previous iteration.",
+      "parentUuid": "c5cf4ea5_7a78380c",
       "range": {
         "startLine": 36,
         "startChar": 10,
@@ -70,6 +118,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb7b2ae_df9ce880",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollectorTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-08T13:15:53Z",
+      "side": 1,
+      "message": "one we get rid of `project` it will be used in the tests, hence outside the `setUp`",
+      "parentUuid": "389fa704_e74f7cc8",
+      "range": {
+        "startLine": 37,
+        "startChar": 2,
+        "endLine": 37,
+        "endChar": 41
+      },
+      "revId": "b6ee5e1495ae1a2d0601a5c85437db9f72be01b6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45cfd86c_667f910d",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-08T12:21:06Z",
       "side": 1,
       "message": "if `putMetrics` gets simplified then `project` object will be not be needed anymore",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "b6ee5e1495ae1a2d0601a5c85437db9f72be01b6",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a27633ed_2e4161f3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollectorTest.java",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-08T13:15:53Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "45cfd86c_667f910d",
       "range": {
         "startLine": 38,
         "startChar": 2,
