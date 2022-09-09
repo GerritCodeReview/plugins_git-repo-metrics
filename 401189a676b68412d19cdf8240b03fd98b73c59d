@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f98f6a24_77dbb997",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-09T11:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e249282_e99e5c23",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "401189a676b68412d19cdf8240b03fd98b73c59d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0ba5120_5fe95444",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de807fb0_1458d512",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-09T11:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0ba5120_5fe95444",
+      "range": {
+        "startLine": 86,
+        "startChar": 17,
+        "endLine": 86,
+        "endChar": 75
+      },
+      "revId": "401189a676b68412d19cdf8240b03fd98b73c59d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbafd7d1_961c1c74",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-07T21:10:44Z",
       "side": 1,
       "message": "change javadoc",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 59
+      },
+      "revId": "401189a676b68412d19cdf8240b03fd98b73c59d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f825fbfe_da463ed5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/MetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-09T11:15:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbafd7d1_961c1c74",
       "range": {
         "startLine": 26,
         "startChar": 0,
