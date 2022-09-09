@@ -26,9 +26,12 @@ public class UpdateGitMetricsExecutorProvider implements Provider<ExecutorServic
   private ExecutorService executor;
 
   @Inject
-  UpdateGitMetricsExecutorProvider(WorkQueue workQueue, @PluginName String pluginName) {
-    // TODO Make pool size configurable
-    executor = workQueue.createQueue(1, "[" + pluginName + " plugin]");
+  UpdateGitMetricsExecutorProvider(
+      WorkQueue workQueue,
+      @PluginName String pluginName,
+      GitRepoMetricsConfig gitRepoMetricsConfig) {
+    executor =
+        workQueue.createQueue(gitRepoMetricsConfig.getPoolSize(), "[" + pluginName + " plugin]");
   }
 
   @Override
