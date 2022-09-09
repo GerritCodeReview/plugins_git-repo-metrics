@@ -24,7 +24,6 @@ import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
@@ -88,12 +87,6 @@ public class UpdateGitMetricsTask implements Runnable {
       logger.atSevere().withCause(e).log(
           "Something went wrong when reading from the repository for %s", projectName);
     }
-  }
-
-  String getStringFromMap(Map<String, Long> m) {
-    return m.keySet().stream()
-        .map(key -> key + "=" + m.get(key))
-        .collect(Collectors.joining(", ", "{", "}"));
   }
 
   @Override
