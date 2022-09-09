@@ -43,4 +43,8 @@ public class GitRepoMetricsConfig {
   public Long getGracePeriodMs() {
     return config.getTimeUnit("git-repo-metrics", null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
   }
+
+  public int getPoolSize() {
+    return config.getInt("git-repo-metrics", null, "poolSize", 1);
+  }
 }

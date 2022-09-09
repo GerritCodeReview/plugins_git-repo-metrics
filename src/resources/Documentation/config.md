@@ -39,3 +39,5 @@ exported, but only the one listed in the configuration file, i.e.:
 
 _git-repo-metrics.gracePeriod_: Grace period between samples collection. Used to avoid aggressive
 metrics collection. By default, 0.
+
+_git-repo-metrics.poolSize_: Number of threads available to collect metrics. By default, 1.
