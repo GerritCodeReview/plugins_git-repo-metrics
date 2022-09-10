@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a17c8e2_7394eb55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:03:08Z",
+      "side": 1,
+      "message": "Overall LGTM, @luca.milanesio@gmail.com WDYT?",
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f41a12_4e16c40c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:03:08Z",
+      "side": 1,
+      "message": "nit: I wonder if that annotation is even needed if there are no tests inside this class",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935aae15_b4636899",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:03:08Z",
+      "side": 1,
+      "message": "nit: not needed constructor",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
