@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aedb1ed4_611149d8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:34:52Z",
+      "side": 1,
+      "message": "`gitRepoMetricsCache.getCollectors()` is of `DynamicSet\u003cT\u003e` type that has `com.google.gerrit.extensions.registration.DynamicSet.stream()` method that could be used here",
+      "range": {
+        "startLine": 68,
+        "startChar": 6,
+        "endLine": 69,
+        "endChar": 57
+      },
+      "revId": "5b40f9b8b78fc53e2978f5ccdb1a5e95af45a94b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a42a974_520ba9cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:34:52Z",
+      "side": 1,
+      "message": "consider passing `metrics` to `gitRepoMetricsCache` along with `projectName` so that it can optimally incorporate them for instance without setting `this.collectedAt.put(projectName, clock.millis());` over and over again ;)",
+      "range": {
+        "startLine": 74,
+        "startChar": 16,
+        "endLine": 81,
+        "endChar": 23
+      },
+      "revId": "5b40f9b8b78fc53e2978f5ccdb1a5e95af45a94b",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
