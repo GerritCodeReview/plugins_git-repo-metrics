@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8475bc25_29a857e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:14:03Z",
+      "side": 1,
+      "message": "This description doesn\u0027t add up to me :/\nOne can use either constructor or injection in test. Defining parameter/body-less constructor is no necessary in order to call it as Java generates one in such case.\nI would say that their definition was not needed as it was only causing more code to maintain and independently from that injection was used in test to obtain them.\nThe later is an additional improvement so that in future, in case when we have constructors that take some parameters and do sth about them it wouldn\u0027t require any test changes (obviously as long as those parameters can be injected).",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "fca705376a27deecc27f6b7fbfdf7f25e60567cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
