@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3371810_5fe0f236",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-10T09:34:29Z",
+      "side": 1,
+      "message": "If I don\u0027t use the annotation it is recognized as a test class:\n\n```\n1) initializationError(com.googlesource.gerrit.plugins.gitrepometrics.FakeMetricsCollector)\njava.lang.Exception: Test class should have exactly one public constructor\n```",
+      "parentUuid": "80f41a12_4e16c40c",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "935aae15_b4636899",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-10T09:03:08Z",
       "side": 1,
       "message": "nit: not needed constructor",
+      "range": {
+        "startLine": 45,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aecb5da_cce57a1d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-10T09:34:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "935aae15_b4636899",
       "range": {
         "startLine": 45,
         "startChar": 2,
