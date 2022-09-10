@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c116f0_b5f269db",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 18
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:06:34Z",
+      "side": 1,
+      "message": "nit: remove the empty line",
+      "revId": "3c731c89734494145a69d60eaabaf18511906f64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02180be8_2cb33cb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:06:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3c731c89734494145a69d60eaabaf18511906f64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf7d936_409ae4a7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T09:06:34Z",
+      "side": 1,
+      "message": "not needed constructor",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 32
+      },
+      "revId": "3c731c89734494145a69d60eaabaf18511906f64",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
