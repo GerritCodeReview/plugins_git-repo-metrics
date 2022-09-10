@@ -22,6 +22,30 @@
       },
       "revId": "fca705376a27deecc27f6b7fbfdf7f25e60567cb",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad906614_cf3c5f41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-10T09:44:25Z",
+      "side": 1,
+      "message": "Totally right, I need to study my Java better :/",
+      "parentUuid": "8475bc25_29a857e1",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 65
+      },
+      "revId": "fca705376a27deecc27f6b7fbfdf7f25e60567cb",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
