@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d0031be_c453108b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T10:26:20Z",
+      "side": 1,
+      "message": "Not sure if I understand it correct but `UpdateGitMetricsTask` is called when repository is changed and it collects all metrics related to it. We could/should call it on Gerrit start (for configured repos) so that some initial values are there.\nAFAIU we would give in the possibility to capture metrics for more repositories for optimising a single repository metrics capture (or not as both collectors operate on IO so they could actually compete)...\nLet\u0027s put aside the benefits AFAIU it would be a problematic for busy repos as they can have on-going changes and that approach could/would make some repos starving...\n\nHow about dropping execution? IOW:\n1. there is no metrics collection happening for the repo hence schedule one; another coming will be dropped\n2. there is metrics collection happening for the repo therefore the first incoming will be scheduled and more incoming will be dropped\n\nIn this case it will be assured that metric collection will keep up with the changes without calculating them each time when they happen...",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dedf0cd_f539ea2f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T10:26:20Z",
+      "side": 1,
+      "message": "I\u0027m not native so take it with a pinch of salt but IMHO\n`better to avoid being too aggressive` sounds more natural to me...",
+      "range": {
+        "startLine": 25,
+        "startChar": 9,
+        "endLine": 25,
+        "endChar": 27
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "221a9638_a355f241",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-10T10:26:20Z",
+      "side": 1,
+      "message": "AFAIU what we need is a\n```\nrecord {\n  numberOfFiles \u003d 0L\n  numberOfDirectories \u003d 0L\n  numberOfEmptyDirectories \u003d 0L\n  numberOfKeepFiles \u003d 0L\n}\n```\nthat is being captured (for each filesystem object - either file or dir) and finally reduced to. So my question would be why not to introduce it instead of building it on the top of `HashMap`? IMHO it would state the intent and improve the readability of the code. WDYT? Another benefit would be that `getInitializedMetrics` wouldn\u0027t be needed anymore...",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 3
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
