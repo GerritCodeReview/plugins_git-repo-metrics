@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f30c25cf_922761b8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T17:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fea4f335_8f67e580",
+      "range": {
+        "startLine": 88,
+        "startChar": 16,
+        "endLine": 88,
+        "endChar": 63
+      },
+      "revId": "249f633ee24f26b066f7a04e0a21bb4a8f2b26fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fe6010a_8a74f801",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-10T09:50:07Z",
       "side": 1,
       "message": "AFAIU: `getMetricName` will be calculated over and over again, each time when metric value will be obtained... IOW I would propose to calculate it prior the `Supplier` definition. As a bonus it could reused in line #110 ;)",
+      "range": {
+        "startLine": 105,
+        "startChar": 45,
+        "endLine": 105,
+        "endChar": 89
+      },
+      "revId": "249f633ee24f26b066f7a04e0a21bb4a8f2b26fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "711db17a_40e656a8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T17:37:15Z",
+      "side": 1,
+      "message": "Good catch",
+      "parentUuid": "9fe6010a_8a74f801",
       "range": {
         "startLine": 105,
         "startChar": 45,
@@ -70,6 +118,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4815cafc_d0feb94d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricMaker.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T17:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e0d8e5a_0b6cc2b6",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "249f633ee24f26b066f7a04e0a21bb4a8f2b26fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1eaff211_4055df53",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-09-10T09:50:07Z",
       "side": 1,
       "message": "what if `GitRepoMetricsCache` was injected? Existing metrics could be used that case, couldn\u0027t they?",
+      "range": {
+        "startLine": 42,
+        "startChar": 2,
+        "endLine": 42,
+        "endChar": 42
+      },
+      "revId": "249f633ee24f26b066f7a04e0a21bb4a8f2b26fd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcebb5d2_7bdc1899",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T17:37:15Z",
+      "side": 1,
+      "message": "Yes, it was actually my initial implementation.\n\nThe pros of using fake metrics are that every time we add a new metric collector we won\u0027t have to update the test.\n\nThe cons are that we are not enforcing a check on the real metric registration.\n\nI am happy to move it back to the previous implementation.",
+      "parentUuid": "1eaff211_4055df53",
       "range": {
         "startLine": 42,
         "startChar": 2,
