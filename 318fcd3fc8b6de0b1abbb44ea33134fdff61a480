@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf0d870d_53f88d16",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-12T06:52:05Z",
+      "side": 1,
+      "message": "I see what you mean. The problem is in build as it recognises no JUnit file as a test file. In this case the solution is different and requires the changes in plugins `BUILD` file. Currently it contains:\n\n```\njunit_tests(\n    name \u003d \"git-repo-metrics_tests\",\n    srcs \u003d glob([\"src/test/java/**/*.java\"]),\n    resources \u003d glob([\"src/test/resources/**/*\"]),\n    tags \u003d [\n        \"git-repo-metrics\",\n    ],\n    deps \u003d [\n        \":git-repo-metrics__plugin_test_deps\",\n    ],\n)\n```\n\nand it means that all files under `src/test/java` will be recognised as JUnit tests. One can solve it by changing it into 2 steps:\n1. compile no-test files into test lib\n2. compile and run tests (but depend on test lib)\n\ne.g.:\n\n```\njava_library(\n    name \u003d \"git-repo-metrics_tests_lib\",\n    testonly \u003d True,\n    tags \u003d [\n        \"git-repo-metrics\",\n    ],\n    srcs \u003d glob(\n        [\"src/test/java/**/*.java\"],\n        exclude \u003d [\"src/test/java/**/*Test.java\"],\n    ),\n    deps \u003d [\n        \"git-repo-metrics__plugin_test_deps\",\n    ],\n)\n\njunit_tests(\n    name \u003d \"git-repo-metrics_tests\",\n    srcs \u003d glob([\"src/test/java/**/*Test.java\"]),\n    resources \u003d glob([\"src/test/resources/**/*\"]),\n    tags \u003d [\n        \"git-repo-metrics\",\n    ],\n    deps \u003d [\n        \":git-repo-metrics__plugin_test_deps\",\n        \":git-repo-metrics_tests_lib\",\n    ],\n)\n```\n\nNote that it will have to be extended with `\"src/test/java/**/*IT.java\"` once integration tests are introduced ;)\n\nWhen applied `FakeMetricsCollector` could be turned to package protected class.",
+      "parentUuid": "b3371810_5fe0f236",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "935aae15_b4636899",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
         "patchSetId": 18
@@ -107,6 +131,98 @@
         "startChar": 2,
         "endLine": 45,
         "endChar": 37
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18ba5448_6f0b58fc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-12T06:52:05Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 55,
+        "startChar": 38,
+        "endLine": 55,
+        "endChar": 56
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e49075c_114eb2bd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-12T06:52:05Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 66,
+        "startChar": 46,
+        "endLine": 66,
+        "endChar": 64
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead57ee9_da76785e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-12T06:52:05Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 92,
+        "startChar": 49,
+        "endLine": 92,
+        "endChar": 67
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05fdc58_d9511aba",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-12T06:52:05Z",
+      "side": 1,
+      "message": "not needed",
+      "range": {
+        "startLine": 102,
+        "startChar": 53,
+        "endLine": 102,
+        "endChar": 71
       },
       "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
