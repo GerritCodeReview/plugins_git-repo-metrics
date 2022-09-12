@@ -89,6 +89,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e62039b3_362979f4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricsCollector.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T16:26:05Z",
+      "side": 1,
+      "message": "Oh yes, this is neat!\n\n\u003e Note that it will have to be extended with  \"src/test/java/**/*IT.java\"  once integration tests are introduced ;)\n\nYep, I will add it in the follow up when I add the IT test",
+      "parentUuid": "bf0d870d_53f88d16",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 7
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "935aae15_b4636899",
@@ -159,6 +183,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d144e167_1a34b721",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T16:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18ba5448_6f0b58fc",
+      "range": {
+        "startLine": 55,
+        "startChar": 38,
+        "endLine": 55,
+        "endChar": 56
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e49075c_114eb2bd",
@@ -172,6 +220,30 @@
       "writtenOn": "2022-09-12T06:52:05Z",
       "side": 1,
       "message": "not needed",
+      "range": {
+        "startLine": 66,
+        "startChar": 46,
+        "endLine": 66,
+        "endChar": 64
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae255e0_58fb85ee",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T16:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e49075c_114eb2bd",
       "range": {
         "startLine": 66,
         "startChar": 46,
@@ -205,6 +277,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44701464_ab9c7111",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T16:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ead57ee9_da76785e",
+      "range": {
+        "startLine": 92,
+        "startChar": 49,
+        "endLine": 92,
+        "endChar": 67
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c05fdc58_d9511aba",
@@ -218,6 +314,30 @@
       "writtenOn": "2022-09-12T06:52:05Z",
       "side": 1,
       "message": "not needed",
+      "range": {
+        "startLine": 102,
+        "startChar": 53,
+        "endLine": 102,
+        "endChar": 71
+      },
+      "revId": "318fcd3fc8b6de0b1abbb44ea33134fdff61a480",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cadac9d_d59e5248",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-12T16:26:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c05fdc58_d9511aba",
       "range": {
         "startLine": 102,
         "startChar": 53,
