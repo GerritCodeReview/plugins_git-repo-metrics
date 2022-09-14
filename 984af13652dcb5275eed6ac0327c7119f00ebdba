@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cef3fec_511de6f2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-14T11:29:20Z",
+      "side": 1,
+      "message": "\u003eNot sure if I understand it correct but UpdateGitMetricsTask is called when repository is changed and it collects all metrics related to it. We could/should call it on Gerrit start (for configured repos) so that some initial values are there.\n\nThe current use case of the plugin is to monitor repositories which might grow rapidly, i.e.: busy repositories. For the nature of the repositories, the metrics will be populated without the need to add extra code. I don\u0027t think it will be a big problem if we don\u0027t have metrics for a while after startup.\n\n\u003e In this case it will be assured that metric collection will keep up with the changes without calculating them each time when they happen\n\nBy design, the metrics are not supposed to be real-time. As long as we have metrics collected every X minutes (5/10min?) it should be enough.\nWe already have in place a mechanism to avoid being too aggressive. We have a grace period setting which allows avoiding collecting metrics too often.\n\nWe are trying to address cases like:\n* GC runs every 4 hours, we want to make sure the number of packfiles goes down after GC otherwise raise an alert\n* forecast the growth of a repository in the next X months\n\nDoes it make sense or did I misunderstood your comment?",
+      "parentUuid": "5d0031be_c453108b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dedf0cd_f539ea2f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -60,6 +84,30 @@
       "writtenOn": "2022-09-10T10:26:20Z",
       "side": 1,
       "message": "AFAIU what we need is a\n```\nrecord {\n  numberOfFiles \u003d 0L\n  numberOfDirectories \u003d 0L\n  numberOfEmptyDirectories \u003d 0L\n  numberOfKeepFiles \u003d 0L\n}\n```\nthat is being captured (for each filesystem object - either file or dir) and finally reduced to. So my question would be why not to introduce it instead of building it on the top of `HashMap`? IMHO it would state the intent and improve the readability of the code. WDYT? Another benefit would be that `getInitializedMetrics` wouldn\u0027t be needed anymore...",
+      "range": {
+        "startLine": 66,
+        "startChar": 2,
+        "endLine": 111,
+        "endChar": 3
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d19b5f_9da83bd8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollector.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-14T11:29:20Z",
+      "side": 1,
+      "message": "yup, let me add it.",
+      "parentUuid": "221a9638_a355f241",
       "range": {
         "startLine": 66,
         "startChar": 2,
