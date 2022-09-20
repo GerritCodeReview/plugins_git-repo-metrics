@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c451ebde_41d6ad48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-20T17:15:10Z",
+      "side": 1,
+      "message": "Metrics are collected every grace period but AFAIU they are generated on each repo ref update operation see `GitRepoUpdateListener.onGitReferenceUpdated`...\n\nIOW it doesn\u0027t matter that we will ask for metric every `5/10min` if we are calculating them on every repo ref update which means that on busy repos it will be ongoing operation with repos competing on both levels: repo and individual metric collector (as they are submitted to the same executor)... AFAIU it will create the endless queue of metrics being calculated so that every `5/10min` result will be examined by callback metric and result could be sth way older than `5/10min` which would really depend on the time it takes to calculate vs business vs good luck as busier repos will be favoured over less busy (as they will schedule more tasks)...\n\nHaving said that I\u0027m happy to discuss it as I could have misinterpret sth 😄",
+      "parentUuid": "2cef3fec_511de6f2",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dedf0cd_f539ea2f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
