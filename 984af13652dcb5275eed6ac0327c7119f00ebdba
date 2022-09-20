@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4631a228_f1b22b14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-20T22:38:26Z",
+      "side": 1,
+      "message": "\u003e BTW: in the link #2, the following code:\n\nAddressed here [1]\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/346334",
+      "parentUuid": "8c34dc92_7dd77261",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dedf0cd_f539ea2f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
