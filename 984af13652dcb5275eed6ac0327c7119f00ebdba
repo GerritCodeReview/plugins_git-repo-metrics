@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c3a33df_652a7789",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-20T19:58:50Z",
+      "side": 1,
+      "message": "Yeah I have missed the part that takes grace period into decision if repo metrics should be calculated. Thanks for pointing to that code!\n\nHaving said that I\u0027m still not fully convinced if it makes any improvement to schedule Git and FS metric collections as separate operations when the executor\u0027s thread count is `1` (default setting) as they will be performed one after another anyway...\nWhen threads number will be increased to `2` it could still easily block executor by running both Git and FS collection in the same time...\n\nOTOH I don\u0027t know what is the relation between the repo size / ref updates / metrics collection time and finally the grace period and it all may be a bit premature to optimise. IMHO it doesn\u0027t prevent the single repo from chocking the collection process unless threads pool will be big enough to compensate the repo size vs collection time and grace period...\n\nBTW: in the link #2, the following code:\n```\nreturn projects.stream().anyMatch(p -\u003e p.equals(projectName));\n```\n\ncould be improved with:\n1. turning *projects* into *Set* e.g. `this.projects \u003d new HashSet\u003c\u003e(config.getRepositoryNames());`\n2. reducing the check to `return projects.contains(projectName);`\n\nObviously to be considered as being addressed in the follow up ;)",
+      "parentUuid": "85c0a81c_bca1e25c",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dedf0cd_f539ea2f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
