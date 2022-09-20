@@ -30,16 +30,18 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.time.Clock;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private Map<String, Long> metrics;
   private final MetricMaker metricMaker;
   private final MetricRegistry metricRegistry;
-  private final List<String> projects;
+  private final Set<String> projects;
   private Map<String, Long> collectedAt;
   private final long gracePeriodMs;
   private ImmutableList<GitRepoMetric> metricsNames;
@@ -63,7 +65,7 @@ public class GitRepoMetricsCache {
             .flatMap(c -> c.availableMetrics().stream())
             .collect(collectingAndThen(toList(), ImmutableList::copyOf));
 
-    this.projects = config.getRepositoryNames();
+    this.projects = new HashSet<>(config.getRepositoryNames());
     this.metrics = Maps.newHashMap();
     this.collectedAt = Maps.newHashMap();
     this.clock = clock;
@@ -149,6 +151,6 @@ public class GitRepoMetricsCache {
       return false;
     }
 
-    return projects.stream().anyMatch(p -> p.equals(projectName));
+    return projects.contains(projectName);
   }
 }
