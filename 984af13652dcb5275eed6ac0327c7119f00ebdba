@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c34dc92_7dd77261",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-20T20:15:36Z",
+      "side": 1,
+      "message": "\u003e Having said that I\u0027m still not fully convinced if it makes any improvement to schedule Git and FS metric collections as separate operations when the executor\u0027s thread count is 1 (default setting) as they will be performed one after another anyway...\n\nTotally agree with that. There is a change in the chain to make it configurable.\nI think pool size is one of the \"knobs\", along with the grace period (possibly per repo), to fine-tune the metric collection.\n\nI don\u0027t think there is a one-size-fits-all solution. Hence I wanted to expose the different configurations to adapt the collection to the numbers and size of repositories we are targeting.\n\n\u003e OTOH I don\u0027t know what is the relation between the repo size / ref updates / metrics collection time and finally the grace period and it all may be a bit premature to optimise.\n\nYep, that\u0027s what I thought as well. I didn\u0027t want to optimize prematurely. I think it will also depend on the plugin adoption and the feedback we will get from the users.\n\n\u003e BTW: in the link #2, the following code:\n\nAh good point! I will address it in a followup.",
+      "parentUuid": "9c3a33df_652a7789",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dedf0cd_f539ea2f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
