@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85c0a81c_bca1e25c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-20T18:10:31Z",
+      "side": 1,
+      "message": "\u003e Metrics are collected every grace period but AFAIU they are generated on each repo ref update operation see GitRepoUpdateListener.onGitReferenceUpdated...\n\nActually, metrics are generated/calculated every grace period. The collection time is dictated, for example, by Prometheus, not the grace period. See this check [1] and its implementation [2].\n\nThis is to avoid, as you are saying, long queues of metrics calculation. I was also thinking of adding a feature to define the grace period per repo, so we could fine- tune the metrics calculation and avoid metrics calculations piling up.\n\nHope it makes more sense 😎\n\n[1]: https://gerrit.googlesource.com/plugins/git-repo-metrics/+/56cdd59287f6a4e4eeefc6cad85beefc24f19752/src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java#43\n\n[2]: https://gerrit.googlesource.com/plugins/git-repo-metrics/+/56cdd59287f6a4e4eeefc6cad85beefc24f19752/src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java#155",
+      "parentUuid": "c451ebde_41d6ad48",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "984af13652dcb5275eed6ac0327c7119f00ebdba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dedf0cd_f539ea2f",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
