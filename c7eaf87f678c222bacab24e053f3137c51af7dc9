@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fae35c56_4e47512c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-21T20:01:43Z",
+      "side": 1,
+      "message": "As per @geminica.programs@gmail.com suggestion here [1]\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/343606/comment/202fe1f1_e0782822/",
+      "revId": "c7eaf87f678c222bacab24e053f3137c51af7dc9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
