@@ -22,6 +22,30 @@
       },
       "revId": "032294d8b24b0c0c118b645894e1ab0d7ed0bbbf",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "483e87bf_63085bc4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-21T16:48:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8dc2950f_8e26e240",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 38
+      },
+      "revId": "032294d8b24b0c0c118b645894e1ab0d7ed0bbbf",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
