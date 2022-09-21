@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf82bc1_5851aa16",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-21T06:53:27Z",
+      "side": 1,
+      "message": "nit: they are not injected hence they can be turned private",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4737897b_708107ac",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-21T06:53:27Z",
+      "side": 1,
+      "message": "one doesn\u0027t have to override the `LightweightPluginDaemonTest.setUpTestPlugin` method in order to have `@Before` one IOW either overwrite (and remove `@Before`) or don\u0027t overwrite, add `@Before` and don\u0027t call `super.setUpTestPlugin();` e.g\n\n```\n  @Before\n  public void setUp() throws Exception {\n    repoManager.createRepository(testProject1);\n    repoManager.createRepository(testProject2);\n    gitRepoMetricsCache \u003d plugin.getSysInjector().getInstance(GitRepoMetricsCache.class);\n    fsMetricsCollector \u003d plugin.getSysInjector().getInstance(FSMetricsCollector.class);\n    gitStatsMetricsCollector \u003d plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);\n  }\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e3e807_090ddb8b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-21T06:53:27Z",
+      "side": 1,
+      "message": "adding `createChange();` which is creating a change for a `testProject` (one that is always created) brakes the test with the following result:\n\n```\njava.lang.AssertionError: Only 25 metrics have been registered, expected 24\n```\n\nIt would mean that some metric is created for `testProject` whereas it shouldn\u0027t be the case...",
+      "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
