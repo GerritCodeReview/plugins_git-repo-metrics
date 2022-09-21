@@ -188,6 +188,30 @@
       },
       "revId": "ffe5cd7dc92ef345331f6ce9a357456c82bb7ee3",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd4aab20_086f7abc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/FSMetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-21T18:36:12Z",
+      "side": 1,
+      "message": "I would rather get rid of anonymous class creation with instance initialization (as it is not bringing anything to the picture but pollutes the meta-namespace) in favour of regular HashMap creation e.g.:\n\n```\nHashMap\u003cGitRepoMetrics, Long\u003e metrics \u003d new HashMap\u003c\u003e(4);\nmetrics.put(...)\n...\n```\n\nIt would be even less code lines to maintain 😄",
+      "parentUuid": "73b181b3_3b7efe53",
+      "range": {
+        "startLine": 63,
+        "startChar": 26,
+        "endLine": 63,
+        "endChar": 44
+      },
+      "revId": "ffe5cd7dc92ef345331f6ce9a357456c82bb7ee3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
