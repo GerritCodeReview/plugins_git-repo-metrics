@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba0e8c3_e59fc234",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-21T15:57:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebf82bc1_5851aa16",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 45,
+        "endChar": 42
+      },
+      "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4737897b_708107ac",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "506c1d52_e833270f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-21T15:57:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4737897b_708107ac",
+      "range": {
+        "startLine": 50,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 0
+      },
+      "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04e3e807_090ddb8b",
@@ -60,6 +108,24 @@
       "writtenOn": "2022-09-21T06:53:27Z",
       "side": 1,
       "message": "adding `createChange();` which is creating a change for a `testProject` (one that is always created) brakes the test with the following result:\n\n```\njava.lang.AssertionError: Only 25 metrics have been registered, expected 24\n```\n\nIt would mean that some metric is created for `testProject` whereas it shouldn\u0027t be the case...",
+      "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af231fbc_13306c1c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-21T15:57:31Z",
+      "side": 1,
+      "message": "Good catch!\n\n`createChange()` is triggering the creation of a latency metric added by Gerrit:\n\n```\nplugin/latency/git-repo-metrics/com.googlesource.gerrit.plugins.gitrepometrics.GitRepoUpdateListener/\n```\n\nThis is unrelated to the metrics we are adding. I have added stricter filtering in the `getPluginMetricsCount()` to avoid this,",
+      "parentUuid": "04e3e807_090ddb8b",
       "revId": "fa91ce733a77ee0b3885ccc611ddc1ea3a2ed57f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
