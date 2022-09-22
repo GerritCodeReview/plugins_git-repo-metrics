@@ -89,12 +89,15 @@ public class GitRepoMetricsCache {
     newMetrics.forEach(
         (repoMetric, value) -> {
           String metricsName = getMetricName(repoMetric.getName(), projectName);
-          logger.atFine().log(
+          logger.atSevere().log(
               String.format(
                   "Collected %s for project %s: %d", repoMetric.getName(), projectName, value));
           metrics.put(metricsName, value);
 
           if (!metricExists(metricsName)) {
+            logger.atSevere().log(
+                    String.format(
+                            "Metric %s for project %s is new", repoMetric.getName(), projectName));
             createNewCallbackMetric(repoMetric, projectName);
           }
         });
@@ -116,11 +119,15 @@ public class GitRepoMetricsCache {
           }
         };
 
-    metricMaker.newCallbackMetric(
-        metricName,
-        Long.class,
-        new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()),
-        supplier);
+    try {
+      metricMaker.newCallbackMetric(
+              metricName,
+              Long.class,
+              new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()),
+              supplier);
+    } catch (Exception e) {
+      logger.atSevere().withCause(e).log("Something went wrong when publishing metric " + metricName);
+    }
   }
 
   public List<GitRepoMetric> getMetricsNames() {
