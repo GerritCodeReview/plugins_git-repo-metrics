@@ -19,11 +19,11 @@ import static java.util.stream.Collectors.toList;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.base.Supplier;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.registration.DynamicSet;
+import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
@@ -109,18 +109,13 @@ public class GitRepoMetricsCache {
 
   private void createNewCallbackMetric(GitRepoMetric metric, String projectName) {
     String metricName = getMetricName(metric.getName(), projectName);
-    Supplier<Long> supplier =
-        new Supplier<Long>() {
-          public Long get() {
-            return getMetrics().getOrDefault(metricName, 0L);
-          }
-        };
+    CallbackMetric0<Long> cb =
+        metricMaker.newCallbackMetric(
+            metricName,
+            Long.class,
+            new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()));
 
-    metricMaker.newCallbackMetric(
-        metricName,
-        Long.class,
-        new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()),
-        supplier);
+    metricMaker.newTrigger(cb, () -> cb.set(getMetrics().getOrDefault(metricName, 0L)));
   }
 
   public List<GitRepoMetric> getMetricsNames() {
