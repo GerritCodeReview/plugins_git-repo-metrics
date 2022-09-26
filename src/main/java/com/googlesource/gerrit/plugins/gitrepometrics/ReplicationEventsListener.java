@@ -15,16 +15,18 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.entities.Project;
+import com.google.gerrit.server.events.Event;
+import com.google.gerrit.server.events.EventListener;
+import com.google.gerrit.server.events.ProjectEvent;
 import com.google.inject.Inject;
 import java.util.concurrent.ExecutorService;
 
-public class GitRepoUpdateListener extends RepositoryUpdateListener
-    implements GitReferenceUpdatedListener {
+class ReplicationEventsListener extends RepositoryUpdateListener implements EventListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
 
   @Inject
-  GitRepoUpdateListener(
+  ReplicationEventsListener(
       @UpdateGitMetricsExecutor ExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
       GitRepoMetricsCache gitRepoMetricsCache) {
@@ -32,10 +34,15 @@ public class GitRepoUpdateListener extends RepositoryUpdateListener
   }
 
   @Override
-  public void onGitReferenceUpdated(Event event) {
-    String projectName = event.getProjectName();
-    logger.atFine().log("Got an update for project %s", projectName);
+  public void onEvent(Event event) {
+    if (event.type.endsWith("-replication-done")) {
+      Project.NameKey projectNameKey = ((ProjectEvent) event).getProjectNameKey();
+      logger.atInfo().log(
+          String.format(
+              "Got %s event from %s. Might need to collect metrics for project %s",
+              event.type, event.instanceId, projectNameKey.get()));
 
-    maybeExecuteTask(event.getProjectName());
+      maybeExecuteTask(projectNameKey.get());
+    }
   }
 }
