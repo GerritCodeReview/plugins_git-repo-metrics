@@ -14,94 +14,35 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import static com.google.common.truth.Truth.assertThat;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.reset;
-
-import com.codahale.metrics.MetricRegistry;
-import com.google.gerrit.entities.Project;
-import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.api.changes.NotifyHandling;
 import com.google.gerrit.extensions.common.AccountInfo;
 import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
-import com.google.gerrit.extensions.registration.DynamicSet;
-import com.google.gerrit.metrics.DisabledMetricMaker;
-import com.google.gerrit.server.git.GitRepositoryManager;
-import com.google.gerrit.testing.InMemoryModule;
-import com.google.gerrit.testing.InMemoryRepositoryManager;
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Inject;
-import com.google.inject.Injector;
-import com.google.inject.TypeLiteral;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.concurrent.ExecutorService;
-import org.eclipse.jgit.lib.Repository;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 
-public class GitUpdateListenerTest {
-  private final GitRepositoryManager repoManager = new InMemoryRepositoryManager();
-  private final ExecutorService mockedExecutorService = mock(ExecutorService.class);
+public class GitUpdateListenerTest extends RepositoryUpdateListenerTest {
+
   private GitRepoUpdateListener gitRepoUpdateListener;
-  private final String testProject = "testProject";
-  private final Project.NameKey testProjectNameKey = Project.nameKey("testProject");
-  private Repository repository;
-  ArgumentCaptor<UpdateGitMetricsTask> valueCapture =
-      ArgumentCaptor.forClass(UpdateGitMetricsTask.class);
-  private GitRepoMetricsCache gitRepoMetricsCache;
-
-  private final String disabledProject = "disabledProject";
-  private final Project.NameKey disabledProjectNameKey = Project.nameKey(disabledProject);
-  private Repository disabledRepository;
-
-  @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Before
   public void setupRepo() throws IOException {
-    ConfigSetupUtils configSetupUtils =
-        new ConfigSetupUtils(Collections.singletonList(testProject));
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(
-            new DynamicSet<>(),
-            new DisabledMetricMaker(),
-            new MetricRegistry(),
-            configSetupUtils.getGitRepoMetricsConfig());
-
-    AbstractModule m =
-        new AbstractModule() {
-          @Override
-          protected void configure() {
-            install(new InMemoryModule());
-            install(new UpdateGitMetricsTaskModule());
-            bind(new TypeLiteral<String>() {})
-                .annotatedWith(PluginName.class)
-                .toInstance(ConfigSetupUtils.pluginName);
-            bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
-          }
-        };
-    Injector injector = Guice.createInjector(m);
-    injector.injectMembers(this);
-
-    reset(mockedExecutorService);
+    testSetup();
     gitRepoUpdateListener =
         new GitRepoUpdateListener(
             mockedExecutorService, updateGitMetricsTaskFactory, gitRepoMetricsCache);
-    repository = repoManager.createRepository(testProjectNameKey);
-    disabledRepository = repoManager.createRepository(disabledProjectNameKey);
   }
 
   @Test
   public void shouldUpdateMetricsIfProjectIsEnabled() {
-    doNothing().when(mockedExecutorService).execute(valueCapture.capture());
-    gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent(testProject));
-    UpdateGitMetricsTask expectedUpdateGitMetricsTask =
-        updateGitMetricsTaskFactory.create(testProject);
-    assertThat(valueCapture.getValue().toString())
-        .isEqualTo(expectedUpdateGitMetricsTask.toString());
+    gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent(enabledProject));
+    assertMetricsAreUpdated();
+  }
+
+  @Test
+  public void shouldNotUpdateMetricsIfProjectIsDisabled() {
+    gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent(disabledProject));
+    assertMetricsAreNotUpdated();
   }
 
   public static class TestEvent implements GitReferenceUpdatedListener.Event {

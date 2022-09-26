@@ -14,28 +14,29 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.inject.Inject;
 import java.util.concurrent.ExecutorService;
 
-public class GitRepoUpdateListener extends RepositoryUpdateListener
-    implements GitReferenceUpdatedListener {
-  private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+public abstract class RepositoryUpdateListener {
+
+  protected final ExecutorService executor;
+  protected final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
+  protected final GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject
-  GitRepoUpdateListener(
+  RepositoryUpdateListener(
       @UpdateGitMetricsExecutor ExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
       GitRepoMetricsCache gitRepoMetricsCache) {
-    super(executor, updateGitMetricsTaskFactory, gitRepoMetricsCache);
+    this.executor = executor;
+    this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
+    this.gitRepoMetricsCache = gitRepoMetricsCache;
   }
 
-  @Override
-  public void onGitReferenceUpdated(Event event) {
-    String projectName = event.getProjectName();
-    logger.atFine().log("Got an update for project %s", projectName);
-
-    maybeExecuteTask(event.getProjectName());
+  protected void maybeExecuteTask(String projectName) {
+    if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
+      UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
+      executor.execute(updateGitMetricsTask);
+    }
   }
 }
