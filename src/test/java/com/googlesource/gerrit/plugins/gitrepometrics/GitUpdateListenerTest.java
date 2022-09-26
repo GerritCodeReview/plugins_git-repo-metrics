@@ -18,15 +18,16 @@ import static com.google.common.truth.Truth.assertThat;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 import com.codahale.metrics.MetricRegistry;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginName;
-import com.google.gerrit.extensions.api.changes.NotifyHandling;
-import com.google.gerrit.extensions.common.AccountInfo;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.DisabledMetricMaker;
+import com.google.gerrit.server.data.RefUpdateAttribute;
+import com.google.gerrit.server.events.RefEvent;
+import com.google.gerrit.server.events.RefUpdatedEvent;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.gerrit.testing.InMemoryModule;
 import com.google.gerrit.testing.InMemoryRepositoryManager;
@@ -38,32 +39,33 @@ import com.google.inject.TypeLiteral;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.ExecutorService;
-import org.eclipse.jgit.lib.Repository;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 public class GitUpdateListenerTest {
   private final GitRepositoryManager repoManager = new InMemoryRepositoryManager();
-  private final ExecutorService mockedExecutorService = mock(ExecutorService.class);
+
+  protected final ExecutorService mockedExecutorService = mock(ExecutorService.class);
+
+  protected final String enabledProject = "enabledProject";
+  private final Project.NameKey enabledProjectNameKey = Project.nameKey(enabledProject);
+
+  protected final String disabledProject = "disabledProject";
+  private final Project.NameKey disabledProjectNameKey = Project.nameKey(disabledProject);
+
   private GitRepoUpdateListener gitRepoUpdateListener;
-  private final String testProject = "testProject";
-  private final Project.NameKey testProjectNameKey = Project.nameKey("testProject");
-  private Repository repository;
+
   ArgumentCaptor<UpdateGitMetricsTask> valueCapture =
       ArgumentCaptor.forClass(UpdateGitMetricsTask.class);
-  private GitRepoMetricsCache gitRepoMetricsCache;
+  protected GitRepoMetricsCache gitRepoMetricsCache;
 
-  private final String disabledProject = "disabledProject";
-  private final Project.NameKey disabledProjectNameKey = Project.nameKey(disabledProject);
-  private Repository disabledRepository;
-
-  @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
+  @Inject protected UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
   @Before
-  public void setupRepo() throws IOException {
+  public void testSetup() throws IOException {
     ConfigSetupUtils configSetupUtils =
-        new ConfigSetupUtils(Collections.singletonList(testProject));
+        new ConfigSetupUtils(Collections.singletonList(enabledProject));
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
             new DynamicSet<>(),
@@ -87,73 +89,86 @@ public class GitUpdateListenerTest {
     injector.injectMembers(this);
 
     reset(mockedExecutorService);
+    doNothing().when(mockedExecutorService).execute(valueCapture.capture());
+    repoManager.createRepository(enabledProjectNameKey);
+    repoManager.createRepository(disabledProjectNameKey);
+
     gitRepoUpdateListener =
         new GitRepoUpdateListener(
             mockedExecutorService, updateGitMetricsTaskFactory, gitRepoMetricsCache);
-    repository = repoManager.createRepository(testProjectNameKey);
-    disabledRepository = repoManager.createRepository(disabledProjectNameKey);
   }
 
   @Test
-  public void shouldUpdateMetricsIfProjectIsEnabled() {
-    doNothing().when(mockedExecutorService).execute(valueCapture.capture());
-    gitRepoUpdateListener.onGitReferenceUpdated(new TestEvent(testProject));
-    UpdateGitMetricsTask expectedUpdateGitMetricsTask =
-        updateGitMetricsTaskFactory.create(testProject);
-    assertThat(valueCapture.getValue().toString())
-        .isEqualTo(expectedUpdateGitMetricsTask.toString());
+  public void shouldUpdateMetricsIfProjectIsEnabledRefUpdated() {
+    gitRepoUpdateListener.onEvent(getRefUpdatedEvent(enabledProject));
+    assertMetricsAreUpdated();
   }
 
-  public static class TestEvent implements GitReferenceUpdatedListener.Event {
+  @Test
+  public void shouldNotUpdateMetricsIfProjectIsDisabledRefUpdated() {
+    gitRepoUpdateListener.onEvent(getRefUpdatedEvent(disabledProject));
+    assertMetricsAreNotUpdated();
+  }
+
+  @Test
+  public void shouldUpdateMetricsIfProjectIsEnabledRefReplicationDone() {
+    gitRepoUpdateListener.onEvent(new ReplicationTestEvent("ref-replication-done", enabledProject));
+    assertMetricsAreUpdated();
+  }
+
+  @Test
+  public void shouldNotUpdateMetricsIfProjectIsDisabledReplicationDone() {
+    gitRepoUpdateListener.onEvent(
+        new ReplicationTestEvent("ref-replication-done", disabledProject));
+    assertMetricsAreNotUpdated();
+  }
+
+  @Test
+  public void shouldNotUpdateMetricsIfNoTReplicationDone() {
+    gitRepoUpdateListener.onEvent(new ReplicationTestEvent("any-event", enabledProject));
+    assertMetricsAreNotUpdated();
+  }
+
+  private RefUpdatedEvent getRefUpdatedEvent(String projectName) {
+    RefUpdatedEvent refUpdatedEvent = new RefUpdatedEvent();
+    refUpdatedEvent.refUpdate =
+        () -> {
+          RefUpdateAttribute attributes = new RefUpdateAttribute();
+          attributes.project = projectName;
+          attributes.refName = "refs/for/master";
+          return attributes;
+        };
+    return refUpdatedEvent;
+  }
+
+  public static class ReplicationTestEvent extends RefEvent {
     private final String projectName;
 
-    protected TestEvent(String projectName) {
+    protected ReplicationTestEvent(String type, String projectName) {
+      super(type);
       this.projectName = projectName;
     }
 
     @Override
-    public String getProjectName() {
-      return projectName;
-    }
-
-    @Override
-    public NotifyHandling getNotify() {
-      return null;
+    public Project.NameKey getProjectNameKey() {
+      return Project.NameKey.parse(projectName);
     }
 
     @Override
     public String getRefName() {
-      return null;
+      return "refs/for/test";
     }
+  }
 
-    @Override
-    public String getOldObjectId() {
-      return null;
-    }
+  protected void assertMetricsAreUpdated() {
+    UpdateGitMetricsTask expectedUpdateGitMetricsTask =
+        updateGitMetricsTaskFactory.create(enabledProject);
+    assertThat(valueCapture.getValue().toString())
+        .isEqualTo(expectedUpdateGitMetricsTask.toString());
+  }
 
-    @Override
-    public String getNewObjectId() {
-      return null;
-    }
-
-    @Override
-    public boolean isCreate() {
-      return false;
-    }
-
-    @Override
-    public boolean isDelete() {
-      return false;
-    }
-
-    @Override
-    public boolean isNonFastForward() {
-      return false;
-    }
-
-    @Override
-    public AccountInfo getUpdater() {
-      return null;
-    }
+  protected void assertMetricsAreNotUpdated() {
+    updateGitMetricsTaskFactory.create(enabledProject);
+    verifyNoInteractions(mockedExecutorService);
   }
 }

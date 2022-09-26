@@ -15,34 +15,44 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
+import com.google.gerrit.server.events.Event;
+import com.google.gerrit.server.events.EventListener;
+import com.google.gerrit.server.events.ProjectEvent;
+import com.google.gerrit.server.events.RefUpdatedEvent;
 import com.google.inject.Inject;
 import java.util.concurrent.ExecutorService;
 
-public class GitRepoUpdateListener implements GitReferenceUpdatedListener {
+class GitRepoUpdateListener extends RepositoryUpdateListener implements EventListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
-  private final ExecutorService executor;
-  private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
-  private final GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject
-  GitRepoUpdateListener(
+  protected GitRepoUpdateListener(
       @UpdateGitMetricsExecutor ExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
       GitRepoMetricsCache gitRepoMetricsCache) {
-    this.executor = executor;
-    this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
-    this.gitRepoMetricsCache = gitRepoMetricsCache;
+    super(executor, updateGitMetricsTaskFactory, gitRepoMetricsCache);
   }
 
   @Override
-  public void onGitReferenceUpdated(Event event) {
-    String projectName = event.getProjectName();
-    logger.atFine().log("Got an update for project %s", projectName);
+  public void onEvent(Event event) {
+    if (event instanceof RefUpdatedEvent || isReplicationDoneEvent(event)) {
+      String projectName = ((ProjectEvent) event).getProjectNameKey().get();
+      logger.atInfo().log(
+          String.format(
+              "Got %s event from %s. Might need to collect metrics for project %s",
+              event.type, event.instanceId, projectName));
 
-    if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
-      UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
-      executor.execute(updateGitMetricsTask);
+      if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
+        UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
+        executor.execute(updateGitMetricsTask);
+      }
     }
+  }
+
+  private boolean isReplicationDoneEvent(Event event) {
+    // Check the name of the event instead of checking the class type
+    // to avoid importing pull and push replication plugin dependencies
+    // only for this check.
+    return event.type != null && event.type.endsWith("-replication-done");
   }
 }
