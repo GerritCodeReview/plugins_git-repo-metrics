@@ -14,9 +14,9 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import com.google.gerrit.extensions.events.GitReferenceUpdatedListener;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
+import com.google.gerrit.server.events.EventListener;
 import com.google.inject.Scopes;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
@@ -32,7 +32,8 @@ public class Module extends LifecycleModule {
         .annotatedWith(UpdateGitMetricsExecutor.class)
         .toProvider(UpdateGitMetricsExecutorProvider.class);
     bind(GitRepoUpdateListener.class);
-    DynamicSet.bind(binder(), GitReferenceUpdatedListener.class).to(GitRepoUpdateListener.class);
+    DynamicSet.bind(binder(), EventListener.class).to(GitRepoUpdateListener.class);
+
     DynamicSet.setOf(binder(), MetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStatsMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
