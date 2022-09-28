@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2fcdfb_79d75fde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-28T14:19:38Z",
+      "side": 1,
+      "message": "How about implementing both",
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6bbd934_e6e0be28",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ReplicationEventsListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-28T14:19:38Z",
+      "side": 1,
+      "message": "AFAIU `EventListener` receives also `RefUpdatedEvent` so maybe instead of adding a dedicated listener one could be used that listens on both events?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 89
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f09ac1d_9adf4277",
