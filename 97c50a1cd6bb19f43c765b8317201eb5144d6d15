@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f09ac1d_9adf4277",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepositoryUpdateListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-28T14:04:30Z",
+      "side": 1,
+      "message": "nit: can be package protected",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 7
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a338b028_d457cc09",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepositoryUpdateListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-28T14:04:30Z",
+      "side": 1,
+      "message": "how about `collectMetricsOrSkip` as `executeTask` could be literally anything ;)",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c82c1a5_c910be5c",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepositoryUpdateListenerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-28T14:04:30Z",
+      "side": 1,
+      "message": "nit: rename it to `...TestBase` so that `@Ignore` is not needed, would also consider making it `abstract`",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
