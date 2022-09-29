@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "329612ca_13c0c936",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:18:18Z",
+      "side": 1,
+      "message": "have a look if it makes more sense now",
+      "parentUuid": "03fd03b3_c8cba452",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 58
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c499906a_3f490efd",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2022-09-29T17:03:23Z",
       "side": 1,
       "message": "nit: would probably changed `RefUpdated` to `OnRefUpdated` so that the intent is clear. Same in the following method.",
+      "range": {
+        "startLine": 104,
+        "startChar": 51,
+        "endLine": 104,
+        "endChar": 62
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb601b73_75c8f7b7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c499906a_3f490efd",
       "range": {
         "startLine": 104,
         "startChar": 51,
@@ -70,6 +118,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5cbc472_f67d336b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35c87b63_32d27fe6",
+      "range": {
+        "startLine": 116,
+        "startChar": 51,
+        "endLine": 116,
+        "endChar": 70
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c82f9449_503bb8d1",
@@ -93,6 +165,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c75957_576c474f",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c82f9449_503bb8d1",
+      "range": {
+        "startLine": 130,
+        "startChar": 38,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60ec6cce_16466e2a",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-09-29T17:03:23Z",
       "side": 1,
       "message": "nit: `ReplicationEvent` how about `shouldNotUpdateMetricsOnRefReplicationDoneFromSameNode`?",
+      "range": {
+        "startLine": 137,
+        "startChar": 38,
+        "endLine": 137,
+        "endChar": 54
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e34c2d6_db2fc945",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60ec6cce_16466e2a",
       "range": {
         "startLine": 137,
         "startChar": 38,
