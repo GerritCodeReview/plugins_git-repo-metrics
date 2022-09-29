@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aaeb781_ad7cef0a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0adecb_bdb12b4e",
+      "range": {
+        "startLine": 110,
+        "startChar": 55,
+        "endLine": 110,
+        "endChar": 65
+      },
+      "revId": "a90cb7daef616c7d430246995304c3b3bd18158d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b773914d_272c8331",
@@ -47,6 +71,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4880206_fee35252",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b773914d_272c8331",
+      "range": {
+        "startLine": 123,
+        "startChar": 55,
+        "endLine": 123,
+        "endChar": 70
+      },
+      "revId": "a90cb7daef616c7d430246995304c3b3bd18158d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab929e2f_c1102570",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-29T17:31:40Z",
       "side": 1,
       "message": "now I see the intent it is about the correct instance id but different event then `ReplicationDone` hence how about:\n`shouldNotUpdateMetricsOnUnknownEvent`",
+      "range": {
+        "startLine": 130,
+        "startChar": 38,
+        "endLine": 130,
+        "endChar": 55
+      },
+      "revId": "a90cb7daef616c7d430246995304c3b3bd18158d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27964a59_74de3d52",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T17:36:46Z",
+      "side": 1,
+      "message": "yup, reads better",
+      "parentUuid": "ab929e2f_c1102570",
       "range": {
         "startLine": 130,
         "startChar": 38,
