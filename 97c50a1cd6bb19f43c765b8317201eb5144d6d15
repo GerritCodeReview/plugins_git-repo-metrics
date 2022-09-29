@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1675a66e_5c08b4c1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ReplicationEventsListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T16:28:56Z",
+      "side": 1,
+      "message": "Really good point. Done in the latest PS.",
+      "parentUuid": "e6bbd934_e6e0be28",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 89
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f09ac1d_9adf4277",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-28T14:04:30Z",
       "side": 1,
       "message": "nit: can be package protected",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 7
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "633d19ba_ea3accd1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepositoryUpdateListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T16:28:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f09ac1d_9adf4277",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d78853b9_af99bd1a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepositoryUpdateListener.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T16:28:56Z",
+      "side": 1,
+      "message": "This method has gone in the last PS",
+      "parentUuid": "a338b028_d457cc09",
+      "range": {
+        "startLine": 36,
+        "startChar": 17,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c82c1a5_c910be5c",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-09-28T14:04:30Z",
       "side": 1,
       "message": "nit: rename it to `...TestBase` so that `@Ignore` is not needed, would also consider making it `abstract`",
+      "range": {
+        "startLine": 45,
+        "startChar": 13,
+        "endLine": 45,
+        "endChar": 41
+      },
+      "revId": "97c50a1cd6bb19f43c765b8317201eb5144d6d15",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b564d754_9b0a4e71",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepositoryUpdateListenerTest.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2022-09-29T16:28:56Z",
+      "side": 1,
+      "message": "This class doesn\u0027t exist anymore in the last PS, but I will keep it in mind.",
+      "parentUuid": "1c82c1a5_c910be5c",
       "range": {
         "startLine": 45,
         "startChar": 13,
