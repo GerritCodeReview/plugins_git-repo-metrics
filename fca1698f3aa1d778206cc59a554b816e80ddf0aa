@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fd03b3_c8cba452",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:03:23Z",
+      "side": 1,
+      "message": "nit: can the intent of this variable be better reflected? in the end it is called to get `toString` method so that one can verify if the taks was executed for the repo in question (by comparing the task name) and needs to spend time to decipher it from general purpose `valueCapture`...",
+      "range": {
+        "startLine": 53,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 58
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c499906a_3f490efd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:03:23Z",
+      "side": 1,
+      "message": "nit: would probably changed `RefUpdated` to `OnRefUpdated` so that the intent is clear. Same in the following method.",
+      "range": {
+        "startLine": 104,
+        "startChar": 51,
+        "endLine": 104,
+        "endChar": 62
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35c87b63_32d27fe6",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:03:23Z",
+      "side": 1,
+      "message": "nit: same as above would turn `RefReplicationDone` to `OnRefReplicationDone` and in the following methods where applicable",
+      "range": {
+        "startLine": 116,
+        "startChar": 51,
+        "endLine": 116,
+        "endChar": 70
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82f9449_503bb8d1",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:03:23Z",
+      "side": 1,
+      "message": "typo `NoT`?",
+      "range": {
+        "startLine": 130,
+        "startChar": 38,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ec6cce_16466e2a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:03:23Z",
+      "side": 1,
+      "message": "nit: `ReplicationEvent` how about `shouldNotUpdateMetricsOnRefReplicationDoneFromSameNode`?",
+      "range": {
+        "startLine": 137,
+        "startChar": 38,
+        "endLine": 137,
+        "endChar": 54
+      },
+      "revId": "fca1698f3aa1d778206cc59a554b816e80ddf0aa",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
