@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0adecb_bdb12b4e",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:31:40Z",
+      "side": 1,
+      "message": "nit: `OnRefUpdated` ;)",
+      "range": {
+        "startLine": 110,
+        "startChar": 55,
+        "endLine": 110,
+        "endChar": 65
+      },
+      "revId": "a90cb7daef616c7d430246995304c3b3bd18158d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b773914d_272c8331",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:31:40Z",
+      "side": 1,
+      "message": "nit: `OnReplicationDone`",
+      "range": {
+        "startLine": 123,
+        "startChar": 55,
+        "endLine": 123,
+        "endChar": 70
+      },
+      "revId": "a90cb7daef616c7d430246995304c3b3bd18158d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab929e2f_c1102570",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2022-09-29T17:31:40Z",
+      "side": 1,
+      "message": "now I see the intent it is about the correct instance id but different event then `ReplicationDone` hence how about:\n`shouldNotUpdateMetricsOnUnknownEvent`",
+      "range": {
+        "startLine": 130,
+        "startChar": 38,
+        "endLine": 130,
+        "endChar": 55
+      },
+      "revId": "a90cb7daef616c7d430246995304c3b3bd18158d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
