@@ -19,6 +19,7 @@ import com.google.gerrit.entities.Project;
 import com.google.gerrit.server.git.DelegateRepository;
 import com.google.gerrit.server.git.GitRepositoryManager;
 import com.google.inject.Inject;
+import com.google.inject.ProvisionException;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import java.io.IOException;
@@ -57,16 +58,11 @@ public class UpdateGitMetricsTask implements Runnable {
           "Running task to collect stats: repo %s, project %s",
           repository.getIdentifier(), projectName);
 
-      Repository unwrappedRepo =
-          repository instanceof DelegateRepository
-              ? ((DelegateRepository) repository).delegate()
-              : repository;
-
       gitRepoMetricsCache.getCollectors().stream()
           .forEach(
               metricsCollector -> {
                 metricsCollector.collect(
-                    (FileRepository) unwrappedRepo,
+                    getFileRepository(repository),
                     projectName,
                     metrics -> {
                       Map<GitRepoMetric, Long> newMetrics = new HashMap<>();
@@ -87,6 +83,18 @@ public class UpdateGitMetricsTask implements Runnable {
       logger.atSevere().withCause(e).log(
           "Something went wrong when reading from the repository for %s", projectName);
     }
+  }
+
+  private FileRepository getFileRepository(Repository repo) {
+    if (repo instanceof DelegateRepository) {
+      return getFileRepository(((DelegateRepository) repo).delegate());
+    }
+
+    if (repo instanceof FileRepository) {
+      return (FileRepository) repo;
+    }
+
+    throw new ProvisionException("git-repo-metrics plugin can only be used with FileRepository");
   }
 
   @Override
