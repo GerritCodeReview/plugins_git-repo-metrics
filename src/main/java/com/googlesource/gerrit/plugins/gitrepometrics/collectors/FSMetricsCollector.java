@@ -112,7 +112,6 @@ public class FSMetricsCollector implements MetricsCollector {
                   path -> {
                     File f = path.toFile();
                     MetricsRecord mr = new MetricsRecord();
-                    ;
                     if (f.isFile()) {
                       mr.foundFile();
                       if (f.getName().endsWith(".keep")) {
