@@ -36,6 +36,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+// Bla bla bla
+
 public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private Map<String, Long> metrics;
