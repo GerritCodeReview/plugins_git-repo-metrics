@@ -69,9 +69,8 @@ public class UpdateGitMetricsTask implements Runnable {
                       metrics.forEach(
                           (repoMetric, value) -> {
                             logger.atFine().log(
-                                String.format(
-                                    "Collected %s for project %s: %d",
-                                    repoMetric.getName(), projectName, value));
+                                "Collected %s for project %s: %d",
+                                repoMetric.getName(), projectName, value);
                             newMetrics.put(repoMetric, value);
                           });
                       gitRepoMetricsCache.setMetrics(newMetrics, projectName);

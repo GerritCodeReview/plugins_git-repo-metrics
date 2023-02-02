@@ -90,8 +90,7 @@ public class GitRepoMetricsCache {
         (repoMetric, value) -> {
           String metricsName = getMetricName(repoMetric.getName(), projectName);
           logger.atFine().log(
-              String.format(
-                  "Collected %s for project %s: %d", repoMetric.getName(), projectName, value));
+              "Collected %s for project %s: %d", repoMetric.getName(), projectName, value);
           metrics.put(metricsName, value);
 
           if (!metricExists(metricsName)) {

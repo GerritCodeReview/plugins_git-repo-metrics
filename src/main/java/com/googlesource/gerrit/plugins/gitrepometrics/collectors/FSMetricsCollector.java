@@ -135,7 +135,7 @@ public class FSMetricsCollector implements MetricsCollector {
       return metricsRecord.toMap();
     } catch (IOException e) {
       logger.atSevere().withCause(e).log(
-          "Error reading from file system for project " + projectName);
+          "Error reading from file system for project %s", projectName);
     }
 
     return new MetricsRecord().toMap();

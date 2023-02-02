@@ -48,9 +48,8 @@ class GitRepoUpdateListener implements EventListener {
     if (event instanceof RefUpdatedEvent || isReplicationDoneEvent(event)) {
       String projectName = ((ProjectEvent) event).getProjectNameKey().get();
       logger.atFine().log(
-          String.format(
-              "Got %s event from %s. Might need to collect metrics for project %s",
-              event.type, event.instanceId, projectName));
+          "Got %s event from %s. Might need to collect metrics for project %s",
+          event.type, event.instanceId, projectName);
 
       if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
         UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
