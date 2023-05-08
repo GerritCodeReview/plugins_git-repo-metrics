@@ -17,6 +17,8 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import static com.google.common.truth.Truth.assertThat;
 
 import com.codahale.metrics.MetricRegistry;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
@@ -158,10 +160,6 @@ public class GitRepoMetricsCacheTest {
   }
 
   private HashMap<GitRepoMetric, Long> getCollectedMetrics() {
-    return new HashMap<GitRepoMetric, Long>() {
-      {
-        put(new GitRepoMetric("anyMetrics", "anyMetric description", "Count"), 1L);
-      }
-    };
+    return Maps.newHashMap(ImmutableMap.of(new GitRepoMetric("anyMetrics", "anyMetric description", "Count"), 1L));
   }
 }
