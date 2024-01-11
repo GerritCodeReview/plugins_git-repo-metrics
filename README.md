@@ -30,5 +30,5 @@ loaded.
 
 ## Configuration
 
-More information about the plugin configuration can be found in the [config.md](resources/Documentation/config.md)
+More information about the plugin configuration can be found in the [config.md](src/resources/Documentation/config.md)
 file.
