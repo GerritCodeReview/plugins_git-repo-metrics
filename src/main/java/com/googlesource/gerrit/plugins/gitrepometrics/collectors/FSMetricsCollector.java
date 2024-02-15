@@ -21,10 +21,12 @@ import com.googlesource.gerrit.plugins.gitrepometrics.UpdateGitMetricsExecutor;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
 public class FSMetricsCollector implements MetricsCollector {
@@ -105,9 +107,9 @@ public class FSMetricsCollector implements MetricsCollector {
   private HashMap<GitRepoMetric, Long> filesAndDirectoriesCount(
       FileRepository repository, String projectName) {
 
-    try {
+    try (Stream<Path> objDir = Files.walk(repository.getObjectsDirectory().toPath())) {
       MetricsRecord metricsRecord =
-          Files.walk(repository.getObjectsDirectory().toPath())
+          objDir
               .map(
                   path -> {
                     File f = path.toFile();
