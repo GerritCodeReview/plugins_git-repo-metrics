@@ -19,6 +19,7 @@ plugins_git_repo_metrics_numberofkeepfiles_<repo_name>
 plugins_git_repo_metrics_numberoffiles_<repo_name>
 plugins_git_repo_metrics_numberofdirectories_<repo_name>
 plugins_git_repo_metrics_numberofemptydirectories_<repo_name>
+plugins_git_repo_metrics_combinedrefssha1_<repo_name>
 ```
 
 Settings
