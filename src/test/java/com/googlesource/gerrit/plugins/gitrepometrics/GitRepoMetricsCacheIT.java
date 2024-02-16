@@ -25,6 +25,7 @@ import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.gerrit.entities.Project;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import java.time.Duration;
 import java.util.Arrays;
@@ -41,6 +42,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   @Inject MetricRegistry metricRegistry;
   private FSMetricsCollector fsMetricsCollector;
   private GitStatsMetricsCollector gitStatsMetricsCollector;
+  private GitRefsMetricsCollector gitRefsMetricsCollector;
   private GitRepoMetricsCache gitRepoMetricsCache;
 
   private final Project.NameKey testProject1 = Project.nameKey("testProject1");
@@ -55,6 +57,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     gitRepoMetricsCache = plugin.getSysInjector().getInstance(GitRepoMetricsCache.class);
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
+    gitRefsMetricsCollector = plugin.getSysInjector().getInstance(GitRefsMetricsCollector.class);
   }
 
   @Test
@@ -70,7 +73,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()
-            + gitStatsMetricsCollector.availableMetrics().size();
+            + gitStatsMetricsCollector.availableMetrics().size()
+            + gitRefsMetricsCollector.availableMetrics().size();
 
     try {
       WaitUtil.waitUntil(
