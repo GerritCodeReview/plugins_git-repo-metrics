@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "758ac878_5bf40b2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:57:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52028466_a17e0143",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 18
+      },
+      "revId": "af3917236355d27d1013a33dd75af0a7376ed7bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e3e2b7c_f45f6d8e",
@@ -37,6 +61,24 @@
       "writtenOn": "2024-02-18T22:36:25Z",
       "side": 1,
       "message": "This could `protected`",
+      "revId": "af3917236355d27d1013a33dd75af0a7376ed7bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7280c2bf_f4fd1273",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRefsMetricsCollector.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:57:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e3e2b7c_f45f6d8e",
       "revId": "af3917236355d27d1013a33dd75af0a7376ed7bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
@@ -64,6 +106,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d27ca65_768b4fea",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRefsMetricsCollectorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:57:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d69e18e_8f918053",
+      "range": {
+        "startLine": 66,
+        "startChar": 79,
+        "endLine": 66,
+        "endChar": 87
+      },
+      "revId": "af3917236355d27d1013a33dd75af0a7376ed7bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23ec2faf_ae707f4e",
@@ -77,6 +143,24 @@
       "writtenOn": "2024-02-18T22:36:25Z",
       "side": 1,
       "message": "Is this needed? `TemporaryFolder` should be deleted by junit once the test is over.",
+      "revId": "af3917236355d27d1013a33dd75af0a7376ed7bd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d47fb10_0ae340b5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRefsMetricsCollectorTest.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1010134
+      },
+      "writtenOn": "2024-02-19T09:57:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23ec2faf_ae707f4e",
       "revId": "af3917236355d27d1013a33dd75af0a7376ed7bd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
