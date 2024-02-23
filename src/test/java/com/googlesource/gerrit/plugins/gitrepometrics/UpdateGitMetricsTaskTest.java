@@ -28,6 +28,7 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provides;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GenericMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.io.File;
 import java.nio.file.Path;
@@ -45,7 +46,9 @@ public class UpdateGitMetricsTaskTest {
   private Project testProject;
   private GitRepoMetricsCache gitRepoMetricsCache;
   private FakeMetricsCollector fakeStatsCollector;
+  private FakeGenericMetricsCollector fakeGenericCollector;
   private DynamicSet<MetricsCollector> ds;
+  private DynamicSet<GenericMetricsCollector> dsGeneric;
 
   @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
@@ -57,9 +60,14 @@ public class UpdateGitMetricsTaskTest {
     ds = new DynamicSet<>();
     ds.add("git-repo-metrics", fakeStatsCollector);
 
+    fakeGenericCollector = new FakeGenericMetricsCollector();
+    dsGeneric = new DynamicSet<>();
+    dsGeneric.add("git-repo-metrics", fakeGenericCollector);
+
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
             ds,
+            dsGeneric,
             new DisabledMetricMaker(),
             new MetricRegistry(),
             configSetupUtils.getGitRepoMetricsConfig());

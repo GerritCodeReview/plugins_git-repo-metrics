@@ -17,23 +17,19 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import java.util.HashMap;
 import java.util.function.Consumer;
 
-import org.eclipse.jgit.internal.storage.file.FileRepository;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GenericMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 
-class FakeMetricsCollector implements MetricsCollector {
+class FakeGenericMetricsCollector implements GenericMetricsCollector {
   private final String prefix;
   private final GitRepoMetric fakeMetric1;
   private final GitRepoMetric fakeMetric2;
 
   @Override
   public void collect(
-      FileRepository repository,
-      String projectName,
       Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
      populateMetrics.accept(
             Maps.newHashMap(ImmutableMap.of(fakeMetric1, 1L, fakeMetric2, 2L)));
@@ -49,13 +45,13 @@ class FakeMetricsCollector implements MetricsCollector {
     return ImmutableList.of(fakeMetric1, fakeMetric2);
   }
 
-  protected FakeMetricsCollector(String prefix) {
+  protected FakeGenericMetricsCollector(String prefix) {
     this.prefix = prefix;
     this.fakeMetric1 = new GitRepoMetric(prefix + "-fake-metric-1", "Fake metric 1", "Count");
     this.fakeMetric2 = new GitRepoMetric(prefix + "-fake-metric-2", "Fake metric 2", "Count");
   }
 
-  protected FakeMetricsCollector() {
+  protected FakeGenericMetricsCollector() {
     this("defaultPrefix");
   }
 }

@@ -27,6 +27,7 @@ import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GenericMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.time.Clock;
@@ -38,6 +39,9 @@ import java.util.Set;
 
 public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
+  private static final String GENERIC_METRICS =
+      "#GENERIC#"; // So that there are no collisions with any project name
+
   private Map<String, Long> metrics;
   private final MetricMaker metricMaker;
   private final MetricRegistry metricRegistry;
@@ -46,17 +50,21 @@ public class GitRepoMetricsCache {
   private final long gracePeriodMs;
   private ImmutableList<GitRepoMetric> metricsNames;
   private DynamicSet<MetricsCollector> collectors;
+  DynamicSet<GenericMetricsCollector> genericCollectors;
 
   private final Clock clock;
 
   @VisibleForTesting
   GitRepoMetricsCache(
       DynamicSet<MetricsCollector> collectors,
+      DynamicSet<GenericMetricsCollector> genericCollectors,
       MetricMaker metricMaker,
       MetricRegistry metricRegistry,
       GitRepoMetricsConfig config,
       Clock clock) {
     this.collectors = collectors;
+    this.genericCollectors = genericCollectors;
+
     this.metricMaker = metricMaker;
     this.metricRegistry = metricRegistry;
 
@@ -75,10 +83,17 @@ public class GitRepoMetricsCache {
   @Inject
   GitRepoMetricsCache(
       DynamicSet<MetricsCollector> collectors,
+      DynamicSet<GenericMetricsCollector> genericCollectors,
       MetricMaker metricMaker,
       MetricRegistry metricRegistry,
       GitRepoMetricsConfig config) {
-    this(collectors, metricMaker, metricRegistry, config, Clock.systemDefaultZone());
+    this(
+        collectors,
+        genericCollectors,
+        metricMaker,
+        metricRegistry,
+        config,
+        Clock.systemDefaultZone());
   }
 
   public Map<String, Long> getMetrics() {
@@ -100,6 +115,20 @@ public class GitRepoMetricsCache {
     collectedAt.put(projectName, clock.millis());
   }
 
+  public void setMetrics(Map<GitRepoMetric, Long> newMetrics) {
+    newMetrics.forEach(
+        (repoMetric, value) -> {
+          String metricsName = getMetricName(repoMetric.getName());
+          logger.atFine().log("Collected %s: %d", repoMetric.getName(), value);
+          metrics.put(metricsName, value);
+
+          if (!metricExists(metricsName)) {
+            createNewCallbackMetric(repoMetric);
+          }
+        });
+    collectedAt.put(GENERIC_METRICS, clock.millis());
+  }
+
   private boolean metricExists(String metricName) {
     return metricRegistry
         .getMetrics()
@@ -117,12 +146,27 @@ public class GitRepoMetricsCache {
     metricMaker.newTrigger(cb, () -> cb.set(getMetrics().getOrDefault(metricName, 0L)));
   }
 
+  private void createNewCallbackMetric(GitRepoMetric metric) {
+    String metricName = getMetricName(metric.getName(), null);
+    CallbackMetric0<Long> cb =
+        metricMaker.newCallbackMetric(
+            metricName,
+            Long.class,
+            new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()));
+
+    metricMaker.newTrigger(cb, () -> cb.set(getMetrics().getOrDefault(metricName, 0L)));
+  }
+
   public List<GitRepoMetric> getMetricsNames() {
     return metricsNames;
   }
 
-  public DynamicSet<MetricsCollector> getCollectors() {
+  public DynamicSet<MetricsCollector> getProjectCollectors() {
     return collectors;
+  }
+
+  public DynamicSet<GenericMetricsCollector> getGenericCollectors() {
+    return genericCollectors;
   }
 
   @VisibleForTesting
@@ -130,8 +174,17 @@ public class GitRepoMetricsCache {
     return collectedAt;
   }
 
+  @VisibleForTesting
+  public Long getGenericCollectedAt() {
+    return collectedAt.get(GENERIC_METRICS);
+  }
+
   public static String getMetricName(String metricName, String projectName) {
     return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
+  }
+
+  public static String getMetricName(String metricName) {
+    return metricName.toLowerCase(Locale.ROOT);
   }
 
   public boolean shouldCollectStats(String projectName) {

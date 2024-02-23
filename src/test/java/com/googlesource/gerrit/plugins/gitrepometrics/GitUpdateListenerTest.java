@@ -68,6 +68,7 @@ public class GitUpdateListenerTest {
     gitRepoMetricsCache =
         new GitRepoMetricsCache(
             new DynamicSet<>(),
+            new DynamicSet<>(),
             new DisabledMetricMaker(),
             new MetricRegistry(),
             configSetupUtils.getGitRepoMetricsConfig());

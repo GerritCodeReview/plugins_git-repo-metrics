@@ -14,14 +14,16 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
+import java.util.concurrent.ExecutorService;
+
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.gerrit.server.events.EventListener;
 import com.google.inject.Scopes;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GenericMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
-import java.util.concurrent.ExecutorService;
 
 public class Module extends LifecycleModule {
 
@@ -33,10 +35,15 @@ public class Module extends LifecycleModule {
         .toProvider(UpdateGitMetricsExecutorProvider.class);
     bind(GitRepoUpdateListener.class);
     DynamicSet.bind(binder(), EventListener.class).to(GitRepoUpdateListener.class);
-
+    DynamicSet.bind(binder(), EventListener.class).to(GenericMetricsListener.class);
+    
     DynamicSet.setOf(binder(), MetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStatsMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
+    DynamicSet.setOf(binder(), GenericMetricsCollector.class);
+    DynamicSet.bind(binder(), GenericMetricsCollector.class).to(GenericMetricsCollector.class);
+
     install(new UpdateGitMetricsTaskModule());
+    listener().to(GenericMetricsTask.class);
   }
 }
