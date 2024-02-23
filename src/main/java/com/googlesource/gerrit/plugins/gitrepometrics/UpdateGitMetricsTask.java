@@ -58,7 +58,7 @@ public class UpdateGitMetricsTask implements Runnable {
           "Running task to collect stats: repo %s, project %s",
           repository.getIdentifier(), projectName);
 
-      gitRepoMetricsCache.getCollectors().stream()
+      gitRepoMetricsCache.getProjectCollectors().stream()
           .forEach(
               metricsCollector -> {
                 metricsCollector.collect(
