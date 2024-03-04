@@ -14,6 +14,8 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
+import java.util.concurrent.ExecutorService;
+
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.gerrit.server.events.EventListener;
@@ -22,7 +24,6 @@ import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollec
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
-import java.util.concurrent.ExecutorService;
 
 public class Module extends LifecycleModule {
 
@@ -40,5 +41,6 @@ public class Module extends LifecycleModule {
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitRefsMetricsCollector.class);
     install(new UpdateGitMetricsTaskModule());
+    listener().to(RepoCountMetricRunner.class);
   }
 }

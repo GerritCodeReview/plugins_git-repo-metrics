@@ -2,9 +2,14 @@
 ======================
 
 The @PLUGIN@ allows a systematic collection of repository metrics.
-Metrics are updated upon a `ref-update` receive.
 
-Currently, the metrics exposed are the following:
+The following exposed metric is updated continuously upon plugin startup:
+
+```bash
+plugins_git_repo_metrics_numberofprojects
+```
+
+The following exposed metrics are updated upon a `ref-update` receive:
 
 ```bash
 plugins_git_repo_metrics_numberofbitmaps_<repo_name>
