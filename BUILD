@@ -15,6 +15,7 @@ gerrit_plugin(
     manifest_entries = [
         "Gerrit-PluginName: git-repo-metrics",
         "Gerrit-Module: com.googlesource.gerrit.plugins.gitrepometrics.Module",
+        "Gerrit-ReloadMode: restart",
         "Implementation-Title: git-repo-metrics plugin",
         "Implementation-URL: https://review.gerrithub.io/admin/repos/GerritForge/git-repo-metrics",
         "Implementation-Vendor: GerritForge",
