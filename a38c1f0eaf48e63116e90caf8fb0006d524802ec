@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70f3d199_a6b6f4b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "Can you also add some tests to check the metric is correctly registered and returns the correct values. Not sure if it is also easy to check the logic to avoid the re-registration of the metric.",
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f536a626_d7f6a2cf",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "You probably forgot to run the java formatter.",
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b293bcf1_69bc3318",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "I\u0027d call it `RepoCountMetricRegister`, since it is just registering the metric, not running the collection or anything else.",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e9e59a3_e118faa8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "Make sure to check if the metrics already exists when registering it, similarly to [1]. Otherwise when reloading the plugin you will have errors like:\n\n```\njava.lang.IllegalArgumentException: A metric named plugins/git-repo-metrics/numberofprojects already exists\n```\n\n[1]: https://gerrit.googlesource.com/plugins/git-repo-metrics/+/5b481ff4d305457431a9744a3d08e9ed426ea153/src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java#103",
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63109cb4_3e505a7f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "nit: `numberOfProjects` for consistency with the other metrics name. The metric will be register lowercase at the end, however for consistency with the other metric names, I\u0027d call it `numberOfProjects`.",
+      "range": {
+        "startLine": 46,
+        "startChar": 9,
+        "endLine": 46,
+        "endChar": 25
+      },
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eacb939_c4eb2a43",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRunner.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "Wrong unit. I\u0027d set it to `Count` for consistency with [1].\n\n[1]: https://gerrit.googlesource.com/plugins/git-repo-metrics/+/5b481ff4d305457431a9744a3d08e9ed426ea153/src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitStatsMetricsCollector.java#31",
+      "range": {
+        "startLine": 48,
+        "startChar": 67,
+        "endLine": 48,
+        "endChar": 87
+      },
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f138da1_50e92cf7",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-03-06T08:18:34Z",
+      "side": 1,
+      "message": "Every time the metrics endpoint will be called, the metric will be read again from the list project cache.\n\nAt startup you only register the callback.",
+      "range": {
+        "startLine": 6,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 73
+      },
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
