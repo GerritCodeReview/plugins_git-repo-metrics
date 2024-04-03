@@ -89,6 +89,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a11e5e1_4dade142",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/Module.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f536a626_d7f6a2cf",
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b293bcf1_69bc3318",

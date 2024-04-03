@@ -1,0 +1,199 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f46e0806_ac630a13",
+        "filename": "BUILD",
+        "patchSetId": 4
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "We do not have any external resources here. I think we can keep the default `reload` behavior. Is there any reason why you are considering `restart` instead?",
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc3743eb_4e0fc909",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "In a previous comment [1], I suggested using camel case. However, I didn\u0027t realize we are explicitly lower-casing it [2]. Sorry about the confusion.\n\n\n[1]: https://gerrit-review.googlesource.com/c/plugins/git-repo-metrics/+/411798/comment/63109cb4_3e505a7f/\n[2]: https://gerrit.googlesource.com/plugins/git-repo-metrics/+/refs/heads/master/src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java#133",
+      "range": {
+        "startLine": 34,
+        "startChar": 58,
+        "endLine": 34,
+        "endChar": 74
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c935d6db_9955052f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "nit: No need to initialize to `null`.",
+      "range": {
+        "startLine": 38,
+        "startChar": 32,
+        "endLine": 38,
+        "endChar": 38
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e1d17d_a59c9f6c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "You could use the `projectCache` here instead to avoid an HTTP call.\n\nOnce injected you could call it this way: `projectCache.all().size()`",
+      "range": {
+        "startLine": 43,
+        "startChar": 6,
+        "endLine": 43,
+        "endChar": 50
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8e14323_0aef9c41",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "This might not be needed. See my comment below. If it is needed it might be worth moving it in an Util library since it is used elsewhere.",
+      "range": {
+        "startLine": 51,
+        "startChar": 2,
+        "endLine": 55,
+        "endChar": 3
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fc2c161_d8d2b415",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed. I also tested it and it works without it.\n\nSince you set `Gerrit-ReloadMode` to `restart` the `stop()` of the previous version of the plugin will always be called before the `start()` of the new one, meaning you will always be in a clean situation.\n\nI think it might be worth adding this note to the commit message explaining why we are using a `restart`.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 5
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba00b8f7_2becd6fa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "nit: Unnecessary boxing. Since `myIntValue` is already a primitive you won\u0027t have to create a `Long` object just but just cast it this way `(long) myIntValue`.",
+      "range": {
+        "startLine": 80,
+        "startChar": 25,
+        "endLine": 80,
+        "endChar": 38
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb39efa3_3a13de37",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed. Why do you think it is?",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 32
+      },
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "861fd669_3424edb4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricTest.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-03T14:53:33Z",
+      "side": 1,
+      "message": "Since the calling order of stop() and start() is enforced by `Gerrit-ReloadMode: restart` I would just add a test which calls `start()` and `stop()` and makes sure the metric is there and the value is what we expect.",
+      "revId": "fea7be261981070d65d35b2e9b9860a9617ded91",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
