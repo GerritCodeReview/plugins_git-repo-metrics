@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aff9a07a_9a2a85e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-04-03T10:46:21Z",
+      "side": 1,
+      "message": "Some tests were added to support this",
+      "parentUuid": "70f3d199_a6b6f4b6",
+      "revId": "a38c1f0eaf48e63116e90caf8fb0006d524802ec",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f536a626_d7f6a2cf",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/Module.java",
         "patchSetId": 1
