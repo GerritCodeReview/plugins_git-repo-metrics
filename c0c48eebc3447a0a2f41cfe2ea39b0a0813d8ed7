@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf8725c9_f4f98f7b",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-04T13:13:28Z",
+      "side": 1,
+      "message": "This is not needed.",
+      "revId": "c0c48eebc3447a0a2f41cfe2ea39b0a0813d8ed7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78460d36_9d0705f4",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-04T13:13:28Z",
+      "side": 1,
+      "message": "It would be nice to have a test that checks the metric is incremented/decremented when creating a repo is added/removed.\n\nWe can also di it in a follow up change.\n\nYou could implement a `FakeProjectCache` in your test as follow, and add/remove repo from it:\n\n```\nclass FakeProjectCache implements ProjectCache {\n\n    final private Set\u003cProject.NameKey\u003e projects;\n    FakeProjectCache(Set\u003cProject.NameKey\u003e projects) {\n      this.projects \u003d projects;\n    }\n\n    @Override\n    public ProjectState getAllProjects() {\n      return null;\n    }\n\n    @Override\n    public ProjectState getAllUsers() {\n      return null;\n    }\n\n    @Override\n    public Optional \u003cProjectState\u003e get(Project.NameKey projectName) throws StorageException {\n      return Optional.empty();\n    }\n\n    @Override\n    public void evict(Project.NameKey p) {\n\n    }\n\n    @Override\n    public void evictAndReindex(Project p) {\n\n    }\n\n    @Override\n    public void evictAndReindex(Project.NameKey p) {\n\n    }\n\n    @Override\n    public void remove(Project p) {\n\n    }\n\n    @Override\n    public void remove(Project.NameKey name) {\n      projects.remove(name);\n    }\n\n    @Override\n    public ImmutableSortedSet \u003cProject.NameKey\u003e all() {\n      return ImmutableSortedSet.copyOf(projects);\n    }\n\n    @Override\n    public void refreshProjectList() {\n\n    }\n\n    @Override\n    public Set \u003cAccountGroup.UUID\u003e guessRelevantGroupUUIDs() {\n      return null;\n    }\n\n    @Override\n    public ImmutableSortedSet \u003cProject.NameKey\u003e byName(String prefix) {\n      return null;\n    }\n\n    @Override\n    public void onCreateProject(Project.NameKey newProjectName) throws IOException {\n\n    }\n  }\n  ```",
+      "revId": "c0c48eebc3447a0a2f41cfe2ea39b0a0813d8ed7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfc290e7_e0889dab",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-04T13:13:28Z",
+      "side": 1,
+      "message": "nit: formatting",
+      "revId": "c0c48eebc3447a0a2f41cfe2ea39b0a0813d8ed7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d5c1f10_58e05cbc",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-04-04T13:13:28Z",
+      "side": 1,
+      "message": "nit: we could hardcode `RepoCountMetricRegister.REPO_COUNT_METRIC_NAME`. We are not using it for other metrics.",
+      "range": {
+        "startLine": 51,
+        "startChar": 78,
+        "endLine": 51,
+        "endChar": 88
+      },
+      "revId": "c0c48eebc3447a0a2f41cfe2ea39b0a0813d8ed7",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
