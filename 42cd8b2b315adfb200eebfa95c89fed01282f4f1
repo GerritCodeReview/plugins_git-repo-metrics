@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f0661d8_106d0a78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-04-08T09:45:09Z",
+      "side": 1,
+      "message": "Integrated tests passed with success",
+      "revId": "42cd8b2b315adfb200eebfa95c89fed01282f4f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
