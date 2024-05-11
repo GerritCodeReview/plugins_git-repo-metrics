@@ -16,6 +16,46 @@
       "message": "Integrated tests passed with success",
       "revId": "42cd8b2b315adfb200eebfa95c89fed01282f4f1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10bcfbab_c5386cc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-11T11:08:07Z",
+      "side": 1,
+      "message": "Post-merge -2: this is killing GerritHub.io :-(",
+      "revId": "42cd8b2b315adfb200eebfa95c89fed01282f4f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a67a090_0cfce201",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-11T11:08:07Z",
+      "side": 1,
+      "message": "Well, that is killing Gerrit with one method call: we have 50k repositories in Gerrit, do you really want to load all of them in cache ... just to realise how many are them?",
+      "range": {
+        "startLine": 53,
+        "startChar": 26,
+        "endLine": 53,
+        "endChar": 44
+      },
+      "revId": "42cd8b2b315adfb200eebfa95c89fed01282f4f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ],
   "submitRequirementResults": [
