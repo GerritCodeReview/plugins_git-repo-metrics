@@ -23,6 +23,8 @@ import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.gerrit.server.project.ProjectCache;
+import com.google.gerrit.server.restapi.project.ListProjects;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 @Singleton
@@ -30,13 +32,13 @@ public class RepoCountMetricRegister implements LifecycleListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   protected static final String REPO_COUNT_METRIC_NAME = "numberofprojects";
   private final MetricMaker metricMaker;
-  private final ProjectCache projectCache;
+  private final Provider<ListProjects> listProjectsProvider;
 
   @VisibleForTesting
   @Inject
-  RepoCountMetricRegister(ProjectCache projectCache, MetricMaker metricMaker) {
+  RepoCountMetricRegister(Provider<ListProjects> listProjectsProvider, MetricMaker metricMaker) {
     this.metricMaker = metricMaker;
-    this.projectCache = projectCache;
+    this.listProjectsProvider = listProjectsProvider;
   }
 
   @Override
@@ -50,7 +52,17 @@ public class RepoCountMetricRegister implements LifecycleListener {
         new Supplier<Long>() {
           @Override
           public Long get() {
-            return (long) projectCache.all().size();
+            ListProjects listProjects = listProjectsProvider.get();
+            listProjects.setStart(0);
+            listProjects.setShowDescription(false);
+
+            try {
+              return (long) listProjects.apply().size();
+            } catch (Exception e) {
+              logger.atSevere().withCause(e).log("Error getting repo count");
+            }
+
+            return 0L;
           }
         });
   }
