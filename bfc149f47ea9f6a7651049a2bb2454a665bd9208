@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "940e18a0_13db99c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1090261
+      },
+      "writtenOn": "2024-05-13T12:35:53Z",
+      "side": 1,
+      "message": "Some test results for this implementation, while doing testing with project creations:\nplugins_git_repo_metrics_numberofprojects 2.0  - 0m0,023s\nplugins_git_repo_metrics_numberofprojects 2479.0 - 0m0,614s\nplugins_git_repo_metrics_numberofprojects 6678.0 -  0m1,530s\nplugins_git_repo_metrics_numberofprojects 26367.0 - 0m5,403s\nplugins_git_repo_metrics_numberofprojects 50022.0 - 0m8,984s\n\n\nCalling multiple times after test loading takes exactly the same time at each repetition",
+      "revId": "bfc149f47ea9f6a7651049a2bb2454a665bd9208",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
