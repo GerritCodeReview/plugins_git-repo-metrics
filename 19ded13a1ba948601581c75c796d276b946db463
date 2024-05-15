@@ -46,6 +46,30 @@
       },
       "revId": "19ded13a1ba948601581c75c796d276b946db463",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6044904b_cdf94799",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/NumberOfProjectsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-15T11:25:36Z",
+      "side": 1,
+      "message": "Also, the L48 `ctx.open()` crea un request context come internal user, which allows to have limit \u003d 0 (no limit) for queries.\n\nI tested it locally and works as expected: even with a limit set to 5, I can still see 6 as number of projects.",
+      "parentUuid": "42c90391_fc21fe6a",
+      "range": {
+        "startLine": 49,
+        "startChar": 13,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "19ded13a1ba948601581c75c796d276b946db463",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
