@@ -70,6 +70,30 @@
       },
       "revId": "19ded13a1ba948601581c75c796d276b946db463",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa67e977_7adee6b8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/NumberOfProjectsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-15T14:18:12Z",
+      "side": 1,
+      "message": "I have added `index.maxLimit` to my gerrit configuration and the number of projects returned is at most `index.maxLimit`.\n\nI think we should still browse through all the pages of the results from the index.",
+      "parentUuid": "6044904b_cdf94799",
+      "range": {
+        "startLine": 49,
+        "startChar": 13,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "19ded13a1ba948601581c75c796d276b946db463",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
