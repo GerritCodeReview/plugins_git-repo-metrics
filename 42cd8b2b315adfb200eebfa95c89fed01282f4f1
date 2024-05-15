@@ -22,6 +22,30 @@
       },
       "revId": "42cd8b2b315adfb200eebfa95c89fed01282f4f1",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48eec44b_a8e802cd",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-15T09:53:23Z",
+      "side": 0,
+      "message": "Oh yes, good point 👍",
+      "parentUuid": "5037c867_fe9053b9",
+      "range": {
+        "startLine": 38,
+        "startChar": 27,
+        "endLine": 38,
+        "endChar": 43
+      },
+      "revId": "42cd8b2b315adfb200eebfa95c89fed01282f4f1",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
