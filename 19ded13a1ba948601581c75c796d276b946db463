@@ -22,6 +22,30 @@
       },
       "revId": "19ded13a1ba948601581c75c796d276b946db463",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c90391_fc21fe6a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/NumberOfProjectsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-15T11:12:37Z",
+      "side": 1,
+      "message": "What you see is limited by the ACLs.",
+      "parentUuid": "5dac8f54_3f2a6d47",
+      "range": {
+        "startLine": 49,
+        "startChar": 13,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "19ded13a1ba948601581c75c796d276b946db463",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
