@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8363d5f_2f9742ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-15T09:29:02Z",
+      "side": 1,
+      "message": "from",
+      "range": {
+        "startLine": 7,
+        "startChar": 44,
+        "endLine": 7,
+        "endChar": 48
+      },
+      "revId": "9970def4c6d7efaa4943b0ad342b679a7b1269a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b53c6d69_c0b8dc5f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/RepoCountMetricRegister.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-15T09:29:02Z",
+      "side": 1,
+      "message": "nit: `numberOfProjectsProvider` ?",
+      "range": {
+        "startLine": 38,
+        "startChar": 68,
+        "endLine": 38,
+        "endChar": 84
+      },
+      "revId": "9970def4c6d7efaa4943b0ad342b679a7b1269a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
