@@ -16,26 +16,22 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.codahale.metrics.MetricRegistry;
+import com.google.common.base.Supplier;
 import java.util.Optional;
-
+import java.util.concurrent.atomic.AtomicLong;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.codahale.metrics.MetricRegistry;
-
-import com.google.common.base.Supplier;
 
 public class RepoCountMetricTest {
   private FakeMetricMaker fakeMetricMaker;
   private MetricRegistry metricRegistry;
-  private FakeProjectCache fakeProjectCache;
   private String repoCountMetricName;
 
   @Before
   public void setup() {
     metricRegistry = new MetricRegistry();
     fakeMetricMaker = new FakeMetricMaker(metricRegistry);
-    fakeProjectCache = new FakeProjectCache(0);
     repoCountMetricName =
         String.format(
             "%s/%s/%s",
@@ -45,7 +41,7 @@ public class RepoCountMetricTest {
   @Test
   public void metricIsCorrectlyRegistered() {
     RepoCountMetricRegister repoCountMetricRegister =
-        new RepoCountMetricRegister(fakeProjectCache, fakeMetricMaker);
+        new RepoCountMetricRegister(() -> 1L, fakeMetricMaker);
 
     repoCountMetricRegister.start();
 
@@ -56,8 +52,9 @@ public class RepoCountMetricTest {
 
   @Test
   public void metricIsUpdated() {
+    AtomicLong numProjects = new AtomicLong();
     RepoCountMetricRegister repoCountMetricRegister =
-        new RepoCountMetricRegister(fakeProjectCache, fakeMetricMaker);
+        new RepoCountMetricRegister(numProjects::get, fakeMetricMaker);
 
     repoCountMetricRegister.start();
 
@@ -69,8 +66,7 @@ public class RepoCountMetricTest {
     assertTrue(!obj.isEmpty());
     assertEquals(0, ((Long) obj.get().get()).longValue());
 
-    fakeProjectCache.setProjectCount(2);
-
+    numProjects.set(2);
     assertEquals(2, ((Long) obj.get().get()).longValue());
   }
 }
