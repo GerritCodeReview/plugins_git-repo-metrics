@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dac8f54_3f2a6d47",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/NumberOfProjectsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-15T09:58:51Z",
+      "side": 1,
+      "message": "I don\u0027t think this returns all the projects.\nUnless I am wrong this should be equivalent to the following query:\n\n```\ncurl -s \u0027https://review.gerrithub.io/projects/\u0027 \\\n  -H \u0027accept: application/json\u0027 | tail -1 | jq length\n500\n```",
+      "range": {
+        "startLine": 49,
+        "startChar": 13,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "19ded13a1ba948601581c75c796d276b946db463",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
