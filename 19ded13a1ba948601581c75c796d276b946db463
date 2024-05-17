@@ -94,6 +94,30 @@
       },
       "revId": "19ded13a1ba948601581c75c796d276b946db463",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "470132c7_66328b1a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/NumberOfProjectsCollector.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-17T16:36:53Z",
+      "side": 1,
+      "message": "Apparently it is a Gerrit bug [1]. Internal users queries shouldn\u0027t be limited.\n\n[1]: https://issues.gerritcodereview.com/u/1/issues/341288175",
+      "parentUuid": "aa67e977_7adee6b8",
+      "range": {
+        "startLine": 49,
+        "startChar": 13,
+        "endLine": 49,
+        "endChar": 48
+      },
+      "revId": "19ded13a1ba948601581c75c796d276b946db463",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
