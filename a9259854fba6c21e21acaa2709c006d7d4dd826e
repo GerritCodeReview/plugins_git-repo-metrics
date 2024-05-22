@@ -87,6 +87,24 @@
       "parentUuid": "bfdd5fec_37dc09f3",
       "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568322f9_d43908b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-22T22:08:42Z",
+      "side": 1,
+      "message": "It does not change the others, it\u0027s just a matter of Guice injection: if you don\u0027t use the exact interface for the injections, Guice won\u0027t find the existing ones. That\u0027s why I had to amend all the others as well, and I agree that were not necessarily needed, if not for feeding Guice with the right interface type.",
+      "parentUuid": "ce7c3023_2f3a66a6",
+      "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
