@@ -38,14 +38,15 @@ import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 import java.io.IOException;
 import java.util.Collections;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 public class GitUpdateListenerTest {
   private final GitRepositoryManager repoManager = new InMemoryRepositoryManager();
-  private final ExecutorService mockedExecutorService = mock(ExecutorService.class);
+  private final ScheduledExecutorService mockedExecutorService =
+      mock(ScheduledExecutorService.class);
   private GitRepoUpdateListener gitRepoUpdateListener;
   private final String enabledProject = "enabledProject";
   private final Project.NameKey enabledProjectNameKey = Project.nameKey(enabledProject);

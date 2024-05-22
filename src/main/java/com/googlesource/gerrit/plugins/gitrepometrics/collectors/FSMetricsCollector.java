@@ -25,6 +25,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
@@ -88,7 +89,7 @@ public class FSMetricsCollector implements MetricsCollector {
   private final ExecutorService executorService;
 
   @Inject
-  public FSMetricsCollector(@UpdateGitMetricsExecutor ExecutorService executorService) {
+  public FSMetricsCollector(@UpdateGitMetricsExecutor ScheduledExecutorService executorService) {
     this.executorService = executorService;
   }
 

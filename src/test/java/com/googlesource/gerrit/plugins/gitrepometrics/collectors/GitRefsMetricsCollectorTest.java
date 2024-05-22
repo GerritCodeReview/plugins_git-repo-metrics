@@ -52,7 +52,7 @@ public class GitRefsMetricsCollectorTest {
     HashMap<GitRepoMetric, Long> result = new HashMap<>();
 
     CountDownLatch latch = new CountDownLatch(1);
-    new GitRefsMetricsCollector(Executors.newFixedThreadPool(1))
+    new GitRefsMetricsCollector(Executors.newScheduledThreadPool(1))
         .collect(
             repo.getRepository(),
             REPO_NAME,

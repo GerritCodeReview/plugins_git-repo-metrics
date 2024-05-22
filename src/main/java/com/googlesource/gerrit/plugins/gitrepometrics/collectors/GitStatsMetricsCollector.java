@@ -21,6 +21,7 @@ import com.googlesource.gerrit.plugins.gitrepometrics.UpdateGitMetricsExecutor;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
@@ -59,7 +60,8 @@ public class GitStatsMetricsCollector implements MetricsCollector {
   private final ExecutorService executorService;
 
   @Inject
-  public GitStatsMetricsCollector(@UpdateGitMetricsExecutor ExecutorService executorService) {
+  public GitStatsMetricsCollector(
+      @UpdateGitMetricsExecutor ScheduledExecutorService executorService) {
     this.executorService = executorService;
   }
 

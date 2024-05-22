@@ -28,6 +28,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Ref;
@@ -45,7 +46,7 @@ public class GitRefsMetricsCollector implements MetricsCollector {
   private final ExecutorService executorService;
 
   @Inject
-  GitRefsMetricsCollector(@UpdateGitMetricsExecutor ExecutorService executorService) {
+  GitRefsMetricsCollector(@UpdateGitMetricsExecutor ScheduledExecutorService executorService) {
     this.executorService = executorService;
   }
 
