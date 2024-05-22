@@ -48,7 +48,7 @@ public class FSMetricsCollectorTest {
     HashMap<GitRepoMetric, Long> metrics = new HashMap<>();
 
     CountDownLatch latch = new CountDownLatch(1);
-    new FSMetricsCollector(Executors.newFixedThreadPool(2))
+    new FSMetricsCollector(Executors.newScheduledThreadPool(2))
         .collect(
             (FileRepository) repository,
             "testRepo",

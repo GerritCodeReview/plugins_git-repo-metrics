@@ -23,6 +23,7 @@ import com.google.gerrit.server.events.RefUpdatedEvent;
 import com.google.inject.Inject;
 import java.util.Objects;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 
 class GitRepoUpdateListener implements EventListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -34,7 +35,7 @@ class GitRepoUpdateListener implements EventListener {
   @Inject
   protected GitRepoUpdateListener(
       @GerritInstanceId String instanceId,
-      @UpdateGitMetricsExecutor ExecutorService executor,
+      @UpdateGitMetricsExecutor ScheduledExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
       GitRepoMetricsCache gitRepoMetricsCache) {
     this.instanceId = instanceId;
