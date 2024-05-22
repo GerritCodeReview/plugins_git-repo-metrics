@@ -44,6 +44,10 @@ public class GitRepoMetricsConfig {
     return config.getTimeUnit("git-repo-metrics", null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
   }
 
+  public boolean isForcedCollection() {
+    return config.getBoolean("git-repo-metrics", "forcedCollection", false);
+  }
+
   public int getPoolSize() {
     return config.getInt("git-repo-metrics", null, "poolSize", 1);
   }

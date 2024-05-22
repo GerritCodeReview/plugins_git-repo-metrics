@@ -42,6 +42,11 @@ exported, but only the one listed in the configuration file, i.e.:
   project = another-repo
   gracePeriod = 5m
 ```
+_git-repo-metrics.forcedCollection_: Force the repositories' metric collection update every
+_gracePeriod_ interval. By default, disabled.
+
+> **NOTE**: When using `forcedCollection` the `gracePeriod` should be defined to a positive
+> interval, otherwise the collection would happen just once at the plugin startup time.
 
 _git-repo-metrics.gracePeriod_: Grace period between samples collection. Used to avoid aggressive
 metrics collection. By default, 0.
