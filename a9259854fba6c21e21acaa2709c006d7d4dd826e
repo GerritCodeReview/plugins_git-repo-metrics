@@ -69,6 +69,24 @@
       "parentUuid": "ab370b0c_9fbd09f4",
       "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7c3023_2f3a66a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-22T16:57:50Z",
+      "side": 1,
+      "message": "But the tasks at fixed rate are created by the GitRepoMetricsScheduler. I don\u0027t get why in this change we need to alter the other executors as well.\n\nWe can talk about it online. If it works it is fine for me.",
+      "parentUuid": "bfdd5fec_37dc09f3",
+      "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
