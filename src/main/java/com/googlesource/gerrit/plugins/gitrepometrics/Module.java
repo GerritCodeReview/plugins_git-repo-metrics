@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.gerrit.server.events.EventListener;
+import com.google.inject.Inject;
 import com.google.inject.Scopes;
 import com.google.inject.name.Names;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
@@ -24,18 +25,29 @@ import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsC
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.NumberOfProjectsCollector;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class Module extends LifecycleModule {
+
+  private final GitRepoMetricsConfig config;
+
+  @Inject
+  Module(GitRepoMetricsConfig config) {
+    this.config = config;
+  }
 
   @Override
   protected void configure() {
     bind(GitRepoMetricsCache.class).in(Scopes.SINGLETON);
-    bind(ExecutorService.class)
+    bind(ScheduledExecutorService.class)
         .annotatedWith(UpdateGitMetricsExecutor.class)
         .toProvider(UpdateGitMetricsExecutorProvider.class);
     bind(GitRepoUpdateListener.class);
     DynamicSet.bind(binder(), EventListener.class).to(GitRepoUpdateListener.class);
+
+    if (config.isForcedCollection()) {
+      listener().to(GitRepoMetricsScheduler.class);
+    }
 
     DynamicSet.setOf(binder(), MetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStatsMetricsCollector.class);
