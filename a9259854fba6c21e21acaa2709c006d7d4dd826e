@@ -18,6 +18,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb12ab16_271c7e01",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-22T15:41:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0936afbb_85b91f07",
+      "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab370b0c_9fbd09f4",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-05-22T14:46:14Z",
       "side": 1,
       "message": "* Why all the classes need to become `ScheduledExecutor`? \n* Consider adding the new config to the docs, even in a followup.",
+      "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfdd5fec_37dc09f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-22T15:41:25Z",
+      "side": 1,
+      "message": "Because this is exactly what they are (the Gerrit queue creates a ScheduledExecutor) and I need to schedule tasks at fixed rate.",
+      "parentUuid": "ab370b0c_9fbd09f4",
       "revId": "a9259854fba6c21e21acaa2709c006d7d4dd826e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }

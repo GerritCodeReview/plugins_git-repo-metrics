@@ -22,6 +22,30 @@
       },
       "revId": "45d936ad35ae67d257895ae5765b07ae392e5746",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a86b913f_e1b76401",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-05-22T15:41:25Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "ead56c86_da1d6de9",
+      "range": {
+        "startLine": 49,
+        "startChar": 33,
+        "endLine": 49,
+        "endChar": 46
+      },
+      "revId": "45d936ad35ae67d257895ae5765b07ae392e5746",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
