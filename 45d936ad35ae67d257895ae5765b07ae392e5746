@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead56c86_da1d6de9",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsScheduler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2024-05-22T14:46:14Z",
+      "side": 1,
+      "message": "Grace period is 0 by default.\n\nFrom the `ScheduledThreadPoolExecutor` docs referring to the `period` parameter it appears that :\n```\nA value of 0 indicates a non-repeating (one-shot) task.\n```\n\nI think we should document that if you set `forcedCollection` and you don\u0027t set the `gracePeriod` you will have a single collection.",
+      "range": {
+        "startLine": 49,
+        "startChar": 33,
+        "endLine": 49,
+        "endChar": 46
+      },
+      "revId": "45d936ad35ae67d257895ae5765b07ae392e5746",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
