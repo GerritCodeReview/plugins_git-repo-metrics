@@ -19,11 +19,11 @@ import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ScheduledExecutorService;
 
 @Singleton
-public class UpdateGitMetricsExecutorProvider implements Provider<ExecutorService> {
-  private ExecutorService executor;
+public class UpdateGitMetricsExecutorProvider implements Provider<ScheduledExecutorService> {
+  private final ScheduledExecutorService executor;
 
   @Inject
   UpdateGitMetricsExecutorProvider(
@@ -35,7 +35,7 @@ public class UpdateGitMetricsExecutorProvider implements Provider<ExecutorServic
   }
 
   @Override
-  public ExecutorService get() {
+  public ScheduledExecutorService get() {
     return executor;
   }
 }
