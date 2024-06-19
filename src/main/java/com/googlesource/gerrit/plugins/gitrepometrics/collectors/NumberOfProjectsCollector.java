@@ -46,7 +46,7 @@ public class NumberOfProjectsCollector implements Provider<Long> {
 
   private static long queryNumberOfProjects(OneOffRequestContext ctx, GerritApi api) {
     try (ManualRequestContext c = ctx.open()) {
-      return api.projects().query().get().size();
+      return api.projects().query("(state:active OR state:read-only)").get().size();
     } catch (RestApiException e) {
       logger.atWarning().withCause(e).log("Unable to query Gerrit projects list");
       throw new IllegalStateException(e);
