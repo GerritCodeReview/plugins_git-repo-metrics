@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a3e165_989ed953",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-09-10T21:12:57Z",
+      "side": 1,
+      "message": "Are you sure this is the relevant issue?",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "551fadbd_17ee3164",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-09-10T21:12:57Z",
+      "side": 1,
+      "message": "This looks a bit overkill, as it is simply a long anyway.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "613c346a_9c72af9e",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-09-10T21:12:57Z",
+      "side": 1,
+      "message": "Why not splitting into two `filter` stages?\n\n\n\n```suggestion\n                        .filter(not(this::hasBitMap))\n                        .map(pack -\u003e pack.getFileSnapshot().lastModifiedInstant().toEpochMilli())\n                        .filter(epoch -\u003e epoch \u003e newestBitmap)\n```",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 63
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07da6359_c440e826",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-09-10T21:12:57Z",
+      "side": 1,
+      "message": "You could get the `long` directly.\n\n\n\n```suggestion\n        .map(p -\u003e p.getFileSnapshot().lastModifiedInstant().toEpochMilli())\n```",
+      "range": {
+        "startLine": 61,
+        "startChar": 38,
+        "endLine": 61,
+        "endChar": 59
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb3d480c_2741d142",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-09-10T21:12:57Z",
+      "side": 1,
+      "message": "Just do `.max()` on a `long`.\n\n\n\n```suggestion\n        .max();\n```",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
