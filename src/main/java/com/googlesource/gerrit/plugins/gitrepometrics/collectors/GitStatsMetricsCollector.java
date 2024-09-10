@@ -25,6 +25,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.internal.storage.file.GC;
+import org.eclipse.jgit.internal.storage.file.GitRepositoryStatistics;
 
 public class GitStatsMetricsCollector implements MetricsCollector {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -33,6 +34,9 @@ public class GitStatsMetricsCollector implements MetricsCollector {
       new GitRepoMetric("numberOfPackedObjects", "Number of packed objects", "Count");
   public static final GitRepoMetric numberOfPackFiles =
       new GitRepoMetric("numberOfPackFiles", "Number of pack files", "Count");
+  public static final GitRepoMetric numberOfPackFilesAfterBitmap =
+      new GitRepoMetric(
+          "numberOfPackFilesAfterBitmap", "Number of pack files after bitmap", "Count");
   public static final GitRepoMetric numberOfLooseObjects =
       new GitRepoMetric("numberOfLooseObjects", "Number of loose objects", "Count");
   public static final GitRepoMetric numberOfLooseRefs =
@@ -50,6 +54,7 @@ public class GitStatsMetricsCollector implements MetricsCollector {
       ImmutableList.of(
           numberOfPackedObjects,
           numberOfPackFiles,
+          numberOfPackFilesAfterBitmap,
           numberOfLooseObjects,
           numberOfLooseRefs,
           numberOfPackedRefs,
@@ -84,7 +89,12 @@ public class GitStatsMetricsCollector implements MetricsCollector {
             metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
             metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
             metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
-            logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
+            long numberOfPackFilesAfterBitmapValue =
+                GitRepositoryStatistics.numberOfPackFilesAfterBitmap(repository);
+            metrics.put(numberOfPackFilesAfterBitmap, numberOfPackFilesAfterBitmapValue);
+            logger.atInfo().log(
+                "New Git Statistics metrics collected: %s, numberOfPackFilesAfterBitmap=%d",
+                statistics.toString(), numberOfPackFilesAfterBitmapValue);
           } catch (IOException e) {
             logger.atSevere().log("Something went wrong: %s", e.getMessage());
           }
