@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe2e8a3_15c7599b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-09-11T04:52:17Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "95a3e165_989ed953",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 13
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "551fadbd_17ee3164",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-09-10T21:12:57Z",
       "side": 1,
       "message": "This looks a bit overkill, as it is simply a long anyway.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 3
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85dfa452_ca081a94",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-09-11T04:52:17Z",
+      "side": 1,
+      "message": "I guess that it will go back soon but agree that it is hard to justify it just for this change.",
+      "parentUuid": "551fadbd_17ee3164",
       "range": {
         "startLine": 25,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "943c4235_5b0cf57d",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-09-11T04:52:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "613c346a_9c72af9e",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 63
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07da6359_c440e826",
@@ -93,6 +165,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc719c3_83aaacd4",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-09-11T04:52:17Z",
+      "side": 1,
+      "message": "Done - just note that we are loosing a bit of precision with that move - it was up to nanos now it is up to millis - don\u0027t believe it is an issue here though",
+      "parentUuid": "07da6359_c440e826",
+      "range": {
+        "startLine": 61,
+        "startChar": 38,
+        "endLine": 61,
+        "endChar": 59
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb3d480c_2741d142",
@@ -106,6 +202,30 @@
       "writtenOn": "2024-09-10T21:12:57Z",
       "side": 1,
       "message": "Just do `.max()` on a `long`.\n\n\n\n```suggestion\n        .max();\n```",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "958acc2cdc618180fbea414c9ecc15c5f0a80da3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeb58b5a_4882655e",
+        "filename": "src/main/java/org/eclipse/jgit/internal/storage/file/GitRepositoryStatistics.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1025452
+      },
+      "writtenOn": "2024-09-11T04:52:17Z",
+      "side": 1,
+      "message": "It is slightly more sophisticated as one needs to either use `mapToLong` (so that `max()` is available) or `map` as you suggested but then `max(Comparator)` needs to be used - anyway done",
+      "parentUuid": "eb3d480c_2741d142",
       "range": {
         "startLine": 62,
         "startChar": 8,
