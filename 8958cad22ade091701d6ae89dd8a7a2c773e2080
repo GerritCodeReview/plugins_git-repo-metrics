@@ -22,6 +22,30 @@
       },
       "revId": "8958cad22ade091701d6ae89dd8a7a2c773e2080",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f891bd3a_5590d0e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2024-09-14T09:57:11Z",
+      "side": 1,
+      "message": "Thanks a very good idea indeed",
+      "parentUuid": "fdd2e1e9_c87f0f83",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 66
+      },
+      "revId": "8958cad22ade091701d6ae89dd8a7a2c773e2080",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
