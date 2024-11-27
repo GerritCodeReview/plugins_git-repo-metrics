@@ -14,31 +14,29 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
+import javax.inject.Inject;
+
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.base.Supplier;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
-import com.google.inject.Provider;
+import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.NumberOfProjectsCollector;
-import javax.inject.Inject;
 
 @Singleton
 public class RepoCountMetricRegister implements LifecycleListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   protected static final String REPO_COUNT_METRIC_NAME = "numberofprojects";
   private final MetricMaker metricMaker;
-  private final Provider<Long> numberOfProjectsProvider;
+  private final ProjectCache projectCache;
 
   @VisibleForTesting
   @Inject
-  RepoCountMetricRegister(
-      @Named(NumberOfProjectsCollector.NUM_PROJECTS) Provider<Long> numberOfProjectsProvider,
-      MetricMaker metricMaker) {
+  RepoCountMetricRegister(ProjectCache projectCache, MetricMaker metricMaker) {
     this.metricMaker = metricMaker;
-    this.numberOfProjectsProvider = numberOfProjectsProvider;
+    this.projectCache = projectCache;
   }
 
   @Override
@@ -49,7 +47,12 @@ public class RepoCountMetricRegister implements LifecycleListener {
         REPO_COUNT_METRIC_NAME,
         Long.class,
         new Description("Number of existing projects.").setGauge().setUnit("Count"),
-        numberOfProjectsProvider::get);
+        new Supplier<Long>() {
+          @Override
+          public Long get() {
+            return (long) projectCache.all().size();
+          }
+        });
   }
 
   @Override
