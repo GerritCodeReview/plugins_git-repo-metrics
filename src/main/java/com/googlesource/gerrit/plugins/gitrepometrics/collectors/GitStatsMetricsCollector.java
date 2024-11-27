@@ -45,6 +45,17 @@ public class GitStatsMetricsCollector implements MetricsCollector {
       new GitRepoMetric("sizeOfPackedObjects", "Size of packed objects", "Count");
   public static final GitRepoMetric numberOfBitmaps =
       new GitRepoMetric("numberOfBitmaps", "Number of bitmaps", "Count");
+  public static final GitRepoMetric numberOfObjectsSinceBitmap =
+      new GitRepoMetric(
+          "numberOfObjectsSinceBitmap",
+          "Number of objects in pack files and as loose object created after the last bitmap"
+              + " generation",
+          "Count");
+  public static final GitRepoMetric numberOfPackFilesSinceBitmap =
+      new GitRepoMetric(
+          "numberOfPackFilesSinceBitmap",
+          "The number of pack files that were created after the last bitmap generation",
+          "Count");
 
   private static final ImmutableList<GitRepoMetric> availableMetrics =
       ImmutableList.of(
@@ -55,7 +66,9 @@ public class GitStatsMetricsCollector implements MetricsCollector {
           numberOfPackedRefs,
           sizeOfLooseObjects,
           sizeOfPackedObjects,
-          numberOfBitmaps);
+          numberOfBitmaps,
+          numberOfObjectsSinceBitmap,
+          numberOfPackFilesSinceBitmap);
 
   private final ExecutorService executorService;
 
@@ -84,6 +97,8 @@ public class GitStatsMetricsCollector implements MetricsCollector {
             metrics.put(sizeOfLooseObjects, statistics.sizeOfLooseObjects);
             metrics.put(sizeOfPackedObjects, statistics.sizeOfPackedObjects);
             metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
+            metrics.put(numberOfObjectsSinceBitmap, statistics.numberOfObjectsSinceBitmap);
+            metrics.put(numberOfPackFilesSinceBitmap, statistics.numberOfPackFilesSinceBitmap);
             logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
           } catch (IOException e) {
             logger.atSevere().log("Something went wrong: %s", e.getMessage());
