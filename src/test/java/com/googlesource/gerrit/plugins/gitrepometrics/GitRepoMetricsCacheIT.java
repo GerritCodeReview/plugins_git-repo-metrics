@@ -37,7 +37,7 @@ import org.junit.Test;
     sysModule = "com.googlesource.gerrit.plugins.gitrepometrics.Module")
 public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
-  private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 10;
+  private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 5;
 
   @Inject MetricRegistry metricRegistry;
   private FSMetricsCollector fsMetricsCollector;
@@ -77,10 +77,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
             + gitRefsMetricsCollector.availableMetrics().size();
 
     try {
-      // One additional is added for the numberofprojects metric
       WaitUtil.waitUntil(
-          () ->
-              getPluginMetricsCount() == (long) (availableProjects.size() * expectedMetricsCount) + 1,
+          () -> getPluginMetricsCount() == (long) availableProjects.size() * expectedMetricsCount,
           Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
     } catch (InterruptedException e) {
       fail(
