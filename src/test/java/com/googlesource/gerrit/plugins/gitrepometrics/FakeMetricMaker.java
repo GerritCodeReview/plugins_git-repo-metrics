@@ -14,13 +14,8 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import java.util.HashMap;
-import java.util.Optional;
-
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
-import com.google.common.base.Supplier;
-import com.google.gerrit.extensions.registration.RegistrationHandle;
 import com.google.gerrit.metrics.CallbackMetric0;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.DisabledMetricMaker;
@@ -28,19 +23,16 @@ import com.google.gerrit.metrics.DisabledMetricMaker;
 class FakeMetricMaker extends DisabledMetricMaker {
   Integer callsCounter;
   private MetricRegistry metricRegistry;
-  HashMap<String, Supplier<?>> actionMap;
 
-  @SuppressWarnings({"rawtypes", "unchecked"})
   FakeMetricMaker(MetricRegistry metricRegistry) {
-    this.callsCounter = 0;
+    callsCounter = 0;
     this.metricRegistry = metricRegistry;
-    this.actionMap = new HashMap();
   }
 
-  @SuppressWarnings("unused")
   @Override
   public <V> CallbackMetric0<V> newCallbackMetric(
       String name, Class<V> valueClass, Description desc) {
+
     callsCounter += 1;
     metricRegistry.register(
         String.format("%s/%s/%s", "plugins", "git-repo-metrics", name), new Meter());
@@ -52,26 +44,5 @@ class FakeMetricMaker extends DisabledMetricMaker {
       @Override
       public void remove() {}
     };
-  }
-
-  @Override
-  public <V> RegistrationHandle newCallbackMetric(
-      String name, Class<V> valueClass, Description desc, Supplier<V> trigger) {
-    callsCounter += 1;
-
-    String metricName = String.format("%s/%s/%s", "plugins", "git-repo-metrics", name);
-
-    metricRegistry.register(metricName, new Meter());
-
-    actionMap.put(metricName, trigger);
-
-    return null;
-  }
-
-  @SuppressWarnings("rawtypes")
-  public Optional<Supplier> getValueForMetric(String metric) {
-    if (actionMap.containsKey(metric)) return Optional.of(actionMap.get(metric));
-
-    return Optional.empty();
   }
 }
