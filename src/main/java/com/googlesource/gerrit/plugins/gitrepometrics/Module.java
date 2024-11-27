@@ -19,13 +19,19 @@ import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.gerrit.server.events.EventListener;
 import com.google.inject.Inject;
 import com.google.inject.Scopes;
-import com.google.inject.name.Names;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
+<<<<<<< PATCH SET (53ff7f Revert "Decouple the number of repositories metrics from the)
+import java.util.concurrent.ExecutorService;
+||||||| BASE
+import com.googlesource.gerrit.plugins.gitrepometrics.collectors.NumberOfProjectsCollector;
+import java.util.concurrent.ExecutorService;
+=======
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.NumberOfProjectsCollector;
 import java.util.concurrent.ScheduledExecutorService;
+>>>>>>> BASE      (624d06 Revert "Replace project cache with GerritApi for listing pro)
 
 public class Module extends LifecycleModule {
 
@@ -54,10 +60,6 @@ public class Module extends LifecycleModule {
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitRefsMetricsCollector.class);
     install(new UpdateGitMetricsTaskModule());
-
-    bind(Long.class)
-        .annotatedWith(Names.named(NumberOfProjectsCollector.NUM_PROJECTS))
-        .toProvider(NumberOfProjectsCollector.class);
     listener().to(RepoCountMetricRegister.class);
   }
 }
