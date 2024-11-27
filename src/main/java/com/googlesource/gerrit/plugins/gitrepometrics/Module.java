@@ -19,13 +19,11 @@ import com.google.gerrit.lifecycle.LifecycleModule;
 import com.google.gerrit.server.events.EventListener;
 import com.google.inject.Inject;
 import com.google.inject.Scopes;
-import com.google.inject.name.Names;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
-import com.googlesource.gerrit.plugins.gitrepometrics.collectors.NumberOfProjectsCollector;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ExecutorService;
 
 public class Module extends LifecycleModule {
 
@@ -54,10 +52,6 @@ public class Module extends LifecycleModule {
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitRefsMetricsCollector.class);
     install(new UpdateGitMetricsTaskModule());
-
-    bind(Long.class)
-        .annotatedWith(Names.named(NumberOfProjectsCollector.NUM_PROJECTS))
-        .toProvider(NumberOfProjectsCollector.class);
     listener().to(RepoCountMetricRegister.class);
   }
 }
