@@ -23,6 +23,7 @@ import com.google.inject.ProvisionException;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import java.io.IOException;
+import org.apache.commons.codec.digest.DigestUtils;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
@@ -39,20 +40,23 @@ public class UpdateGitMetricsTask implements Runnable {
   private final String projectName;
   private GitRepoMetricsCache gitRepoMetricsCache;
   private GitRepositoryManager repoManager;
+  private GitBackend gitBackend;
 
   @Inject
   UpdateGitMetricsTask(
       GitRepoMetricsCache gitRepoMetricsCache,
       GitRepositoryManager repoManager,
+      GitRepoMetricsConfig config,
       @Assisted String projectName) {
     this.projectName = projectName;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
     this.repoManager = repoManager;
+    this.gitBackend = config.getGitBackend();
   }
 
   @Override
   public void run() {
-    Project.NameKey projectNameKey = Project.nameKey(projectName);
+    Project.NameKey projectNameKey = Project.nameKey(gitBackend.repoPath(projectName));
     try (Repository repository = repoManager.openRepository(projectNameKey)) {
       logger.atInfo().log(
           "Running task to collect stats: repo %s, project %s",
