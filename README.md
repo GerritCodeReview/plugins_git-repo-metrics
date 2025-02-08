@@ -1,6 +1,6 @@
 # Plugin to collect Git repository metrics
 
-This plugin allows a systematic collection of repository metrics.
+This plugin allows a systematic collection of repository metrics for multiple Git SCM systems.
 Metrics are updated upon a `ref-update` receive.
 
 ## How to build
@@ -23,10 +23,20 @@ The output plugin jar is created in:
 bazel-genfiles/plugins/git-repo-metrics/git-repo-metrics.jar
 ```
 
-## How to install
+## How to install with Gerrit
 
 Copy the git-repo-metrics.jar into the Gerrit's /plugins directory and wait for the plugin to be automatically
 loaded.
+
+## How to install with a different SCM
+
+It's possible to make this plugin work with other Git repositories hosted by other Git based SCM tools,
+however a read-only version of Gerrit will always be required.
+So to make this plugin work with other Git SCM tools, a Gerrit installation needs to be set-up and the `basePath`
+needs to be set to the git data directory of the tool of choice.
+Also, a configuration option will need to be specified to indicate which Backend is being used.
+Currently supported backend, other than Gerrit are:
+- GitLab
 
 ## Configuration
 
