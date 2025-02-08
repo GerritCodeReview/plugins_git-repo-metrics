@@ -69,6 +69,7 @@ public class UpdateGitMetricsTaskTest {
           @Override
           protected void configure() {
             install(new UpdateGitMetricsTaskModule());
+            bind(GitRepoMetricsConfig.class).toInstance(configSetupUtils.getGitRepoMetricsConfig());
             bind(GitRepoMetricsCache.class).toInstance(gitRepoMetricsCache);
             bind(Config.class)
                 .annotatedWith(GerritServerConfig.class)
