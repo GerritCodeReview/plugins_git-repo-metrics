@@ -38,6 +38,7 @@ exported, but only the one listed in the configuration file, i.e.:
   project = test-project
   project = another-repo
   gracePeriod = 5m
+  gracePeriod = Gerrit
 ```
 _git-repo-metrics.forcedCollection_: Force the repositories' metric collection update every
 _gracePeriod_ interval. By default, disabled.
@@ -49,3 +50,10 @@ _git-repo-metrics.gracePeriod_: Grace period between samples collection. Used to
 metrics collection. By default, 0.
 
 _git-repo-metrics.poolSize_: Number of threads available to collect metrics. By default, 1.
+_git-repo-metrics.gitBackend_: Name of the Git SCM tool managing the Git data, for which this tools will expose
+metrics.
+
+Currently supported values:
+- Gerrit (default)
+- GitLab
+

@@ -23,6 +23,7 @@ import com.google.inject.ProvisionException;
 import com.google.inject.assistedinject.Assisted;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import java.io.IOException;
+import org.apache.commons.codec.digest.DigestUtils;
 import java.util.HashMap;
 import java.util.Map;
 import org.eclipse.jgit.errors.RepositoryNotFoundException;
@@ -39,20 +40,27 @@ public class UpdateGitMetricsTask implements Runnable {
   private final String projectName;
   private GitRepoMetricsCache gitRepoMetricsCache;
   private GitRepositoryManager repoManager;
+  private String gitBackend;
 
   @Inject
   UpdateGitMetricsTask(
       GitRepoMetricsCache gitRepoMetricsCache,
       GitRepositoryManager repoManager,
+      GitRepoMetricsConfig config,
       @Assisted String projectName) {
     this.projectName = projectName;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
     this.repoManager = repoManager;
+    this.gitBackend = config.getGitBackend();
   }
 
   @Override
   public void run() {
-    Project.NameKey projectNameKey = Project.nameKey(projectName);
+    String projectPath = projectName;
+    if(gitBackend.equals(GitBackends.GitLab.name())){
+      projectPath = getGitLabProjectPath(projectName);
+    }
+    Project.NameKey projectNameKey = Project.nameKey(projectPath);
     try (Repository repository = repoManager.openRepository(projectNameKey)) {
       logger.atInfo().log(
           "Running task to collect stats: repo %s, project %s",
@@ -82,6 +90,14 @@ public class UpdateGitMetricsTask implements Runnable {
       logger.atSevere().withCause(e).log(
           "Something went wrong when reading from the repository for %s", projectName);
     }
+  }
+
+  private String getGitLabProjectPath(String projectName){
+    String sha256OfProjectName = DigestUtils.sha256Hex(projectName);
+    return String.format("repositories/@hashed/%s/%s/%s.git",
+        sha256OfProjectName.substring(0, 2),
+        sha256OfProjectName.substring(2, 4),
+        sha256OfProjectName);
   }
 
   private FileRepository getFileRepository(Repository repo) {
