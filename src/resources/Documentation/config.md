@@ -2,7 +2,8 @@
 ======================
 
 The @PLUGIN@ allows a systematic collection of repository metrics.
-Metrics are updated upon a `ref-update` receive.
+Metrics are updated either upon a `ref-update` receive or on a time based refresh interval.
+`ref-update` events are received only on primary nodes, so on replicas `gracePeriod` will need to be set.
 
 Currently, the metrics exposed are the following:
 
