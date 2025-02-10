@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3a31307_f18907f6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "Should the metric not be exposed with the name of the project rather than its hashed equivalent?",
+      "range": {
+        "startLine": 12,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32d63b7c_725375e3",
+        "filename": "BUILD",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "```suggestion\n    exports \u003d PLUGIN_DEPS\n```",
+      "range": {
+        "startLine": 76,
+        "startChar": 25,
+        "endLine": 76,
+        "endChar": 26
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7446f085_5fd24e71",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "What do you mean by this?\nShould the repository be imported in gerrit? I thought you could just point to the repo even it it lives outside gerrit?\n\nIs it relevant that the repo would be read-only, would we not be able to export the metrics if it was read-write?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 62
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7370e062_0350549e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackends.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "An enum represents a single value; consider using a singular here.",
+      "range": {
+        "startLine": 3,
+        "startChar": 12,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eac5dd88_7d47729f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "What if `gitBackend` is not defined? should we have `Gerrit` as default?",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eecbd61a_e7e69bce",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "You could use `config.getEnum` here and return GitBackends`",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 3
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f65134c_362ae4e5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-10T17:43:48Z",
+      "side": 1,
+      "message": "Rather than having a specific `gitLab` method here, can you consider encapsulating this logic in the enum itself, by defining a `projectPath` method or something similar?\n\nWe do this in Gerrit in different places.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 3
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
