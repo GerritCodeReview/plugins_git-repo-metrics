@@ -22,6 +22,30 @@
       },
       "revId": "c7116ab17eba2576a891481e40cdd8c52cb32091",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60d18f11_b45bf852",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-02-10T15:32:28Z",
+      "side": 1,
+      "message": "\u003e I\u0027m not sure if it’s appropriate for this Gerrit plugin to accommodate configuration for non-Gerrit Git servers, such as GitLab.\n\nA lot of people using Gerrit also use other non-Gerrit servers and repositories. Therefore I believe this is a nice addition.\n\n\u003e This raises a few questions about the scope and purpose of the plugin:\n\u003e \n\u003e 1. In the context of Gerrit, does it make sense to expose metrics for projects that are not hosted by Gerrit?\n\nYes, you could actually have repos that are managed by other means but accessed also by Gerrit in read-only.\n\n\u003e 2. Is this plugin now intended to support metrics for arbitrary Git repositories, regardless of whether they are hosted on Gerrit or not? If so, this should be documented.\n\nI believe that\u0027s the purpose of this change and yes, it should be documented.\n\n\u003e Some functionalities, such as updating metrics upon receiving `ref-updates`, would not work, for example.\n\nWell, when using this plugin on Gerrit replicas the update of metrics upon receiving `ref-updates` doesn\u0027t work either. It isn\u0027t something new and yes, should be documented in a separate follow-up change.",
+      "parentUuid": "437f9633_d40d16f0",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 44
+      },
+      "revId": "c7116ab17eba2576a891481e40cdd8c52cb32091",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
