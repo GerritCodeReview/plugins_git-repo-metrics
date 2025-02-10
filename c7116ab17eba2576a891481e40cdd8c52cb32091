@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1f37f03e_8c306ad6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T17:11:51Z",
+      "side": 1,
+      "message": "Addressed all points.",
+      "parentUuid": "60d18f11_b45bf852",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 44
+      },
+      "revId": "c7116ab17eba2576a891481e40cdd8c52cb32091",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7e533ef4_b57450da",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
