@@ -1,7 +1,8 @@
 # Plugin to collect Git repository metrics
 
 This plugin allows a systematic collection of repository metrics for multiple Git SCM systems.
-Metrics are updated upon a `ref-update` receive.
+Metrics are updated either upon a `ref-update` receive or on a time based refresh interval.
+`ref-update` events are received only on primary nodes, so on replicas `gracePeriod` will need to be set.
 
 ## How to build
 
