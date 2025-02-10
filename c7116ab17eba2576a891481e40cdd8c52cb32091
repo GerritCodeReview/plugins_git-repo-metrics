@@ -46,6 +46,46 @@
       },
       "revId": "c7116ab17eba2576a891481e40cdd8c52cb32091",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e533ef4_b57450da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-02-10T15:35:24Z",
+      "side": 1,
+      "message": "Missing documentation update.",
+      "revId": "c7116ab17eba2576a891481e40cdd8c52cb32091",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e573ea8f_5f937734",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-02-10T15:35:24Z",
+      "side": 1,
+      "message": "Add a note saying that that happens only when using this plugin on a Gerrit primary node, otherwise it would happen only if explicitly set with a forced period refresh.",
+      "range": {
+        "startLine": 5,
+        "startChar": 20,
+        "endLine": 5,
+        "endChar": 47
+      },
+      "revId": "c7116ab17eba2576a891481e40cdd8c52cb32091",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
