@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c5efcc1_eccb0afc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T22:25:04Z",
+      "side": 1,
+      "message": "It will be emitted with the ID, not the hash. The hash comes from the Id, not the name.\n\nIt possible that in the future we\u0027ll be able to get the name from the Id through an API call to gitlab, but I think for now we should stick to simply hashing the configured Id and then using the id in the name of the metric.",
+      "parentUuid": "b3a31307_f18907f6",
+      "range": {
+        "startLine": 12,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32d63b7c_725375e3",
         "filename": "BUILD",
         "patchSetId": 5
@@ -72,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca5481d4_51bc6482",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T22:25:04Z",
+      "side": 1,
+      "message": "You can point to any repo wherever, but you still need a Gerrit instance to run git-repo-metrics-plugin.\n\nif you\u0027re using it with a different SCM, would you want Gerrit to be writing to it? I think it would be fine yes, but it\u0027s not the point to have both GitLab and Gerrit writing to the same repo dir, at least I don\u0027t think so, ahah.",
+      "parentUuid": "7446f085_5fd24e71",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 62
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7370e062_0350549e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackends.java",
         "patchSetId": 5
@@ -83,6 +131,30 @@
       "writtenOn": "2025-02-10T17:43:48Z",
       "side": 1,
       "message": "An enum represents a single value; consider using a singular here.",
+      "range": {
+        "startLine": 3,
+        "startChar": 12,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5ce824_a9f22ccc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackends.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T22:25:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7370e062_0350549e",
       "range": {
         "startLine": 3,
         "startChar": 12,
@@ -116,6 +188,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26a749c8_efe6541f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T22:25:04Z",
+      "side": 1,
+      "message": "getString takes no default, so later on, if it\u0027s undefined I default it to Gerrit.",
+      "parentUuid": "eac5dd88_7d47729f",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 68
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eecbd61a_e7e69bce",
@@ -139,6 +235,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6af4c7_7ef2d90d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T22:25:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eecbd61a_e7e69bce",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 3
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f65134c_362ae4e5",
@@ -152,6 +272,30 @@
       "writtenOn": "2025-02-10T17:43:48Z",
       "side": 1,
       "message": "Rather than having a specific `gitLab` method here, can you consider encapsulating this logic in the enum itself, by defining a `projectPath` method or something similar?\n\nWe do this in Gerrit in different places.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 3
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b8ca98_14ab6a73",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-10T22:25:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f65134c_362ae4e5",
       "range": {
         "startLine": 95,
         "startChar": 0,
