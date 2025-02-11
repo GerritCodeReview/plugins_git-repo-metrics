@@ -27,11 +27,9 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
-
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 
@@ -55,8 +53,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   public void setUpTestPlugin() throws Exception {
     super.setUpTestPlugin();
 
-    repoManager.createRepository(testProject1);
-    repoManager.createRepository(testProject2);
+    repoManager.createRepository(testProject1).close();
+    repoManager.createRepository(testProject2).close();
     gitRepoMetricsCache = plugin.getSysInjector().getInstance(GitRepoMetricsCache.class);
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
