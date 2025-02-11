@@ -194,6 +194,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd95f17_2f37223e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackend.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-11T11:12:14Z",
+      "side": 1,
+      "message": "Good point, I believe the tests are currently failing on master and for some reasons tests are not being executed on this repo by the CI.\n\nI\u0027ll get them fixed on master and then add a test for this as a follow-up",
+      "parentUuid": "90454a7a_921ec3b7",
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df3bc6d0_cd126cb8",
