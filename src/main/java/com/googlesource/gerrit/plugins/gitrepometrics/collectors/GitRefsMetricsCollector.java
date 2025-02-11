@@ -70,7 +70,8 @@ public class GitRefsMetricsCollector implements MetricsCollector {
             populateMetrics.accept(metrics);
           } catch (NoSuchAlgorithmException e) {
             logger.atSevere().withCause(e).log(
-                "Could not obtain SHA-1 implementation will not compute the combinedRefsSha1 metric");
+                "Could not obtain SHA-1 implementation will not compute the combinedRefsSha1"
+                    + " metric");
           } catch (IOException e) {
             logger.atSevere().withCause(e).log(
                 "Computing combinedRefsSha1 failed. Will retry next time");
