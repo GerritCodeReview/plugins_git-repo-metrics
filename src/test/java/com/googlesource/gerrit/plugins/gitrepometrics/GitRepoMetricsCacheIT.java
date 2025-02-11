@@ -53,8 +53,8 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   public void setUpTestPlugin() throws Exception {
     super.setUpTestPlugin();
 
-    repoManager.createRepository(testProject1);
-    repoManager.createRepository(testProject2);
+    repoManager.createRepository(testProject1).close();
+    repoManager.createRepository(testProject2).close();
     gitRepoMetricsCache = plugin.getSysInjector().getInstance(GitRepoMetricsCache.class);
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
