@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6d1c35e2_2cc5ecca",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-11T08:54:30Z",
+      "side": 1,
+      "message": "I\u0027ll do this as a follow-up change as it\u0027s used across all the config options already.",
+      "parentUuid": "5b3e3a50_e03e1233",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 44
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0a1fdd15_9b9e3d8e",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
         "patchSetId": 8

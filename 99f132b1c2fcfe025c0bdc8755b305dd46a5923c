@@ -72,6 +72,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d59ed1f_260eaba4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-11T08:54:30Z",
+      "side": 1,
+      "message": "Good question. In GitLab, the project ID is separate from the project name. In Gerrit, this separation doesn\u0027t exist. I\u0027ve added link to description in message.",
+      "parentUuid": "a6503c4c_57dbce15",
+      "range": {
+        "startLine": 12,
+        "startChar": 39,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32d63b7c_725375e3",
@@ -180,6 +204,30 @@
       "side": 1,
       "message": "\u003e You can point to any repo wherever, but you still need a Gerrit instance to run git-repo-metrics-plugin.\n\nYep, that\u0027s clear.\n\n\u003e \n\u003e if you\u0027re using it with a different SCM, would you want Gerrit to be writing to it? I think it would be fine yes, but it\u0027s not the point to have both GitLab and Gerrit writing to the same repo dir, at least I don\u0027t think so, ahah.\n\nI agree, but is that relevant information in the context of exposing metrics?\nMetrics would be exposed regardless, right?",
       "parentUuid": "ca5481d4_51bc6482",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 62
+      },
+      "revId": "99f132b1c2fcfe025c0bdc8755b305dd46a5923c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225f64d2_7d2c3de9",
+        "filename": "README.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1155599
+      },
+      "writtenOn": "2025-02-11T08:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1335e854_df5a7c26",
       "range": {
         "startLine": 34,
         "startChar": 0,
