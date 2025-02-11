@@ -160,6 +160,7 @@ public class GitRepoMetricsCacheTest {
   }
 
   private HashMap<GitRepoMetric, Long> getCollectedMetrics() {
-    return Maps.newHashMap(ImmutableMap.of(new GitRepoMetric("anyMetrics", "anyMetric description", "Count"), 1L));
+    return Maps.newHashMap(
+        ImmutableMap.of(new GitRepoMetric("anyMetrics", "anyMetric description", "Count"), 1L));
   }
 }

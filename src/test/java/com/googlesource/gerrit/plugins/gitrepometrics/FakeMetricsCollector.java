@@ -20,7 +20,6 @@ import com.google.common.collect.Maps;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 
@@ -34,8 +33,7 @@ class FakeMetricsCollector implements MetricsCollector {
       FileRepository repository,
       String projectName,
       Consumer<HashMap<GitRepoMetric, Long>> populateMetrics) {
-     populateMetrics.accept(
-            Maps.newHashMap(ImmutableMap.of(fakeMetric1, 1L, fakeMetric2, 2L)));
+    populateMetrics.accept(Maps.newHashMap(ImmutableMap.of(fakeMetric1, 1L, fakeMetric2, 2L)));
   }
 
   @Override

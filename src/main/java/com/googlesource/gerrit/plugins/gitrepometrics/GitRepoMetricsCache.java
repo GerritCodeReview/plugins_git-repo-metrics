@@ -140,7 +140,8 @@ public class GitRepoMetricsCache {
     boolean doCollectStats = lastCollectionTime + gracePeriodMs <= currentTimeMs;
     if (!doCollectStats) {
       logger.atFine().log(
-          "Skip stats collection for %s (grace period: %d, last collection time: %d, current time: %d",
+          "Skip stats collection for %s (grace period: %d, last collection time: %d, current time:"
+              + " %d",
           projectName, gracePeriodMs, lastCollectionTime, currentTimeMs);
       return false;
     }
