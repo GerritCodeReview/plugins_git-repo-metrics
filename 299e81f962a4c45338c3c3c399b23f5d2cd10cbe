@@ -3,6 +3,172 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "221f7f15_be523ccc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "Why specifically GitLab? Isn\u0027t this for generic SCMs ?\n\nMaybe mention for any git SCM, in this change we implement GitLab?",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 28
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "918765e0_49918285",
+        "filename": "README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "nit: I would say something like: This tool is primarily designed for Gerrit but can also be used with other SCM systems",
+      "range": {
+        "startLine": 3,
+        "startChar": 65,
+        "endLine": 3,
+        "endChar": 93
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2104a11d_2f454e8f",
+        "filename": "README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "Also bare Git repositories",
+      "range": {
+        "startLine": 33,
+        "startChar": 77,
+        "endLine": 33,
+        "endChar": 102
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62441800_b07721d1",
+        "filename": "README.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "I think you will also need to specify `forceCollection` and the `gracePeriod` [1] for it to work since Gerrit won\u0027t receive `ref-updates`.\n\n[1]: https://gerrit.googlesource.com/plugins/git-repo-metrics/+/refs/heads/master/src/resources/Documentation/config.md#settings",
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90454a7a_921ec3b7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackend.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "Canyou add a test for this class. It should be straight forward.",
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3bc6d0_cd126cb8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackend.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "nit: missing copyright header",
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4da3ae69_20eddea0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackend.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "nit: enum are usually capital, Gerrit \u003d\u003e GERRIT",
+      "range": {
+        "startLine": 6,
+        "startChar": 2,
+        "endLine": 6,
+        "endChar": 8
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b283607f_db7b6afc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitBackend.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "See comment above",
+      "range": {
+        "startLine": 13,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b3e3a50_e03e1233",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
         "patchSetId": 8
@@ -61,6 +227,75 @@
       "writtenOn": "2025-02-11T07:41:18Z",
       "side": 1,
       "message": "Nice one @danielesassoli@gmail.com! ❤️",
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238453e8_94a4a9ff",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "backend",
+      "range": {
+        "startLine": 41,
+        "startChar": 2,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fc2acb_968ef922",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "Capitalize",
+      "range": {
+        "startLine": 57,
+        "startChar": 2,
+        "endLine": 58,
+        "endChar": 8
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "842e8ec0_ba295165",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-02-11T09:04:03Z",
+      "side": 1,
+      "message": "why is now throwing an exception?",
+      "range": {
+        "startLine": 72,
+        "startChar": 41,
+        "endLine": 72,
+        "endChar": 60
+      },
       "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
