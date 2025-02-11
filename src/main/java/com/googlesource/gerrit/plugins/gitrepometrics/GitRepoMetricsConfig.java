@@ -41,18 +41,18 @@ public class GitRepoMetricsConfig {
   }
 
   public Long getGracePeriodMs() {
-    return config.getTimeUnit(pluginName, null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
+    return config.getTimeUnit("git-repo-metrics", null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
   }
 
   public boolean isForcedCollection() {
-    return config.getBoolean(pluginName, "forcedCollection", false);
+    return config.getBoolean("git-repo-metrics", "forcedCollection", false);
   }
 
   public int getPoolSize() {
-    return config.getInt(pluginName, null, "poolSize", 1);
+    return config.getInt("git-repo-metrics", null, "poolSize", 1);
   }
 
   public GitBackend getGitBackend() {
-    return config.getEnum(pluginName, null, "gitBackend", GitBackend.GERRIT);
+    return config.getEnum("git-repo-metrics", null, "gitBackend", GitBackend.GERRIT);
   }
 }
