@@ -2,8 +2,7 @@
 ======================
 
 The @PLUGIN@ allows a systematic collection of repository metrics.
-Metrics are updated either upon a `ref-update` receive or on a time based refresh interval.
-`ref-update` events are received only on primary nodes, so on replicas `gracePeriod` will need to be set.
+Metrics are updated upon a `ref-update` receive.
 
 Currently, the metrics exposed are the following:
 
@@ -55,11 +54,6 @@ _git-repo-metrics.gitBackend_: Name of the Git SCM tool managing the Git data, f
 metrics.
 
 Currently supported values:
-<<<<<<< HEAD
 - GERRIT (default)
 - GITLAB
 
-=======
-- Gerrit (default)
-- GitLab
->>>>>>> 630d00f (Specify that update via ref-update is only for primaries)

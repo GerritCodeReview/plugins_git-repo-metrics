@@ -4,8 +4,7 @@ This plugin allows a systematic collection of repository metrics. It's primary u
 with Gerrit, however it's possible for it to work with multiple Git SCM systems, including bare
 Git repositories.
 
-Metrics are updated either upon a `ref-update` receive or on a time based refresh interval.
-`ref-update` events are received only on primary nodes, so on replicas `gracePeriod` will need to be set.
+Metrics are updated upon a `ref-update` receive.
 
 ## How to build
 
