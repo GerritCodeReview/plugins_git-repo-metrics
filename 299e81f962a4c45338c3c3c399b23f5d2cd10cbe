@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b3e3a50_e03e1233",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-11T07:41:18Z",
+      "side": 1,
+      "message": "nit: could get this by using the injected `@PluginName`",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 44
+      },
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a1fdd15_9b9e3d8e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/UpdateGitMetricsTask.java",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-02-11T07:41:18Z",
+      "side": 1,
+      "message": "Nice one @danielesassoli@gmail.com! ❤️",
+      "revId": "299e81f962a4c45338c3c3c399b23f5d2cd10cbe",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
