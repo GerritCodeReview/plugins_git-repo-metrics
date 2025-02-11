@@ -27,11 +27,8 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
-
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import org.junit.Test;
 
@@ -69,11 +66,10 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
       pluginName = "git-repo-metrics",
       name = "git-repo-metrics.project",
       values = {"testProject1", "testProject2"})
-  public void shouldRegisterAllMetrics() throws IOException {
-    ConfigSetupUtils configSetupUtils = new ConfigSetupUtils(Arrays.asList("testProject1", "testProject2"));
+  public void shouldRegisterAllMetrics() {
     List<Project.NameKey> availableProjects = Arrays.asList(testProject1, testProject2);
-    new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, configSetupUtils.getGitRepoMetricsConfig(), testProject1.get()).run();
-    new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, configSetupUtils.getGitRepoMetricsConfig(), testProject2.get()).run();
+    new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, testProject1.get()).run();
+    new UpdateGitMetricsTask(gitRepoMetricsCache, repoManager, testProject2.get()).run();
 
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()

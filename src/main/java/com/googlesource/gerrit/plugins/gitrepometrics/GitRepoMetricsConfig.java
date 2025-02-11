@@ -51,8 +51,4 @@ public class GitRepoMetricsConfig {
   public int getPoolSize() {
     return config.getInt("git-repo-metrics", null, "poolSize", 1);
   }
-
-  public GitBackend getGitBackend() {
-    return config.getEnum("git-repo-metrics", null, "gitBackend", GitBackend.GERRIT);
-  }
 }
