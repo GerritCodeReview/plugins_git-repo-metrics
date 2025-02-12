@@ -21,7 +21,8 @@ gerrit_plugin(
     ],
     resources = glob(
         ["src/main/resources/**/*"],
-    )
+    ),
+    deps = ["@commons-codec//jar"],
 )
 
 java_library(
