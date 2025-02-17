@@ -46,7 +46,7 @@ public class GitRepoMetricsScheduler implements LifecycleListener, Runnable {
   public void start() {
     updaterTask =
         metricsExecutor.scheduleAtFixedRate(
-            this, gracePeriodMs, gracePeriodMs, TimeUnit.MILLISECONDS);
+            this, 0, gracePeriodMs, TimeUnit.MILLISECONDS);
   }
 
   @Override
