@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d222c8be_a63de5ec",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsScheduler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-02-18T02:35:22Z",
+      "side": 0,
+      "message": "This was done on purpose for avoiding the plugin initial metrics collection to block Gerrit startup process.",
+      "range": {
+        "startLine": 49,
+        "startChar": 18,
+        "endLine": 49,
+        "endChar": 31
+      },
+      "revId": "17352078b2afdc1b3fde40d59a940c3a3ca32b5d",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
