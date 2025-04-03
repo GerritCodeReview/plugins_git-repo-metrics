@@ -14,7 +14,6 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
-import static com.google.gerrit.entities.RefNames.REFS_USERS;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -60,7 +59,7 @@ public class GitRefsMetricsCollector implements MetricsCollector {
           try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             repository.getRefDatabase().getRefs().stream()
-                .filter(ref -> !ref.isSymbolic() && !ref.getName().startsWith(REFS_USERS))
+                .filter(ref -> !ref.isSymbolic())
                 .sorted(Comparator.comparing(Ref::getName))
                 .forEach(ref -> md.update(ref.getObjectId().toString().getBytes(UTF_8)));
             int sha1Int = truncateHashToInt(md.digest());
