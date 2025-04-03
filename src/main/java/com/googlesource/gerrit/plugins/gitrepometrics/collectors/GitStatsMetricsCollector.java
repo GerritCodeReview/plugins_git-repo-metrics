@@ -99,7 +99,7 @@ public class GitStatsMetricsCollector implements MetricsCollector {
             metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
             metrics.put(numberOfObjectsSinceBitmap, statistics.numberOfObjectsSinceBitmap);
             metrics.put(numberOfPackFilesSinceBitmap, statistics.numberOfPackFilesSinceBitmap);
-            logger.atInfo().log("New Git Statistics metrics collected: %s", statistics.toString());
+            logger.atFine().log("New Git Statistics metrics collected: %s", statistics.toString());
           } catch (IOException e) {
             logger.atSevere().log("Something went wrong: %s", e.getMessage());
           }
