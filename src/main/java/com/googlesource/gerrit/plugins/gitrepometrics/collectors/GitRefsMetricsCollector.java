@@ -60,7 +60,7 @@ public class GitRefsMetricsCollector implements MetricsCollector {
           try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
             repository.getRefDatabase().getRefs().stream()
-                .filter(ref -> !ref.isSymbolic() && !ref.getName().startsWith(REFS_USERS))
+                .filter(ref -> !ref.isSymbolic())
                 .sorted(Comparator.comparing(Ref::getName))
                 .forEach(ref -> md.update(ref.getObjectId().toString().getBytes(UTF_8)));
             int sha1Int = truncateHashToInt(md.digest());
