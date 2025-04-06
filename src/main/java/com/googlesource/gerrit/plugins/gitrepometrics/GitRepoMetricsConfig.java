@@ -14,30 +14,45 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 
+import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.server.config.PluginConfigFactory;
+import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 import org.eclipse.jgit.lib.Config;
 
 @Singleton
 public class GitRepoMetricsConfig {
   private final String pluginName;
   private final Config config;
+  private final ProjectCache projectCache;
 
   @Inject
-  public GitRepoMetricsConfig(PluginConfigFactory configFactory, @PluginName String pluginName) {
+  public GitRepoMetricsConfig(
+      PluginConfigFactory configFactory, ProjectCache projectCache, @PluginName String pluginName) {
+    this.projectCache = projectCache;
     config = configFactory.getGlobalPluginConfig(pluginName);
     this.pluginName = pluginName;
   }
 
-  public List<String> getRepositoryNames() {
-    return Arrays.stream(config.getStringList(pluginName, null, "project")).collect(toList());
+  public Set<String> getRepositoryNames() {
+    Stream<String> streamOfProjects =
+        collectAllRepositories()
+            ? projectCache.all().stream().map(Project.NameKey::get)
+            : Arrays.stream(config.getStringList(pluginName, null, "project"));
+
+    return streamOfProjects.collect(toSet());
+  }
+
+  private boolean collectAllRepositories() {
+    return config.getBoolean(pluginName, null, "collectAllRepositories", false);
   }
 
   public Long getGracePeriodMs() {
