@@ -19,6 +19,8 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 import com.google.gerrit.server.config.PluginConfigFactory;
+import com.google.gerrit.server.project.NullProjectCache;
+import com.google.gerrit.server.project.ProjectCache;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -34,24 +36,35 @@ public class ConfigSetupUtils {
   private final Path gitBasePath;
   private final List<String> projects;
   private final String gracePeriod;
+  private boolean collectAllRepositories;
 
   public ConfigSetupUtils(List<String> projects) throws IOException {
-    this(projects, "0");
+    this(projects, "0", false);
   }
 
   public ConfigSetupUtils(List<String> projects, String gracePeriod) throws IOException {
+    this(projects, gracePeriod, false);
+  }
+
+  public ConfigSetupUtils(List<String> projects, String gracePeriod, boolean collectAllRepositories)
+      throws IOException {
+    this.collectAllRepositories = collectAllRepositories;
     this.basePath = Files.createTempDirectory("git_repo_metrics_");
     this.gitBasePath = new File(basePath.toFile(), "git").toPath();
     this.projects = projects;
     this.gracePeriod = gracePeriod;
   }
 
-  public GitRepoMetricsConfig getGitRepoMetricsConfig() {
+  public GitRepoMetricsConfig getGitRepoMetricsConfig(ProjectCache projectCache) {
     PluginConfigFactory pluginConfigFactory = mock(PluginConfigFactory.class);
 
     doReturn(getConfig()).when(pluginConfigFactory).getGlobalPluginConfig(any());
 
-    return new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics");
+    return new GitRepoMetricsConfig(pluginConfigFactory, projectCache, "git-repo-metrics");
+  }
+
+  public GitRepoMetricsConfig getGitRepoMetricsConfig() {
+    return getGitRepoMetricsConfig(new NullProjectCache());
   }
 
   public Config getConfig() {
@@ -59,6 +72,7 @@ public class ConfigSetupUtils {
 
     c.setStringList(pluginName, null, "project", projects);
     c.setString(pluginName, null, "gracePeriod", gracePeriod);
+    c.setBoolean(pluginName, null, "collectAllRepositories", collectAllRepositories);
     c.setString("gerrit", null, "basePath", gitBasePath.toString());
     return c;
   }

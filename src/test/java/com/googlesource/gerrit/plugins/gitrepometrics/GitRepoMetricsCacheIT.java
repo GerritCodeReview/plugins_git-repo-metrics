@@ -23,6 +23,7 @@ import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.server.git.WorkQueue;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
@@ -45,6 +46,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   private GitStatsMetricsCollector gitStatsMetricsCollector;
   private GitRefsMetricsCollector gitRefsMetricsCollector;
   private GitRepoMetricsCache gitRepoMetricsCache;
+  private WorkQueue workQueue;
 
   private final Project.NameKey testProject1 = Project.nameKey("testProject1");
   private final Project.NameKey testProject2 = Project.nameKey("testProject2");
@@ -59,6 +61,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
     gitRefsMetricsCollector = plugin.getSysInjector().getInstance(GitRefsMetricsCollector.class);
+    workQueue = plugin.getSysInjector().getInstance(WorkQueue.class);
   }
 
   @Test
@@ -83,6 +86,42 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
             configSetupUtils.getGitRepoMetricsConfig(),
             testProject2.get())
         .run();
+
+    int expectedMetricsCount =
+        fsMetricsCollector.availableMetrics().size()
+            + gitStatsMetricsCollector.availableMetrics().size()
+            + gitRefsMetricsCollector.availableMetrics().size();
+
+    try {
+      WaitUtil.waitUntil(
+          () -> getPluginMetricsCount() == (long) availableProjects.size() * expectedMetricsCount,
+          Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
+    } catch (InterruptedException e) {
+      fail(
+          String.format(
+              "Only %d metrics have been registered, expected %d",
+              getPluginMetricsCount(), availableProjects.size() * expectedMetricsCount));
+    }
+  }
+
+  @Test
+  @UseLocalDisk
+  public void shouldCollectAllMetrics() throws IOException {
+    ConfigSetupUtils configSetupUtils =
+        new ConfigSetupUtils(List.of(), "0", /*collectAllRepositories*/ true);
+
+    GitRepoMetricsConfig gitRepoMetricsConfig =
+        configSetupUtils.getGitRepoMetricsConfig(projectCache);
+    TestUpdateGitMetricsTaskFactory testFactory =
+        new TestUpdateGitMetricsTaskFactory(gitRepoMetricsCache, repoManager, gitRepoMetricsConfig);
+    UpdateGitMetricsExecutorProvider executorProvider =
+        new UpdateGitMetricsExecutorProvider(workQueue, "git-repo-metrics", gitRepoMetricsConfig);
+    GitRepoMetricsScheduler scheduler =
+        new GitRepoMetricsScheduler(executorProvider.get(), gitRepoMetricsConfig, testFactory);
+
+    scheduler.run();
+
+    List<Project.NameKey> availableProjects = Arrays.asList(testProject1, testProject2);
 
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()
