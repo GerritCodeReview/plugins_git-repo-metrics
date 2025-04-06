@@ -17,7 +17,6 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -26,10 +25,10 @@ import java.util.concurrent.TimeUnit;
 public class GitRepoMetricsScheduler implements LifecycleListener, Runnable {
 
   private final ScheduledExecutorService metricsExecutor;
+  private final GitRepoMetricsConfig config;
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
   private final Long gracePeriodMs;
   private ScheduledFuture<?> updaterTask;
-  private List<String> repositoryNames;
 
   @Inject
   public GitRepoMetricsScheduler(
@@ -37,8 +36,8 @@ public class GitRepoMetricsScheduler implements LifecycleListener, Runnable {
       GitRepoMetricsConfig config,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory) {
     this.metricsExecutor = metricsExecutor;
-    repositoryNames = config.getRepositoryNames();
     gracePeriodMs = config.getGracePeriodMs();
+    this.config = config;
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
   }
 
@@ -56,7 +55,7 @@ public class GitRepoMetricsScheduler implements LifecycleListener, Runnable {
 
   @Override
   public void run() {
-    repositoryNames.stream()
+    config.getRepositoryNames().stream()
         .map(updateGitMetricsTaskFactory::create)
         .forEach(metricsExecutor::execute);
   }

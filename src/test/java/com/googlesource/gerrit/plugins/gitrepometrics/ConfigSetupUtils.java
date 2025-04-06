@@ -19,6 +19,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 import com.google.gerrit.server.config.PluginConfigFactory;
+import com.google.gerrit.server.project.NullProjectCache;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -51,7 +52,8 @@ public class ConfigSetupUtils {
 
     doReturn(getConfig()).when(pluginConfigFactory).getGlobalPluginConfig(any());
 
-    return new GitRepoMetricsConfig(pluginConfigFactory, "git-repo-metrics");
+    return new GitRepoMetricsConfig(
+        pluginConfigFactory, new NullProjectCache(), "git-repo-metrics");
   }
 
   public Config getConfig() {
