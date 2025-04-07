@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a90b5b0_948d3361",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2025-04-07T07:24:58Z",
+      "side": 1,
+      "message": "```suggestion\nDo not skip \"refs/users/\" when calculating SHA1\n```",
+      "revId": "0f509d17fb8a1588f2b2cf64870ae3c1c0b0edac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a57673_e711ccdf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1004034
+      },
+      "writtenOn": "2025-04-07T07:24:58Z",
+      "side": 1,
+      "message": "```suggestion\nSkipping \"refs/users/\" would not allow the correct computation\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "0f509d17fb8a1588f2b2cf64870ae3c1c0b0edac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
