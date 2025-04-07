@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3901da_7ae2941f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-07T12:51:47Z",
+      "side": 1,
+      "message": "This doesn\u0027t work when used in a multi-site setup since the starred changes are not replicated. I believe gerrit/multi-site should be fixed. I V-1 to trigger a discussion and avoid merging it.",
+      "revId": "ca31c4450f25d0656b3e1e465604c09d23240b51",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
