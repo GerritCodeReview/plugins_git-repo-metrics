@@ -18,6 +18,60 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a828f4_a57ad6a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-07T07:54:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "9a90b5b0_948d3361",
+      "fixSuggestions": [
+        {
+          "fixId": "bdef6552_6278cb28",
+          "description": "User suggestion",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 7,
+                "startChar": 0,
+                "endLine": 7,
+                "endChar": 45
+              },
+              "replacement": "Do not skip \"refs/users/\" when calculating SHA1"
+            }
+          ]
+        }
+      ],
+      "revId": "0f509d17fb8a1588f2b2cf64870ae3c1c0b0edac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75f02f94_6edaa0de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-07T07:54:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "9a90b5b0_948d3361",
+      "revId": "0f509d17fb8a1588f2b2cf64870ae3c1c0b0edac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7a57673_e711ccdf",
@@ -31,6 +85,72 @@
       "writtenOn": "2025-04-07T07:24:58Z",
       "side": 1,
       "message": "```suggestion\nSkipping \"refs/users/\" would not allow the correct computation\n```",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "revId": "0f509d17fb8a1588f2b2cf64870ae3c1c0b0edac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb98e35_b63f305c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-07T07:54:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "f7a57673_e711ccdf",
+      "range": {
+        "startLine": 9,
+        "startChar": 9,
+        "endLine": 9,
+        "endChar": 20
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "d72a8cb2_7456e88a",
+          "description": "User suggestion",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 9,
+                "startChar": 0,
+                "endLine": 9,
+                "endChar": 60
+              },
+              "replacement": "Skipping \"refs/users/\" would not allow the correct computation"
+            }
+          ]
+        }
+      ],
+      "revId": "0f509d17fb8a1588f2b2cf64870ae3c1c0b0edac",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237ee9f6_ce88534e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-07T07:54:27Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "f7a57673_e711ccdf",
       "range": {
         "startLine": 9,
         "startChar": 9,
