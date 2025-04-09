@@ -34,6 +34,24 @@
       "parentUuid": "ff3901da_7ae2941f",
       "revId": "ca31c4450f25d0656b3e1e465604c09d23240b51",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1149fe6b_2476fab6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-09T13:16:09Z",
+      "side": 1,
+      "message": "The multi-site and git-repo-metrics are different plugins and they should not influence each other. If refs are misaligned, that\u0027s it, git-repo-metrics should highlight it.",
+      "parentUuid": "ff3901da_7ae2941f",
+      "revId": "ca31c4450f25d0656b3e1e465604c09d23240b51",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
