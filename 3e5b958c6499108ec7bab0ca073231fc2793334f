@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca1cacc_1b10515f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-10T12:45:22Z",
+      "side": 1,
+      "message": "```suggestion\n  public ImmutableSortedSet\u003cString\u003e getRepositoryNames() {\n```",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "3e5b958c6499108ec7bab0ca073231fc2793334f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}

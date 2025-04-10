@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7584eb6f_2979b279",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-10T12:45:22Z",
+      "side": 1,
+      "message": "```suggestion\n  [git-repo-metrics]\n       collectAllRepositories \u003d true\n```",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 50
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e5c3984_fad3d3a5",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-10T12:45:22Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed.\nYou should be able to get the `UpdateGitMetricsTask.Factory` from the `sysInjector` this way:\n\n`updateGitMetricsTaskFactory \u003d plugin.getSysInjector().getInstance(UpdateGitMetricsTask.Factory.class);`\n\nSimilarly to what we did for `*MetricsCollector` in the `setUpTestPlugin()` method.",
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b7b789_cf07d711",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-10T12:45:22Z",
+      "side": 1,
+      "message": "Should this also include All-Users and All-projects?",
+      "range": {
+        "startLine": 124,
+        "startChar": 26,
+        "endLine": 124,
+        "endChar": 43
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
