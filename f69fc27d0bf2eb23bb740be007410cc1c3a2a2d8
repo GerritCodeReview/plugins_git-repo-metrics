@@ -26,6 +26,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d641be17_a72679c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-10T19:48:25Z",
+      "side": 1,
+      "message": "This is expensive and unnecessary.\n\nIf `collectAllRepositories \u003d true` then you should just return `true` at the very beginning of the `shouldCollectStats()` method and not being bothered in listing *all the repositories* for then executing a contain on them.\n\nLarge setups could have tens of thousands of repos (e.g. GerritHub.io) and fetching all of them and looking for a contain every single time is very expensive.",
+      "range": {
+        "startLine": 147,
+        "startChar": 11,
+        "endLine": 147,
+        "endChar": 38
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06cc38b_153b9b9c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-10T19:48:25Z",
+      "side": 1,
+      "message": "This is unrelated: whilst I do understand that using a `Set` would make more sense, however there is no need to change this method at all in this change.\n\nWhen `collectAllRepositories \u003d true` we should use a _shortcut_ and not checking repository names anymore.",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d18b515f_4122bffc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-10T19:48:25Z",
+      "side": 1,
+      "message": "This is *very expensive* and should be avoided here.",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 67
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107d7930_cefd1fe0",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-10T19:48:25Z",
+      "side": 1,
+      "message": "Why not making this public and leave the consumers of the configuration to adopt a shortcut when all the repositories should be collected?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e5c3984_fad3d3a5",
         "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
         "patchSetId": 3
