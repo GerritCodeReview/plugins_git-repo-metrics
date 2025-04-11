@@ -21,7 +21,6 @@ import com.google.gerrit.server.events.EventListener;
 import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefUpdatedEvent;
 import com.google.inject.Inject;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -63,8 +62,6 @@ class GitRepoUpdateListener implements EventListener {
     // Check the name of the event instead of checking the class type
     // to avoid importing pull and push replication plugin dependencies
     // only for this check.
-    return event.type != null
-        && !Objects.equals(event.instanceId, instanceId)
-        && event.type.endsWith("-replication-done");
+    return event.type != null && event.type.endsWith("-replication-done");
   }
 }
