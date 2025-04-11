@@ -135,10 +135,10 @@ public class GitUpdateListenerTest {
   }
 
   @Test
-  public void shouldNotUpdateMetricsOnRefReplicationDoneFromSameNode() {
+  public void shouldUpdateMetricsOnRefReplicationDoneFromSameNode() {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent(refReplicationDoneType, enabledProject, producerInstanceId));
-    assertMetricsAreNotUpdated();
+    assertMetricsAreUpdated();
   }
 
   private RefUpdatedEvent getRefUpdatedEvent(String projectName) {

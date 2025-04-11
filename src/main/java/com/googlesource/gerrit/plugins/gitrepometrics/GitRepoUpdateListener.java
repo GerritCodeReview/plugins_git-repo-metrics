@@ -64,7 +64,6 @@ class GitRepoUpdateListener implements EventListener {
     // to avoid importing pull and push replication plugin dependencies
     // only for this check.
     return event.type != null
-        && !Objects.equals(event.instanceId, instanceId)
         && event.type.endsWith("-replication-done");
   }
 }
