@@ -31,8 +31,7 @@ Settings
 The plugin allows to customize its behaviour through a specific
 `git-repo-metrics.config` file in the `$GERRIT_SITE/etc` directory.
 
-The metrics are not collected for all the projects, otherwise there might be an explosion of metrics
-exported, but only the one listed in the configuration file, i.e.:
+Following an example of config file:
 
 ```
 [git-repo-metrics]
@@ -41,6 +40,10 @@ exported, but only the one listed in the configuration file, i.e.:
   gracePeriod = 5m
   backend = GERRIT
 ```
+_git-repo-metrics.project_: Project to collect metrics for. Multiple projects can be listed.
+
+_git-repo-metrics.collectAllRepositories_: Collect metrics for all the repositories. By default, false.
+
 _git-repo-metrics.forcedCollection_: Force the repositories' metric collection update every
 _gracePeriod_ interval. By default, disabled.
 
