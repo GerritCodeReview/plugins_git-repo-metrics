@@ -52,6 +52,10 @@ public class GitRepoMetricsConfig {
     return config.getInt(pluginName, null, "poolSize", 1);
   }
 
+  public boolean collectAllRepositories() {
+    return config.getBoolean(pluginName, null, "collectAllRepositories", false);
+  }
+
   public GitBackend getGitBackend() {
     return config.getEnum(pluginName, null, "gitBackend", GitBackend.GERRIT);
   }
