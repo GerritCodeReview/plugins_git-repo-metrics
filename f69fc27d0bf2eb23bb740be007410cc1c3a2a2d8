@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e35b15c_6519cdc4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7584eb6f_2979b279",
+      "range": {
+        "startLine": 16,
+        "startChar": 2,
+        "endLine": 16,
+        "endChar": 50
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d641be17_a72679c4",
@@ -37,6 +61,54 @@
       "writtenOn": "2025-04-10T19:48:25Z",
       "side": 1,
       "message": "This is expensive and unnecessary.\n\nIf `collectAllRepositories \u003d true` then you should just return `true` at the very beginning of the `shouldCollectStats()` method and not being bothered in listing *all the repositories* for then executing a contain on them.\n\nLarge setups could have tens of thousands of repos (e.g. GerritHub.io) and fetching all of them and looking for a contain every single time is very expensive.",
+      "range": {
+        "startLine": 147,
+        "startChar": 11,
+        "endLine": 147,
+        "endChar": 38
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc767231_79811d65",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "Good shout!\nI won\u0027t go to the beginning of the",
+      "parentUuid": "d641be17_a72679c4",
+      "range": {
+        "startLine": 147,
+        "startChar": 11,
+        "endLine": 147,
+        "endChar": 38
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9f01c49_d2b076c4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "Good shout!\nI won\u0027t go to the beginning of the `shouldCollectStats()` method, but just before the `contains` check, because we still need to honour the grace period.",
+      "parentUuid": "d641be17_a72679c4",
       "range": {
         "startLine": 147,
         "startChar": 11,
@@ -72,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f927044f_733fbbf1",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "I could move this at a higher level, but at some point, we need to explicitly list the repositories we want to collect metrics for.\n\nMetrics collection doesn\u0027t happen just by listening to events for the wanted repositories, but also (if `forceCollection` is enabled), metrics are collected on a scheduled basis, which implies looping through all existing repositories.\n\nWDYT?",
+      "parentUuid": "c06cc38b_153b9b9c",
+      "range": {
+        "startLine": 45,
+        "startChar": 9,
+        "endLine": 45,
+        "endChar": 12
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d18b515f_4122bffc",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
         "patchSetId": 3
@@ -83,6 +179,54 @@
       "writtenOn": "2025-04-10T19:48:25Z",
       "side": 1,
       "message": "This is *very expensive* and should be avoided here.",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 67
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce71335_c66efffb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "See my previous reply. I believe we must loop through all repositories to gather metrics for all repositories when `forceCollection` is enabled.",
+      "parentUuid": "d18b515f_4122bffc",
+      "range": {
+        "startLine": 48,
+        "startChar": 14,
+        "endLine": 48,
+        "endChar": 67
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f77a1c3a_3978f028",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "I can move this to a higher level (without changing the",
+      "parentUuid": "d18b515f_4122bffc",
       "range": {
         "startLine": 48,
         "startChar": 14,
@@ -106,6 +250,30 @@
       "writtenOn": "2025-04-10T19:48:25Z",
       "side": 1,
       "message": "Why not making this public and leave the consumers of the configuration to adopt a shortcut when all the repositories should be collected?",
+      "range": {
+        "startLine": 54,
+        "startChar": 2,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "f69fc27d0bf2eb23bb740be007410cc1c3a2a2d8",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdf9668a_4c2da7f8",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsConfig.java",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-11T20:04:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "107d7930_cefd1fe0",
       "range": {
         "startLine": 54,
         "startChar": 2,
