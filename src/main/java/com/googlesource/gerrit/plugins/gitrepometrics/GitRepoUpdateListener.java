@@ -46,7 +46,7 @@ class GitRepoUpdateListener implements EventListener {
 
   @Override
   public void onEvent(Event event) {
-    if (event instanceof RefUpdatedEvent || isReplicationDoneEvent(event)) {
+    if (isMyEvent(event) && (isRefUpdatedEvent(event) || isRefReplicatedEvent(event))) {
       String projectName = ((ProjectEvent) event).getProjectNameKey().get();
       logger.atFine().log(
           "Got %s event from %s. Might need to collect metrics for project %s",
@@ -59,12 +59,19 @@ class GitRepoUpdateListener implements EventListener {
     }
   }
 
-  private boolean isReplicationDoneEvent(Event event) {
+  private boolean isRefReplicatedEvent(Event event) {
     // Check the name of the event instead of checking the class type
     // to avoid importing pull and push replication plugin dependencies
     // only for this check.
-    return event.type != null
-        && !Objects.equals(event.instanceId, instanceId)
-        && event.type.endsWith("-replication-done");
+
+    return event.type.endsWith("ref-replicated");
+  }
+
+  private boolean isRefUpdatedEvent(Event event) {
+    return event.type.equals(RefUpdatedEvent.TYPE);
+  }
+
+  private boolean isMyEvent(Event event) {
+    return event.type != null && Objects.equals(event.instanceId, instanceId);
   }
 }
