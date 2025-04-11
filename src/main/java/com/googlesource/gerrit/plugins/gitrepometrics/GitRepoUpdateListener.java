@@ -15,11 +15,13 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.extensions.events.LifecycleListener;
 import com.google.gerrit.server.config.GerritInstanceId;
 import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.EventListener;
 import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefUpdatedEvent;
+import com.google.gerrit.server.project.ProjectCache;
 import com.google.inject.Inject;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
@@ -30,17 +32,21 @@ class GitRepoUpdateListener implements EventListener {
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
   private final GitRepoMetricsCache gitRepoMetricsCache;
   private final String instanceId;
+  private final ProjectCache projectCache;
 
   @Inject
   protected GitRepoUpdateListener(
       @GerritInstanceId String instanceId,
       @UpdateGitMetricsExecutor ScheduledExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
-      GitRepoMetricsCache gitRepoMetricsCache) {
+      GitRepoMetricsCache gitRepoMetricsCache,
+      ProjectCache projectCache
+      ) {
     this.instanceId = instanceId;
     this.executor = executor;
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
+    this.projectCache = projectCache;
   }
 
   @Override
