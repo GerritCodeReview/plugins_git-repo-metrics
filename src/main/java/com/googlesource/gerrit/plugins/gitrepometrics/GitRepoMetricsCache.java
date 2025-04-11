@@ -44,6 +44,7 @@ public class GitRepoMetricsCache {
   private final Set<String> projects;
   private Map<String, Long> collectedAt;
   private final long gracePeriodMs;
+  private final boolean collectAllRepositories;
   private ImmutableList<GitRepoMetric> metricsNames;
   private DynamicSet<MetricsCollector> collectors;
 
@@ -70,6 +71,7 @@ public class GitRepoMetricsCache {
     this.collectedAt = Maps.newHashMap();
     this.clock = clock;
     this.gracePeriodMs = config.getGracePeriodMs();
+    this.collectAllRepositories = config.collectAllRepositories();
   }
 
   @Inject
@@ -146,6 +148,6 @@ public class GitRepoMetricsCache {
       return false;
     }
 
-    return projects.contains(projectName);
+    return collectAllRepositories || projects.contains(projectName);
   }
 }

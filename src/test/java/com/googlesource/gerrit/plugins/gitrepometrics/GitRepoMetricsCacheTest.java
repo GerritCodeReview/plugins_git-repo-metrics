@@ -28,6 +28,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -87,6 +88,16 @@ public class GitRepoMetricsCacheTest {
         new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
+  }
+
+  @Test
+  public void shouldCollectStatsForAllRepos() throws Exception {
+    gitRepoMetricsConfig = new ConfigSetupUtils(List.of(), "0", true).getGitRepoMetricsConfig();
+
+    gitRepoMetricsCache =
+        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+
+    assertThat(gitRepoMetricsCache.shouldCollectStats("new-repo")).isTrue();
   }
 
   @Test
