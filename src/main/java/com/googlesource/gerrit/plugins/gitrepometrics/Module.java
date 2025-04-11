@@ -47,6 +47,10 @@ public class Module extends LifecycleModule {
       listener().to(GitRepoMetricsScheduler.class);
     }
 
+    if (config.collectAllRepositories()) {
+      listener().to(MetricsInitializer.class);
+    }
+
     DynamicSet.setOf(binder(), MetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStatsMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);

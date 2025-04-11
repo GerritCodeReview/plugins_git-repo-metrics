@@ -34,16 +34,23 @@ public class ConfigSetupUtils {
   private final Path gitBasePath;
   private final List<String> projects;
   private final String gracePeriod;
+  private final boolean collectAllRepositories;
 
   public ConfigSetupUtils(List<String> projects) throws IOException {
     this(projects, "0");
   }
 
   public ConfigSetupUtils(List<String> projects, String gracePeriod) throws IOException {
+    this(projects, gracePeriod, false);
+  }
+
+  public ConfigSetupUtils(List<String> projects, String gracePeriod, boolean collectAllRepositories)
+      throws IOException {
     this.basePath = Files.createTempDirectory("git_repo_metrics_");
     this.gitBasePath = new File(basePath.toFile(), "git").toPath();
     this.projects = projects;
     this.gracePeriod = gracePeriod;
+    this.collectAllRepositories = collectAllRepositories;
   }
 
   public GitRepoMetricsConfig getGitRepoMetricsConfig() {
@@ -57,6 +64,7 @@ public class ConfigSetupUtils {
   public Config getConfig() {
     Config c = new Config();
 
+    c.setBoolean(pluginName, null, "collectAllRepositories", collectAllRepositories);
     c.setStringList(pluginName, null, "project", projects);
     c.setString(pluginName, null, "gracePeriod", gracePeriod);
     c.setString("gerrit", null, "basePath", gitBasePath.toString());
