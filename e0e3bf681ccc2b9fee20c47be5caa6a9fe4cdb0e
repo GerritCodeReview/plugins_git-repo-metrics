@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afc27c62_7e788603",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-14T22:00:13Z",
+      "side": 1,
+      "message": "This test could be flaky. We should somehow wait some time before doing the assertion. Might be better just remove it?",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 53
+      },
+      "revId": "e0e3bf681ccc2b9fee20c47be5caa6a9fe4cdb0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
