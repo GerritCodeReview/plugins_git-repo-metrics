@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "301edd8d_8d4846a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-14T20:13:57Z",
+      "side": 1,
+      "message": "```suggestion\nhappens synchronously via fetch.\n```",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "03ba510d78d8f52c1b9cf6e4b531b2d4d4dc760c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98f7b56_8f585638",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-14T20:13:57Z",
+      "side": 1,
+      "message": "Maybe worth defining a constant and reuse it across the whole plugin?",
+      "range": {
+        "startLine": 67,
+        "startChar": 31,
+        "endLine": 67,
+        "endChar": 47
+      },
+      "revId": "03ba510d78d8f52c1b9cf6e4b531b2d4d4dc760c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
