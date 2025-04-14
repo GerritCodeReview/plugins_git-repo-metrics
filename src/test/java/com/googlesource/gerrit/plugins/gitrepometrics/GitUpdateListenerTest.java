@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.googlesource.gerrit.plugins.gitrepometrics.GitRepoUpdateListener.REF_REPLICATED_EVENT_SUFFIX;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
@@ -57,8 +58,6 @@ public class GitUpdateListenerTest {
   private final String disabledProject = "disabledProject";
   private final Project.NameKey disabledProjectNameKey = Project.nameKey(disabledProject);
   private final String producerInstanceId = "producerInstanceId";
-  private final String consumerInstanceId = "consumerInstanceId";
-  private final String refReplicationDoneType = "ref-replication-done";
 
   @Inject private UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
 
@@ -114,35 +113,54 @@ public class GitUpdateListenerTest {
   }
 
   @Test
-  public void shouldUpdateMetricsIfProjectIsEnabledOnRefReplicationDone() {
+  public void shouldNotUpdateMetricsOnRefReplicatedFromOtherNode() {
     gitRepoUpdateListener.onEvent(
-        getRefReplicationEvent(refReplicationDoneType, enabledProject, consumerInstanceId));
+        getRefReplicationEvent(
+            REF_REPLICATED_EVENT_SUFFIX, enabledProject, "another-node-instance-id"));
+    assertMetricsAreNotUpdated();
+  }
+
+  @Test
+  public void shouldNotUpdateMetricsOnRefUpdatedFromOtherNode() {
+    gitRepoUpdateListener.onEvent(getRefUpdatedEvent(enabledProject, "another-node-instance-id"));
+    assertMetricsAreNotUpdated();
+  }
+
+  @Test
+  public void shouldUpdateMetricsIfProjectIsEnabledOnRefReplicated() {
+    gitRepoUpdateListener.onEvent(
+        getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, enabledProject, producerInstanceId));
     assertMetricsAreUpdated();
   }
 
   @Test
-  public void shouldNotUpdateMetricsIfProjectIsDisabledOnReplicationDone() {
+  public void shouldNotUpdateMetricsIfProjectIsDisabledOnOnRefReplicated() {
     gitRepoUpdateListener.onEvent(
-        getRefReplicationEvent(refReplicationDoneType, disabledProject, consumerInstanceId));
+        getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, disabledProject, producerInstanceId));
     assertMetricsAreNotUpdated();
   }
 
   @Test
   public void shouldNotUpdateMetricsOnUnknownEvent() {
     gitRepoUpdateListener.onEvent(
-        getRefReplicationEvent("any-event", enabledProject, consumerInstanceId));
+        getRefReplicationEvent("any-event", enabledProject, producerInstanceId));
     assertMetricsAreNotUpdated();
   }
 
   @Test
-  public void shouldNotUpdateMetricsOnRefReplicationDoneFromSameNode() {
+  public void shouldUpdateMetricsOnRefReplicatedFromSameNode() {
     gitRepoUpdateListener.onEvent(
-        getRefReplicationEvent(refReplicationDoneType, enabledProject, producerInstanceId));
-    assertMetricsAreNotUpdated();
+        getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, enabledProject, producerInstanceId));
+    assertMetricsAreUpdated();
   }
 
   private RefUpdatedEvent getRefUpdatedEvent(String projectName) {
+    return getRefUpdatedEvent(projectName, producerInstanceId);
+  }
+
+  private RefUpdatedEvent getRefUpdatedEvent(String projectName, String instanceId) {
     RefUpdatedEvent refUpdatedEvent = new RefUpdatedEvent();
+    refUpdatedEvent.instanceId = instanceId;
     refUpdatedEvent.refUpdate =
         () -> {
           RefUpdateAttribute attributes = new RefUpdateAttribute();
