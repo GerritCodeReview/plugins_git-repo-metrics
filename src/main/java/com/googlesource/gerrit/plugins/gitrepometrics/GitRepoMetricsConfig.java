@@ -41,7 +41,7 @@ public class GitRepoMetricsConfig {
   }
 
   public Long getGracePeriodMs() {
-    return config.getTimeUnit(pluginName, null, "gracePeriod", 0L, TimeUnit.MILLISECONDS);
+    return config.getTimeUnit(pluginName, null, "gracePeriod", 300000L, TimeUnit.MILLISECONDS);
   }
 
   public boolean isForcedCollection() {

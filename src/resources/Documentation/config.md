@@ -51,7 +51,7 @@ _gracePeriod_ interval. By default, disabled.
 > interval, otherwise the collection would happen just once at the plugin startup time.
 
 _git-repo-metrics.gracePeriod_: Grace period between samples collection. Used to avoid aggressive
-metrics collection. By default, 0.
+metrics collection. By default, 5 minutes.
 
 _git-repo-metrics.poolSize_: Number of threads available to collect metrics. By default, 1.
 _git-repo-metrics.gitBackend_: Name of the Git SCM tool managing the Git data, for which this tools will expose
