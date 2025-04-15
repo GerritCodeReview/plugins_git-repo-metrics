@@ -43,9 +43,7 @@ public class Module extends LifecycleModule {
     bind(GitRepoUpdateListener.class);
     DynamicSet.bind(binder(), EventListener.class).to(GitRepoUpdateListener.class);
 
-    if (config.isForcedCollection()) {
-      listener().to(GitRepoMetricsScheduler.class);
-    }
+    listener().to(GitRepoMetricsScheduler.class);
 
     if (config.collectAllRepositories()) {
       listener().to(MetricsInitializer.class);

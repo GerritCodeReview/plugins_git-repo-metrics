@@ -22,26 +22,17 @@ import com.google.gerrit.server.events.ProjectEvent;
 import com.google.gerrit.server.events.RefUpdatedEvent;
 import com.google.inject.Inject;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ScheduledExecutorService;
 
 class GitRepoUpdateListener implements EventListener {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   protected static final String REF_REPLICATED_EVENT_SUFFIX = "ref-replicated";
-  private final ExecutorService executor;
-  private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
   private final GitRepoMetricsCache gitRepoMetricsCache;
   private final String instanceId;
 
   @Inject
   protected GitRepoUpdateListener(
-      @GerritInstanceId String instanceId,
-      @UpdateGitMetricsExecutor ScheduledExecutorService executor,
-      UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
-      GitRepoMetricsCache gitRepoMetricsCache) {
+      @GerritInstanceId String instanceId, GitRepoMetricsCache gitRepoMetricsCache) {
     this.instanceId = instanceId;
-    this.executor = executor;
-    this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
   }
 
@@ -53,10 +44,7 @@ class GitRepoUpdateListener implements EventListener {
           "Got %s event from %s. Might need to collect metrics for project %s",
           event.type, event.instanceId, projectName);
 
-      if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
-        UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
-        executor.execute(updateGitMetricsTask);
-      }
+      gitRepoMetricsCache.collectStatsForProject(projectName);
     }
   }
 
