@@ -51,6 +51,10 @@ public class Module extends LifecycleModule {
       listener().to(MetricsInitializer.class);
     }
 
+    if (config.getGracePeriodMs() > 0) {
+      bind(ProjectMetricsLimiter.class).to(ProjectMetricsThrottler.class).in(Scopes.SINGLETON);
+    }
+
     DynamicSet.setOf(binder(), MetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(GitStatsMetricsCollector.class);
     DynamicSet.bind(binder(), MetricsCollector.class).to(FSMetricsCollector.class);
