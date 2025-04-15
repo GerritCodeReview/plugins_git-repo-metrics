@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41e10e0b_fc145ed7",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-15T10:54:12Z",
+      "side": 1,
+      "message": "Could avoid if `forceCollection` is set.",
+      "revId": "09356c3ef19fe6b28a9c6aff775535907c7817e9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
