@@ -18,7 +18,6 @@ import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
 import com.codahale.metrics.MetricRegistry;
-import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.flogger.FluentLogger;
@@ -29,7 +28,6 @@ import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
-import java.time.Clock;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -43,22 +41,17 @@ public class GitRepoMetricsCache {
   private final MetricMaker metricMaker;
   private final MetricRegistry metricRegistry;
   private final Set<String> projects;
-  private Map<String, Long> collectedAt;
-  private final long gracePeriodMs;
   private final boolean collectAllRepositories;
   private ImmutableList<GitRepoMetric> metricsNames;
   private DynamicSet<MetricsCollector> collectors;
   private Set<String> staleStatsProjects;
 
-  private final Clock clock;
-
-  @VisibleForTesting
+  @Inject
   GitRepoMetricsCache(
       DynamicSet<MetricsCollector> collectors,
       MetricMaker metricMaker,
       MetricRegistry metricRegistry,
-      GitRepoMetricsConfig config,
-      Clock clock) {
+      GitRepoMetricsConfig config) {
     this.collectors = collectors;
     this.metricMaker = metricMaker;
     this.metricRegistry = metricRegistry;
@@ -70,20 +63,8 @@ public class GitRepoMetricsCache {
 
     this.projects = new HashSet<>(config.getRepositoryNames());
     this.metrics = Maps.newHashMap();
-    this.collectedAt = Maps.newHashMap();
-    this.clock = clock;
-    this.gracePeriodMs = config.getGracePeriodMs();
     this.collectAllRepositories = config.collectAllRepositories();
     this.staleStatsProjects = ConcurrentHashMap.newKeySet();
-  }
-
-  @Inject
-  GitRepoMetricsCache(
-      DynamicSet<MetricsCollector> collectors,
-      MetricMaker metricMaker,
-      MetricRegistry metricRegistry,
-      GitRepoMetricsConfig config) {
-    this(collectors, metricMaker, metricRegistry, config, Clock.systemDefaultZone());
   }
 
   public Map<String, Long> getMetrics() {
@@ -102,7 +83,6 @@ public class GitRepoMetricsCache {
             createNewCallbackMetric(repoMetric, projectName);
           }
         });
-    collectedAt.put(projectName, clock.millis());
   }
 
   private boolean metricExists(String metricName) {
@@ -130,27 +110,11 @@ public class GitRepoMetricsCache {
     return collectors;
   }
 
-  @VisibleForTesting
-  public Map<String, Long> getCollectedAt() {
-    return collectedAt;
-  }
-
   public static String getMetricName(String metricName, String projectName) {
     return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
   }
 
   public boolean shouldCollectStats(String projectName) {
-    long lastCollectionTime = collectedAt.getOrDefault(projectName, 0L);
-    long currentTimeMs = System.currentTimeMillis();
-    boolean doCollectStats = lastCollectionTime + gracePeriodMs <= currentTimeMs;
-    if (!doCollectStats) {
-      logger.atFine().log(
-          "Skip stats collection for %s (grace period: %d, last collection time: %d, current time:"
-              + " %d",
-          projectName, gracePeriodMs, lastCollectionTime, currentTimeMs);
-      return false;
-    }
-
     return (collectAllRepositories || projects.contains(projectName))
         && !staleStatsProjects.contains(projectName);
   }
