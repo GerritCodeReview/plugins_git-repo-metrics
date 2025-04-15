@@ -16,12 +16,14 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
 import static com.googlesource.gerrit.plugins.gitrepometrics.GitRepoUpdateListener.REF_REPLICATED_EVENT_SUFFIX;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 import com.codahale.metrics.MetricRegistry;
+import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginName;
 import com.google.gerrit.extensions.registration.DynamicSet;
@@ -38,13 +40,17 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.TypeLiteral;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Collections;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 
 public class GitUpdateListenerTest {
+  private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 5;
   private final GitRepositoryManager repoManager = new InMemoryRepositoryManager();
   private final ScheduledExecutorService mockedExecutorService =
       mock(ScheduledExecutorService.class);
@@ -96,7 +102,8 @@ public class GitUpdateListenerTest {
             producerInstanceId,
             mockedExecutorService,
             updateGitMetricsTaskFactory,
-            gitRepoMetricsCache);
+            gitRepoMetricsCache,
+            new ProjectMetricsUnlimited());
   }
 
   @Test
@@ -151,6 +158,26 @@ public class GitUpdateListenerTest {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, enabledProject, producerInstanceId));
     assertMetricsUpdateTaskIsExecuted();
+  }
+
+  @Test
+  public void shouldTriggerRateLimiter() {
+    AtomicInteger acquireCount = new AtomicInteger();
+    GitRepoUpdateListener limitedGitRepoUpdateListener =
+        new GitRepoUpdateListener(
+            producerInstanceId,
+            Executors.newSingleThreadScheduledExecutor(),
+            updateGitMetricsTaskFactory,
+            gitRepoMetricsCache,
+            (project) -> acquireCount.incrementAndGet());
+    limitedGitRepoUpdateListener.onEvent(getRefUpdatedEvent(enabledProject));
+
+    try {
+      WaitUtil.waitUntil(
+          () -> acquireCount.get() == 1, Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
+    } catch (InterruptedException e) {
+      fail(String.format("Rate limiter not triggered for project %s", enabledProject));
+    }
   }
 
   private RefUpdatedEvent getRefUpdatedEvent(String projectName) {

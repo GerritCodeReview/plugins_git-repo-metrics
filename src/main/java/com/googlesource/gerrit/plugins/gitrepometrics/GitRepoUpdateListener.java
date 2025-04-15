@@ -32,17 +32,20 @@ class GitRepoUpdateListener implements EventListener {
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
   private final GitRepoMetricsCache gitRepoMetricsCache;
   private final String instanceId;
+  private final ProjectMetricsLimiter projectMetricsLimiter;
 
   @Inject
   protected GitRepoUpdateListener(
       @GerritInstanceId String instanceId,
       @UpdateGitMetricsExecutor ScheduledExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
-      GitRepoMetricsCache gitRepoMetricsCache) {
+      GitRepoMetricsCache gitRepoMetricsCache,
+      ProjectMetricsLimiter projectMetricsLimiter) {
     this.instanceId = instanceId;
     this.executor = executor;
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
+    this.projectMetricsLimiter = projectMetricsLimiter;
   }
 
   @Override
@@ -58,6 +61,7 @@ class GitRepoUpdateListener implements EventListener {
         gitRepoMetricsCache.setStale(projectName);
         executor.execute(
             () -> {
+              projectMetricsLimiter.acquire(projectName);
               gitRepoMetricsCache.unsetStale(projectName);
               updateGitMetricsTask.run();
             });
