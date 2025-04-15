@@ -44,7 +44,6 @@ public class GitRepoMetricsCache {
   private final MetricRegistry metricRegistry;
   private final Set<String> projects;
   private Map<String, Long> collectedAt;
-  private final long gracePeriodMs;
   private final boolean collectAllRepositories;
   private ImmutableList<GitRepoMetric> metricsNames;
   private DynamicSet<MetricsCollector> collectors;
@@ -72,7 +71,6 @@ public class GitRepoMetricsCache {
     this.metrics = Maps.newHashMap();
     this.collectedAt = Maps.newHashMap();
     this.clock = clock;
-    this.gracePeriodMs = config.getGracePeriodMs();
     this.collectAllRepositories = config.collectAllRepositories();
     this.staleStatsProjects = ConcurrentHashMap.newKeySet();
   }
@@ -140,17 +138,6 @@ public class GitRepoMetricsCache {
   }
 
   public boolean shouldCollectStats(String projectName) {
-    long lastCollectionTime = collectedAt.getOrDefault(projectName, 0L);
-    long currentTimeMs = System.currentTimeMillis();
-    boolean doCollectStats = lastCollectionTime + gracePeriodMs <= currentTimeMs;
-    if (!doCollectStats) {
-      logger.atFine().log(
-          "Skip stats collection for %s (grace period: %d, last collection time: %d, current time:"
-              + " %d",
-          projectName, gracePeriodMs, lastCollectionTime, currentTimeMs);
-      return false;
-    }
-
     return (collectAllRepositories || projects.contains(projectName))
         && !staleStatsProjects.contains(projectName);
   }
