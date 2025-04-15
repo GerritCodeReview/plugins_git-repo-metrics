@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f8724ed_c5d2c88b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "I am missing a test where we are asserting that the Issue 410584024 has been resolved.",
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6380dc_1bc16b9c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsLimiter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "Public interfaces should have JavaDocs.",
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e777608_615edf6e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsThrottler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "nit: can be package-protected.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 6
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b54ad315_fc1e48ac",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsThrottler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "This can be computed at L26 and just used at runtime here.",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 72
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd1d9bd_790cad1a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsUnlimited.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "nit: can be package-protected.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d7d804f_8af083d0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "The test body doesn\u0027t have correlation with this name: consider either rename the test or just remove it altogether.",
+      "range": {
+        "startLine": 124,
+        "startChar": 14,
+        "endLine": 124,
+        "endChar": 56
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3b3538_58576fec",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "```suggestion\n    AtomicInteger acquireCount \u003d new AtomicInteger();\n```",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 59
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c38c0f4_96d580a9",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "```suggestion\n            (project) -\u003e acquireCount.incrementAndGet());\n```",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 39
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7fa93a1_2b6fbf31",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "```suggestion\n          () -\u003e acquireCount.get() \u003d\u003d 1,\n```",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6536b95d_e5191300",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T22:23:29Z",
+      "side": 1,
+      "message": "This whole class is unnecessary: you could achieve the same test with a simple lambda.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 3
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
