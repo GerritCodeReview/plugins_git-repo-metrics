@@ -96,7 +96,8 @@ public class GitUpdateListenerTest {
             producerInstanceId,
             mockedExecutorService,
             updateGitMetricsTaskFactory,
-            gitRepoMetricsCache);
+            gitRepoMetricsCache,
+            new ProjectMetricsUnlimited());
   }
 
   @Test
