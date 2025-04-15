@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c7985c1_2dc0e452",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T12:57:53Z",
+      "side": 1,
+      "message": "Unrelated: we should remove this `GERRIT` in the example, as this is the plugin *for* Gerrit, therefore relying on its default would be enough.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 18
+      },
+      "revId": "1a6ca362e5c1ba4507cdebd4003f9464c3b11e8f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfe1b0a_8af807bf",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T12:57:53Z",
+      "side": 1,
+      "message": "Maybe rename it to ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS?",
+      "range": {
+        "startLine": 67,
+        "startChar": 43,
+        "endLine": 67,
+        "endChar": 45
+      },
+      "revId": "1a6ca362e5c1ba4507cdebd4003f9464c3b11e8f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d935e166_17ced9e3",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-15T12:57:53Z",
+      "side": 1,
+      "message": "This test is not useful, as it may have zero metrics at the beginning and then collecting them: without any additional action or assertion is always passing anyway.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 3
+      },
+      "revId": "1a6ca362e5c1ba4507cdebd4003f9464c3b11e8f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
