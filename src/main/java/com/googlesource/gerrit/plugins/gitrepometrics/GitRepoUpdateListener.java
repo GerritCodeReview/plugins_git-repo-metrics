@@ -53,10 +53,7 @@ class GitRepoUpdateListener implements EventListener {
           "Got %s event from %s. Might need to collect metrics for project %s",
           event.type, event.instanceId, projectName);
 
-      if (gitRepoMetricsCache.shouldCollectStats(projectName)) {
-        UpdateGitMetricsTask updateGitMetricsTask = updateGitMetricsTaskFactory.create(projectName);
-        executor.execute(updateGitMetricsTask);
-      }
+      gitRepoMetricsCache.collectStatsForProject(projectName);
     }
   }
 

@@ -27,19 +27,24 @@ public class GitRepoMetricsScheduler implements LifecycleListener, Runnable {
 
   private final ScheduledExecutorService metricsExecutor;
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
+  private final boolean isForcedCollection;
   private final Long gracePeriodMs;
   private ScheduledFuture<?> updaterTask;
   private List<String> repositoryNames;
+  private final GitRepoMetricsCache gitRepoMetricsCache;
 
   @Inject
   public GitRepoMetricsScheduler(
       @UpdateGitMetricsExecutor ScheduledExecutorService metricsExecutor,
       GitRepoMetricsConfig config,
-      UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory) {
+      UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
+      GitRepoMetricsCache gitRepoMetricsCache) {
     this.metricsExecutor = metricsExecutor;
     repositoryNames = config.getRepositoryNames();
     gracePeriodMs = config.getGracePeriodMs();
+    this.isForcedCollection = config.isForcedCollection();
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
+    this.gitRepoMetricsCache = gitRepoMetricsCache;
   }
 
   @Override
@@ -56,8 +61,17 @@ public class GitRepoMetricsScheduler implements LifecycleListener, Runnable {
 
   @Override
   public void run() {
-    repositoryNames.stream()
-        .map(updateGitMetricsTaskFactory::create)
-        .forEach(metricsExecutor::execute);
+    if (isForcedCollection) {
+      repositoryNames.stream()
+          .map(updateGitMetricsTaskFactory::create)
+          .forEach(metricsExecutor::execute);
+    } else {
+      gitRepoMetricsCache.getStaleStatsProjects()
+          .forEach(p -> {
+            Runnable task = updateGitMetricsTaskFactory.create(p);
+            gitRepoMetricsCache.statsCollectedForProject(p);
+            metricsExecutor.execute(task);
+          });
+    }
   }
 }

@@ -35,6 +35,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -47,6 +48,8 @@ public class GitRepoMetricsCache {
   private final boolean collectAllRepositories;
   private ImmutableList<GitRepoMetric> metricsNames;
   private DynamicSet<MetricsCollector> collectors;
+  private Set<String> staleStatsProjects;
+
 
   private final Clock clock;
 
@@ -72,6 +75,7 @@ public class GitRepoMetricsCache {
     this.clock = clock;
     this.gracePeriodMs = config.getGracePeriodMs();
     this.collectAllRepositories = config.collectAllRepositories();
+    this.staleStatsProjects = ConcurrentHashMap.newKeySet();
   }
 
   @Inject
@@ -81,6 +85,10 @@ public class GitRepoMetricsCache {
       MetricRegistry metricRegistry,
       GitRepoMetricsConfig config) {
     this(collectors, metricMaker, metricRegistry, config, Clock.systemDefaultZone());
+  }
+
+  public Set<String> getStaleStatsProjects() {
+    return staleStatsProjects;
   }
 
   public Map<String, Long> getMetrics() {
@@ -149,5 +157,13 @@ public class GitRepoMetricsCache {
     }
 
     return collectAllRepositories || projects.contains(projectName);
+  }
+
+  public void collectStatsForProject(String projectName) {
+    staleStatsProjects.add(projectName);
+  }
+
+  public void statsCollectedForProject(String projectName) {
+    staleStatsProjects.remove(projectName);
   }
 }
