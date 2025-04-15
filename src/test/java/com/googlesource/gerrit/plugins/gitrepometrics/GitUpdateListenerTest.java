@@ -52,8 +52,7 @@ public class GitUpdateListenerTest {
   private final String enabledProject = "enabledProject";
   private final Project.NameKey enabledProjectNameKey = Project.nameKey(enabledProject);
 
-  ArgumentCaptor<UpdateGitMetricsTask> updateGitMetricsTaskCaptor =
-      ArgumentCaptor.forClass(UpdateGitMetricsTask.class);
+  ArgumentCaptor<Runnable> updateGitMetricsTaskCaptor = ArgumentCaptor.forClass(Runnable.class);
   private GitRepoMetricsCache gitRepoMetricsCache;
   private final String disabledProject = "disabledProject";
   private final Project.NameKey disabledProjectNameKey = Project.nameKey(disabledProject);
@@ -103,13 +102,13 @@ public class GitUpdateListenerTest {
   @Test
   public void shouldUpdateMetricsIfProjectIsEnabledOnRefUpdated() {
     gitRepoUpdateListener.onEvent(getRefUpdatedEvent(enabledProject));
-    assertMetricsAreUpdated();
+    assertMetricsUpdateTaskIsExecuted();
   }
 
   @Test
   public void shouldNotUpdateMetricsIfProjectIsDisabledOnRefUpdated() {
     gitRepoUpdateListener.onEvent(getRefUpdatedEvent(disabledProject));
-    assertMetricsAreNotUpdated();
+    assertMetricsUpdateTaskIsNotExecuted();
   }
 
   @Test
@@ -117,41 +116,41 @@ public class GitUpdateListenerTest {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent(
             REF_REPLICATED_EVENT_SUFFIX, enabledProject, "another-node-instance-id"));
-    assertMetricsAreNotUpdated();
+    assertMetricsUpdateTaskIsNotExecuted();
   }
 
   @Test
   public void shouldNotUpdateMetricsOnRefUpdatedFromOtherNode() {
     gitRepoUpdateListener.onEvent(getRefUpdatedEvent(enabledProject, "another-node-instance-id"));
-    assertMetricsAreNotUpdated();
+    assertMetricsUpdateTaskIsNotExecuted();
   }
 
   @Test
   public void shouldUpdateMetricsIfProjectIsEnabledOnRefReplicated() {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, enabledProject, producerInstanceId));
-    assertMetricsAreUpdated();
+    assertMetricsUpdateTaskIsExecuted();
   }
 
   @Test
   public void shouldNotUpdateMetricsIfProjectIsDisabledOnOnRefReplicated() {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, disabledProject, producerInstanceId));
-    assertMetricsAreNotUpdated();
+    assertMetricsUpdateTaskIsNotExecuted();
   }
 
   @Test
   public void shouldNotUpdateMetricsOnUnknownEvent() {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent("any-event", enabledProject, producerInstanceId));
-    assertMetricsAreNotUpdated();
+    assertMetricsUpdateTaskIsNotExecuted();
   }
 
   @Test
   public void shouldUpdateMetricsOnRefReplicatedFromSameNode() {
     gitRepoUpdateListener.onEvent(
         getRefReplicationEvent(REF_REPLICATED_EVENT_SUFFIX, enabledProject, producerInstanceId));
-    assertMetricsAreUpdated();
+    assertMetricsUpdateTaskIsExecuted();
   }
 
   private RefUpdatedEvent getRefUpdatedEvent(String projectName) {
@@ -197,14 +196,11 @@ public class GitUpdateListenerTest {
     }
   }
 
-  private void assertMetricsAreUpdated() {
-    UpdateGitMetricsTask expectedUpdateGitMetricsTask =
-        updateGitMetricsTaskFactory.create(enabledProject);
-    assertThat(updateGitMetricsTaskCaptor.getValue().toString())
-        .isEqualTo(expectedUpdateGitMetricsTask.toString());
+  private void assertMetricsUpdateTaskIsExecuted() {
+    assertThat(updateGitMetricsTaskCaptor.getValue()).isNotNull();
   }
 
-  private void assertMetricsAreNotUpdated() {
+  private void assertMetricsUpdateTaskIsNotExecuted() {
     updateGitMetricsTaskFactory.create(enabledProject);
     verifyNoInteractions(mockedExecutorService);
   }
