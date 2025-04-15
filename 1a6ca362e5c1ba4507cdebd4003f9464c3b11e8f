@@ -47,6 +47,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c2d01a_6d01d185",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-15T12:59:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cfe1b0a_8af807bf",
+      "range": {
+        "startLine": 67,
+        "startChar": 43,
+        "endLine": 67,
+        "endChar": 45
+      },
+      "revId": "1a6ca362e5c1ba4507cdebd4003f9464c3b11e8f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d935e166_17ced9e3",
@@ -60,6 +84,30 @@
       "writtenOn": "2025-04-15T12:57:53Z",
       "side": 1,
       "message": "This test is not useful, as it may have zero metrics at the beginning and then collecting them: without any additional action or assertion is always passing anyway.",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 3
+      },
+      "revId": "1a6ca362e5c1ba4507cdebd4003f9464c3b11e8f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa46780b_79c1e8e2",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-15T12:59:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d935e166_17ced9e3",
       "range": {
         "startLine": 77,
         "startChar": 0,
