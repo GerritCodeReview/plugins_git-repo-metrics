@@ -47,6 +47,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "901da07a_47db4f10",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-16T13:33:19Z",
+      "side": 1,
+      "message": "Otherwise you cannot mutate it on the lambda at L174",
+      "parentUuid": "6fbc5772_d8301677",
+      "range": {
+        "startLine": 171,
+        "startChar": 54,
+        "endLine": 171,
+        "endChar": 69
+      },
+      "revId": "37d8c402b1bba3c65f6293d21d1b65b5b03a9cef",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "444f6dc2_82b73eb6",
@@ -60,6 +84,30 @@
       "writtenOn": "2025-04-16T13:20:27Z",
       "side": 1,
       "message": "```suggestion\n                    .equalsIgnoreCase(metricName + \"_\" + projectName.toLowerCase()))\n```",
+      "range": {
+        "startLine": 200,
+        "startChar": 20,
+        "endLine": 201,
+        "endChar": 27
+      },
+      "revId": "37d8c402b1bba3c65f6293d21d1b65b5b03a9cef",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1067f96d_cd880d51",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-16T13:33:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "444f6dc2_82b73eb6",
       "range": {
         "startLine": 200,
         "startChar": 20,
