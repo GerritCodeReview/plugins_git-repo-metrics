@@ -46,6 +46,30 @@
       },
       "revId": "05d543ac160114d9ecad0a4825de78811a172d53",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13960e03_b45e90ae",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T11:28:20Z",
+      "side": 1,
+      "message": "Ah true! So I think we should either wait for it to be 3 or we just set `initialLooseRefs` to 3.",
+      "parentUuid": "039b06d5_c85e0e1d",
+      "range": {
+        "startLine": 153,
+        "startChar": 90,
+        "endLine": 153,
+        "endChar": 94
+      },
+      "revId": "05d543ac160114d9ecad0a4825de78811a172d53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
