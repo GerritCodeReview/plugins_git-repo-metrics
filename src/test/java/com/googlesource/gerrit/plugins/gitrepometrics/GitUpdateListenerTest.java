@@ -93,10 +93,8 @@ public class GitUpdateListenerTest {
 
     gitRepoUpdateListener =
         new GitRepoUpdateListener(
-            producerInstanceId,
-            mockedExecutorService,
-            updateGitMetricsTaskFactory,
-            gitRepoMetricsCache);
+            mockedExecutorService, updateGitMetricsTaskFactory, gitRepoMetricsCache);
+    gitRepoUpdateListener.setInstanceId(producerInstanceId);
   }
 
   @Test

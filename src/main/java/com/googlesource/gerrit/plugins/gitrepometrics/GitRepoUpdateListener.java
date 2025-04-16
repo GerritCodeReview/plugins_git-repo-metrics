@@ -31,15 +31,18 @@ class GitRepoUpdateListener implements EventListener {
   private final ExecutorService executor;
   private final UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory;
   private final GitRepoMetricsCache gitRepoMetricsCache;
-  private final String instanceId;
+  private String instanceId;
+
+  @Inject(optional = true)
+  public void setInstanceId(@GerritInstanceId String instanceId) {
+    this.instanceId = instanceId;
+  }
 
   @Inject
   protected GitRepoUpdateListener(
-      @GerritInstanceId String instanceId,
       @UpdateGitMetricsExecutor ScheduledExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
       GitRepoMetricsCache gitRepoMetricsCache) {
-    this.instanceId = instanceId;
     this.executor = executor;
     this.updateGitMetricsTaskFactory = updateGitMetricsTaskFactory;
     this.gitRepoMetricsCache = gitRepoMetricsCache;
@@ -78,6 +81,7 @@ class GitRepoUpdateListener implements EventListener {
   }
 
   private boolean isMyEvent(Event event) {
-    return event.type != null && Objects.equals(event.instanceId, instanceId);
+    return event.type != null
+        && (instanceId == null || Objects.equals(event.instanceId, instanceId));
   }
 }
