@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b81c73a_d47e8438",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-16T10:29:44Z",
+      "side": 1,
+      "message": "It looks like it can be a lot simpler by adding a @Nullable on the injection",
+      "revId": "796e4dbf57dd87494016181708029f8d49256c07",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
