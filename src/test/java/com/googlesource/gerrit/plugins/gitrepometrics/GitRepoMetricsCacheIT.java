@@ -17,12 +17,19 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import static org.junit.Assert.fail;
 
 import com.codahale.metrics.MetricRegistry;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
 import com.google.gerrit.acceptance.UseLocalDisk;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.acceptance.config.GlobalPluginConfig;
 import com.google.gerrit.entities.Project;
+import com.google.gerrit.entities.RefNames;
+import com.google.gerrit.extensions.api.projects.BranchInfo;
+import com.google.gerrit.extensions.api.projects.BranchInput;
+import com.google.gerrit.extensions.api.projects.ProjectApi;
+import com.google.gerrit.extensions.api.projects.ProjectInput;
+import com.google.gerrit.extensions.restapi.RestApiException;
 import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
@@ -31,6 +38,9 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Function;
 import org.junit.Test;
 
 @TestPlugin(
@@ -38,6 +48,8 @@ import org.junit.Test;
     sysModule = "com.googlesource.gerrit.plugins.gitrepometrics.Module")
 public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
+  public static final String NUM_LOOSE_REFS = "numberoflooserefs";
+  private static final long HEAD_MASTER_REFS_META_CONFIG_NUM_REFS = 3;
   private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 5;
 
   @Inject MetricRegistry metricRegistry;
@@ -53,12 +65,20 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   public void setUpTestPlugin() throws Exception {
     super.setUpTestPlugin();
 
-    repoManager.createRepository(testProject1).close();
-    repoManager.createRepository(testProject2).close();
+    createProjectWithEmptyCommit(testProject1.get());
+    createProjectWithEmptyCommit(testProject2.get());
     gitRepoMetricsCache = plugin.getSysInjector().getInstance(GitRepoMetricsCache.class);
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
     gitRefsMetricsCollector = plugin.getSysInjector().getInstance(GitRefsMetricsCollector.class);
+  }
+
+  @CanIgnoreReturnValue
+  private ProjectApi createProjectWithEmptyCommit(String projectName) throws RestApiException {
+    ProjectInput pi = new ProjectInput();
+    pi.name = projectName;
+    pi.createEmptyCommit = true;
+    return gApi.projects().create(pi);
   }
 
   @Test
@@ -101,9 +121,76 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     }
   }
 
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.project",
+      value = "testProject1")
+  public void shouldUpdateRepositoryMetricsOnTwoRefUpdates() throws Exception {
+    addTwoBranchesToProjectAndAssertLooseRefsMetrics();
+  }
+
+  @Test
+  @UseLocalDisk
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.project",
+      value = "testProject1")
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.gracePeriod",
+      value = "1 s")
+  public void shouldUpdateRepositoryMetricsOnTwoRefUpdatesWithGracePeriod() throws Exception {
+    addTwoBranchesToProjectAndAssertLooseRefsMetrics();
+  }
+
+  private void addTwoBranchesToProjectAndAssertLooseRefsMetrics()
+      throws InterruptedException, RestApiException {
+    long initialLooseRefs =
+        waitForMetricValue(
+            testProject1.get(), NUM_LOOSE_REFS, (v) -> v == HEAD_MASTER_REFS_META_CONFIG_NUM_REFS);
+
+    createBranch("branch1");
+    waitForMetricValue(
+        testProject1.get(), NUM_LOOSE_REFS, (value) -> value == initialLooseRefs + 1);
+
+    createBranch("branch2");
+    waitForMetricValue(
+        testProject1.get(), NUM_LOOSE_REFS, (value) -> value == initialLooseRefs + 2);
+  }
+
+  @CanIgnoreReturnValue
+  private long waitForMetricValue(
+      String projectName, String metric, Function<Long, Boolean> metricCondition)
+      throws InterruptedException {
+    AtomicReference<Optional<Long>> metricValue = new AtomicReference<>();
+    WaitUtil.waitUntil(
+        () -> {
+          metricValue.set(gitRepoMetric(projectName, metric));
+          return metricValue.get().map(metricCondition).orElse(false);
+        },
+        Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
+    return metricValue.get().get();
+  }
+
+  private void createBranch(String branchName) throws RestApiException {
+    BranchInput bi = new BranchInput();
+    bi.ref = RefNames.REFS_HEADS + branchName;
+    bi.revision = "HEAD";
+    BranchInfo unused = gApi.projects().name(testProject1.get()).branch(bi.ref).create(bi).get();
+  }
+
   private long getPluginMetricsCount() {
     return metricRegistry.getMetrics().keySet().stream()
         .filter(metricName -> metricName.contains("plugins/git-repo-metrics"))
         .count();
+  }
+
+  private Optional<Long> gitRepoMetric(String projectName, String metricName) {
+    return Optional.ofNullable(
+        gitRepoMetricsCache
+            .getMetrics()
+            .get(metricName.toLowerCase() + "_" + projectName.toLowerCase()));
   }
 }
