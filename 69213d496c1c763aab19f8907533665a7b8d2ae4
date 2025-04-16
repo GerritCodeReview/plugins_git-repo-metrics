@@ -20,6 +20,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "370b35be_0e9d6798",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-16T00:16:40Z",
+      "side": 1,
+      "message": "```suggestion\n  private final ProjectMetricsLimiter projectMetricsLimiter;\n```",
+      "range": {
+        "startLine": 35,
+        "startChar": 38,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dadb821c_ad09c44b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-16T00:16:40Z",
+      "side": 1,
+      "message": "```suggestion\n    this.projectMetricsRateLimit \u003d projectMetricsLimiter;\n```",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a9286c_eb1de797",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-16T00:16:40Z",
+      "side": 1,
+      "message": "```suggestion\n              projectMetricsLimiter.acquire(projectName);\n```",
+      "range": {
+        "startLine": 64,
+        "startChar": 14,
+        "endLine": 64,
+        "endChar": 37
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b6380dc_1bc16b9c",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsLimiter.java",
         "patchSetId": 5
