@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca4579e_f19ca27a",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T10:54:15Z",
+      "side": 1,
+      "message": "`v \u003d\u003d 3`\n\nThe initial number of loose refs reposted is 3. I we bail out straight away the count of looseRef might be wrong and it would now allow the wait at L156 to pass.\n\nHaving said that if I check on the filesystem I only see 2 looserefs:\n\n```\n\u003e find refs -type f\nrefs/meta/config\nrefs/heads/master\n```\n\nAm I missing something?",
+      "range": {
+        "startLine": 153,
+        "startChar": 90,
+        "endLine": 153,
+        "endChar": 94
+      },
+      "revId": "05d543ac160114d9ecad0a4825de78811a172d53",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
