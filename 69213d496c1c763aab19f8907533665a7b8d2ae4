@@ -41,6 +41,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eabd522_796623aa",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "370b35be_0e9d6798",
+      "range": {
+        "startLine": 35,
+        "startChar": 38,
+        "endLine": 35,
+        "endChar": 61
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dadb821c_ad09c44b",
@@ -54,6 +78,30 @@
       "writtenOn": "2025-04-16T00:16:40Z",
       "side": 1,
       "message": "```suggestion\n    this.projectMetricsRateLimit \u003d projectMetricsLimiter;\n```",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5636b67f_5d0048d5",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dadb821c_ad09c44b",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d14607_ca80f92b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoUpdateListener.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a9286c_eb1de797",
+      "range": {
+        "startLine": 64,
+        "startChar": 14,
+        "endLine": 64,
+        "endChar": 37
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b6380dc_1bc16b9c",
@@ -104,6 +176,24 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "997ee921_9d9fc754",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsLimiter.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6380dc_1bc16b9c",
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e777608_615edf6e",
@@ -117,6 +207,30 @@
       "writtenOn": "2025-04-15T22:23:29Z",
       "side": 1,
       "message": "nit: can be package-protected.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 6
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6535d19a_454a4a86",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsThrottler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e777608_615edf6e",
       "range": {
         "startLine": 21,
         "startChar": 0,
@@ -150,6 +264,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab551d6c_3bb3f0dc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsThrottler.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b54ad315_fc1e48ac",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 72
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cd1d9bd_790cad1a",
@@ -163,6 +301,30 @@
       "writtenOn": "2025-04-15T22:23:29Z",
       "side": 1,
       "message": "nit: can be package-protected.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 6
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ecaf0a_3fb09850",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectMetricsUnlimited.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cd1d9bd_790cad1a",
       "range": {
         "startLine": 17,
         "startChar": 0,
@@ -196,6 +358,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8d5a98e_dff866ab",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Removed, it doesn\u0027t make sense anymore.",
+      "parentUuid": "4d7d804f_8af083d0",
+      "range": {
+        "startLine": 124,
+        "startChar": 14,
+        "endLine": 124,
+        "endChar": 56
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f3b3538_58576fec",
@@ -209,6 +395,30 @@
       "writtenOn": "2025-04-15T22:23:29Z",
       "side": 1,
       "message": "```suggestion\n    AtomicInteger acquireCount \u003d new AtomicInteger();\n```",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 165,
+        "endChar": 59
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b024c040_5f3ff0b7",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f3b3538_58576fec",
       "range": {
         "startLine": 165,
         "startChar": 0,
@@ -242,6 +452,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e8c90f_56d3a152",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c38c0f4_96d580a9",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 39
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7fa93a1_2b6fbf31",
@@ -265,6 +499,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "515dd109_af1042ae",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7fa93a1_2b6fbf31",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6536b95d_e5191300",
@@ -278,6 +536,30 @@
       "writtenOn": "2025-04-15T22:23:29Z",
       "side": 1,
       "message": "This whole class is unnecessary: you could achieve the same test with a simple lambda.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 3
+      },
+      "revId": "69213d496c1c763aab19f8907533665a7b8d2ae4",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f52f545_b673d560",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitUpdateListenerTest.java",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-16T07:55:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6536b95d_e5191300",
       "range": {
         "startLine": 183,
         "startChar": 0,
