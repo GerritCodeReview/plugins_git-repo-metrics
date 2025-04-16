@@ -15,6 +15,7 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.google.common.flogger.FluentLogger;
+import com.google.gerrit.common.Nullable;
 import com.google.gerrit.server.config.GerritInstanceId;
 import com.google.gerrit.server.events.Event;
 import com.google.gerrit.server.events.EventListener;
@@ -35,7 +36,7 @@ class GitRepoUpdateListener implements EventListener {
 
   @Inject
   protected GitRepoUpdateListener(
-      @GerritInstanceId String instanceId,
+      @Nullable @GerritInstanceId String instanceId,
       @UpdateGitMetricsExecutor ScheduledExecutorService executor,
       UpdateGitMetricsTask.Factory updateGitMetricsTaskFactory,
       GitRepoMetricsCache gitRepoMetricsCache) {
@@ -78,6 +79,7 @@ class GitRepoUpdateListener implements EventListener {
   }
 
   private boolean isMyEvent(Event event) {
-    return event.type != null && Objects.equals(event.instanceId, instanceId);
+    return event.type != null
+        && (instanceId == null || Objects.equals(event.instanceId, instanceId));
   }
 }
