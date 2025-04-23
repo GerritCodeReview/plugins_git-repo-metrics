@@ -111,7 +111,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
 
     try {
       WaitUtil.waitUntil(
-          () -> getPluginMetricsCount() == (long) availableProjects.size() * expectedMetricsCount,
+          () -> getPluginMetricsCount() == expectedMetricsCount,
           Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
     } catch (InterruptedException e) {
       fail(
@@ -191,6 +191,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     return Optional.ofNullable(
         gitRepoMetricsCache
             .getMetrics()
-            .get(metricName.toLowerCase() + "_" + projectName.toLowerCase()));
+            .get(metricName.toLowerCase())
+            .get(projectName.toLowerCase()));
   }
 }
