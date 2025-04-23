@@ -16,7 +16,6 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import com.codahale.metrics.MetricRegistry;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.gerrit.extensions.registration.DynamicSet;
@@ -33,7 +32,6 @@ public class GitRepoMetricsCacheTest {
   GitRepoMetricsCache gitRepoMetricsCache;
   GitRepoMetricsConfig gitRepoMetricsConfig;
   FakeMetricMaker fakeMetricMaker;
-  MetricRegistry metricRegistry;
   private ConfigSetupUtils configSetupUtils;
   private final String enabledRepo = "enabledRepo";
 
@@ -43,8 +41,7 @@ public class GitRepoMetricsCacheTest {
   @Before
   public void setupRepo() throws IOException {
     configSetupUtils = new ConfigSetupUtils(Collections.singletonList(enabledRepo));
-    metricRegistry = new MetricRegistry();
-    fakeMetricMaker = new FakeMetricMaker(metricRegistry);
+    fakeMetricMaker = new FakeMetricMaker();
 
     fakeStatsCollector = new FakeMetricsCollector();
     ds = new DynamicSet<MetricsCollector>();
@@ -54,8 +51,7 @@ public class GitRepoMetricsCacheTest {
   @Test
   public void shouldRegisterMetrics() {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+    gitRepoMetricsCache = new GitRepoMetricsCache(ds, fakeMetricMaker, gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(getCollectedMetrics(), "anyRepo");
 
@@ -65,8 +61,7 @@ public class GitRepoMetricsCacheTest {
   @Test
   public void shouldRegisterMetricsOnlyOnce() {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, metricRegistry, gitRepoMetricsConfig);
+    gitRepoMetricsCache = new GitRepoMetricsCache(ds, fakeMetricMaker, gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(getCollectedMetrics(), "anyRepo");
 
@@ -81,8 +76,7 @@ public class GitRepoMetricsCacheTest {
   public void shouldCollectStatsForEnabledRepo() {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
 
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+    gitRepoMetricsCache = new GitRepoMetricsCache(ds, fakeMetricMaker, gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
   }
@@ -91,8 +85,7 @@ public class GitRepoMetricsCacheTest {
   public void shouldCollectStatsForAllRepos() throws Exception {
     gitRepoMetricsConfig = new ConfigSetupUtils(List.of(), "0", true).getGitRepoMetricsConfig();
 
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+    gitRepoMetricsCache = new GitRepoMetricsCache(ds, fakeMetricMaker, gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats("new-repo")).isTrue();
   }
@@ -101,8 +94,7 @@ public class GitRepoMetricsCacheTest {
   public void shouldNotCollectStatsForDisabledRepo() {
     String disabledRepo = "disabledRepo";
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+    gitRepoMetricsCache = new GitRepoMetricsCache(ds, fakeMetricMaker, gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(disabledRepo)).isFalse();
   }
@@ -112,8 +104,7 @@ public class GitRepoMetricsCacheTest {
     ConfigSetupUtils configSetupUtils =
         new ConfigSetupUtils(Collections.singletonList(enabledRepo));
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
-    gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+    gitRepoMetricsCache = new GitRepoMetricsCache(ds, fakeMetricMaker, gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(getCollectedMetrics(), enabledRepo);
 
