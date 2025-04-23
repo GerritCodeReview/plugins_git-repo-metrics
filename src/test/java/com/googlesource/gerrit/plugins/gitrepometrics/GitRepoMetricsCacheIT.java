@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -191,6 +192,6 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     return Optional.ofNullable(
         gitRepoMetricsCache
             .getMetrics()
-            .get(metricName.toLowerCase() + "_" + projectName.toLowerCase()));
+            .get(metricName.toLowerCase() + "_" + projectName.toLowerCase(Locale.ROOT)));
   }
 }

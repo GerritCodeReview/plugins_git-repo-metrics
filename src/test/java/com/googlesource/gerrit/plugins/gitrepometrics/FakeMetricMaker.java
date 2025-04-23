@@ -14,32 +14,29 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
-import com.codahale.metrics.Meter;
-import com.codahale.metrics.MetricRegistry;
-import com.google.gerrit.metrics.CallbackMetric0;
+import com.google.gerrit.metrics.CallbackMetric1;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.DisabledMetricMaker;
+import com.google.gerrit.metrics.Field;
 
 class FakeMetricMaker extends DisabledMetricMaker {
   Integer callsCounter;
-  private MetricRegistry metricRegistry;
 
-  FakeMetricMaker(MetricRegistry metricRegistry) {
+  FakeMetricMaker() {
     callsCounter = 0;
-    this.metricRegistry = metricRegistry;
   }
 
   @Override
-  public <V> CallbackMetric0<V> newCallbackMetric(
-      String name, Class<V> valueClass, Description desc) {
-
+  public <F1, V> CallbackMetric1<F1, V> newCallbackMetric(
+      String name, Class<V> valueClass, Description desc, Field<F1> field1) {
     callsCounter += 1;
-    metricRegistry.register(
-        String.format("%s/%s/%s", "plugins", "git-repo-metrics", name), new Meter());
-    return new CallbackMetric0<V>() {
+    return new CallbackMetric1<F1, V>() {
 
       @Override
-      public void set(V value) {}
+      public void set(F1 field1, V value) {}
+
+      @Override
+      public void forceCreate(F1 field1) {}
 
       @Override
       public void remove() {}
