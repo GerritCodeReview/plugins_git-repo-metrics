@@ -191,6 +191,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     return Optional.ofNullable(
         gitRepoMetricsCache
             .getMetrics()
-            .get(metricName.toLowerCase() + "_" + projectName.toLowerCase()));
+            .get(metricName.toLowerCase())
+            .get(projectName.toLowerCase()));
   }
 }
