@@ -27,6 +27,7 @@ import com.googlesource.gerrit.plugins.gitrepometrics.collectors.FSMetricsCollec
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRefsMetricsCollector;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitStatsMetricsCollector;
 import java.time.Duration;
+import java.util.Arrays;
 import org.junit.Test;
 
 @TestPlugin(
@@ -57,7 +58,7 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
       name = "git-repo-metrics.collectAllRepositories",
       value = "true")
   public void shouldCollectAllRepositoriesMetrics() {
-    long ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS = 2L;
+    long ALL_PROJECTS_ALL_USERS_TEST_PROJECT_INITIAL_NUM_REPOS = 3L;
     int expectedMetricsCount =
         fsMetricsCollector.availableMetrics().size()
             + gitStatsMetricsCollector.availableMetrics().size()
@@ -67,14 +68,18 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
       WaitUtil.waitUntil(
           () ->
               getPluginMetricsCount()
-                  == ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS * expectedMetricsCount,
+                  == ALL_PROJECTS_ALL_USERS_TEST_PROJECT_INITIAL_NUM_REPOS * expectedMetricsCount,
           Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
     } catch (InterruptedException e) {
       fail(
           String.format(
-              "Only %d metrics have been registered, expected %d",
+              "Only %d metrics have been registered, expected %d, %s",
               getPluginMetricsCount(),
-              ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS * expectedMetricsCount));
+              ALL_PROJECTS_ALL_USERS_TEST_PROJECT_INITIAL_NUM_REPOS * expectedMetricsCount,
+              Arrays.toString(
+                  metricRegistry.getMetrics().keySet().stream()
+                      .filter(metricName -> metricName.contains("plugins/git-repo-metrics"))
+                      .toArray())));
     }
   }
 

@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
+import static com.google.gerrit.metrics.Field.ofProjectName;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
@@ -22,7 +23,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.registration.DynamicSet;
-import com.google.gerrit.metrics.CallbackMetric0;
+import com.google.gerrit.metrics.CallbackMetric1;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.MetricMaker;
 import com.google.inject.Inject;
@@ -30,10 +31,11 @@ import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
@@ -78,10 +80,7 @@ public class GitRepoMetricsCache {
           logger.atFine().log(
               "Collected %s for project %s: %d", repoMetric.getName(), projectName, value);
           metrics.put(metricsName, value);
-
-          if (!metricExists(metricsName)) {
-            createNewCallbackMetric(repoMetric, projectName);
-          }
+          createNewCallbackMetric(repoMetric, projectName);
         });
   }
 
@@ -92,14 +91,19 @@ public class GitRepoMetricsCache {
   }
 
   private void createNewCallbackMetric(GitRepoMetric metric, String projectName) {
-    String metricName = getMetricName(metric.getName(), projectName);
-    CallbackMetric0<Long> cb =
+    CallbackMetric1<String, Long> cb =
         metricMaker.newCallbackMetric(
-            metricName,
+            metric.getName(),
             Long.class,
-            new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()));
-
-    metricMaker.newTrigger(cb, () -> cb.set(getMetrics().getOrDefault(metricName, 0L)));
+            new Description(metric.getDescription()).setRate().setUnit(metric.getUnit()),
+            ofProjectName("project_name").description("The name of the project.").build());
+    metricMaker.newTrigger(
+        cb,
+        () -> {
+          String metricName = getMetricName(metric.getName(), projectName);
+          cb.set(projectName, metrics.get(metricName));
+          cb.prune();
+        });
   }
 
   public List<GitRepoMetric> getMetricsNames() {
@@ -111,7 +115,7 @@ public class GitRepoMetricsCache {
   }
 
   public static String getMetricName(String metricName, String projectName) {
-    return String.format("%s_%s", metricName, projectName).toLowerCase(Locale.ROOT);
+    return String.format("%s/%s", metricName, sanitizeProjectName(projectName));
   }
 
   public boolean shouldCollectStats(String projectName) {
@@ -125,5 +129,38 @@ public class GitRepoMetricsCache {
 
   public void unsetStale(String projectName) {
     staleStatsProjects.remove(projectName);
+  }
+
+  private static final Pattern SUBMETRIC_NAME_PATTERN =
+      Pattern.compile("[a-zA-Z0-9_-]+([a-zA-Z0-9_-]+)*");
+  private static final Pattern INVALID_CHAR_PATTERN = Pattern.compile("[^\\w-]");
+  private static final String REPLACEMENT_PREFIX = "_0x";
+
+  /**
+   * This logic has been borrowed from:
+   * https://gerrit.googlesource.com/gerrit/+/refs/heads/stable-3.10/java/com/google/gerrit/metrics/Field.java#163
+   */
+  private static String sanitizeProjectName(String projectName) {
+    if (SUBMETRIC_NAME_PATTERN.matcher(projectName).matches()
+        && !projectName.contains(REPLACEMENT_PREFIX)) {
+      return projectName;
+    }
+
+    String replacmentPrefixSanitizedName =
+        projectName.replaceAll(REPLACEMENT_PREFIX, REPLACEMENT_PREFIX + REPLACEMENT_PREFIX);
+    StringBuilder sanitizedName = new StringBuilder();
+    for (int i = 0; i < replacmentPrefixSanitizedName.length(); i++) {
+      Character c = replacmentPrefixSanitizedName.charAt(i);
+      Matcher matcher = INVALID_CHAR_PATTERN.matcher(c.toString());
+      if (matcher.matches()) {
+        sanitizedName.append(REPLACEMENT_PREFIX);
+        sanitizedName.append(Integer.toHexString(c).toUpperCase());
+        sanitizedName.append('_');
+      } else {
+        sanitizedName.append(c);
+      }
+    }
+
+    return sanitizedName.toString();
   }
 }
