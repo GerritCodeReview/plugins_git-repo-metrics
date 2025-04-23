@@ -14,6 +14,7 @@
 
 package com.googlesource.gerrit.plugins.gitrepometrics.collectors;
 
+import java.util.Locale;
 import java.util.Objects;
 
 public class GitRepoMetric {
@@ -28,7 +29,7 @@ public class GitRepoMetric {
   }
 
   public String getName() {
-    return name;
+    return name.toLowerCase(Locale.ROOT);
   }
 
   public String getUnit() {
