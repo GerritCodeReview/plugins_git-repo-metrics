@@ -22,7 +22,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verifyNoInteractions;
 
-import com.codahale.metrics.MetricRegistry;
 import com.google.gerrit.acceptance.WaitUtil;
 import com.google.gerrit.entities.Project;
 import com.google.gerrit.extensions.annotations.PluginName;
@@ -74,7 +73,6 @@ public class GitUpdateListenerTest {
         new GitRepoMetricsCache(
             new DynamicSet<>(),
             new DisabledMetricMaker(),
-            new MetricRegistry(),
             configSetupUtils.getGitRepoMetricsConfig());
 
     AbstractModule m =
