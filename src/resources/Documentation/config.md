@@ -25,6 +25,13 @@ plugins_git_repo_metrics_numberofobjectssincebitmap_<repo_name>
 plugins_git_repo_metrics_numberofpackfilessincebitmap_<repo_name>
 ```
 
+> **NOTE**: The `<repo_name>` is a subject of sanitization in order to avoid collision between repository names.
+> Rules are:
+> - any character outside `[a-zA-Z0-9_-]+([a-zA-Z0-9_-]+)*` pattern is replaced with `_0x[HEX CODE]_` (code is capitalized)
+>   string for instance `repo/name` is sanitized to `repo_0x2F_name`
+> - if the repository name contains the replacement prefix `(_0x)` it is prefixed with another `_0x`
+>   e.g. `repo_0x2F_name` becomes `repo_0x_0x2F_name`.
+
 Settings
 --------
 
