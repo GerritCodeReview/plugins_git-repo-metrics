@@ -24,6 +24,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2512d271_4e720cba",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T12:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cac8b3d_d826abbc",
+      "range": {
+        "startLine": 117,
+        "startChar": 28,
+        "endLine": 117,
+        "endChar": 29
+      },
+      "revId": "3c8743a1dfcd081d89d7468beef26d81b260f1ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0260025e_fc395818",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-04-24T14:44:39Z",
       "side": 1,
       "message": "We need to \"borrow\" the `sanitizeProjectName` method from Gerrit to sanitize the project names.\n\nWe could make the method public in Gerrit to DRY. A similar issue presents in the multi-site plugin [1], hence making the method public might make sense.\n\n[1]: https://cs.opensource.google/gerrit/gerrit/plugins/multi-site/+/master:src/main/java/com/googlesource/gerrit/plugins/multisite/consumer/SubscriberMetrics.java;l\u003d110?q\u003dsanitizeProjectName\u0026ss\u003dgerrit",
+      "revId": "3c8743a1dfcd081d89d7468beef26d81b260f1ba",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "375edeee_d64d5b82",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T12:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0260025e_fc395818",
       "revId": "3c8743a1dfcd081d89d7468beef26d81b260f1ba",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
