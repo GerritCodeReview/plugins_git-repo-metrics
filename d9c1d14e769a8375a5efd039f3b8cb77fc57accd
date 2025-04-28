@@ -22,6 +22,30 @@
       },
       "revId": "d9c1d14e769a8375a5efd039f3b8cb77fc57accd",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2059408_d957ab53",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T14:34:10Z",
+      "side": 1,
+      "message": "We only try to setup a metric when we create a task to collect metrics.\n\nThis happens at startup, when we force collection of metrics for all the repositories, or lazily when we generate traffic on a repository in case we don\u0027t want to collect metrics for all the repositories.\n\nThe loop throug the repositories, if needed, is done by the caller.",
+      "parentUuid": "6a107ac6_198972ed",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 21
+      },
+      "revId": "d9c1d14e769a8375a5efd039f3b8cb77fc57accd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
