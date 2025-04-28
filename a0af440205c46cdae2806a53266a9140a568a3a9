@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "317837a1_4a1afb71",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T13:53:46Z",
+      "side": 0,
+      "message": "Instead of using the metric registry to keep track of the metrics already initialized, use an internal variable, Using the metric registry would need the project name sanitize logic which is not currently exposed by Gerrit.\n\nDoing it with an internal variable allows to avoid code repetition.\n\nIf we don\u0027t check for metric existance, the metric registry will throw a `java.lang.IllegalArgumentException: A metric named \u003cmetric\u003e already exists` exception.",
+      "range": {
+        "startLine": 89,
+        "startChar": 11,
+        "endLine": 89,
+        "endChar": 25
+      },
+      "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
