@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5760a911_4669a5ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 1,
+      "message": "This should add the metric to the project\u0027s field value.\n\n\n\n```suggestion\n          metrics.computeIfAbsent(metricsName, (m) -\u003e new HashMap\u003c\u003e()).put(projectName.toLowerCase(Locale.ROOT), value);\n```",
+      "range": {
+        "startLine": 80,
+        "startChar": 10,
+        "endLine": 80,
+        "endChar": 42
+      },
+      "revId": "d9c1d14e769a8375a5efd039f3b8cb77fc57accd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a107ac6_198972ed",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
         "patchSetId": 11
@@ -38,6 +61,30 @@
       "side": 1,
       "message": "We only try to setup a metric when we create a task to collect metrics.\n\nThis happens at startup, when we force collection of metrics for all the repositories, or lazily when we generate traffic on a repository in case we don\u0027t want to collect metrics for all the repositories.\n\nThe loop throug the repositories, if needed, is done by the caller.",
       "parentUuid": "6a107ac6_198972ed",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 21
+      },
+      "revId": "d9c1d14e769a8375a5efd039f3b8cb77fc57accd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d62596bc_fa04153b",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 1,
+      "message": "That\u0027s not the way parametric metrics work though: you should create the metric once for all projects and the loop through the projects happens in the callback.\n\n\n\n```suggestion\n          Map\u003cString, Long\u003e projectsMetrics \u003d metrics.get(metricName);\n          if (projectsMetrics \u003d\u003d null || projectsMetrics.isEmpty()) {\n            cb.forceCreate(\"\");\n          } else {\n            metrics.get(metricName).forEach(cb::set);\n            cb.prune();\n          }\n```",
+      "parentUuid": "d2059408_d957ab53",
       "range": {
         "startLine": 103,
         "startChar": 0,

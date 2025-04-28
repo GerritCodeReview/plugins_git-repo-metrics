@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed6ef0c2_6e466a3d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 0,
+      "message": "You need to remove the project name from the metric name. Therefore, this becomes a Map of Maps.\n\n```suggestion\n  private Map\u003cString, Map\u003cString, Long\u003e\u003e metrics;\n```",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 35
+      },
+      "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a11daf2_b0baf2db",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 0,
+      "message": "Unrelated: this is never used other than testing. Consider adding an annotation for that.\n\n\n\n```suggestion\n  @VisibleForTesting\n  public Map\u003cString, Map\u003cString, Long\u003e\u003e getMetrics() {\n    return metrics;\n  }\n```",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 3
+      },
+      "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "317837a1_4a1afb71",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
         "patchSetId": 11
@@ -19,6 +65,76 @@
         "startChar": 11,
         "endLine": 89,
         "endChar": 25
+      },
+      "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5392e6d2_001df6c2",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 0,
+      "message": "No, the metric registry will contain only the metric name, but not the project name which is a metric field.",
+      "parentUuid": "317837a1_4a1afb71",
+      "range": {
+        "startLine": 89,
+        "startChar": 11,
+        "endLine": 89,
+        "endChar": 25
+      },
+      "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e7656e1_cfddcacc",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 0,
+      "message": "`projectName` is not part of the metric name anymore and should be ignored here.",
+      "range": {
+        "startLine": 94,
+        "startChar": 59,
+        "endLine": 94,
+        "endChar": 79
+      },
+      "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8fe789_986ddd58",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-28T22:18:04Z",
+      "side": 0,
+      "message": "This should now be removed: the `projectName` is one field of the metric and should not be part of the metric name.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 3
       },
       "revId": "a0af440205c46cdae2806a53266a9140a568a3a9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
