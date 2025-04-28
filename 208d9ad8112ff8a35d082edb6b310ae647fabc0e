@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8ca5f66_e5a5fc51",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRepoMetric.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T13:20:00Z",
+      "side": 1,
+      "message": "I wanted to keep at least the first part of the metric unchanged. Since the metric name is changing in format we might also decide to drop it.",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "208d9ad8112ff8a35d082edb6b310ae647fabc0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
