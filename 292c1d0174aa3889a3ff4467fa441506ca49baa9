@@ -1,0 +1,11 @@
+{
+  "checks": {
+    "gerritforge:git-repo-metrics-format-dcf840cc5047dd58175ddbe23ab81198c837f353": {
+      "state": "RUNNING",
+      "url": "https://gerrit-ci.gerritforge.com/job/plugin-git-repo-metrics-verifier/job/01%252F470601%252F6/1/console",
+      "started": "2025-04-28T08:51:12Z",
+      "created": "2025-04-28T08:51:12Z",
+      "updated": "2025-04-28T08:51:12Z"
+    }
+  }
+}
