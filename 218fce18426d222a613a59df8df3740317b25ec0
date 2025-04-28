@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d63739_116ac167",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T12:51:58Z",
+      "side": 1,
+      "message": "Note for reviewers: The repo created by the Gerrit testing framework didn\u0027t expose any any metric since the name contains special characters. Fixing this issue is now exposing it.",
+      "range": {
+        "startLine": 61,
+        "startChar": 65,
+        "endLine": 61,
+        "endChar": 66
+      },
+      "revId": "218fce18426d222a613a59df8df3740317b25ec0",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
