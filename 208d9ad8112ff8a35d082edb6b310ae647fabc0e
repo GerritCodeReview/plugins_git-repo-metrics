@@ -46,6 +46,30 @@
       },
       "revId": "208d9ad8112ff8a35d082edb6b310ae647fabc0e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "165d89a6_e255a858",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/collectors/GitRepoMetric.java",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1054778
+      },
+      "writtenOn": "2025-04-28T13:32:41Z",
+      "side": 1,
+      "message": "\u003e Actually, this allow to keep forward compatibility with the metric name.\n\nbackcompatibility",
+      "parentUuid": "086c6e27_42e8fefd",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 27
+      },
+      "revId": "208d9ad8112ff8a35d082edb6b310ae647fabc0e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
