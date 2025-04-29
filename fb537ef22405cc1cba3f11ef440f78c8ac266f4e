@@ -213,6 +213,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6961560f_d1cea9ff",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-29T13:48:16Z",
+      "side": 1,
+      "message": "Done with I607d6bf80",
+      "parentUuid": "40e7b879_fcfed212",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 3
+      },
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b23adc9_b8074b60",
@@ -291,6 +315,24 @@
       "side": 1,
       "message": "Good idea, will add as a separate additional test, which demonstrates the bug.",
       "parentUuid": "b96795ba_c3ba7544",
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beb3f5fe_994127c0",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-29T13:48:16Z",
+      "side": 1,
+      "message": "Done with Iae9946f211",
+      "parentUuid": "f0789db6_e4f09842",
       "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
