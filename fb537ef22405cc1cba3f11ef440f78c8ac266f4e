@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898c0e8d_343066cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T12:36:50Z",
+      "side": 1,
+      "message": "```suggestion\n  private final ConcurrentHashMap\u003cString, ConcurrentHashMap\u003cString, Long\u003e\u003e metrics;\n```",
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3028db66_ee221d2e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T12:36:50Z",
+      "side": 1,
+      "message": "In what cases will the metric have a trailing slash?",
+      "range": {
+        "startLine": 92,
+        "startChar": 11,
+        "endLine": 93,
+        "endChar": 82
+      },
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c11765f2_1ae1a61a",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T12:36:50Z",
+      "side": 1,
+      "message": "In what cases can happen that we don\u0027t find `metric` in the `metrics` hashmap?\n- `metrics` is populated by `setMetrics` L81 \n- This method (`createNewCallbackMetric`) is also called by `setMetrics` L85.\n\nWon\u0027t we always find `metric` in `metrics`, then?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 31
+      },
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66411ad4_b424a19c",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T12:36:50Z",
+      "side": 1,
+      "message": "unrelated: This is unused",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 3
+      },
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b23adc9_b8074b60",
+        "filename": "src/resources/Documentation/config.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T12:36:50Z",
+      "side": 1,
+      "message": "How about linking to the already-existing and comprehensive documentation about metric names sanitization in Gerrit [1] rather than duplicating it here?\n\n[1] https://gerrit-review.googlesource.com/Documentation/dev-plugins.html#_providing_own_metrics",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 12
+      },
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b96795ba_c3ba7544",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T12:36:50Z",
+      "side": 1,
+      "message": "Consider adding a test for a repository containing dots (i.e. `test.with.dot `).",
+      "revId": "fb537ef22405cc1cba3f11ef440f78c8ac266f4e",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
