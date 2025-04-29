@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "80ed9f6e_ac2144a3",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 11
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-29T07:56:05Z",
+      "side": 1,
+      "message": "This will define the same metric multiple times, one per project, leading to the erasure of the previous metric.\n\nExample: `numberoflooseobjects` will be defined twice, once for the `All-Users` project and another for `All-Projects`. The one that comes last will erase the previous one.\n\nSee the relevant code in `DropWizardMetricMaker`:\n\n```\n  public \u003cF1, V\u003e CallbackMetric1\u003cF1, V\u003e newCallbackMetric(\n      String name, Class\u003cV\u003e valueClass, Description desc, Field\u003cF1\u003e field1) {\n    checkMetricName(name);\n    CallbackMetricImpl1\u003cF1, V\u003e m \u003d\n        new CallbackMetricImpl1\u003c\u003e(this, registry, name, valueClass, desc, field1);\n    define(name, desc);\n    bucketed.put(name, m);\n    return m.create();\n  }\n```\n\nThe `bucketed` will keep only the last one as the `name` is only the metric name that doesn\u0027t contain the project name in it.",
+      "range": {
+        "startLine": 96,
+        "startChar": 12,
+        "endLine": 96,
+        "endChar": 28
+      },
+      "revId": "d9c1d14e769a8375a5efd039f3b8cb77fc57accd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a107ac6_198972ed",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
         "patchSetId": 11
