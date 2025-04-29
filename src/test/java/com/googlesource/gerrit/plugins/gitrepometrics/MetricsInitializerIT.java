@@ -32,6 +32,7 @@ import org.junit.Test;
 @TestPlugin(
     name = "git-repo-metrics",
     sysModule = "com.googlesource.gerrit.plugins.gitrepometrics.Module")
+@UseLocalDisk
 public class MetricsInitializerIT extends LightweightPluginDaemonTest {
 
   private final int MAX_WAIT_TIME_FOR_METRICS_SECS = 5;
@@ -51,7 +52,6 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
   }
 
   @Test
-  @UseLocalDisk
   @GlobalPluginConfig(
       pluginName = "git-repo-metrics",
       name = "git-repo-metrics.collectAllRepositories",
@@ -75,6 +75,34 @@ public class MetricsInitializerIT extends LightweightPluginDaemonTest {
               "Only %d metrics have been registered, expected %d",
               getPluginMetricsCount(),
               ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS * expectedMetricsCount));
+    }
+  }
+
+  @Test
+  @GlobalPluginConfig(
+      pluginName = "git-repo-metrics",
+      name = "git-repo-metrics.collectAllRepositories",
+      value = "true")
+  public void shouldCollectMetricsForRepositoryWithDot() throws Exception {
+    createProjectOverAPI(".suffix", null, true, null);
+
+    long ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS = 2L;
+    int expectedMetricsCount =
+        fsMetricsCollector.availableMetrics().size()
+            + gitStatsMetricsCollector.availableMetrics().size()
+            + gitRefsMetricsCollector.availableMetrics().size();
+    long expectedTotalMetrics =
+        (ALL_PROJECTS_ALL_USERS_INITIAL_NUM_REPOS + 1) * expectedMetricsCount;
+
+    try {
+      WaitUtil.waitUntil(
+          () -> getPluginMetricsCount() == expectedTotalMetrics,
+          Duration.ofSeconds(MAX_WAIT_TIME_FOR_METRICS_SECS));
+    } catch (InterruptedException e) {
+      fail(
+          String.format(
+              "Only %d metrics have been registered, expected %d",
+              getPluginMetricsCount(), expectedTotalMetrics));
     }
   }
 
