@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9938c1a3_d639b731",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-29T10:55:54Z",
+      "side": 1,
+      "message": "Proposed an alternative approach with I4244021881 following the common Gerrit pattern for parametrised metrics.",
+      "revId": "d9c1d14e769a8375a5efd039f3b8cb77fc57accd",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5760a911_4669a5ff",
