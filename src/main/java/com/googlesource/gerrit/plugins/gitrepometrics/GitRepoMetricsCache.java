@@ -31,7 +31,6 @@ import com.google.inject.Inject;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.GitRepoMetric;
 import com.googlesource.gerrit.plugins.gitrepometrics.collectors.MetricsCollector;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -115,10 +114,6 @@ public class GitRepoMetricsCache {
             cb.prune();
           }
         });
-  }
-
-  public List<GitRepoMetric> getMetricsNames() {
-    return metricsNames;
   }
 
   public DynamicSet<MetricsCollector> getCollectors() {
