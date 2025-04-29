@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e8d4a70_147cce53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-29T14:49:31Z",
+      "side": 1,
+      "message": "Is `shouldCollectMetricsForRepositoryWithDot` test possibly flaky?\nIt is passing in the previous change but failing here\n\n```\n1) shouldCollectMetricsForRepositoryWithDot[default](com.googlesource.gerrit.plugins.gitrepometrics.MetricsInitializerIT)\njava.lang.AssertionError: Only 60 metrics have been registered, expected 45\n```",
+      "revId": "7209dada6c347bbc1ec1627f47370ed97c6a1ef3",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
