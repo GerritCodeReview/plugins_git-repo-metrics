@@ -117,10 +117,6 @@ public class GitRepoMetricsCache {
         });
   }
 
-  public List<GitRepoMetric> getMetricsNames() {
-    return metricsNames;
-  }
-
   public DynamicSet<MetricsCollector> getCollectors() {
     return collectors;
   }
