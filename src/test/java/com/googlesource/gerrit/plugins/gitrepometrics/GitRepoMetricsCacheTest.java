@@ -27,7 +27,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class GitRepoMetricsCacheTest {
@@ -56,7 +55,7 @@ public class GitRepoMetricsCacheTest {
   public void shouldRegisterMetrics() {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+        new GitRepoMetricsCache(ds, fakeMetricMaker, newMetricsTracker(), gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(getCollectedMetrics(), "anyRepo");
 
@@ -64,14 +63,14 @@ public class GitRepoMetricsCacheTest {
   }
 
   @Test
-  @Ignore /* The fix of FakeMetricMaker makes this test failing, which is correct because the implementation
-          of the logic for avoiding the double-registration of metrics is broken and should have already failed before;
-          however, it was compensated by the wrong implementation of the FakeMetricMaker which did not create the project
-          name in the generated metrics. */
   public void shouldRegisterMetricsOnlyOnce() {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, metricRegistry, gitRepoMetricsConfig);
+        new GitRepoMetricsCache(
+            ds,
+            fakeMetricMaker,
+            new ProjectlessMetricsTracker("git-repo-metrics", metricRegistry),
+            gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(getCollectedMetrics(), "anyRepo");
 
@@ -87,7 +86,7 @@ public class GitRepoMetricsCacheTest {
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
 
     gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+        new GitRepoMetricsCache(ds, fakeMetricMaker, newMetricsTracker(), gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(enabledRepo)).isTrue();
   }
@@ -97,7 +96,7 @@ public class GitRepoMetricsCacheTest {
     gitRepoMetricsConfig = new ConfigSetupUtils(List.of(), "0", true).getGitRepoMetricsConfig();
 
     gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+        new GitRepoMetricsCache(ds, fakeMetricMaker, newMetricsTracker(), gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats("new-repo")).isTrue();
   }
@@ -107,7 +106,7 @@ public class GitRepoMetricsCacheTest {
     String disabledRepo = "disabledRepo";
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+        new GitRepoMetricsCache(ds, fakeMetricMaker, newMetricsTracker(), gitRepoMetricsConfig);
 
     assertThat(gitRepoMetricsCache.shouldCollectStats(disabledRepo)).isFalse();
   }
@@ -118,7 +117,7 @@ public class GitRepoMetricsCacheTest {
         new ConfigSetupUtils(Collections.singletonList(enabledRepo));
     gitRepoMetricsConfig = configSetupUtils.getGitRepoMetricsConfig();
     gitRepoMetricsCache =
-        new GitRepoMetricsCache(ds, fakeMetricMaker, new MetricRegistry(), gitRepoMetricsConfig);
+        new GitRepoMetricsCache(ds, fakeMetricMaker, newMetricsTracker(), gitRepoMetricsConfig);
 
     gitRepoMetricsCache.setMetrics(getCollectedMetrics(), enabledRepo);
 
@@ -128,5 +127,9 @@ public class GitRepoMetricsCacheTest {
   private HashMap<GitRepoMetric, Long> getCollectedMetrics() {
     return Maps.newHashMap(
         ImmutableMap.of(new GitRepoMetric("anyMetrics", "anyMetric description", "Count"), 1L));
+  }
+
+  private static ProjectlessMetricsTracker newMetricsTracker() {
+    return new ProjectlessMetricsTracker("git-repo-metrics", new MetricRegistry());
   }
 }
