@@ -74,7 +74,7 @@ public class GitUpdateListenerTest {
         new GitRepoMetricsCache(
             new DynamicSet<>(),
             new DisabledMetricMaker(),
-            new MetricRegistry(),
+            new MetricsTracker("git-repo-metrics", new MetricRegistry()),
             configSetupUtils.getGitRepoMetricsConfig());
 
     AbstractModule m =

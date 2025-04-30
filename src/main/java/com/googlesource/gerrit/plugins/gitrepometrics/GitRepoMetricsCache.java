@@ -15,13 +15,8 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.gerrit.metrics.Field.ofProjectName;
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
 
-import com.codahale.metrics.Metric;
-import com.codahale.metrics.MetricRegistry;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.CallbackMetric1;
@@ -40,10 +35,9 @@ public class GitRepoMetricsCache {
   private static final FluentLogger logger = FluentLogger.forEnclosingClass();
   private final ConcurrentHashMap<String, ConcurrentHashMap<String, Long>> metrics;
   private final MetricMaker metricMaker;
-  private final MetricRegistry metricRegistry;
   private final Set<String> projects;
   private final boolean collectAllRepositories;
-  private ImmutableList<GitRepoMetric> metricsNames;
+  private final MetricsTracker metricsTracker;
   private DynamicSet<MetricsCollector> collectors;
   private Set<String> staleStatsProjects;
 
@@ -51,16 +45,11 @@ public class GitRepoMetricsCache {
   GitRepoMetricsCache(
       DynamicSet<MetricsCollector> collectors,
       MetricMaker metricMaker,
-      MetricRegistry metricRegistry,
+      MetricsTracker metricsTracker,
       GitRepoMetricsConfig config) {
     this.collectors = collectors;
     this.metricMaker = metricMaker;
-    this.metricRegistry = metricRegistry;
-
-    this.metricsNames =
-        collectors.stream()
-            .flatMap(c -> c.availableMetrics().stream())
-            .collect(collectingAndThen(toList(), ImmutableList::copyOf));
+    this.metricsTracker = metricsTracker;
 
     this.projects = new HashSet<>(config.getRepositoryNames());
     this.metrics = new ConcurrentHashMap<>();
@@ -80,18 +69,10 @@ public class GitRepoMetricsCache {
           metrics
               .computeIfAbsent(metricsName, (m) -> new ConcurrentHashMap<>())
               .put(projectName.toLowerCase(Locale.ROOT), value);
-          if (!metricExists(metricsName)) {
+          if (!metricsTracker.metricExists(metricsName)) {
             createNewCallbackMetric(repoMetric);
           }
         });
-  }
-
-  private boolean metricExists(String metricName) {
-    Map<String, Metric> currMetrics = metricRegistry.getMetrics();
-    return currMetrics.containsKey(
-            String.format("%s/%s/%s/", "plugins", "git-repo-metrics", metricName))
-        || currMetrics.containsKey(
-            String.format("%s/%s/%s", "plugins", "git-repo-metrics", metricName));
   }
 
   private void createNewCallbackMetric(GitRepoMetric metric) {
