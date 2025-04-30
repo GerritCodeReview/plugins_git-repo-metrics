@@ -61,7 +61,7 @@ public class UpdateGitMetricsTaskTest {
         new GitRepoMetricsCache(
             ds,
             new DisabledMetricMaker(),
-            new MetricRegistry(),
+            new ProjectlessMetricsTracker("git-repo-metrics", new MetricRegistry()),
             configSetupUtils.getGitRepoMetricsConfig());
 
     AbstractModule m =
