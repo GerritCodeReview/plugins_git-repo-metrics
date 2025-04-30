@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ecdb33_9702091f",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/ProjectlessMetricsTracker.java",
+        "patchSetId": 18
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-30T20:16:19Z",
+      "side": 1,
+      "message": "Has the project name already be normalized at this point or might it still contain `/`?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 24
+      },
+      "revId": "703c45122221e21bb6be1f00bc2c02921960498f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}

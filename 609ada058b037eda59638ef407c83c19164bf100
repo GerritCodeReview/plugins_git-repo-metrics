@@ -253,6 +253,30 @@
       },
       "revId": "609ada058b037eda59638ef407c83c19164bf100",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1826f73c_82aefa88",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-30T20:16:19Z",
+      "side": 1,
+      "message": "I really like the listener approach! I didn\u0027t know that could be done 👍",
+      "parentUuid": "914fc706_5227d3e4",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
