@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a240ab75_6ccf149d",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCacheIT.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-30T20:06:52Z",
+      "side": 1,
+      "message": "nit: consider moving this inside `getPluginMetricsCount()`, since every time we count the metrics we very likely want to generate them first.\n\nAlso, it will be consistent with the way has been done for MetricsInitializerIT.java",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 36
+      },
+      "revId": "7e1db65e5e4f555a776d7d6448e4cb3da31e0fe9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
