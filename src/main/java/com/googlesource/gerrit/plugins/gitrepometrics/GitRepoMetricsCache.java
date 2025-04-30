@@ -18,7 +18,6 @@ import static com.google.gerrit.metrics.Field.ofProjectName;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toList;
 
-import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
@@ -87,11 +86,11 @@ public class GitRepoMetricsCache {
   }
 
   private boolean metricExists(String metricName) {
-    Map<String, Metric> currMetrics = metricRegistry.getMetrics();
-    return currMetrics.containsKey(
-            String.format("%s/%s/%s/", "plugins", "git-repo-metrics", metricName))
-        || currMetrics.containsKey(
-            String.format("%s/%s/%s", "plugins", "git-repo-metrics", metricName));
+    String metricNamePrefix =
+        String.format(
+            "%s/%s/%s", "plugins", "git-repo-metrics", metricName.toLowerCase(Locale.ROOT));
+    return metricRegistry.getMetrics().keySet().stream()
+        .anyMatch(name -> name.startsWith(metricNamePrefix));
   }
 
   private void createNewCallbackMetric(GitRepoMetric metric) {
