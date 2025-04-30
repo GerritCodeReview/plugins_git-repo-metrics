@@ -24,6 +24,72 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ce3972_a6940c10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T15:09:52Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "75109721_a8d7e851",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "fixSuggestions": [
+        {
+          "fixId": "5891e5f3_03e4b802",
+          "description": "User suggestion",
+          "replacements": [
+            {
+              "path": "/COMMIT_MSG",
+              "range": {
+                "startLine": 11,
+                "startChar": 0,
+                "endLine": 11,
+                "endChar": 44
+              },
+              "replacement": "name that is now part of the metric field."
+            }
+          ]
+        }
+      ],
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ebe8028_2db5417f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T15:09:52Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "75109721_a8d7e851",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a13a9253_4bd6db19",
