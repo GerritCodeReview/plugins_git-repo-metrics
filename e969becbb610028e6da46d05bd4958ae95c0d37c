@@ -1,5 +1,46 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9a9ad01_2b1ef111",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T17:39:15Z",
+      "side": 1,
+      "message": "Post-merge -1",
+      "revId": "e969becbb610028e6da46d05bd4958ae95c0d37c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "590add25_74dde515",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/FakeMetricMaker.java",
+        "patchSetId": 15
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T17:39:15Z",
+      "side": 1,
+      "message": "This is now incorrect: the registration of the metric *does not* happen when the `newCallMetric()` is called but instead on the `set()` AT L42",
+      "range": {
+        "startLine": 37,
+        "startChar": 19,
+        "endLine": 38,
+        "endChar": 85
+      },
+      "revId": "e969becbb610028e6da46d05bd4958ae95c0d37c",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
