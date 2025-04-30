@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75109721_a8d7e851",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-30T12:41:09Z",
+      "side": 1,
+      "message": "```suggestion\nname that is now part of the metric field.\n```",
+      "range": {
+        "startLine": 11,
+        "startChar": 29,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13a9253_4bd6db19",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1072905
+      },
+      "writtenOn": "2025-04-30T12:41:09Z",
+      "side": 1,
+      "message": "This prefix search is now more expensive than the previous lookup approach, considering it is executed every time an `UpdateGitMetricsTask` is run and it might loop through thousands of repos.\n\nDo you have any number on how long it would take or you think it is not a concern right now?",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    }
+  ]
+}
