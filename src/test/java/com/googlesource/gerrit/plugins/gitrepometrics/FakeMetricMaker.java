@@ -22,12 +22,14 @@ import com.google.gerrit.metrics.DisabledMetricMaker;
 import com.google.gerrit.metrics.Field;
 
 class FakeMetricMaker extends DisabledMetricMaker {
+  private final ProjectlessMetricsTracker metricTracker;
+  private final MetricRegistry metricRegistry;
   Integer callsCounter;
-  private MetricRegistry metricRegistry;
 
   FakeMetricMaker(MetricRegistry metricRegistry) {
     callsCounter = 0;
     this.metricRegistry = metricRegistry;
+    this.metricTracker = new ProjectlessMetricsTracker("git-repo-metrics", metricRegistry);
   }
 
   @Override
