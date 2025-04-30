@@ -113,6 +113,30 @@
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e10f2c01_616c296d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T16:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "008810fd_4fcfbc1e",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16de8fcd_7cb9d14d",
@@ -126,6 +150,30 @@
       "writtenOn": "2025-04-30T16:27:03Z",
       "side": 1,
       "message": "nit: unrelated change",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75bab9d_bd2922cb",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T16:34:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16de8fcd_7cb9d14d",
       "range": {
         "startLine": 59,
         "startChar": 0,
