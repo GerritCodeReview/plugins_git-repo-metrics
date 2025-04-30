@@ -16,6 +16,8 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
+import com.google.gerrit.extensions.registration.RegistrationHandle;
+import com.google.gerrit.metrics.CallbackMetric;
 import com.google.gerrit.metrics.CallbackMetric1;
 import com.google.gerrit.metrics.Description;
 import com.google.gerrit.metrics.DisabledMetricMaker;
@@ -35,13 +37,15 @@ class FakeMetricMaker extends DisabledMetricMaker {
   @Override
   public <F1, V> CallbackMetric1<F1, V> newCallbackMetric(
       String name, Class<V> valueClass, Description desc, Field<F1> field1) {
-    callsCounter += 1;
-    metricRegistry.register(
-        String.format("%s/%s/%s", "plugins", "git-repo-metrics", name), new Meter());
     return new CallbackMetric1<F1, V>() {
 
       @Override
-      public void set(F1 field1, V value) {}
+      public void set(F1 field1, V value) {
+        callsCounter += 1;
+        metricRegistry.register(
+            String.format("%s/%s/%s/%s", "plugins", "git-repo-metrics", name, field1.toString()),
+            new Meter());
+      }
 
       @Override
       public void forceCreate(F1 field1) {}
@@ -49,5 +53,11 @@ class FakeMetricMaker extends DisabledMetricMaker {
       @Override
       public void remove() {}
     };
+  }
+
+  @Override
+  public RegistrationHandle newTrigger(CallbackMetric<?> metric1, Runnable trigger) {
+    trigger.run();
+    return () -> {};
   }
 }
