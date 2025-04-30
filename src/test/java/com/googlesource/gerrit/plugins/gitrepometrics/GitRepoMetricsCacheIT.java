@@ -17,6 +17,7 @@ package com.googlesource.gerrit.plugins.gitrepometrics;
 import static org.junit.Assert.fail;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Slf4jReporter;
 import com.google.errorprone.annotations.CanIgnoreReturnValue;
 import com.google.gerrit.acceptance.LightweightPluginDaemonTest;
 import com.google.gerrit.acceptance.TestPlugin;
@@ -41,6 +42,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
+import org.junit.After;
 import org.junit.Test;
 
 @TestPlugin(
@@ -57,6 +59,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   private GitStatsMetricsCollector gitStatsMetricsCollector;
   private GitRefsMetricsCollector gitRefsMetricsCollector;
   private GitRepoMetricsCache gitRepoMetricsCache;
+  private Slf4jReporter metricReporter;
 
   private final Project.NameKey testProject1 = Project.nameKey("testProject1");
   private final Project.NameKey testProject2 = Project.nameKey("testProject2");
@@ -71,6 +74,12 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
     fsMetricsCollector = plugin.getSysInjector().getInstance(FSMetricsCollector.class);
     gitStatsMetricsCollector = plugin.getSysInjector().getInstance(GitStatsMetricsCollector.class);
     gitRefsMetricsCollector = plugin.getSysInjector().getInstance(GitRefsMetricsCollector.class);
+    metricReporter = Slf4jReporter.forRegistry(metricRegistry).build();
+  }
+
+  @After
+  public void tearDown() {
+    metricReporter.close();
   }
 
   @CanIgnoreReturnValue
@@ -182,6 +191,7 @@ public class GitRepoMetricsCacheIT extends LightweightPluginDaemonTest {
   }
 
   private long getPluginMetricsCount() {
+    metricReporter.report();
     return metricRegistry.getMetrics().keySet().stream()
         .filter(metricName -> metricName.contains("plugins/git-repo-metrics"))
         .count();
