@@ -92,6 +92,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "008810fd_4fcfbc1e",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T16:27:03Z",
+      "side": 1,
+      "message": "nit: unrelated change",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 37
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16de8fcd_7cb9d14d",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T16:27:03Z",
+      "side": 1,
+      "message": "nit: unrelated change",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 73
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a13a9253_4bd6db19",
         "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
         "patchSetId": 1
@@ -127,6 +173,30 @@
       "side": 1,
       "message": "\u003e This prefix search is now more expensive than the previous lookup approach, considering it is executed every time an `UpdateGitMetricsTask` is run and it might loop through thousands of repos.\n\u003e \n\u003e Do you have any number on how long it would take or you think it is not a concern right now?\n\nAssuming you are tracking all the metrics for 100k projects, this would take indeed 1M loops, which is indeed a performance concern.",
       "parentUuid": "a13a9253_4bd6db19",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 61
+      },
+      "revId": "609ada058b037eda59638ef407c83c19164bf100",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "914fc706_5227d3e4",
+        "filename": "src/main/java/com/googlesource/gerrit/plugins/gitrepometrics/GitRepoMetricsCache.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T16:27:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cf453d2_595c56d5",
       "range": {
         "startLine": 92,
         "startChar": 0,
