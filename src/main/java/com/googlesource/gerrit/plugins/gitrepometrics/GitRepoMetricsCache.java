@@ -15,13 +15,10 @@
 package com.googlesource.gerrit.plugins.gitrepometrics;
 
 import static com.google.gerrit.metrics.Field.ofProjectName;
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
 
 import com.codahale.metrics.Metric;
 import com.codahale.metrics.MetricRegistry;
 import com.google.common.annotations.VisibleForTesting;
-import com.google.common.collect.ImmutableList;
 import com.google.common.flogger.FluentLogger;
 import com.google.gerrit.extensions.registration.DynamicSet;
 import com.google.gerrit.metrics.CallbackMetric1;
@@ -43,9 +40,8 @@ public class GitRepoMetricsCache {
   private final MetricRegistry metricRegistry;
   private final Set<String> projects;
   private final boolean collectAllRepositories;
-  private ImmutableList<GitRepoMetric> metricsNames;
-  private DynamicSet<MetricsCollector> collectors;
-  private Set<String> staleStatsProjects;
+  private final DynamicSet<MetricsCollector> collectors;
+  private final Set<String> staleStatsProjects;
 
   @Inject
   GitRepoMetricsCache(
@@ -56,12 +52,6 @@ public class GitRepoMetricsCache {
     this.collectors = collectors;
     this.metricMaker = metricMaker;
     this.metricRegistry = metricRegistry;
-
-    this.metricsNames =
-        collectors.stream()
-            .flatMap(c -> c.availableMetrics().stream())
-            .collect(collectingAndThen(toList(), ImmutableList::copyOf));
-
     this.projects = new HashSet<>(config.getRepositoryNames());
     this.metrics = new ConcurrentHashMap<>();
     this.collectAllRepositories = config.collectAllRepositories();
