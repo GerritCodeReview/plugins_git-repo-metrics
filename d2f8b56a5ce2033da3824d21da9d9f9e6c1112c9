@@ -16,6 +16,24 @@
       "message": "nit: empty line",
       "revId": "d2f8b56a5ce2033da3824d21da9d9f9e6c1112c9",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a3be75_942d2082",
+        "filename": "src/test/java/com/googlesource/gerrit/plugins/gitrepometrics/MetricsInitializerIT.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T17:11:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a892ab08_d45bd1bb",
+      "revId": "d2f8b56a5ce2033da3824d21da9d9f9e6c1112c9",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
