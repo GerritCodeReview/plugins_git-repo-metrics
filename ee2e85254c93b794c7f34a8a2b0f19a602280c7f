@@ -22,6 +22,30 @@
       },
       "revId": "ee2e85254c93b794c7f34a8a2b0f19a602280c7f",
       "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3596a2be_a38d2d48",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1006192
+      },
+      "writtenOn": "2025-04-30T19:38:43Z",
+      "side": 1,
+      "message": "\u003e Just for me to understand, so we\u0027re trying to trigger the generation logic, but we\u0027re not testing any part of it?\n\nThese are IT tests. Therefore, we test external behaviour and not internal behaviour. I\u0027ve explained in the commit message why the existing tests are still passing without this change.",
+      "parentUuid": "bed7b3ee_6584b1d5",
+      "range": {
+        "startLine": 12,
+        "startChar": 3,
+        "endLine": 12,
+        "endChar": 54
+      },
+      "revId": "ee2e85254c93b794c7f34a8a2b0f19a602280c7f",
+      "serverId": "173816e5-2b9a-37c3-8a2e-48639d4f1153"
     }
   ]
 }
