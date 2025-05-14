@@ -57,6 +57,13 @@ public class GitStatsMetricsCollector implements MetricsCollector {
           "The number of pack files that were created after the last bitmap generation",
           "Count");
 
+  public static final GitRepoMetric numberOfTagsHeadsObjectsSinceBitmap =
+      new GitRepoMetric(
+          "numberOfTagsHeadsObjectsSinceBitmap",
+          "The number of objects created since the last bitmap generation that are reachable from"
+              + " tags or branch tips.",
+          "Count");
+
   private static final ImmutableList<GitRepoMetric> availableMetrics =
       ImmutableList.of(
           numberOfPackedObjects,
@@ -68,7 +75,8 @@ public class GitStatsMetricsCollector implements MetricsCollector {
           sizeOfPackedObjects,
           numberOfBitmaps,
           numberOfObjectsSinceBitmap,
-          numberOfPackFilesSinceBitmap);
+          numberOfPackFilesSinceBitmap,
+          numberOfTagsHeadsObjectsSinceBitmap);
 
   private final ExecutorService executorService;
 
@@ -99,6 +107,9 @@ public class GitStatsMetricsCollector implements MetricsCollector {
             metrics.put(numberOfBitmaps, statistics.numberOfBitmaps);
             metrics.put(numberOfObjectsSinceBitmap, statistics.numberOfObjectsSinceBitmap);
             metrics.put(numberOfPackFilesSinceBitmap, statistics.numberOfPackFilesSinceBitmap);
+            metrics.put(
+                numberOfTagsHeadsObjectsSinceBitmap,
+                statistics.numberOfTagsHeadsObjectsSinceBitmap);
             logger.atFine().log("New Git Statistics metrics collected: %s", statistics.toString());
           } catch (IOException e) {
             logger.atSevere().log("Something went wrong: %s", e.getMessage());
